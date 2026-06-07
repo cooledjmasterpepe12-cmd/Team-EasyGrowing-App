@@ -24,7 +24,7 @@ export default function B2B() {
         ].map((m, i) => (
           <div key={i} className="pixel-card" style={{ border: '3px solid #00ff00', padding: '20px', background: '#1a1a1a' }}>
             <div style={{ fontSize: '12px', marginBottom: '10px' }}>{m.label}</div>
-            <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#00e5ff' }}>{m.value}</div>
+            <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#cc00ff' }}>{m.value}</div>
           </div>
         ))}
       </div>
@@ -34,22 +34,22 @@ export default function B2B() {
         <h2 className="pixel-h2">Facility Consumption</h2>
         <div style={{ display: 'flex', alignItems: 'flex-end', gap: '10px', height: '200px', marginTop: '20px' }}>
           {[45, 78, 62, 88, 55, 91, 70].map((h, i) => (
-            <div key={i} style={{ flex: 1, background: '#00ff00', height: `${h}%`, border: '2px solid #00e5ff' }} />
+            <div key={i} style={{ flex: 1, background: '#00ff00', height: `${h}%`, border: '2px solid #cc00ff' }} />
           ))}
         </div>
       </div>
 
       {/* ROI Predictor & Scaling Strategy */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '40px' }}>
-        <div className="pixel-card-cyan" style={{ border: '3px solid #00e5ff', padding: '20px', background: '#1a1a1a' }}>
+        <div className="pixel-card" style={{ border: '3px solid #cc00ff', padding: '20px', background: '#1a1a1a' }}>
           <h3 className="pixel-h3">ROI Predictor</h3>
           <div style={{ marginTop: '15px', fontSize: '14px' }}>
-            <div style={{ marginBottom: '10px' }}>Scaling Target: <span style={{ color: '#00e5ff' }}>$450k</span></div>
+            <div style={{ marginBottom: '10px' }}>Scaling Target: <span style={{ color: '#cc00ff' }}>$450k</span></div>
             <div>Profit Margin: <span style={{ color: '#00ff00' }}>38%</span></div>
           </div>
         </div>
 
-        <div className="pixel-card-cyan" style={{ border: '3px solid #00e5ff', padding: '20px', background: '#1a1a1a' }}>
+        <div className="pixel-card" style={{ border: '3px solid #cc00ff', padding: '20px', background: '#1a1a1a' }}>
           <h3 className="pixel-h3">Scaling Strategy</h3>
           <div style={{ marginTop: '15px', fontSize: '14px' }}>
             <div style={{ marginBottom: '15px' }}>
@@ -84,7 +84,7 @@ export default function B2B() {
               { id: 'PO-002', batch: 'Batch-B', qty: 300, price: '$1,890', status: 'PROCESSING' },
               { id: 'PO-003', batch: 'Batch-C', qty: 750, price: '$3,750', status: 'PENDING' }
             ].map((row, i) => (
-              <tr key={i} style={{ borderBottom: '1px solid #00e5ff' }}>
+              <tr key={i} style={{ borderBottom: '1px solid #cc00ff' }}>
                 <td style={{ padding: '10px' }}>{row.id}</td>
                 <td style={{ padding: '10px' }}>{row.batch}</td>
                 <td style={{ padding: '10px' }}>{row.qty}</td>

@@ -98,7 +98,7 @@ export default function Bible() {
         {CATEGORIES.map((category) => (
           <button
             key={category}
-            className={activeCategory === category ? 'pixel-tag-cyan' : 'pixel-tag'}
+            className={activeCategory === category ? 'pixel-tag-purple' : 'pixel-tag'}
             onClick={() => setActiveCategory(category)}
             style={{ cursor: 'pointer' }}
           >
@@ -110,10 +110,10 @@ export default function Bible() {
       <h2 className="pixel-h2">{t('bible.mythbuster')}</h2>
       <div style={{ marginBottom: '24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '12px' }}>
         {MYTHS.map((myth, idx) => (
-          <div key={idx} className="pixel-card" style={{ borderColor: '#00e5ff', borderWidth: '4px' }}>
+          <div key={idx} className="pixel-card" style={{ borderColor: '#cc00ff', borderWidth: '4px' }}>
             <h3 className="pixel-h3">{t(`bible.${myth.title}`)}</h3>
             <p style={{ color: '#00ff00', marginBottom: '8px' }}>{t(`bible.${myth.desc}`)}</p>
-            <p style={{ color: '#00e5ff', fontSize: '12px' }}>
+            <p style={{ color: '#cc00ff', fontSize: '12px' }}>
               <strong>{t('bible.truth')}:</strong> {t(`bible.${myth.truth}`)}
             </p>
           </div>

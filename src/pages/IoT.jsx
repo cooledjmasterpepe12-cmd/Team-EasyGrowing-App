@@ -58,12 +58,12 @@ export default function IoT() {
               points="0,100 50,90 100,75 150,65 200,70 250,80 300,95 350,110 400,120"
               style={{
                 fill: 'none',
-                stroke: '#00e5ff',
+                stroke: '#cc00ff',
                 strokeWidth: '2',
               }}
             />
             <text x="10" y="20" style={styles.svgText}>
-              Temp (green) | Moisture (cyan)
+              Temp (green) | Moisture (purple)
             </text>
           </svg>
         </div>
@@ -135,7 +135,7 @@ const styles = {
   h2: {
     fontSize: '20px',
     marginBottom: '10px',
-    color: '#00e5ff',
+    color: '#cc00ff',
   },
   section: {
     marginBottom: '30px',
@@ -194,8 +194,8 @@ const styles = {
     marginTop: '10px',
     padding: '10px',
     backgroundColor: '#121212',
-    border: '2px solid #00e5ff',
-    color: '#00e5ff',
+    border: '2px solid #cc00ff',
+    color: '#cc00ff',
   },
   cameraPlaceholder: {
     textAlign: 'center',

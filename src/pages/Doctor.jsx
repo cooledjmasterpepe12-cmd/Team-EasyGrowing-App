@@ -134,7 +134,7 @@ const styles = {
   h2: {
     fontSize: '20px',
     marginBottom: '10px',
-    color: '#00e5ff',
+    color: '#cc00ff',
   },
   section: {
     marginBottom: '30px',
@@ -172,7 +172,7 @@ const styles = {
   },
   loadingText: {
     fontSize: '12px',
-    color: '#00e5ff',
+    color: '#cc00ff',
   },
   card: {
     backgroundColor: '#1a1a1a',
@@ -186,14 +186,14 @@ const styles = {
   },
   issueCard: {
     backgroundColor: '#1a1a1a',
-    border: '3px solid #00e5ff',
+    border: '3px solid #cc00ff',
     padding: '12px',
   },
   issueName: {
     fontSize: '14px',
     fontWeight: 'bold',
     marginBottom: '10px',
-    color: '#00e5ff',
+    color: '#cc00ff',
   },
   certaintContainer: {
     marginBottom: '10px',
