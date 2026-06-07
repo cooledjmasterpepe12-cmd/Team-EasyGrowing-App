@@ -270,9 +270,8 @@
 
         // Simple Fade-in animation for sections on load
         window.addEventListener('DOMContentLoaded', () => {
-            // Settings sync
-            const savedUnits = localStorage.getItem('units') || 'metric';
-            const savedLang = localStorage.getItem('lang') || 'en';
+            // Settings sync via EG.Units
+            const savedLang = EG.Units.getLang();
             // Simple language switcher display update
             const langEl = document.querySelector('.bg-surface-variant span.font-label-sm');
             if (langEl) langEl.textContent = savedLang.toUpperCase();
@@ -290,5 +289,6 @@
             });
         });
     </script>
+<script src="eg-core.js"></script>
 <script src="player.js"></script>
 </body></html>

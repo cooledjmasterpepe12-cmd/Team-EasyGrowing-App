@@ -281,13 +281,9 @@
 <script>
         // Load initial settings
         window.addEventListener('DOMContentLoaded', () => {
-            const savedUnits = localStorage.getItem('units') || 'metric';
-            const savedLang = localStorage.getItem('lang') || 'en';
-            const savedVol = localStorage.getItem('volUnit') || 'l';
-
-            updateLanguageUI(savedLang);
-            updateTempUI(savedUnits);
-            updateVolUI(savedVol);
+            updateLanguageUI(EG.Units.getLang());
+            updateTempUI(EG.Units.getMode());
+            updateVolUI(EG.Units.getMode() === 'imperial' ? 'gal' : 'l');
         });
 
         // Language togglers
@@ -304,7 +300,7 @@
         document.getElementById('btn-vol-gal').addEventListener('click', () => updateVolUI('gal'));
 
         function updateLanguageUI(lang) {
-            localStorage.setItem('lang', lang);
+            EG.Units.setLang(lang);
             ['de', 'en', 'es'].forEach(l => {
                 const btn = document.getElementById(`btn-lang-${l}`);
                 btn.className = "flex-1 py-2 rounded-lg font-label-sm text-label-sm bg-surface-variant text-on-surface-variant hover:bg-surface-container-highest transition-all duration-300";
@@ -314,13 +310,13 @@
         }
 
         function updateTempUI(mode) {
-            localStorage.setItem('units', mode);
+            EG.Units.setMode(mode);
             const btnC = document.getElementById('btn-temp-c');
             const btnF = document.getElementById('btn-temp-f');
-            
+
             btnC.className = "px-4 py-1 rounded-full font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors";
             btnF.className = "px-4 py-1 rounded-full font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors";
-            
+
             if (mode === 'imperial') {
                 btnF.className = "px-4 py-1 rounded-full font-label-sm text-label-sm bg-secondary text-on-secondary shadow-sm";
             } else {
@@ -329,13 +325,13 @@
         }
 
         function updateVolUI(vol) {
-            localStorage.setItem('volUnit', vol);
+            EG.Units.setMode(vol === 'gal' ? 'imperial' : 'metric');
             const btnL = document.getElementById('btn-vol-l');
             const btnGal = document.getElementById('btn-vol-gal');
-            
+
             btnL.className = "px-4 py-1 rounded-full font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors";
             btnGal.className = "px-4 py-1 rounded-full font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors";
-            
+
             if (vol === 'gal') {
                 btnGal.className = "px-4 py-1 rounded-full font-label-sm text-label-sm bg-secondary text-on-secondary shadow-sm";
             } else {
@@ -344,9 +340,10 @@
         }
 
         function logout() {
-            localStorage.removeItem('isLoggedIn');
+            EG.Auth.logout();
             window.location.href = 'register.html';
         }
     </script>
+<script src="eg-core.js"></script>
 <script src="player.js"></script>
 </body></html>

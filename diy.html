@@ -147,22 +147,22 @@
 <div class="space-y-4">
 <div class="flex flex-col gap-1">
 <label class="text-label-sm uppercase tracking-wider text-on-surface-variant">Breite (mm)</label>
-<input class="bg-surface-variant border-none rounded-lg p-3 text-on-surface focus:ring-2 focus:ring-primary transition-all" type="number" value="800"/>
+<input id="breite-input" class="bg-surface-variant border-none rounded-lg p-3 text-on-surface focus:ring-2 focus:ring-primary transition-all" type="number" value="800"/>
 </div>
 <div class="flex flex-col gap-1">
 <label class="text-label-sm uppercase tracking-wider text-on-surface-variant">Höhe (mm)</label>
-<input class="bg-surface-variant border-none rounded-lg p-3 text-on-surface focus:ring-2 focus:ring-primary transition-all" type="number" value="1800"/>
+<input id="hoehe-input" class="bg-surface-variant border-none rounded-lg p-3 text-on-surface focus:ring-2 focus:ring-primary transition-all" type="number" value="1800"/>
 </div>
 <div class="flex flex-col gap-1">
 <label class="text-label-sm uppercase tracking-wider text-on-surface-variant">Tiefe (mm)</label>
-<input class="bg-surface-variant border-none rounded-lg p-3 text-on-surface focus:ring-2 focus:ring-primary transition-all" type="number" value="600"/>
+<input id="tiefe-input" class="bg-surface-variant border-none rounded-lg p-3 text-on-surface focus:ring-2 focus:ring-primary transition-all" type="number" value="600"/>
 </div>
 <div class="flex flex-col gap-1">
 <label class="text-label-sm uppercase tracking-wider text-on-surface-variant">Materialstärke (mm)</label>
-<select class="bg-surface-variant border-none rounded-lg p-3 text-on-surface focus:ring-2 focus:ring-primary">
-<option>19mm Spanplatte</option>
-<option>18mm Multiplex</option>
-<option>22mm MDF</option>
+<select id="material-select" class="bg-surface-variant border-none rounded-lg p-3 text-on-surface focus:ring-2 focus:ring-primary">
+<option value="19">19mm Spanplatte</option>
+<option value="18">18mm Multiplex</option>
+<option value="22">22mm MDF</option>
 </select>
 </div>
 </div>
@@ -178,7 +178,7 @@
 <div class="flex gap-4">
 <div class="p-4 bg-surface/60 backdrop-blur-md rounded-lg border border-white/5 flex-1">
 <p class="text-label-sm text-on-surface-variant">Lichtdichte Falz-Empfehlung</p>
-<p class="font-bold text-primary">Doppelter Stufenfalz</p>
+<p id="light-trap-text" class="font-bold text-primary">Doppelter Stufenfalz</p>
 </div>
 <div class="p-4 bg-surface/60 backdrop-blur-md rounded-lg border border-white/5 flex-1">
 <p class="text-label-sm text-on-surface-variant">Stabilität</p>
@@ -200,21 +200,25 @@
 <div>
 <div class="flex justify-between text-label-sm mb-2">
 <span> Zuluft Querschnitt (min. 2x Abluft)</span>
-<span class="text-primary">125 cm²</span>
+<span id="intake-area" class="text-primary">125 cm²</span>
 </div>
 <div class="h-2 bg-surface-variant rounded-full overflow-hidden">
-<div class="h-full bg-primary w-3/4"></div>
+<div id="intake-progress" class="h-full bg-primary w-3/4"></div>
 </div>
 </div>
 <div class="grid grid-cols-2 gap-4">
 <div class="p-4 bg-surface-container rounded-lg border border-outline-variant">
 <p class="text-label-sm text-on-surface-variant">Empf. Abluft Ø</p>
-<p class="text-headline-sm font-bold">125 mm</p>
+<p id="exhaust-size" class="text-headline-sm font-bold">125 mm</p>
 </div>
 <div class="p-4 bg-surface-container rounded-lg border border-outline-variant">
-<p class="text-label-sm text-on-surface-variant">Lichtfallen-Widerstand</p>
-<p class="text-headline-sm font-bold text-secondary">30%</p>
+<p class="text-label-sm text-on-surface-variant">Luftwechsel/Stunde</p>
+<p id="air-changes" class="text-headline-sm font-bold text-secondary">30 min</p>
 </div>
+</div>
+<div class="p-4 bg-surface-container/50 rounded-lg border border-outline-variant">
+<p class="text-label-sm text-on-surface-variant">Gesamtvolumen</p>
+<p id="total-volume" class="text-headline-sm font-bold">864 L</p>
 </div>
 <button class="w-full py-4 bg-secondary-container text-on-secondary rounded-xl font-label-lg hover:opacity-90 active:scale-95 transition-all phoenix-glow">
                         LÜFTUNG OPTIMIEREN
@@ -228,33 +232,40 @@
 <h3 class="font-headline-sm text-headline-sm">Zuschnittliste (Sägefertig)</h3>
 </div>
 <div class="space-y-3">
-<div class="flex items-center justify-between p-3 bg-surface-container/50 rounded-lg border border-white/5">
-<div class="flex flex-col">
+<div class="flex items-center justify-between p-3 bg-surface-container/50 rounded-lg border border-white/5 cursor-pointer hover:bg-surface-container/70 transition-colors" data-copy="sides">
+<div class="flex flex-col flex-1">
 <span class="text-body-md font-medium text-on-surface">Seitenwände (2x)</span>
-<span class="text-label-sm text-on-surface-variant">1800 x 600 mm</span>
+<span id="cut-sides" class="text-label-sm text-on-surface-variant">1800 x 600 mm</span>
 </div>
-<span class="material-symbols-outlined text-outline">content_copy</span>
+<span class="material-symbols-outlined text-outline copy-btn">content_copy</span>
 </div>
-<div class="flex items-center justify-between p-3 bg-surface-container/50 rounded-lg border border-white/5">
-<div class="flex flex-col">
+<div class="flex items-center justify-between p-3 bg-surface-container/50 rounded-lg border border-white/5 cursor-pointer hover:bg-surface-container/70 transition-colors" data-copy="top-bottom">
+<div class="flex flex-col flex-1">
 <span class="text-body-md font-medium text-on-surface">Boden/Deckel (2x)</span>
-<span class="text-label-sm text-on-surface-variant">762 x 600 mm (abzgl. Stärke)</span>
+<span id="cut-top-bottom" class="text-label-sm text-on-surface-variant">762 x 600 mm (abzgl. Stärke)</span>
 </div>
-<span class="material-symbols-outlined text-outline">content_copy</span>
+<span class="material-symbols-outlined text-outline copy-btn">content_copy</span>
 </div>
-<div class="flex items-center justify-between p-3 bg-surface-container/50 rounded-lg border border-white/5">
-<div class="flex flex-col">
+<div class="flex items-center justify-between p-3 bg-surface-container/50 rounded-lg border border-white/5 cursor-pointer hover:bg-surface-container/70 transition-colors" data-copy="door">
+<div class="flex flex-col flex-1">
 <span class="text-body-md font-medium text-on-surface">Türflügel (1x)</span>
-<span class="text-label-sm text-on-surface-variant">1796 x 796 mm (mit Schattenfuge)</span>
+<span id="cut-door" class="text-label-sm text-on-surface-variant">1796 x 796 mm (mit Schattenfuge)</span>
 </div>
-<span class="material-symbols-outlined text-outline">content_copy</span>
+<span class="material-symbols-outlined text-outline copy-btn">content_copy</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface-container/50 rounded-lg border border-white/5 cursor-pointer hover:bg-surface-container/70 transition-colors" data-copy="back">
+<div class="flex flex-col flex-1">
+<span class="text-body-md font-medium text-on-surface">Rückwand (1x)</span>
+<span id="cut-back" class="text-label-sm text-on-surface-variant">1800 x 762 mm</span>
+</div>
+<span class="material-symbols-outlined text-outline copy-btn">content_copy</span>
 </div>
 </div>
 <div class="mt-6 flex gap-2">
-<button class="flex-1 py-3 border border-primary text-primary rounded-lg font-label-lg hover:bg-primary/10 transition-colors">
+<button id="pdf-export-btn" class="flex-1 py-3 border border-primary text-primary rounded-lg font-label-lg hover:bg-primary/10 transition-colors">
                         PDF EXPORT
                     </button>
-<button class="flex-1 py-3 bg-surface-container-highest text-on-surface rounded-lg font-label-lg border border-outline-variant">
+<button id="shopping-list-btn" class="flex-1 py-3 bg-surface-container-highest text-on-surface rounded-lg font-label-lg border border-outline-variant">
                         SHOPPING-LISTE
                     </button>
 </div>
@@ -339,17 +350,220 @@
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">save</span>
 </button>
 <script>
-        // Micro-interaction for input fields
-        const inputs = document.querySelectorAll('input, select');
-        inputs.forEach(input => {
-            input.addEventListener('change', () => {
-                // Mock calculation visual feedback
-                const progress = document.querySelector('.bg-primary.w-3\\/4');
-                if(progress) {
-                    progress.style.width = Math.floor(Math.random() * (95 - 60) + 60) + '%';
-                }
+        // DIY Grow-Box Planner Calculations
+        const getInputValues = () => {
+            const breite = parseFloat(document.getElementById('breite-input').value) || 0;
+            const hoehe = parseFloat(document.getElementById('hoehe-input').value) || 0;
+            const tiefe = parseFloat(document.getElementById('tiefe-input').value) || 0;
+            const material = parseFloat(document.getElementById('material-select').value) || 19;
+            return { breite, hoehe, tiefe, material };
+        };
+
+        const calculateDimensions = () => {
+            const { breite, hoehe, tiefe, material } = getInputValues();
+
+            // Calculate dimensions
+            const sidePanels = `${hoehe} x ${tiefe}`;
+            const topBottom = `${breite - 2 * material} x ${tiefe}`;
+            const backPanel = `${hoehe} x ${breite - 2 * material}`;
+            const door = `${hoehe - 2 * material} x ${breite - 2 * material}`;
+
+            return { sidePanels, topBottom, backPanel, door, breite, hoehe, tiefe, material };
+        };
+
+        const calculateVolume = () => {
+            const { breite, hoehe, tiefe } = getInputValues();
+            return (breite * hoehe * tiefe) / 1000; // Convert mm³ to liters
+        };
+
+        const getStandardFanSize = (volumeLiters) => {
+            const minDiameter = Math.ceil(volumeLiters / 50);
+            const standardSizes = [100, 125, 150, 200];
+            const size = standardSizes.find(s => s >= minDiameter) || 200;
+            return size;
+        };
+
+        const calculateVentilation = () => {
+            const volumeLiters = calculateVolume();
+            const exhaustDiameter = getStandardFanSize(volumeLiters);
+
+            // Calculate exhaust area (cm²)
+            const exhaustRadiusCm = (exhaustDiameter / 10) / 2;
+            const exhaustAreaCm2 = Math.PI * exhaustRadiusCm * exhaustRadiusCm;
+
+            // Intake area should be 2x exhaust
+            const intakeAreaCm2 = exhaustAreaCm2 * 2;
+
+            // Air changes per hour (recommend 1 full change per minute = 60/min)
+            const airChangesPerHour = Math.ceil((volumeLiters * 60) / volumeLiters);
+            const minutesPerChange = 1; // 1 minute per full air change
+
+            return {
+                volumeLiters: Math.round(volumeLiters),
+                exhaustDiameter,
+                exhaustAreaCm2: Math.round(exhaustAreaCm2),
+                intakeAreaCm2: Math.round(intakeAreaCm2),
+                airChangesPerHour
+            };
+        };
+
+        const getLightTrapType = () => {
+            const { exhaustDiameter } = calculateVentilation();
+            return exhaustDiameter < 125 ? 'Einfacher Stufenfalz' : 'Doppelter Stufenfalz';
+        };
+
+        const updateCalculations = () => {
+            const dims = calculateDimensions();
+            const vent = calculateVentilation();
+
+            // Update cut list
+            document.getElementById('cut-sides').textContent = dims.sidePanels + ' mm';
+            document.getElementById('cut-top-bottom').textContent = dims.topBottom + ' mm (abzgl. Stärke)';
+            document.getElementById('cut-door').textContent = dims.door + ' mm (mit Schattenfuge)';
+            document.getElementById('cut-back').textContent = dims.backPanel + ' mm';
+
+            // Update ventilation
+            document.getElementById('total-volume').textContent = vent.volumeLiters + ' L';
+            document.getElementById('exhaust-size').textContent = vent.exhaustDiameter + ' mm';
+            document.getElementById('intake-area').textContent = vent.intakeAreaCm2 + ' cm²';
+            document.getElementById('air-changes').textContent = '1x pro min';
+
+            // Update light trap recommendation
+            document.getElementById('light-trap-text').textContent = getLightTrapType();
+
+            // Update intake progress bar
+            const maxIntake = 250;
+            const progress = Math.min((vent.intakeAreaCm2 / maxIntake) * 100, 100);
+            document.getElementById('intake-progress').style.width = progress + '%';
+        };
+
+        // Copy to clipboard functionality
+        const setupCopyButtons = () => {
+            const copyButtons = document.querySelectorAll('[data-copy]');
+            copyButtons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const type = btn.getAttribute('data-copy');
+                    const text = btn.querySelector('.text-label-sm').textContent;
+                    navigator.clipboard.writeText(text).then(() => {
+                        const icon = btn.querySelector('.copy-btn');
+                        const originalText = icon.textContent;
+                        icon.textContent = 'check';
+                        setTimeout(() => {
+                            icon.textContent = originalText;
+                        }, 2000);
+                    });
+                });
             });
+        };
+
+        // PDF Export
+        const setupPDFExport = () => {
+            const btn = document.getElementById('pdf-export-btn');
+            btn.addEventListener('click', () => {
+                const { breite, hoehe, tiefe, material } = getInputValues();
+                const vent = calculateVentilation();
+                const lightTrap = getLightTrapType();
+                const dims = calculateDimensions();
+
+                const content = `DIY GROW-BOX PLANER - PDF EXPORT
+
+DIMENSIONEN:
+- Breite: ${breite} mm
+- Höhe: ${hoehe} mm
+- Tiefe: ${tiefe} mm
+- Materialstärke: ${material} mm
+
+ZUSCHNITTLISTE:
+- Seitenwände (2x): ${dims.sidePanels} mm
+- Boden/Deckel (2x): ${dims.topBottom} mm
+- Rückwand (1x): ${dims.backPanel} mm
+- Türflügel (1x): ${dims.door} mm
+
+LÜFTUNG:
+- Gesamtvolumen: ${vent.volumeLiters} Liter
+- Empf. Abluft Ø: ${vent.exhaustDiameter} mm
+- Zuluft Querschnitt: ${vent.intakeAreaCm2} cm²
+
+LICHTFALLE:
+- Empfehlung: ${lightTrap}`;
+
+                const printWindow = window.open('', '', 'height=600,width=800');
+                printWindow.document.write('<pre>' + content + '</pre>');
+                printWindow.document.close();
+                printWindow.print();
+            });
+        };
+
+        // Shopping List
+        const setupShoppingList = () => {
+            const btn = document.getElementById('shopping-list-btn');
+            btn.addEventListener('click', () => {
+                const { breite, hoehe, tiefe, material } = getInputValues();
+                const vent = calculateVentilation();
+                const lightTrap = getLightTrapType();
+
+                const shoppingList = `EINKAUFSLISTE - DIY GROW-BOX
+
+MATERIALIEN:
+${material}mm Holzplatte (Spanplatte/Multiplex/MDF)
+- Menge: ca. 3-4 Platten (je nach Größe)
+
+BESCHLÄGE:
+- Scharniere: 2x Stück
+- Verschlüsse: 2x Stück
+- Griffe: 1x Stück
+- Winkel/Verstrebungen: 8x Stück
+
+DICHTUNG & VERSIEGELUNG:
+- EPDM-Moosgummidichtung (5m)
+- Silikon (neutral, weiß oder grau)
+
+LÜFTUNG:
+- Abluftventilator: ${vent.exhaustDiameter}mm
+- Zuluftöffnung Material: Kunststoff-Lüftungsgitter
+- Kohlefilter: 1x ${vent.exhaustDiameter}mm
+- Flexrohr: ${vent.exhaustDiameter}mm (mindestens 3m)
+
+LICHTFALLE:
+- Material für ${lightTrap}: MDF/Sperrholz
+
+ZUSÄTZLICH:
+- Weiße Reflektionsbeschichtung (Mylar): 5m²
+- Holzschrauben (3,5x35mm und 3,5x50mm)
+- Holzleim
+- Schleifpapier (K80, K120, K180)
+- Weiße Farbe/Lack für Innenseiten`;
+
+                const printWindow = window.open('', '', 'height=600,width=800');
+                printWindow.document.write('<pre style="font-family: monospace; white-space: pre-wrap;">' + shoppingList + '</pre>');
+                printWindow.document.close();
+                printWindow.print();
+            });
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            const inputs = [
+                document.getElementById('breite-input'),
+                document.getElementById('hoehe-input'),
+                document.getElementById('tiefe-input'),
+                document.getElementById('material-select')
+            ];
+
+            inputs.forEach(input => {
+                input.addEventListener('change', updateCalculations);
+                input.addEventListener('input', updateCalculations);
+            });
+
+            setupCopyButtons();
+            setupPDFExport();
+            setupShoppingList();
+
+            // Initial calculation
+            updateCalculations();
         });
     </script>
+<script src="eg-core.js"></script>
 <script src="player.js"></script>
 </body></html>

@@ -124,6 +124,68 @@
             border-radius: 50%;
             margin-top: 4px;
         }
+        .ppfd-bar {
+            height: 24px;
+            border-radius: 4px;
+            width: 100%;
+            background: linear-gradient(90deg, #ff6b6b 0%, #ffd43b 33%, #51cf66 66%, #ff6b6b 100%);
+            position: relative;
+            margin-top: 8px;
+        }
+        .ppfd-marker {
+            position: absolute;
+            top: -8px;
+            width: 2px;
+            height: 40px;
+            background-color: #a1d494;
+        }
+        .vpd-status {
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+        .vpd-optimal {
+            background-color: rgba(81, 207, 102, 0.2);
+            color: #51cf66;
+            border: 1px solid rgba(81, 207, 102, 0.3);
+        }
+        .vpd-low {
+            background-color: rgba(255, 212, 59, 0.2);
+            color: #ffd43b;
+            border: 1px solid rgba(255, 212, 59, 0.3);
+        }
+        .vpd-high {
+            background-color: rgba(255, 107, 107, 0.2);
+            color: #ff6b6b;
+            border: 1px solid rgba(255, 107, 107, 0.3);
+        }
+        .ph-scale {
+            display: flex;
+            gap: 2px;
+            height: 40px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 12px;
+        }
+        .ph-segment {
+            flex: 1;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            font-size: 10px;
+            color: #000;
+            font-weight: 600;
+        }
+        .ph-indicator {
+            position: absolute;
+            top: -8px;
+            width: 3px;
+            height: 50px;
+            background-color: #a1d494;
+            border-radius: 2px;
+        }
     </style>
 </head>
 <body class="font-body-md text-body-md overflow-x-hidden pb-24">
@@ -168,8 +230,8 @@
 <div class="flex-1 glass rounded-xl p-3 flex flex-col gap-2">
 <span class="text-label-sm text-on-surface-variant uppercase tracking-widest">Skala</span>
 <div class="flex bg-surface-container-lowest rounded-lg p-1">
-<button class="flex-1 py-1 text-label-sm rounded-md bg-primary text-on-primary shadow-sm transition-all">Lux</button>
-<button class="flex-1 py-1 text-label-sm rounded-md text-on-surface-variant hover:text-on-surface transition-all">fc</button>
+<button class="flex-1 py-1 text-label-sm rounded-md bg-primary text-on-primary shadow-sm transition-all" id="scale-lux">Lux</button>
+<button class="flex-1 py-1 text-label-sm rounded-md text-on-surface-variant hover:text-on-surface transition-all" id="scale-fc">fc</button>
 </div>
 </div>
 </div>
@@ -181,9 +243,16 @@
 <h3 class="font-headline-sm text-headline-sm">Licht-Rechner</h3>
 </div>
 <div class="glass rounded-2xl p-5 border-l-4 border-secondary mb-4">
+<label class="block text-label-lg mb-2 text-on-surface">Lichtquelle</label>
+<div class="flex gap-2 mb-4">
+<button class="flex-1 py-2 px-3 rounded-lg text-label-sm font-semibold bg-primary text-on-primary transition-all" data-source="LED">LED</button>
+<button class="flex-1 py-2 px-3 rounded-lg text-label-sm font-semibold text-on-surface-variant hover:text-on-surface bg-surface-container transition-all" data-source="HPS">HPS</button>
+<button class="flex-1 py-2 px-3 rounded-lg text-label-sm font-semibold text-on-surface-variant hover:text-on-surface bg-surface-container transition-all" data-source="CMH">CMH</button>
+<button class="flex-1 py-2 px-3 rounded-lg text-label-sm font-semibold text-on-surface-variant hover:text-on-surface bg-surface-container transition-all" data-source="Sunlight">Sonne</button>
+</div>
 <label class="block text-label-lg mb-2 text-on-surface">Eingabewert (Lux)</label>
-<input class="w-full bg-surface-container-lowest border-outline-variant focus:border-primary rounded-xl p-4 text-headline-md text-primary mb-4 transition-all outline-none" id="light-input" placeholder="z.B. 45000" type="number"/>
-<div class="flex justify-between items-end">
+<input class="w-full bg-surface-container-lowest border border-outline-variant focus:border-primary rounded-xl p-4 text-headline-md text-primary mb-4 transition-all outline-none" id="light-input" placeholder="z.B. 45000" type="number"/>
+<div class="flex justify-between items-end mb-4">
 <div>
 <span class="block text-label-sm text-on-surface-variant uppercase">Ergebnis PPFD</span>
 <div class="flex items-baseline gap-1">
@@ -191,25 +260,49 @@
 <span class="text-label-lg text-secondary">µmol/m²/s</span>
 </div>
 </div>
-<button class="bg-secondary text-on-secondary px-6 py-2 rounded-full font-label-lg phoenix-glow active:scale-95 transition-all">Berechnen</button>
+<button class="bg-secondary text-on-secondary px-6 py-2 rounded-full font-label-lg phoenix-glow active:scale-95 transition-all" id="light-calc-btn">Berechnen</button>
+</div>
+<div class="ppfd-bar" id="ppfd-bar">
+<div class="ppfd-marker" id="ppfd-marker" style="left: 33.33%"></div>
+</div>
+<p class="text-xs text-on-surface-variant mt-2">Rot=optimal, Gelb=ok, Orange=zu viel/wenig</p>
+<!-- DLI Calculator -->
+<div class="mt-6 pt-6 border-t border-white/10">
+<label class="block text-label-lg mb-2 text-on-surface">Lichtstunden pro Tag</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant focus:border-primary rounded-xl p-4 text-headline-sm text-on-surface mb-4 transition-all outline-none" id="light-hours" placeholder="z.B. 16" type="number" value="16"/>
+<div class="grid grid-cols-2 gap-3">
+<div class="bg-surface-container-high rounded-xl p-4">
+<span class="block text-label-sm text-on-surface-variant uppercase">DLI</span>
+<span class="text-headline-sm text-primary font-bold" id="dli-output">0</span>
+<span class="text-xs text-on-surface-variant">mol/m²/d</span>
+</div>
+<div class="bg-surface-container-high rounded-xl p-4">
+<span class="block text-label-sm text-on-surface-variant uppercase">Phase</span>
+<span class="text-headline-sm text-secondary font-bold" id="phase-output">-</span>
+<span class="text-xs text-on-surface-variant">Empfehlung</span>
 </div>
 </div>
-<!-- Beginner Guide / Bento-ish info cards -->
-<div class="grid grid-cols-3 gap-2">
+</div>
+</div>
+<!-- Phase Guide -->
+<div class="grid grid-cols-3 gap-2 mt-4">
 <div class="bg-surface-container-low rounded-xl p-3 border border-white/5 flex flex-col items-center text-center">
 <span class="text-[10px] text-on-surface-variant uppercase mb-1">Setzling</span>
 <span class="text-primary font-bold">100-300</span>
 <span class="text-[8px] text-on-surface-variant">PPFD</span>
+<span class="text-[8px] text-on-surface-variant mt-1">8-15 DLI</span>
 </div>
 <div class="bg-surface-container-low rounded-xl p-3 border border-white/5 flex flex-col items-center text-center">
 <span class="text-[10px] text-on-surface-variant uppercase mb-1">Veggie</span>
 <span class="text-primary font-bold">300-600</span>
 <span class="text-[8px] text-on-surface-variant">PPFD</span>
+<span class="text-[8px] text-on-surface-variant mt-1">15-30 DLI</span>
 </div>
 <div class="bg-surface-container-low rounded-xl p-3 border border-white/5 flex flex-col items-center text-center ring-1 ring-secondary/30">
 <span class="text-[10px] text-on-surface-variant uppercase mb-1">Blüte</span>
 <span class="text-secondary font-bold">600-900+</span>
 <span class="text-[8px] text-on-surface-variant">PPFD</span>
+<span class="text-[8px] text-on-surface-variant mt-1">30-50+ DLI</span>
 </div>
 </div>
 </section>
@@ -220,18 +313,37 @@
 <h3 class="font-headline-sm text-headline-sm">Dünger-Rechner</h3>
 </div>
 <div class="glass rounded-2xl overflow-hidden">
-<div class="p-5 border-b border-white/5"><div class="mb-4 flex flex-col gap-2"><span class="text-label-sm text-on-surface-variant uppercase tracking-widest">Dünger-Einheiten</span><div class="flex bg-surface-container-lowest rounded-lg p-1"><button class="flex-1 py-1 text-label-sm rounded-md bg-primary text-on-primary shadow-sm transition-all" id="nut-unit-ml">ml</button><button class="flex-1 py-1 text-label-sm rounded-md text-on-surface-variant hover:text-on-surface transition-all" id="nut-unit-oz">fl oz</button></div></div>
-<div class="mb-4 flex flex-col gap-2"><span class="text-label-sm text-on-surface-variant uppercase tracking-widest">Wasser-Einheiten</span><div class="flex bg-surface-container-lowest rounded-lg p-1"><button class="flex-1 py-1 text-label-sm rounded-md bg-primary text-on-primary shadow-sm transition-all" id="water-unit-l">Liter</button><button class="flex-1 py-1 text-label-sm rounded-md text-on-surface-variant hover:text-on-surface transition-all" id="water-unit-gal">Gallons</button></div></div><label class="block text-label-lg mb-2 text-on-surface">Wasservolumen</label>
-<div class="relative">
-<input class="w-full bg-surface-container-lowest border-outline-variant focus:border-primary rounded-xl p-4 text-headline-sm text-on-surface transition-all outline-none" id="water-volume" step="0.1" type="number" value="10"/>
-<div class="absolute right-4 top-1/2 -translate-y-1/2 flex gap-1"><button class="w-8 h-8 flex items-center justify-center rounded-md bg-surface-variant hover:bg-primary-container text-on-surface transition-colors" onclick="adjustWater(-0.1)">-</button><button class="w-8 h-8 flex items-center justify-center rounded-md bg-surface-variant hover:bg-primary-container text-on-surface transition-colors" onclick="adjustWater(0.1)">+</button></div>
+<div class="p-5 border-b border-white/5">
+<div class="mb-4 flex flex-col gap-2">
+<span class="text-label-sm text-on-surface-variant uppercase tracking-widest">Dünger-Einheiten</span>
+<div class="flex bg-surface-container-lowest rounded-lg p-1">
+<button class="flex-1 py-1 text-label-sm rounded-md bg-primary text-on-primary shadow-sm transition-all" id="nut-unit-ml">ml</button>
+<button class="flex-1 py-1 text-label-sm rounded-md text-on-surface-variant hover:text-on-surface transition-all" id="nut-unit-oz">fl oz</button>
 </div>
+</div>
+<div class="mb-4 flex flex-col gap-2">
+<span class="text-label-sm text-on-surface-variant uppercase tracking-widest">Wasser-Einheiten</span>
+<div class="flex bg-surface-container-lowest rounded-lg p-1">
+<button class="flex-1 py-1 text-label-sm rounded-md bg-primary text-on-primary shadow-sm transition-all" id="water-unit-l">Liter</button>
+<button class="flex-1 py-1 text-label-sm rounded-md text-on-surface-variant hover:text-on-surface transition-all" id="water-unit-gal">Gallons</button>
+</div>
+</div>
+<label class="block text-label-lg mb-2 text-on-surface">Wasservolumen</label>
+<div class="relative mb-4">
+<input class="w-full bg-surface-container-lowest border border-outline-variant focus:border-primary rounded-xl p-4 text-headline-sm text-on-surface transition-all outline-none" id="water-volume" step="0.1" type="number" value="10"/>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 flex gap-1">
+<button class="w-8 h-8 flex items-center justify-center rounded-md bg-surface-variant hover:bg-primary-container text-on-surface transition-colors" onclick="adjustWater(-0.2)">-</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-md bg-surface-variant hover:bg-primary-container text-on-surface transition-colors" onclick="adjustWater(0.2)">+</button>
+</div>
+</div>
+<label class="block text-label-lg mb-2 text-on-surface">Dosierrate (ml/L)</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant focus:border-primary rounded-xl p-4 text-headline-sm text-on-surface mb-4 transition-all outline-none" id="dose-rate" step="0.1" type="number" value="2" placeholder="z.B. 2"/>
 </div>
 <div class="p-5 space-y-4">
 <p class="text-label-sm text-on-surface-variant uppercase tracking-widest mb-2">Team EasyGrowing Signature Mix</p>
 <!-- Nutrient Row 1 -->
 <div class="flex items-center justify-between p-3 bg-surface-container-high rounded-xl">
-<div class="flex items-center gap-3">
+<div class="flex items-center gap-3 flex-1">
 <div class="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center">
 <span class="material-symbols-outlined text-primary" data-icon="eco">eco</span>
 </div>
@@ -247,7 +359,7 @@
 </div>
 <!-- Nutrient Row 2 -->
 <div class="flex items-center justify-between p-3 bg-surface-container-high rounded-xl">
-<div class="flex items-center gap-3">
+<div class="flex items-center gap-3 flex-1">
 <div class="w-10 h-10 rounded-lg bg-secondary/20 flex items-center justify-center">
 <span class="material-symbols-outlined text-secondary" data-icon="bolt">bolt</span>
 </div>
@@ -263,7 +375,7 @@
 </div>
 <!-- Nutrient Row 3 -->
 <div class="flex items-center justify-between p-3 bg-surface-container-high rounded-xl">
-<div class="flex items-center gap-3">
+<div class="flex items-center gap-3 flex-1">
 <div class="w-10 h-10 rounded-lg bg-tertiary/20 flex items-center justify-center">
 <span class="material-symbols-outlined text-tertiary" data-icon="opacity">opacity</span>
 </div>
@@ -277,11 +389,135 @@
 <span class="text-[10px] text-on-surface-variant">1ml / L</span>
 </div>
 </div>
+<!-- Custom Nutrient -->
+<div class="border-t border-white/10 pt-4 mt-4">
+<label class="block text-label-lg mb-2 text-on-surface">Eigener Dünger</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant focus:border-primary rounded-xl p-4 text-headline-sm text-on-surface mb-2 transition-all outline-none" id="custom-nut-name" placeholder="Name"/>
+<input class="w-full bg-surface-container-lowest border border-outline-variant focus:border-primary rounded-xl p-4 text-headline-sm text-on-surface mb-3 transition-all outline-none" id="custom-nut-dose" step="0.1" type="number" placeholder="ml/L"/>
+<div class="flex items-center justify-between p-3 bg-surface-container-high rounded-xl">
+<div>
+<h4 class="text-label-lg text-on-surface" id="custom-nut-display">Benutzerdefiniert</h4>
+<span class="text-xs text-on-surface-variant" id="custom-nut-dose-display">0 ml / L</span>
 </div>
-<div class="bg-primary-container p-4 flex items-center gap-3">
-<span class="material-symbols-outlined text-on-primary-container" data-icon="info">info</span>
-<p class="text-[11px] text-on-primary-container leading-tight">Empfehlung basierend auf dem aktuellen pH-Wert von 6.2 (Sensor-Daten). Immer erst Basis mischen!</p>
+<div class="text-right">
+<span class="block text-headline-sm text-on-surface font-bold" id="nut-4">0 <span class="nut-unit-label">ml</span></span>
 </div>
+</div>
+</div>
+<!-- Totals -->
+<div class="border-t border-white/10 pt-4 mt-4 bg-surface-container-low rounded-xl p-4">
+<div class="flex items-center justify-between mb-3">
+<span class="text-label-lg text-on-surface">Gesamtdüngermenge</span>
+<span class="text-headline-md text-primary font-bold" id="total-nutrients">70 <span class="nut-unit-label">ml</span></span>
+</div>
+<p class="text-xs text-on-surface-variant">Basierend auf aktuellen pH-Daten und Dosierempfehlungen</p>
+</div>
+</div>
+</section>
+<!-- VPD Calculator Section -->
+<section class="mb-section-gap">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-tertiary" data-icon="air">air</span>
+<h3 class="font-headline-sm text-headline-sm">VPD-Rechner</h3>
+</div>
+<div class="glass rounded-2xl p-5 border-l-4 border-tertiary">
+<div class="mb-4 flex flex-col gap-2">
+<span class="text-label-sm text-on-surface-variant uppercase tracking-widest">Temperatureinheit</span>
+<div class="flex bg-surface-container-lowest rounded-lg p-1">
+<button class="flex-1 py-1 text-label-sm rounded-md bg-primary text-on-primary shadow-sm transition-all" id="temp-c">°C</button>
+<button class="flex-1 py-1 text-label-sm rounded-md text-on-surface-variant hover:text-on-surface transition-all" id="temp-f">°F</button>
+</div>
+</div>
+<label class="block text-label-lg mb-2 text-on-surface">Temperatur</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant focus:border-primary rounded-xl p-4 text-headline-sm text-on-surface mb-4 transition-all outline-none" id="vpd-temp" step="0.1" type="number" value="25" placeholder="z.B. 25"/>
+<label class="block text-label-lg mb-2 text-on-surface">Relative Luftfeuchte (%)</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant focus:border-primary rounded-xl p-4 text-headline-sm text-on-surface mb-6 transition-all outline-none" id="vpd-rh" step="0.1" type="number" value="60" placeholder="z.B. 60"/>
+<div class="grid grid-cols-2 gap-3 mb-4">
+<div class="bg-surface-container-high rounded-xl p-4">
+<span class="block text-label-sm text-on-surface-variant uppercase">VPD Wert</span>
+<span class="text-headline-md text-tertiary font-bold" id="vpd-value">0.00</span>
+<span class="text-xs text-on-surface-variant">kPa</span>
+</div>
+<div class="bg-surface-container-high rounded-xl p-4">
+<span class="block text-label-sm text-on-surface-variant uppercase">Status</span>
+<span class="text-label-lg text-on-surface font-bold" id="vpd-status">-</span>
+</div>
+</div>
+<div id="vpd-status-box" class="vpd-status vpd-optimal">
+Optimal für Wachstum
+</div>
+<div class="mt-4 grid grid-cols-3 gap-2 text-center text-xs">
+<div class="bg-surface-container-low rounded-lg p-2">
+<span class="block text-on-surface-variant">Zu niedrig</span>
+<span class="block text-yellow-400 font-bold">&lt;0.8</span>
+</div>
+<div class="bg-surface-container-low rounded-lg p-2">
+<span class="block text-on-surface-variant">Optimal</span>
+<span class="block text-green-400 font-bold">0.8-1.2</span>
+</div>
+<div class="bg-surface-container-low rounded-lg p-2">
+<span class="block text-on-surface-variant">Zu hoch</span>
+<span class="block text-red-400 font-bold">&gt;1.2</span>
+</div>
+</div>
+</div>
+</section>
+<!-- pH Nutrient Availability Chart Section -->
+<section class="mb-section-gap">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="lab">lab</span>
+<h3 class="font-headline-sm text-headline-sm">pH Nährstoff-Verfügbarkeit</h3>
+</div>
+<div class="glass rounded-2xl p-5">
+<label class="block text-label-lg mb-3 text-on-surface">Erdreich (Optimal: 6.0-7.0)</label>
+<div class="ph-scale" style="background: linear-gradient(90deg, #ff6b6b 0%, #ffa94d 20%, #ffdd00 40%, #95e1d3 60%, #51cf66 80%, #339af0 100%);">
+<div class="ph-segment" style="background: transparent;"></div>
+<div class="ph-segment" style="background: transparent;"></div>
+<div class="ph-segment" style="background: transparent;"></div>
+<div class="ph-segment" style="background: transparent;"></div>
+<div class="ph-segment" style="background: transparent;"></div>
+<div class="ph-segment" style="background: transparent;"></div>
+<div class="ph-segment" style="background: transparent;"></div>
+<div class="ph-segment" style="background: transparent;"></div>
+<div class="ph-segment" style="background: transparent;"></div>
+<div class="ph-segment" style="background: transparent;"></div>
+<div class="ph-segment" style="background: transparent;"></div>
+<div class="ph-segment" style="background: transparent;"></div>
+<div class="ph-segment" style="background: transparent;"></div>
+<div class="ph-segment" style="background: transparent;"></div>
+<div class="ph-indicator" id="soil-ph-indicator" style="left: 60%;"></div>
+</div>
+<div class="flex justify-between text-[10px] text-on-surface-variant font-bold mt-2">
+<span>4.0</span>
+<span>7.0</span>
+<span>10.0</span>
+</div>
+<input class="w-full bg-surface-container-lowest border border-outline-variant focus:border-primary rounded-xl p-3 text-label-lg text-on-surface mb-4 mt-4 transition-all outline-none" id="soil-ph-input" step="0.1" type="number" value="6.5" placeholder="pH"/>
+
+<label class="block text-label-lg mb-3 text-on-surface mt-6">Hydrokultur (Optimal: 5.5-6.5)</label>
+<div class="ph-scale" style="background: linear-gradient(90deg, #ff6b6b 0%, #ffa94d 20%, #ffdd00 40%, #95e1d3 60%, #51cf66 80%, #339af0 100%);">
+<div class="ph-segment" style="background: transparent;"></div>
+<div class="ph-segment" style="background: transparent;"></div>
+<div class="ph-segment" style="background: transparent;"></div>
+<div class="ph-segment" style="background: transparent;"></div>
+<div class="ph-segment" style="background: transparent;"></div>
+<div class="ph-segment" style="background: transparent;"></div>
+<div class="ph-segment" style="background: transparent;"></div>
+<div class="ph-segment" style="background: transparent;"></div>
+<div class="ph-segment" style="background: transparent;"></div>
+<div class="ph-segment" style="background: transparent;"></div>
+<div class="ph-segment" style="background: transparent;"></div>
+<div class="ph-segment" style="background: transparent;"></div>
+<div class="ph-segment" style="background: transparent;"></div>
+<div class="ph-segment" style="background: transparent;"></div>
+<div class="ph-indicator" id="hydro-ph-indicator" style="left: 53%;"></div>
+</div>
+<div class="flex justify-between text-[10px] text-on-surface-variant font-bold mt-2">
+<span>4.0</span>
+<span>7.0</span>
+<span>10.0</span>
+</div>
+<input class="w-full bg-surface-container-lowest border border-outline-variant focus:border-primary rounded-xl p-3 text-label-lg text-on-surface transition-all outline-none" id="hydro-ph-input" step="0.1" type="number" value="6.0" placeholder="pH"/>
 </div>
 </section>
 <!-- Professional Footer -->
@@ -315,63 +551,239 @@
 </a>
 </div>
 </nav>
+
 <script>
-        // Light Calculation Logic (Simplified Lux to PPFD conversion factor)
-        const lightInput = document.getElementById('light-input');
-        const ppfdOutput = document.getElementById('ppfd-output');
+// ========== LIGHT CALCULATOR ==========
+let currentSource = 'LED';
+const lightSources = {
+    'LED': 0.0185,
+    'HPS': 0.0135,
+    'CMH': 0.0160,
+    'Sunlight': 0.0200
+};
 
-        lightInput.addEventListener('input', (e) => {
-            const lux = parseFloat(e.target.value) || 0;
-            // Common conversion for LED (approx 0.015 - 0.02)
-            const ppfd = Math.round(lux * 0.0185);
-            ppfdOutput.textContent = ppfd;
+const phaseRanges = {
+    'Seedling': { ppfd: [100, 300], dli: [8, 15] },
+    'Vegetative': { ppfd: [300, 600], dli: [15, 30] },
+    'Bloom': { ppfd: [600, 900], dli: [30, 50] }
+};
+
+// Light source buttons
+document.querySelectorAll('[data-source]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        document.querySelectorAll('[data-source]').forEach(b => {
+            b.classList.remove('bg-primary', 'text-on-primary');
+            b.classList.add('text-on-surface-variant', 'bg-surface-container');
         });
+        e.target.classList.add('bg-primary', 'text-on-primary');
+        e.target.classList.remove('text-on-surface-variant', 'bg-surface-container');
+        currentSource = e.target.dataset.source;
+        updateLight();
+    });
+});
 
-        // Fertilizer Calculation Logic
-        const waterInput = document.getElementById('water-volume');
-        const nut1 = document.getElementById('nut-1');
-        const nut2 = document.getElementById('nut-2');
-        const nut3 = document.getElementById('nut-3');
+function updateLight() {
+    const lux = parseFloat(document.getElementById('light-input').value) || 0;
+    const factor = lightSources[currentSource];
+    const ppfd = Math.round(lux * factor);
+    document.getElementById('ppfd-output').textContent = ppfd;
 
-        function updateNutrients() {
-            const volume = parseFloat(waterInput.value) || 0;
-            nut1.textContent = `${(volume * 4).toFixed(0)} ml`;
-            nut2.textContent = `${(volume * 2).toFixed(0)} ml`;
-            nut3.textContent = `${(volume * 1).toFixed(0)} ml`;
-        }
+    // Color coding for PPFD
+    let barColor = '#ff6b6b'; // red (too low/high)
+    let position = 0;
 
-        waterInput.addEventListener('input', updateNutrients);
+    if (ppfd < 100) {
+        position = Math.max(0, (ppfd / 100) * 33);
+        barColor = '#ffd43b';
+    } else if (ppfd >= 100 && ppfd <= 900) {
+        position = 33 + ((ppfd - 100) / 800) * 34;
+        barColor = '#51cf66';
+    } else {
+        position = 67 + Math.min(33, ((ppfd - 900) / 900) * 33);
+        barColor = '#ff6b6b';
+    }
 
-        function adjustWater(amount) {
-            let val = parseFloat(waterInput.value) || 0;
-            val = Math.max(0, val + amount);
-            waterInput.value = val;
-            updateNutrients();
-        }
+    const marker = document.getElementById('ppfd-marker');
+    marker.style.left = Math.min(100, Math.max(0, position)) + '%';
+    document.getElementById('ppfd-bar').style.background = `linear-gradient(90deg, #ff6b6b 0%, #ffd43b 33%, #51cf66 66%, #ff6b6b 100%)`;
 
-        // Unit Toggling Simulation
-        const metricBtn = document.getElementById('metric-btn');
-        const imperialBtn = document.getElementById('imperial-btn');
-        const unitLabel = document.getElementById('unit-label');
+    updateDLI(ppfd);
+}
 
-        metricBtn.addEventListener('click', () => {
-            metricBtn.classList.add('bg-primary', 'text-on-primary');
-            metricBtn.classList.remove('text-on-surface-variant');
-            imperialBtn.classList.remove('bg-primary', 'text-on-primary');
-            imperialBtn.classList.add('text-on-surface-variant');
-            unitLabel.textContent = 'Liter';
-        });
+function updateDLI(ppfd) {
+    const lightHours = parseFloat(document.getElementById('light-hours').value) || 16;
+    const dli = (ppfd * lightHours) / 1000000 * 3600;
+    document.getElementById('dli-output').textContent = dli.toFixed(1);
 
-        imperialBtn.addEventListener('click', () => {
-            imperialBtn.classList.add('bg-primary', 'text-on-primary');
-            imperialBtn.classList.remove('text-on-surface-variant');
-            metricBtn.classList.remove('bg-primary', 'text-on-primary');
-            metricBtn.classList.add('text-on-surface-variant');
-            unitLabel.textContent = 'Gallons';
-        });
+    let phase = '-';
+    if (ppfd >= 100 && ppfd <= 300) {
+        phase = 'Setzling';
+    } else if (ppfd > 300 && ppfd <= 600) {
+        phase = 'Veggie';
+    } else if (ppfd > 600) {
+        phase = 'Blüte';
+    }
+    document.getElementById('phase-output').textContent = phase;
+}
 
-        // Initialize values
-        updateNutrients();
-    </script>
-<script src="player.js"></script>
+document.getElementById('light-input').addEventListener('input', updateLight);
+document.getElementById('light-hours').addEventListener('input', updateLight);
+document.getElementById('light-calc-btn').addEventListener('click', updateLight);
+
+// ========== FERTILIZER CALCULATOR ==========
+let isMetric = true;
+let isMl = true;
+
+function updateNutrients() {
+    const volume = parseFloat(document.getElementById('water-volume').value) || 0;
+    const customDose = parseFloat(document.getElementById('custom-nut-dose').value) || 0;
+
+    let conversion = 1;
+    if (!isMl) conversion = 0.033814; // ml to fl oz
+    if (!isMetric) conversion *= 0.264172; // liters to gallons conversion
+
+    let nut1 = volume * 4 * conversion;
+    let nut2 = volume * 2 * conversion;
+    let nut3 = volume * 1 * conversion;
+    let nut4 = volume * customDose * conversion;
+
+    document.getElementById('nut-1').textContent = nut1.toFixed(1) + ' ' + (isMl ? 'ml' : 'fl oz');
+    document.getElementById('nut-2').textContent = nut2.toFixed(1) + ' ' + (isMl ? 'ml' : 'fl oz');
+    document.getElementById('nut-3').textContent = nut3.toFixed(1) + ' ' + (isMl ? 'ml' : 'fl oz');
+    document.getElementById('nut-4').textContent = nut4.toFixed(1) + ' ' + (isMl ? 'ml' : 'fl oz');
+
+    const total = (nut1 + nut2 + nut3 + nut4).toFixed(1);
+    document.getElementById('total-nutrients').textContent = total + ' ' + (isMl ? 'ml' : 'fl oz');
+
+    document.querySelectorAll('.nut-unit-label').forEach(label => {
+        label.textContent = isMl ? 'ml' : 'fl oz';
+    });
+}
+
+function adjustWater(amount) {
+    let val = parseFloat(document.getElementById('water-volume').value) || 0;
+    val = Math.max(0, val + amount);
+    document.getElementById('water-volume').value = val.toFixed(1);
+    updateNutrients();
+}
+
+document.getElementById('water-volume').addEventListener('input', updateNutrients);
+document.getElementById('custom-nut-dose').addEventListener('input', () => {
+    const name = document.getElementById('custom-nut-name').value || 'Benutzerdefiniert';
+    const dose = document.getElementById('custom-nut-dose').value || '0';
+    document.getElementById('custom-nut-display').textContent = name;
+    document.getElementById('custom-nut-dose-display').textContent = dose + ' ml / L';
+    updateNutrients();
+});
+
+document.getElementById('nut-unit-ml').addEventListener('click', function() {
+    isMl = true;
+    document.getElementById('nut-unit-ml').classList.add('bg-primary', 'text-on-primary');
+    document.getElementById('nut-unit-ml').classList.remove('text-on-surface-variant');
+    document.getElementById('nut-unit-oz').classList.remove('bg-primary', 'text-on-primary');
+    document.getElementById('nut-unit-oz').classList.add('text-on-surface-variant');
+    updateNutrients();
+});
+
+document.getElementById('nut-unit-oz').addEventListener('click', function() {
+    isMl = false;
+    document.getElementById('nut-unit-oz').classList.add('bg-primary', 'text-on-primary');
+    document.getElementById('nut-unit-oz').classList.remove('text-on-surface-variant');
+    document.getElementById('nut-unit-ml').classList.remove('bg-primary', 'text-on-primary');
+    document.getElementById('nut-unit-ml').classList.add('text-on-surface-variant');
+    updateNutrients();
+});
+
+document.getElementById('water-unit-l').addEventListener('click', function() {
+    isMetric = true;
+    document.getElementById('water-unit-l').classList.add('bg-primary', 'text-on-primary');
+    document.getElementById('water-unit-l').classList.remove('text-on-surface-variant');
+    document.getElementById('water-unit-gal').classList.remove('bg-primary', 'text-on-primary');
+    document.getElementById('water-unit-gal').classList.add('text-on-surface-variant');
+    updateNutrients();
+});
+
+document.getElementById('water-unit-gal').addEventListener('click', function() {
+    isMetric = false;
+    document.getElementById('water-unit-gal').classList.add('bg-primary', 'text-on-primary');
+    document.getElementById('water-unit-gal').classList.remove('text-on-surface-variant');
+    document.getElementById('water-unit-l').classList.remove('bg-primary', 'text-on-primary');
+    document.getElementById('water-unit-l').classList.add('text-on-surface-variant');
+    updateNutrients();
+});
+
+// ========== VPD CALCULATOR ==========
+let isCelsius = true;
+
+function calculateVPD() {
+    let temp = parseFloat(document.getElementById('vpd-temp').value) || 25;
+    const rh = parseFloat(document.getElementById('vpd-rh').value) || 60;
+
+    if (!isCelsius) {
+        temp = (temp - 32) * (5/9);
+    }
+
+    const svp = 0.61078 * Math.exp((17.27 * temp) / (temp + 237.3));
+    const vpd = svp * (1 - rh / 100);
+
+    document.getElementById('vpd-value').textContent = vpd.toFixed(2);
+
+    const statusBox = document.getElementById('vpd-status-box');
+    let status = '';
+
+    if (vpd < 0.8) {
+        statusBox.className = 'vpd-status vpd-low';
+        status = 'Zu niedrig - Erhöhe RH oder senke Temperatur';
+    } else if (vpd >= 0.8 && vpd <= 1.2) {
+        statusBox.className = 'vpd-status vpd-optimal';
+        status = 'Optimal für Wachstum';
+    } else {
+        statusBox.className = 'vpd-status vpd-high';
+        status = 'Zu hoch - Senke RH oder erhöhe Temperatur';
+    }
+
+    statusBox.textContent = status;
+    document.getElementById('vpd-status').textContent = status.split(' - ')[0];
+}
+
+document.getElementById('vpd-temp').addEventListener('input', calculateVPD);
+document.getElementById('vpd-rh').addEventListener('input', calculateVPD);
+
+document.getElementById('temp-c').addEventListener('click', function() {
+    isCelsius = true;
+    document.getElementById('temp-c').classList.add('bg-primary', 'text-on-primary');
+    document.getElementById('temp-c').classList.remove('text-on-surface-variant');
+    document.getElementById('temp-f').classList.remove('bg-primary', 'text-on-primary');
+    document.getElementById('temp-f').classList.add('text-on-surface-variant');
+    calculateVPD();
+});
+
+document.getElementById('temp-f').addEventListener('click', function() {
+    isCelsius = false;
+    document.getElementById('temp-f').classList.add('bg-primary', 'text-on-primary');
+    document.getElementById('temp-f').classList.remove('text-on-surface-variant');
+    document.getElementById('temp-c').classList.remove('bg-primary', 'text-on-primary');
+    document.getElementById('temp-c').classList.add('text-on-surface-variant');
+    calculateVPD();
+});
+
+// ========== pH CALCULATOR ==========
+document.getElementById('soil-ph-input').addEventListener('input', function() {
+    const ph = parseFloat(this.value) || 6.5;
+    const position = ((ph - 4) / 6) * 100;
+    document.getElementById('soil-ph-indicator').style.left = Math.max(0, Math.min(100, position)) + '%';
+});
+
+document.getElementById('hydro-ph-input').addEventListener('input', function() {
+    const ph = parseFloat(this.value) || 6.0;
+    const position = ((ph - 4) / 6) * 100;
+    document.getElementById('hydro-ph-indicator').style.left = Math.max(0, Math.min(100, position)) + '%';
+});
+
+// Initialize
+updateNutrients();
+calculateVPD();
+updateLight();
+</script>
+<script src="eg-core.js"></script>
 </body></html>

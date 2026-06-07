@@ -214,7 +214,7 @@
 </svg>
 <div class="absolute inset-0 flex items-center justify-between px-4 pointer-events-none">
 <div class="flex flex-col">
-<span class="font-headline-lg text-primary">24.5°</span>
+<span class="font-headline-lg text-primary">24.5°C</span>
 <span class="font-label-sm text-on-surface-variant">Celsius</span>
 </div>
 <div class="flex flex-col items-end">
@@ -280,11 +280,22 @@
 <span class="material-symbols-outlined text-3xl" data-icon="add">add</span>
 </button>
 <script>
+        // Sync unit mode on load
+        window.addEventListener('DOMContentLoaded', () => {
+            const mode = EG.Units.getMode();
+            const tempEl = document.querySelector('.font-headline-lg.text-primary');
+            const unitLabel = document.querySelector('.font-label-sm.text-on-surface-variant');
+            if (mode === 'imperial') {
+                if (tempEl) tempEl.textContent = EG.Units.formatTemp(24.5);
+                if (unitLabel) unitLabel.textContent = 'Fahrenheit';
+            }
+        });
+
         // Micro-interaction for status updates
         setInterval(() => {
             const cpuTemp = (40 + Math.random() * 5).toFixed(1);
             const elements = document.querySelectorAll('.font-label-lg');
-            if (elements[0]) elements[0].innerText = cpuTemp + '°C';
+            if (elements[0]) elements[0].innerText = EG.Units.formatTemp(parseFloat(cpuTemp));
         }, 3000);
 
         // Vanilla JS for sound effect visualization simulation
@@ -296,5 +307,6 @@
             });
         });
     </script>
+<script src="eg-core.js"></script>
 <script src="player.js"></script>
 </body></html>

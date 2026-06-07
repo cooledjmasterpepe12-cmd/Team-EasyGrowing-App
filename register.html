@@ -1,413 +1,129 @@
 <!DOCTYPE html>
-
 <html class="dark" lang="de"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Team EasyGrowing | Login & Registrieren</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <style>
-        .glass-panel {
-            background: rgba(30, 32, 30, 0.8);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .phoenix-glow {
-            box-shadow: 0 0 20px rgba(254, 157, 0, 0.15);
-        }
-        .phoenix-glow:active {
-            box-shadow: 0 0 30px rgba(254, 157, 0, 0.4);
-        }
-        .input-focus-ring:focus {
-            outline: none;
-            border-color: #a1d494;
-            box-shadow: 0 0 0 2px rgba(161, 212, 148, 0.2);
-        }
-    </style>
+  .glass-panel{background:rgba(30,32,30,.8);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.1)}
+  .phoenix-glow{box-shadow:0 0 20px rgba(254,157,0,.15)}
+  .phoenix-glow:active{box-shadow:0 0 30px rgba(254,157,0,.4)}
+  .input-focus-ring:focus{outline:none;border-color:#a1d494;box-shadow:0 0 0 2px rgba(161,212,148,.2)}
+  body{min-height:max(884px,100dvh)}
+</style>
 <script id="tailwind-config">
-        tailwind.config = {
-          darkMode: "class",
-          theme: {
-            extend: {
-              "colors": {
-                      "on-secondary": "#482900",
-                      "on-primary-container": "#9dd090",
-                      "tertiary-fixed": "#ffdbd0",
-                      "on-primary-fixed": "#002201",
-                      "outline-variant": "#42493e",
-                      "on-secondary-fixed-variant": "#673d00",
-                      "inverse-on-surface": "#2f312e",
-                      "on-tertiary-fixed": "#2c160e",
-                      "background": "#121412",
-                      "secondary-fixed": "#ffdcbb",
-                      "primary-fixed": "#bcf0ae",
-                      "surface-container-low": "#1a1c1a",
-                      "primary-container": "#2d5a27",
-                      "primary": "#a1d494",
-                      "primary-fixed-dim": "#a1d494",
-                      "outline": "#8c9387",
-                      "on-primary-fixed-variant": "#23501e",
-                      "error-container": "#93000a",
-                      "tertiary-fixed-dim": "#e7bdb1",
-                      "surface-container-highest": "#333533",
-                      "surface": "#121412",
-                      "on-primary": "#0a3909",
-                      "surface-bright": "#383a37",
-                      "inverse-primary": "#3b6934",
-                      "on-secondary-fixed": "#2c1700",
-                      "surface-container": "#1e201e",
-                      "secondary-container": "#fe9d00",
-                      "surface-container-high": "#292a28",
-                      "on-error": "#690005",
-                      "secondary": "#ffc384",
-                      "on-background": "#e2e3df",
-                      "inverse-surface": "#e2e3df",
-                      "on-surface-variant": "#c2c9bb",
-                      "tertiary": "#e7bdb1",
-                      "surface-dim": "#121412",
-                      "secondary-fixed-dim": "#ffb869",
-                      "surface-variant": "#333533",
-                      "on-secondary-container": "#663c00",
-                      "on-tertiary-container": "#e3baae",
-                      "on-surface": "#e2e3df",
-                      "on-error-container": "#ffdad6",
-                      "surface-tint": "#a1d494",
-                      "error": "#ffb4ab",
-                      "on-tertiary": "#442a22"
-              },
-              "borderRadius": {
-                      "DEFAULT": "0.25rem",
-                      "lg": "0.5rem",
-                      "xl": "0.75rem",
-                      "full": "9999px"
-              },
-              "spacing": {
-                      "inline-padding": "12px",
-                      "stack-gap": "16px",
-                      "section-gap": "32px",
-                      "container-margin": "20px",
-                      "base": "8px"
-              },
-              "fontFamily": {
-                      "label-lg": ["Inter"],
-                      "headline-lg": ["Montserrat"],
-                      "body-lg": ["Inter"],
-                      "body-sm": ["Inter"],
-                      "display-lg": ["Montserrat"],
-                      "label-sm": ["Inter"],
-                      "headline-md": ["Montserrat"],
-                      "headline-sm": ["Montserrat"],
-                      "body-md": ["Inter"]
-              },
-              "fontSize": {
-                      "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
-                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
-                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
-                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
-                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                      "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
-                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
-              }
-            },
-          },
-        }
-    </script>
-<style>
-        body {
-          min-height: max(884px, 100dvh);
-        }
-    </style>
+  tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-secondary":"#482900","on-primary-container":"#9dd090","tertiary-fixed":"#ffdbd0","on-primary-fixed":"#002201","outline-variant":"#42493e","on-secondary-fixed-variant":"#673d00","inverse-on-surface":"#2f312e","on-tertiary-fixed":"#2c160e","background":"#121412","secondary-fixed":"#ffdcbb","primary-fixed":"#bcf0ae","surface-container-low":"#1a1c1a","primary-container":"#2d5a27","primary":"#a1d494","primary-fixed-dim":"#a1d494","outline":"#8c9387","on-primary-fixed-variant":"#23501e","error-container":"#93000a","tertiary-fixed-dim":"#e7bdb1","surface-container-highest":"#333533","surface":"#121412","on-primary":"#0a3909","surface-bright":"#383a37","inverse-primary":"#3b6934","on-secondary-fixed":"#2c1700","surface-container":"#1e201e","secondary-container":"#fe9d00","surface-container-high":"#292a28","on-error":"#690005","secondary":"#ffc384","on-background":"#e2e3df","inverse-surface":"#e2e3df","on-surface-variant":"#c2c9bb","tertiary":"#e7bdb1","surface-dim":"#121412","secondary-fixed-dim":"#ffb869","surface-variant":"#333533","on-secondary-container":"#663c00","on-tertiary-container":"#e3baae","on-surface":"#e2e3df","on-error-container":"#ffdad6","surface-tint":"#a1d494","error":"#ffb4ab","on-tertiary":"#442a22"},borderRadius:{DEFAULT:".25rem",lg:".5rem",xl:".75rem",full:"9999px"},spacing:{"inline-padding":"12px","stack-gap":"16px","section-gap":"32px","container-margin":"20px","base":"8px"},fontFamily:{"label-lg":["Inter"],"headline-lg":["Montserrat"],"body-lg":["Inter"],"body-sm":["Inter"],"display-lg":["Montserrat"],"label-sm":["Inter"],"headline-md":["Montserrat"],"headline-sm":["Montserrat"],"body-md":["Inter"]},fontSize:{"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.05em","fontWeight":"600"}],"headline-lg":["32px",{"lineHeight":"40px","fontWeight":"700"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}],"body-sm":["14px",{"lineHeight":"20px","fontWeight":"400"}],"display-lg":["48px",{"lineHeight":"56px","letterSpacing":"-0.02em","fontWeight":"700"}],"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.05em","fontWeight":"500"}],"headline-md":["24px",{"lineHeight":"32px","fontWeight":"600"}],"headline-sm":["20px",{"lineHeight":"28px","fontWeight":"600"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}]}}}}
+</script>
 </head>
 <body class="bg-background text-on-background min-h-screen flex flex-col items-center justify-center relative overflow-x-hidden">
-<!-- Background Atmospheric Elements -->
 <div class="absolute inset-0 z-0 pointer-events-none">
-<div class="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px]"></div>
-<div class="absolute bottom-[-5%] left-[-5%] w-[400px] h-[400px] bg-secondary/5 rounded-full blur-[100px]"></div>
+  <div class="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px]"></div>
+  <div class="absolute bottom-[-5%] left-[-5%] w-[400px] h-[400px] bg-secondary/5 rounded-full blur-[100px]"></div>
 </div>
 <main class="relative z-10 w-full max-w-[420px] px-container-margin py-section-gap">
-<!-- Brand Identity -->
-<div class="flex flex-col items-center mb-10 text-center">
-<a class="block w-24 h-24 mb-4 transition-transform hover:scale-105 active:scale-95" href="index.html">
-<img alt="Team EasyGrowing Phoenix Logo" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsWiyS5P6l5UeTnn4N2UkPL11YNDP-buYBe-yn6wlzYGRrveqXcnDxrAoNlKN5JoApWiWbBlQ1L8pBW8ovDEvAo5U8pA9qb58SPt8GdIJyDN46DldP7SZIlaOl-BzQvTR_oT0F4M8b3Kr2EpEH7C84IkYKfc0KTclPOgELATNKwVaxK7j7xKUxHSmhJcY-eo9NK8yYcHR1gXuT-LaIA9bto7CzIWUlgxLrDfaKnTdi6LspXCB4ErGcE-nkbuIy-hTy1CsEi7K_wFA"/>
-</a>
-<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">Team EasyGrowing</h1>
-<p class="font-body-md text-body-md text-on-surface-variant mt-2">Willkommen in deinem digitalen Gewächshaus.</p>
-</div>
-<!-- Auth Container -->
-<div class="glass-panel rounded-xl p-8 shadow-2xl transition-all duration-500" id="auth-container">
-<!-- Tabs (Switch between Login/Register) -->
-<div class="flex border-b border-white/5 mb-8">
-<button class="flex-1 py-3 font-label-lg text-label-lg text-primary border-b-2 border-primary transition-all" id="tab-login">Login</button>
-<button class="flex-1 py-3 font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-all" id="tab-register">Registrieren</button>
-</div>
-<!-- Forms -->
-<form action="index.html" class="space-y-stack-gap" id="login-form">
-<div class="space-y-2">
-<label class="font-label-sm text-label-sm text-on-surface-variant ml-1">E-Mail Adresse</label>
-<div class="relative">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-xl">mail</span>
-<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-3 pl-10 pr-4 text-on-surface placeholder:text-on-surface-variant/40 input-focus-ring transition-all" placeholder="name@beispiel.de" required="" type="email"/>
-</div>
-</div>
-<div class="space-y-2">
-<label class="font-label-sm text-label-sm text-on-surface-variant ml-1">Passwort</label>
-<div class="relative">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-xl">lock</span>
-<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-3 pl-10 pr-12 text-on-surface placeholder:text-on-surface-variant/40 input-focus-ring transition-all" placeholder="••••••••" required="" type="password"/>
-<button class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors" type="button">
-<span class="material-symbols-outlined">visibility</span>
-</button>
-</div>
-</div>
-<div class="flex items-center justify-between py-1">
-<label class="flex items-center gap-2 cursor-pointer">
-<input class="w-4 h-4 rounded border-outline-variant bg-surface-container-low text-primary focus:ring-primary/20" type="checkbox"/>
-<span class="font-body-sm text-body-sm text-on-surface-variant">Angemeldet bleiben</span>
-</label>
-<a class="font-body-sm text-body-sm text-secondary hover:underline" href="#">Passwort vergessen?</a>
-</div>
-<button class="w-full bg-secondary-container text-on-secondary font-label-lg text-label-lg py-4 rounded-lg phoenix-glow active:scale-95 transition-all mt-4" type="submit">
-                    Login
-                </button>
-</form>
-<form action="index.html" class="hidden space-y-stack-gap" id="register-form">
-<div class="space-y-2">
-<label class="font-label-sm text-label-sm text-on-surface-variant ml-1">Benutzername</label>
-<div class="relative">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-xl">person</span>
-<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-3 pl-10 pr-4 text-on-surface placeholder:text-on-surface-variant/40 input-focus-ring transition-all" placeholder="GärtnerMeister" required="" type="text"/>
-</div>
-</div>
-<div class="space-y-2">
-<label class="font-label-sm text-label-sm text-on-surface-variant ml-1">E-Mail Adresse</label>
-<div class="relative">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-xl">mail</span>
-<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-3 pl-10 pr-4 text-on-surface placeholder:text-on-surface-variant/40 input-focus-ring transition-all" placeholder="name@beispiel.de" required="" type="email"/>
-</div>
-</div>
-<div class="space-y-2">
-<label class="font-label-sm text-label-sm text-on-surface-variant ml-1">Passwort</label>
-<div class="relative">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-xl">lock</span>
-<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-3 pl-10 pr-4 text-on-surface placeholder:text-on-surface-variant/40 input-focus-ring transition-all" placeholder="Min. 8 Zeichen" required="" type="password"/>
-</div>
-</div>
-<p class="font-body-sm text-body-sm text-on-surface-variant/60 text-center px-4">
-                    Durch das Registrieren akzeptierst du unsere <a class="text-primary hover:underline" href="#">AGB</a> und <a class="text-primary hover:underline" href="#">Datenschutzerklärung</a>.
-                </p>
-<button class="w-full bg-primary-container text-on-primary-container font-label-lg text-label-lg py-4 rounded-lg border border-primary/20 active:scale-95 transition-all mt-4" type="submit">
-                    Registrieren
-                </button>
-</form>
-<!-- Divider -->
-<div class="flex items-center gap-4 my-8">
-<div class="h-[1px] flex-1 bg-white/5"></div>
-<span class="font-label-sm text-label-sm text-on-surface-variant/50">ODER</span>
-<div class="h-[1px] flex-1 bg-white/5"></div>
-</div>
-<!-- Social Login -->
-<button class="w-full flex items-center justify-center gap-3 bg-white/5 hover:bg-white/10 text-on-surface border border-white/10 py-3 rounded-lg transition-colors font-label-lg text-label-lg">
-<svg fill="currentColor" height="20" viewbox="0 0 24 24" width="20">
-<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
-<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
-<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"></path>
-<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
-</svg>
-                Mit Google fortfahren
-            </button>
-</div>
-<!-- Secondary Navigation -->
-<nav class="mt-8 flex flex-wrap justify-center gap-4 text-on-surface-variant font-label-sm text-label-sm">
-<a class="hover:text-primary transition-colors" href="bible.html">Bible</a>
-<a class="hover:text-primary transition-colors" href="diary.html">Diary</a>
-<a class="hover:text-primary transition-colors" href="music.html">Music</a>
-<a class="hover:text-primary transition-colors" href="shop.html">Shop</a>
-<a class="hover:text-primary transition-colors" href="profile.html">Profile</a>
-<a class="hover:text-primary transition-colors" href="admin.html">Admin</a>
-</nav>
-<!-- Footer Visual -->
-<div class="mt-10 rounded-2xl overflow-hidden glass-panel h-32 relative flex items-center px-6">
-<div class="relative z-10">
-<p class="font-headline-sm text-headline-sm text-primary">Wachse mit uns.</p>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Schließe dich 15.000+ Hobbygärtnern an.</p>
-</div>
-<div class="absolute right-[-10px] top-[-20px] opacity-20">
-<span class="material-symbols-outlined text-[120px] text-primary rotate-12">potted_plant</span>
-</div>
-</div>
-<p class="text-center mt-8 font-body-sm text-body-sm text-on-surface-variant/40">
-            © 2026 Team EasyGrowing. Alle Rechte vorbehalten.
-        </p>
+  <div class="flex flex-col items-center mb-10 text-center">
+    <a class="block w-24 h-24 mb-4 transition-transform hover:scale-105 active:scale-95" href="index.html">
+      <img alt="Team EasyGrowing Phoenix Logo" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsWiyS5P6l5UeTnn4N2UkPL11YNDP-buYBe-yn6wlzYGRrveqXcnDxrAoNlKN5JoApWiWbBlQ1L8pBW8ovDEvAo5U8pA9qb58SPt8GdIJyDN46DldP7SZIlaOl-BzQvTR_oT0F4M8b3Kr2EpEH7C84IkYKfc0KTclPOgELATNKwVaxK7j7xKUxHSmhJcY-eo9NK8yYcHR1gXuT-LaIA9bto7CzIWUlgxLrDfaKnTdi6LspXCB4ErGcE-nkbuIy-hTy1CsEi7K_wFA"/>
+    </a>
+    <h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">Team EasyGrowing</h1>
+    <p class="font-body-md text-body-md text-on-surface-variant mt-2" id="welcome-text">Willkommen in deinem digitalen Gewächshaus.</p>
+  </div>
+  <div class="glass-panel rounded-xl p-8 shadow-2xl transition-all duration-500" id="auth-container">
+    <div class="flex border-b border-white/5 mb-8">
+      <button class="flex-1 py-3 font-label-lg text-label-lg text-primary border-b-2 border-primary transition-all" id="tab-login">Login</button>
+      <button class="flex-1 py-3 font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-all" id="tab-register">Registrieren</button>
+    </div>
+    <form class="space-y-stack-gap" id="login-form">
+      <div class="space-y-2">
+        <label class="font-label-sm text-label-sm text-on-surface-variant ml-1">E-Mail Adresse</label>
+        <div class="relative">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-xl">mail</span>
+          <input class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-3 pl-10 pr-4 text-on-surface placeholder:text-on-surface-variant/40 input-focus-ring transition-all" placeholder="name@beispiel.de" required type="email" id="login-email"/>
+        </div>
+      </div>
+      <div class="space-y-2">
+        <label class="font-label-sm text-label-sm text-on-surface-variant ml-1">Passwort</label>
+        <div class="relative">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-xl">lock</span>
+          <input class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-3 pl-10 pr-12 text-on-surface placeholder:text-on-surface-variant/40 input-focus-ring transition-all" placeholder="Min. 6 Zeichen" required type="password" id="login-password"/>
+          <button class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors" type="button" onclick="togglePw('login-password',this)">
+            <span class="material-symbols-outlined">visibility</span>
+          </button>
+        </div>
+      </div>
+      <button class="w-full bg-secondary-container text-on-secondary font-label-lg text-label-lg py-4 rounded-lg phoenix-glow active:scale-95 transition-all mt-4" type="submit">Login</button>
+    </form>
+    <form class="hidden space-y-stack-gap" id="register-form">
+      <div class="space-y-2">
+        <label class="font-label-sm text-label-sm text-on-surface-variant ml-1">Benutzername</label>
+        <div class="relative">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-xl">person</span>
+          <input class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-3 pl-10 pr-4 text-on-surface placeholder:text-on-surface-variant/40 input-focus-ring transition-all" placeholder="GaertnerMeister" required type="text" id="reg-username"/>
+        </div>
+      </div>
+      <div class="space-y-2">
+        <label class="font-label-sm text-label-sm text-on-surface-variant ml-1">E-Mail Adresse</label>
+        <div class="relative">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-xl">mail</span>
+          <input class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-3 pl-10 pr-4 text-on-surface placeholder:text-on-surface-variant/40 input-focus-ring transition-all" placeholder="name@beispiel.de" required type="email" id="reg-email"/>
+        </div>
+      </div>
+      <div class="space-y-2">
+        <label class="font-label-sm text-label-sm text-on-surface-variant ml-1">Passwort</label>
+        <div class="relative">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-xl">lock</span>
+          <input class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-3 pl-10 pr-12 text-on-surface placeholder:text-on-surface-variant/40 input-focus-ring transition-all" placeholder="Min. 6 Zeichen" required type="password" id="reg-password"/>
+          <button class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors" type="button" onclick="togglePw('reg-password',this)">
+            <span class="material-symbols-outlined">visibility</span>
+          </button>
+        </div>
+      </div>
+      <p class="font-body-sm text-body-sm text-on-surface-variant/60 text-center px-4">
+        Durch das Registrieren akzeptierst du unsere <a class="text-primary hover:underline" href="#">AGB</a> und <a class="text-primary hover:underline" href="#">Datenschutzerklaerung</a>.
+      </p>
+      <button class="w-full bg-primary-container text-on-primary-container font-label-lg text-label-lg py-4 rounded-lg border border-primary/20 active:scale-95 transition-all mt-4" type="submit">Registrieren</button>
+    </form>
+    <div class="flex items-center gap-4 my-8">
+      <div class="h-[1px] flex-1 bg-white/5"></div>
+      <span class="font-label-sm text-label-sm text-on-surface-variant/50">ODER</span>
+      <div class="h-[1px] flex-1 bg-white/5"></div>
+    </div>
+    <a class="w-full flex items-center justify-center gap-3 bg-white/5 hover:bg-white/10 text-on-surface border border-white/10 py-3 rounded-lg transition-colors font-label-lg text-label-lg cursor-pointer" href="index.html">
+      <span class="material-symbols-outlined">visibility_off</span>
+      Als Gast fortfahren
+    </a>
+  </div>
+  <div class="flex justify-center gap-2 mt-6">
+    <button class="px-3 py-1 rounded-lg text-label-sm bg-primary text-on-primary font-bold" onclick="setLang('de')">DE</button>
+    <button class="px-3 py-1 rounded-lg text-label-sm bg-surface-variant text-on-surface-variant hover:text-on-surface" onclick="setLang('en')">EN</button>
+    <button class="px-3 py-1 rounded-lg text-label-sm bg-surface-variant text-on-surface-variant hover:text-on-surface" onclick="setLang('es')">ES</button>
+  </div>
+  <div class="mt-10 rounded-2xl overflow-hidden glass-panel h-32 relative flex items-center px-6">
+    <div class="relative z-10">
+      <p class="font-headline-sm text-headline-sm text-primary">Wachse mit uns.</p>
+      <p class="font-body-sm text-body-sm text-on-surface-variant">Schliesse dich 15.000+ Hobbygaertnern an.</p>
+    </div>
+    <div class="absolute right-[-10px] top-[-20px] opacity-20">
+      <span class="material-symbols-outlined text-[120px] text-primary rotate-12">potted_plant</span>
+    </div>
+  </div>
+  <p class="text-center mt-8 font-body-sm text-body-sm text-on-surface-variant/40">&copy; 2026 Team EasyGrowing. Alle Rechte vorbehalten.</p>
 </main>
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-
-    const firebaseConfig = {
-        apiKey: "AIzaSyCwIlWksdGaKr-eJCgJ4Q0u73nwYqG9MNs",
-        authDomain: "team-easygrowing.firebaseapp.com",
-        projectId: "team-easygrowing",
-        storageBucket: "team-easygrowing.firebasestorage.app",
-        messagingSenderId: "152035870457",
-        appId: "1:152035870457:web:265e638fbf0e4e679c4428",
-        measurementId: "G-1C8H0C11T8"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-
-    // Redirect if already logged in
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            window.location.href = 'index.html';
-        }
-    });
-
-    // ── Tab switching ──────────────────────────────────────────
-    const tabLogin    = document.getElementById('tab-login');
-    const tabRegister = document.getElementById('tab-register');
-    const loginForm   = document.getElementById('login-form');
-    const registerForm= document.getElementById('register-form');
-
-    function showLogin() {
-        tabLogin.classList.add('text-primary','border-b-2','border-primary');
-        tabLogin.classList.remove('text-on-surface-variant','border-b-0');
-        tabRegister.classList.remove('text-primary','border-b-2','border-primary');
-        tabRegister.classList.add('text-on-surface-variant');
-        loginForm.classList.remove('hidden');
-        registerForm.classList.add('hidden');
-        clearError();
-    }
-
-    function showRegister() {
-        tabRegister.classList.add('text-primary','border-b-2','border-primary');
-        tabRegister.classList.remove('text-on-surface-variant','border-b-0');
-        tabLogin.classList.remove('text-primary','border-b-2','border-primary');
-        tabLogin.classList.add('text-on-surface-variant');
-        registerForm.classList.remove('hidden');
-        loginForm.classList.add('hidden');
-        clearError();
-    }
-
-    tabLogin.addEventListener('click', showLogin);
-    tabRegister.addEventListener('click', showRegister);
-
-    // ── Error / Success helper ─────────────────────────────────
-    function showError(msg) {
-        let el = document.getElementById('auth-error');
-        if (!el) {
-            el = document.createElement('div');
-            el.id = 'auth-error';
-            el.className = 'bg-error/20 border border-error/40 text-error rounded-lg px-4 py-3 text-sm font-medium text-center mt-2';
-            document.getElementById('auth-container').prepend(el);
-        }
-        el.textContent = msg;
-        el.classList.remove('hidden');
-    }
-
-    function showSuccess(msg) {
-        let el = document.getElementById('auth-error');
-        if (!el) {
-            el = document.createElement('div');
-            el.id = 'auth-error';
-            document.getElementById('auth-container').prepend(el);
-        }
-        el.className = 'bg-primary/20 border border-primary/40 text-primary rounded-lg px-4 py-3 text-sm font-medium text-center mt-2';
-        el.textContent = msg;
-        el.classList.remove('hidden');
-    }
-
-    function clearError() {
-        const el = document.getElementById('auth-error');
-        if (el) el.classList.add('hidden');
-    }
-
-    function setLoading(btn, loading) {
-        if (loading) {
-            btn.disabled = true;
-            btn.dataset.original = btn.textContent;
-            btn.innerHTML = '<span class="inline-block w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin mr-2"></span>Bitte warten...';
-        } else {
-            btn.disabled = false;
-            btn.textContent = btn.dataset.original || btn.textContent;
-        }
-    }
-
-    function translateError(code) {
-        const map = {
-            'auth/user-not-found':      'Kein Konto mit dieser E-Mail gefunden.',
-            'auth/wrong-password':      'Falsches Passwort. Bitte erneut versuchen.',
-            'auth/invalid-credential':  'E-Mail oder Passwort ist falsch.',
-            'auth/email-already-in-use':'Diese E-Mail ist bereits registriert.',
-            'auth/weak-password':       'Passwort muss mindestens 6 Zeichen haben.',
-            'auth/invalid-email':       'Ungültige E-Mail-Adresse.',
-            'auth/too-many-requests':   'Zu viele Versuche. Bitte kurz warten.',
-            'auth/network-request-failed': 'Keine Internetverbindung.',
-        };
-        return map[code] || 'Ein Fehler ist aufgetreten. Bitte erneut versuchen.';
-    }
-
-    // ── Password visibility toggle ─────────────────────────────
-    document.querySelectorAll('button[data-toggle-pw]').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const input = btn.previousElementSibling || btn.parentElement.querySelector('input[type="password"], input[type="text"]');
-            const icon  = btn.querySelector('.material-symbols-outlined');
-            if (input.type === 'password') {
-                input.type = 'text';
-                icon.textContent = 'visibility_off';
-            } else {
-                input.type = 'password';
-                icon.textContent = 'visibility';
-            }
-        });
-    });
-
-    // ── LOGIN ──────────────────────────────────────────────────
-    loginForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        clearError();
-        const email    = loginForm.querySelector('input[type="email"]').value.trim();
-        const password = loginForm.querySelector('input[type="password"]').value;
-        const btn      = loginForm.querySelector('button[type="submit"]');
-
-        setLoading(btn, true);
-        try {
-            await signInWithEmailAndPassword(auth, email, password);
-            showSuccess('✅ Erfolgreich eingeloggt! Weiterleitung...');
-            setTimeout(() => { window.location.href = 'index.html'; }, 800);
-        } catch (err) {
-            showError(translateError(err.code));
-            setLoading(btn, false);
-        }
-    });
-
-    // ── REGISTER ───────────────────────────────────────────────
-    registerForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        clearError();
-        const username = registerForm.querySelector('input[type="text"]').value.trim();
-        const email    = registerForm.querySelector('input[type="email"]').value.trim();
-        const password = registerForm.querySelector('input[type="password"]').value;
-        const btn      = registerForm.querySelector('button[type="submit"]');
-
-        if (!username || username.length < 3) {
-            showError('Benutzername muss mindestens 3 Zeichen lang sein.');
-            return;
-        }
-
-        setLoading(btn, true);
-        try {
-            const cred = await createUserWithEmailAndPassword(auth, email, password);
-            await updateProfile(cred.user, { displayName: username });
-            localStorage.setItem('username', username);
-            showSuccess('✅ Konto erstellt! Willkommen bei EasyGrowing!');
-            setTimeout(() => { window.location.href = 'index.html'; }, 800);
-        } catch (err) {
-            showError(translateError(err.code));
-            setLoading(btn, false);
-        }
-    });
+<script src="eg-core.js"></script>
+<script>
+  if (EG.Auth.isLoggedIn()) window.location.href = 'index.html';
+  const tabLogin=document.getElementById('tab-login'),tabRegister=document.getElementById('tab-register'),
+    loginForm=document.getElementById('login-form'),registerForm=document.getElementById('register-form');
+  function showLogin(){tabLogin.classList.add('text-primary','border-b-2','border-primary');tabLogin.classList.remove('text-on-surface-variant');tabRegister.classList.remove('text-primary','border-b-2','border-primary');tabRegister.classList.add('text-on-surface-variant');loginForm.classList.remove('hidden');registerForm.classList.add('hidden');clearMsg();}
+  function showRegister(){tabRegister.classList.add('text-primary','border-b-2','border-primary');tabRegister.classList.remove('text-on-surface-variant');tabLogin.classList.remove('text-primary','border-b-2','border-primary');tabLogin.classList.add('text-on-surface-variant');registerForm.classList.remove('hidden');loginForm.classList.add('hidden');clearMsg();}
+  tabLogin.addEventListener('click',showLogin);tabRegister.addEventListener('click',showRegister);
+  function showMsg(msg,ok){let el=document.getElementById('auth-msg');if(!el){el=document.createElement('div');el.id='auth-msg';document.getElementById('auth-container').prepend(el);}el.className=ok?'bg-primary/20 border border-primary/40 text-primary rounded-lg px-4 py-3 text-sm font-medium text-center mb-4':'bg-error/20 border border-error/40 text-error rounded-lg px-4 py-3 text-sm font-medium text-center mb-4';el.textContent=msg;}
+  function clearMsg(){const el=document.getElementById('auth-msg');if(el)el.remove();}
+  function togglePw(id,btn){const i=document.getElementById(id),ic=btn.querySelector('.material-symbols-outlined');if(i.type==='password'){i.type='text';ic.textContent='visibility_off';}else{i.type='password';ic.textContent='visibility';}}
+  loginForm.addEventListener('submit',(e)=>{e.preventDefault();clearMsg();const res=EG.Auth.login(document.getElementById('login-email').value.trim(),document.getElementById('login-password').value);if(res.ok){showMsg('Erfolgreich eingeloggt!',true);setTimeout(()=>window.location.href='index.html',600);}else{const l=EG.Units.getLang();showMsg(EG.Auth.errorMessages[l][res.err]||'Fehler beim Login.');}});
+  registerForm.addEventListener('submit',(e)=>{e.preventDefault();clearMsg();const un=document.getElementById('reg-username').value.trim();if(!un||un.length<3){showMsg('Benutzername muss mind. 3 Zeichen lang sein.');return;}const res=EG.Auth.signup(un,document.getElementById('reg-email').value.trim(),document.getElementById('reg-password').value);if(res.ok){showMsg('Konto erstellt! Willkommen!',true);setTimeout(()=>window.location.href='index.html',600);}else{const l=EG.Units.getLang();showMsg(EG.Auth.errorMessages[l][res.err]||'Fehler bei der Registrierung.');}});
+  function setLang(l){EG.Units.setLang(l);window.location.reload();}
 </script>
 </body></html>

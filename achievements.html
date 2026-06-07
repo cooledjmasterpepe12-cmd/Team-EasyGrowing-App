@@ -334,9 +334,8 @@
 <script>
         // Sync preferences on load
         window.addEventListener('DOMContentLoaded', () => {
-            const savedUnits = localStorage.getItem('units') || 'metric';
-            const savedLang = localStorage.getItem('lang') || 'en';
-            
+            const savedLang = EG.Units.getLang();
+
             // Adjust lang text if necessary
             if (savedLang === 'de') {
                 document.querySelector('h1.font-headline-sm').innerText = "Abzeichen";
@@ -363,5 +362,6 @@
             }
         });
     </script>
+<script src="eg-core.js"></script>
 <script src="player.js"></script>
 </body></html>

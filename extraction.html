@@ -291,7 +291,7 @@
                         Extraktions-Faustformeln
                     </h3>
                     <p class="font-body-sm text-body-sm text-on-surface-variant">Schnellreferenz für hervorragendes Rosin-Pressen direkt an der Maschine.</p>
-                    
+
                     <div class="space-y-3 pt-2">
                         <div class="flex gap-3 items-start">
                             <span class="material-symbols-outlined text-secondary mt-0.5">thermostat</span>
@@ -315,6 +315,21 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </section>
+
+            <!-- Press Log Section -->
+            <section class="glass-card rounded-xl p-6">
+                <h3 class="font-headline-sm text-headline-sm text-secondary flex items-center gap-2 mb-4">
+                    <span class="material-symbols-outlined">history</span>
+                    Press Log
+                </h3>
+                <button class="mb-4 px-4 py-2 bg-secondary text-on-secondary rounded-lg font-label-sm hover:opacity-90 transition-opacity" onclick="recordPress()">
+                    <span class="material-symbols-outlined text-sm mr-2" style="vertical-align: middle;">add</span>
+                    Aktuelle Presse aufzeichnen
+                </button>
+                <div class="max-h-96 overflow-y-auto space-y-3" id="press-log-entries">
+                    <!-- Press log entries will be populated here -->
                 </div>
             </section>
         </main>
@@ -434,27 +449,27 @@
             document.getElementById('press-time-val').innerText = `${time}s`;
 
             // Calculate expected yield percentage based on temperature and pressure
-            // Optimum yield generally increases with temp, but terpene grade goes down
-            let yieldPct = (10 + (temp - 70) * 0.25 + (force * 1.5) + (time * 0.01)).toFixed(1);
-            if (yieldPct > 28.5) yieldPct = 28.5; // cap at 28.5%
-            
+            // baseYield = 10 + (temp-70)*0.25 + force*1.5 + time*0.01, cap at 28.5%
+            let baseYield = 10 + (temp - 70) * 0.25 + force * 1.5 + time * 0.01;
+            let yieldPct = Math.min(baseYield, 28.5).toFixed(1);
+
             document.getElementById('expected-yield').innerText = `${yieldPct}%`;
 
-            // Determine Quality Grade
+            // Determine Quality Grade and Flow Speed
             const qEl = document.getElementById('quality-grade');
             const flowEl = document.getElementById('flow-speed');
             if (temp < 82) {
                 qEl.innerText = "Terpene Platinum (Kaltpressung)";
                 qEl.className = "text-lg font-bold text-primary mt-1";
-                flowEl.innerText = "Sehr langsamer, wachsartiger Harzfluss";
+                flowEl.innerText = "Sehr langsamer, wachsartiger Fluss";
             } else if (temp >= 82 && temp <= 95) {
                 qEl.innerText = "Terpene Gold (Optimal)";
                 qEl.className = "text-lg font-bold text-secondary mt-1";
-                flowEl.innerText = "Optimaler, zähflüssiger Fluss";
+                flowEl.innerText = "Optimaler zähflüssiger Fluss";
             } else {
                 qEl.innerText = "Standard Rosin (Dunkles Amber)";
                 qEl.className = "text-lg font-bold text-error mt-1";
-                flowEl.innerText = "Sehr schneller, flüssiger Fluss (hoher Wachsanteil)";
+                flowEl.innerText = "Sehr schneller Fluss (hoher Wachsanteil)";
             }
         }
 
@@ -476,6 +491,103 @@
             document.getElementById('sift-rate').innerText = `${returnRate}%`;
         }
     </script>
+<script>
+// Press Log functionality
+const pressLogs = JSON.parse(localStorage.getItem('pressLogs')) || [];
+
+function recordPress() {
+    const temp = parseFloat(document.getElementById('press-temp').value);
+    const force = parseFloat(document.getElementById('press-force').value);
+    const time = parseFloat(document.getElementById('press-time').value);
+    const yieldVal = parseFloat(document.getElementById('expected-yield').innerText);
+
+    const logEntry = {
+        date: new Date().toLocaleDateString('de-DE'),
+        time: new Date().toLocaleTimeString('de-DE'),
+        temp: temp,
+        force: force,
+        duration: time,
+        yield: yieldVal
+    };
+
+    pressLogs.unshift(logEntry);
+    localStorage.setItem('pressLogs', JSON.stringify(pressLogs));
+    updatePressLog();
+}
+
+function updatePressLog() {
+    const logContainer = document.getElementById('press-log-entries');
+    if (!logContainer) return;
+
+    logContainer.innerHTML = '';
+    pressLogs.forEach((log, idx) => {
+        const logEl = document.createElement('div');
+        logEl.className = 'p-3 bg-surface-container-low border border-white/5 rounded-lg text-sm';
+        logEl.innerHTML = `
+            <div class="flex justify-between items-start mb-2">
+                <span class="text-on-surface-variant text-xs">${log.date} ${log.time}</span>
+                <button onclick="deletePressLog(${idx})" class="text-error hover:text-error/80 text-xs">Löschen</button>
+            </div>
+            <div class="grid grid-cols-4 gap-2 text-[11px]">
+                <div>
+                    <span class="text-on-surface-variant">Temp:</span>
+                    <p class="font-bold text-secondary">${log.temp}°C</p>
+                </div>
+                <div>
+                    <span class="text-on-surface-variant">Kraft:</span>
+                    <p class="font-bold text-primary">${log.force}t</p>
+                </div>
+                <div>
+                    <span class="text-on-surface-variant">Zeit:</span>
+                    <p class="font-bold text-secondary">${log.duration}s</p>
+                </div>
+                <div>
+                    <span class="text-on-surface-variant">Ertrag:</span>
+                    <p class="font-bold text-primary">${log.yield}%</p>
+                </div>
+            </div>
+        `;
+        logContainer.appendChild(logEl);
+    });
+}
+
+function deletePressLog(idx) {
+    pressLogs.splice(idx, 1);
+    localStorage.setItem('pressLogs', JSON.stringify(pressLogs));
+    updatePressLog();
+}
+
+// Save Sift results to localStorage
+function saveSiftResults() {
+    const inputVal = parseFloat(document.getElementById('sift-input').value) || 0;
+    const outputVal = parseFloat(document.getElementById('sift-output').value) || 0;
+    const micron = document.getElementById('sift-micron').value;
+
+    if (inputVal > 0) {
+        const siftLogs = JSON.parse(localStorage.getItem('siftLogs')) || [];
+        siftLogs.unshift({
+            date: new Date().toLocaleDateString('de-DE'),
+            input: inputVal,
+            output: outputVal,
+            micron: micron,
+            rate: ((outputVal / inputVal) * 100).toFixed(2)
+        });
+        localStorage.setItem('siftLogs', JSON.stringify(siftLogs));
+    }
+}
+
+// Update Sift calculation and save
+document.addEventListener('DOMContentLoaded', () => {
+    const siftInput = document.getElementById('sift-input');
+    const siftOutput = document.getElementById('sift-output');
+    if (siftInput && siftOutput) {
+        siftInput.addEventListener('change', saveSiftResults);
+        siftOutput.addEventListener('change', saveSiftResults);
+    }
+    updatePressLog();
+});
+</script>
+<script src="eg-core.js"></script>
 <script src="player.js"></script>
 </body>
 </html>

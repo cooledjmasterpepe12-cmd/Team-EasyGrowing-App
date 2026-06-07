@@ -457,20 +457,15 @@
     </nav>
 
     <script>
-        // State management variables
-        let isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-
         // Redirect if not logged in
         window.addEventListener('DOMContentLoaded', () => {
-            if (localStorage.getItem('isLoggedIn') !== 'true') {
+            if (!EG.Auth.isLoggedIn()) {
                 window.location.href = 'register.html';
             }
 
-            // Load saved settings
-            const savedUnits = localStorage.getItem('units') || 'metric';
-            const savedLang = localStorage.getItem('lang') || 'en';
-            toggleUnits(savedUnits);
-            setLang(savedLang);
+            // Load saved settings via EG.Units
+            toggleUnits(EG.Units.getMode());
+            setLang(EG.Units.getLang());
 
             // Load saved rap lyrics
             const savedLyrics = localStorage.getItem('lyrics_notepads');
@@ -482,13 +477,13 @@
 
         // Logout function
         function logout() {
-            localStorage.removeItem('isLoggedIn');
+            EG.Auth.logout();
             window.location.href = 'register.html';
         }
 
         // Unit switcher
         function toggleUnits(mode) {
-            localStorage.setItem('units', mode);
+            EG.Units.setMode(mode);
             const btnMetric = document.getElementById('btn-metric');
             const btnImperial = document.getElementById('btn-imperial');
             const tempVal = document.getElementById('temp-val');
@@ -498,16 +493,14 @@
             if (mode === 'imperial') {
                 btnMetric.classList.add('opacity-50');
                 btnImperial.classList.remove('opacity-50');
-                
-                // Conversions
+
                 const cTemp = parseFloat(tempSlider.value);
-                const fTemp = (cTemp * 9/5 + 32).toFixed(1);
-                tempVal.innerText = `${fTemp}°F`;
-                tableTemp.innerText = '76.1°F';
+                tempVal.innerText = EG.Units.formatTemp(cTemp);
+                tableTemp.innerText = EG.Units.formatTemp(24.5);
             } else {
                 btnMetric.classList.remove('opacity-50');
                 btnImperial.classList.add('opacity-50');
-                
+
                 const cTemp = parseFloat(tempSlider.value);
                 tempVal.innerText = `${cTemp}°C`;
                 tableTemp.innerText = '24.5°C';
@@ -516,7 +509,7 @@
 
         // Language toggle
         function setLang(lang) {
-            localStorage.setItem('lang', lang);
+            EG.Units.setLang(lang);
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.remove('active-toggle');
                 btn.classList.add('opacity-70');
@@ -527,10 +520,10 @@
                 activeBtn.classList.remove('opacity-70');
             }
 
-            // Simple localization
+            // Localization
             const title = document.getElementById('admin-title');
             const sub = document.getElementById('admin-subtitle');
-            
+
             if (lang === 'de') {
                 title.innerText = "Creator Hub";
                 sub.innerText = "Kommandozentrale für Pepe & Marc. Verwaltung von Systemdaten und Community-Uploads.";
@@ -559,14 +552,14 @@
 
         tempSlider.addEventListener('input', (e) => {
             const val = parseFloat(e.target.value);
-            const units = localStorage.getItem('units') || 'metric';
+            const units = EG.Units.getMode();
             if (units === 'imperial') {
-                const f = (val * 9/5 + 32).toFixed(1);
-                document.getElementById('temp-val').innerText = `${f}°F`;
+                document.getElementById('temp-val').innerText = EG.Units.formatTemp(val);
+                document.getElementById('table-temp-01').innerText = EG.Units.formatTemp(val);
             } else {
                 document.getElementById('temp-val').innerText = `${val}°C`;
+                document.getElementById('table-temp-01').innerText = `${val}°C`;
             }
-            document.getElementById('table-temp-01').innerText = units === 'imperial' ? `${(val * 9/5 + 32).toFixed(1)}°F` : `${val}°C`;
             
             // Recalculate VPD
             calculateVPD();
@@ -683,6 +676,7 @@
             updatePlayerUI();
         }
     </script>
+<script src="eg-core.js"></script>
 <script src="player.js"></script>
 </body>
 </html>

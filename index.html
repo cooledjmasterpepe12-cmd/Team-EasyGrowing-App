@@ -437,29 +437,28 @@
 </div>
 </nav>
 <script>
-    // Load initial state from localStorage if exists
     window.addEventListener('DOMContentLoaded', () => {
-        const savedUnits = localStorage.getItem('units') || 'metric';
-        const savedLang = localStorage.getItem('lang') || 'en';
-        toggleUnits(savedUnits);
-        setLang(savedLang);
+        toggleUnits(EG.Units.getMode());
+        setLang(EG.Units.getLang());
 
-        // Auth state update
-        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        // Auth state update via EG.Auth
+        const user = EG.Auth.getUser();
         const authCtaButtons = document.getElementById('auth-cta-buttons');
-        if (isLoggedIn && authCtaButtons) {
+        if (user && authCtaButtons) {
+            const displayName = user.username || 'Phenix';
             authCtaButtons.innerHTML = `
-                <a class="px-4 py-1.5 rounded-lg bg-primary text-on-primary text-xs font-bold hover:opacity-90 transition-opacity" href="profile.html">MY PROFILE</a>
+                <a class="px-4 py-1.5 rounded-lg bg-primary text-on-primary text-xs font-bold hover:opacity-90 transition-opacity" href="profile.html">${displayName}</a>
                 <button class="px-4 py-1.5 rounded-lg border border-error text-error text-xs font-bold hover:bg-error/10 transition-colors" onclick="logout()">LOGOUT</button>
             `;
+            const welcomeEl = document.querySelector('main h2');
+            if (welcomeEl) {
+              const l = EG.Units.getLang();
+              welcomeEl.innerText = l==='de' ? `Willkommen zurück, ${displayName}` : l==='es' ? `Bienvenido, ${displayName}` : `Welcome Back, ${displayName}`;
+            }
         }
     });
 
-    // Logout
-    function logout() {
-        localStorage.removeItem('isLoggedIn');
-        window.location.reload();
-    }
+    function logout() { EG.Auth.logout(); window.location.reload(); }
 
     // Unit Toggle Logic
     function toggleUnits(mode) {
@@ -523,5 +522,6 @@
         }
     }
 </script>
+<script src="eg-core.js"></script>
 <script src="player.js"></script>
 </body></html>

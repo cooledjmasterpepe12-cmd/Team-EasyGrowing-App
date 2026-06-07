@@ -36,6 +36,20 @@
         .auth-overlay {
             backdrop-filter: blur(4px);
         }
+        .modal-backdrop {
+            animation: fadeIn 0.2s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .modal-content {
+            animation: slideUp 0.3s ease-out;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
     </style>
 <script id="tailwind-config">
       tailwind.config = {
@@ -146,6 +160,74 @@
 <button class="mt-4 text-label-md text-on-surface-variant underline" onclick="document.getElementById('login-prompt').classList.add('hidden')">Continue as Guest (Read Only)</button>
 </div>
 </div>
+
+<!-- Add Plant Modal -->
+<div class="hidden fixed inset-0 z-[100] flex items-center justify-center p-6 auth-overlay bg-black/60 modal-backdrop" id="add-plant-modal">
+<div class="bg-surface-container border border-secondary/30 rounded-2xl max-w-sm w-full text-start shadow-2xl modal-content">
+<div class="p-6 border-b border-outline-variant/30 flex justify-between items-center">
+<h3 class="font-headline-md">Add New Plant</h3>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-secondary" onclick="closeAddPlantModal()">close</button>
+</div>
+<form class="p-6 flex flex-col gap-4" id="add-plant-form">
+<div>
+<label class="text-label-md text-on-surface-variant block mb-2">Strain Name *</label>
+<input class="w-full bg-surface border border-outline-variant rounded-lg p-3 text-on-surface focus:border-secondary outline-none transition-colors" id="strain-name" placeholder="e.g., Lemon Haze" required type="text"/>
+</div>
+<div>
+<label class="text-label-md text-on-surface-variant block mb-2">Phase *</label>
+<select class="w-full bg-surface border border-outline-variant rounded-lg p-3 text-on-surface focus:border-secondary outline-none transition-colors" id="phase-select" required>
+<option value="">Select a phase</option>
+<option value="Keimung">Keimung (Germination)</option>
+<option value="Sämling">Sämling (Seedling)</option>
+<option value="Vegetativ">Vegetativ (Vegetative)</option>
+<option value="Blüte">Blüte (Bloom)</option>
+<option value="Ernte">Ernte (Harvest)</option>
+</select>
+</div>
+<div>
+<label class="text-label-md text-on-surface-variant block mb-2">Start Date *</label>
+<input class="w-full bg-surface border border-outline-variant rounded-lg p-3 text-on-surface focus:border-secondary outline-none transition-colors" id="start-date" required type="date"/>
+</div>
+<div>
+<label class="text-label-md text-on-surface-variant block mb-2">Notes</label>
+<textarea class="w-full bg-surface border border-outline-variant rounded-lg p-3 text-on-surface focus:border-secondary outline-none transition-colors" id="notes" placeholder="e.g., Purchased from local breeder" rows="3"></textarea>
+</div>
+<div class="flex gap-3 mt-4">
+<button class="flex-1 bg-surface-container border border-outline-variant text-on-surface py-3 rounded-full hover:bg-surface-variant transition-colors" onclick="closeAddPlantModal()" type="button">Cancel</button>
+<button class="flex-1 bg-secondary text-black font-bold py-3 rounded-full hover:scale-105 transition-transform" type="submit">Add Plant</button>
+</div>
+</form>
+</div>
+</div>
+
+<!-- Plant Detail Modal -->
+<div class="hidden fixed inset-0 z-[100] flex items-center justify-center p-6 auth-overlay bg-black/60 modal-backdrop" id="plant-detail-modal">
+<div class="bg-surface-container border border-secondary/30 rounded-2xl max-w-2xl w-full text-start shadow-2xl modal-content max-h-[90vh] overflow-y-auto">
+<div class="sticky top-0 p-6 border-b border-outline-variant/30 flex justify-between items-center bg-surface-container">
+<h3 class="font-headline-md" id="detail-plant-name">Plant Name</h3>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-secondary" onclick="closePlantDetailModal()">close</button>
+</div>
+<div class="p-6 flex flex-col gap-6" id="plant-detail-content">
+<!-- Plant info will be inserted here -->
+</div>
+</div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="hidden fixed inset-0 z-[101] flex items-center justify-center p-6 auth-overlay bg-black/60 modal-backdrop" id="delete-confirm-modal">
+<div class="bg-surface-container border border-secondary/30 rounded-2xl max-w-sm w-full text-center shadow-2xl modal-content">
+<div class="p-6">
+<span class="material-symbols-outlined text-error text-5xl mb-4 block">warning</span>
+<h3 class="font-headline-md mb-2">Delete Plant?</h3>
+<p class="text-on-surface-variant mb-6">This action cannot be undone. All logs for this plant will be deleted.</p>
+<div class="flex gap-3">
+<button class="flex-1 bg-surface-container border border-outline-variant text-on-surface py-3 rounded-full hover:bg-surface-variant transition-colors" onclick="closePlantDetailModal()">Cancel</button>
+<button class="flex-1 bg-error text-white font-bold py-3 rounded-full hover:scale-105 transition-transform" onclick="confirmDeletePlant()">Delete</button>
+</div>
+</div>
+</div>
+</div>
+
 <!-- Top Navigation -->
 <header class="bg-surface fixed top-0 w-full z-50 border-b border-outline-variant/30 flex justify-between items-center px-margin-mobile h-16">
 <div class="flex items-center gap-3">
@@ -174,26 +256,8 @@
 </div>
 </header>
 <main class="pt-20 px-4 md:px-margin-desktop max-w-container-max-width mx-auto">
-<!-- Phasen-Steuerung Quick Access -->
-<section class="mb-8">
-<div class="flex items-center justify-between mb-4">
-<h2 class="font-headline-md text-headline-md flex items-center gap-2">
-<span class="material-symbols-outlined text-secondary">settings_input_component</span>
-                Phasen-Steuerung
-            </h2>
-</div>
-<div class="flex gap-2 overflow-x-auto pb-2 custom-scrollbar" id="phase-controls">
-<button class="phase-btn flex-shrink-0 px-4 py-2 bg-surface-container border border-outline-variant/30 rounded-full text-label-lg hover:border-secondary transition-all" onclick="togglePhase(this)">Keimung</button>
-<button class="phase-btn flex-shrink-0 px-4 py-2 bg-surface-container border border-outline-variant/30 rounded-full text-label-lg hover:border-secondary transition-all" onclick="togglePhase(this)">Sämling</button>
-<button class="phase-btn active flex-shrink-0 px-4 py-2 bg-secondary text-black rounded-full text-label-lg font-bold" onclick="togglePhase(this)">Vegetativ</button>
-<button class="phase-btn flex-shrink-0 px-4 py-2 bg-surface-container border border-outline-variant/30 rounded-full text-label-lg hover:border-secondary transition-all" onclick="togglePhase(this)">Blüte</button>
-<button class="phase-btn flex-shrink-0 px-4 py-2 bg-surface-container border border-outline-variant/30 rounded-full text-label-lg hover:border-secondary transition-all" onclick="togglePhase(this)">Ernte</button>
-</div>
-</section>
-<!-- Bento Grid Layout -->
-<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
 <!-- Active Plants Section -->
-<section class="md:col-span-8 flex flex-col gap-4">
+<section class="mb-8 flex flex-col gap-4">
 <div class="flex items-center justify-between">
 <div class="flex items-center gap-2">
 <h2 class="font-headline-md text-headline-md flex items-center gap-2">
@@ -202,171 +266,18 @@
                     </h2>
 <span class="text-[10px] uppercase font-bold tracking-widest text-primary border border-primary/30 px-2 py-0.5 rounded">Member Area</span>
 </div>
-<span class="text-label-md font-label-md bg-primary-container text-secondary px-3 py-1 rounded-full">2 RUNNING</span>
+<span class="text-label-md font-label-md bg-primary-container text-secondary px-3 py-1 rounded-full" id="plant-count">0 PLANTS</span>
 </div>
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-<!-- Lemon Haze Alpha Card -->
-<div class="plant-card cursor-pointer bg-surface-container border border-outline-variant/50 rounded-xl overflow-hidden group hover:border-secondary transition-all duration-300 bloom-glow" onclick="selectPlant(this)">
-<div class="h-40 bg-cover bg-center relative" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB5eHj1UuV4xgSau_Z8DcwAtDvzZ253slGahpqCZp1Zn0IGfU9uwgS616x_hIlIg7lFAv_aS1UGsXRGwYlUZjJIewURwkG6IIdZD5nTKNw5LtGKwpEBA7EaEw-gQe2H0lUyKkPUYCR9QmgFbrxQPNVkYO1zyt8fms1RkI0smd1hujSCJzDq8I4v9UxmR_EZfBiHNGqP4ey6pADDUZkq3z_jdjBc9IU0-U32DDbBjSphUInA1E_obIx0rMucUuHcf3hA0A3tySkeg-g')">
-<div class="absolute top-2 right-2 bg-secondary text-black px-2 py-1 text-label-md font-label-md rounded">VEGGIE</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="plants-grid">
+<!-- Plant cards will be inserted here -->
 </div>
-<div class="p-4 border-t border-outline-variant/30">
-<h3 class="font-headline-sm text-headline-sm text-secondary">Lemon Haze Alpha</h3>
-<div class="mt-4 p-3 bg-surface-container-low rounded-lg border border-outline-variant/20">
-<label class="text-label-md text-on-surface-variant block mb-1">Erntemenge (g)</label>
-<input class="w-full bg-surface border border-outline-variant rounded p-2 text-on-surface focus:border-secondary outline-none transition-colors" onclick="event.stopPropagation()" placeholder="z.B. 45.5" type="number"/>
-</div>
-<div class="flex justify-between items-end mt-4">
-<div class="flex flex-col">
-<span class="text-label-md text-on-surface-variant">Day 42</span>
-<span class="text-body-md font-bold text-on-surface">Phase: Bloom</span>
-</div>
-<div class="w-16 h-16 relative flex items-center justify-center">
-<svg class="w-full h-full transform -rotate-90">
-<circle class="text-surface-container-highest" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-width="4"></circle>
-<circle class="text-secondary transition-all duration-1000" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-dasharray="175.9" stroke-dashoffset="44" stroke-width="4"></circle>
-</svg>
-<span class="absolute text-label-md font-bold">75%</span>
-</div>
-</div>
-</div>
-</div>
-<!-- Purple Punch Beta Card -->
-<div class="plant-card cursor-pointer bg-surface-container border border-outline-variant/50 rounded-xl overflow-hidden group hover:border-secondary/50 transition-all duration-300" onclick="selectPlant(this)">
-<div class="h-40 bg-cover bg-center relative opacity-80" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA7RIVndTov8usbCgqWyMF0vswXy30M8_uV0UX6EBqx2T3ynvvZwSQ6ysOppFNiQFOqhdDRMvl_GjVixFdWMig7RVT786jaaUJsAxkhBXtPnwKQBsh_ObnPutFOBPniCI-lXPGcKl3u5R6r73MrgB99p1t2ew92t3IYbAYa69NF9lGWL7xQu-KyHSIY_UbwD1u_Q-JPXKE6iIYiqcG9OxVq-5BxxkrGtVysqXcevRHRafhypg6rTtodLu7cGR70M1gCfS6cLCj15AE')">
-<div class="absolute top-2 right-2 bg-tertiary-container text-tertiary px-2 py-1 text-label-md font-label-md rounded">BLOOM</div>
-</div>
-<div class="p-4 border-t border-outline-variant/30">
-<h3 class="font-headline-sm text-headline-sm text-secondary">Purple Punch Beta</h3>
-<div class="mt-4 p-3 bg-surface-container-low rounded-lg border border-outline-variant/20">
-<label class="text-label-md text-on-surface-variant block mb-1">Erntemenge (g)</label>
-<input class="w-full bg-surface border border-outline-variant rounded p-2 text-on-surface focus:border-secondary outline-none transition-colors" onclick="event.stopPropagation()" placeholder="z.B. 62.0" type="number"/>
-</div>
-<div class="flex justify-between items-end mt-4">
-<div class="flex flex-col">
-<span class="text-label-md text-on-surface-variant">Day 68</span>
-<span class="text-body-md font-bold text-on-surface">Phase: Harvest Ready</span>
-</div>
-<div class="w-16 h-16 relative flex items-center justify-center">
-<svg class="w-full h-full transform -rotate-90">
-<circle class="text-surface-container-highest" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-width="4"></circle>
-<circle class="text-tertiary transition-all duration-1000" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-dasharray="175.9" stroke-dashoffset="17.5" stroke-width="4"></circle>
-</svg>
-<span class="absolute text-label-md font-bold">90%</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Schedule Side Panel -->
-<section class="md:col-span-4 flex flex-col gap-4">
-<div class="bg-surface-container-high border border-outline-variant/50 rounded-xl p-5 flex flex-col gap-4 h-full">
-<h2 class="font-headline-sm text-headline-sm flex items-center gap-2">
-<span class="material-symbols-outlined text-secondary">event_note</span>
-                    Schedule
-                </h2>
-<div class="flex items-center gap-4 bg-surface-container p-3 rounded-lg border-l-4 border-primary">
-<div class="p-2 bg-primary-container rounded-lg">
-<span class="material-symbols-outlined text-primary">water_drop</span>
-</div>
-<div class="flex-1">
-<p class="font-bold text-on-surface">Watering: Alpha</p>
-<p class="text-label-md text-on-surface-variant">Today, 4:00 PM - <span class="unit-volume">500ml</span></p>
-</div>
-<button class="material-symbols-outlined text-on-surface-variant hover:text-secondary">radio_button_unchecked</button>
-</div>
-<div class="flex items-center gap-4 bg-surface-container p-3 rounded-lg border-l-4 border-secondary">
-<div class="p-2 bg-secondary/20 rounded-lg">
-<span class="material-symbols-outlined text-secondary">science</span>
-</div>
-<div class="flex-1">
-<p class="font-bold text-on-surface">Nutrients: Beta</p>
-<p class="text-label-md text-on-surface-variant">Tomorrow - Bloom Mix A</p>
-</div>
-<span class="material-symbols-outlined text-on-surface-variant opacity-50">pending</span>
-</div>
-<div class="mt-4 border-t border-outline-variant/30 pt-4">
-<h3 class="text-label-lg font-label-lg uppercase tracking-widest text-on-surface-variant mb-4">Environment (24h)</h3>
-<div class="flex flex-col gap-1 mb-6">
-<div class="flex justify-between items-center text-label-md font-label-md">
-<span>Temp</span>
-<span class="text-secondary">24.5°C</span>
-</div>
-<div class="h-12 bg-surface flex items-end gap-[2px] px-1 rounded border border-outline-variant/20 overflow-hidden">
-<div class="flex-1 bg-secondary/40 h-[60%] rounded-t-sm"></div>
-<div class="flex-1 bg-secondary/40 h-[65%] rounded-t-sm"></div>
-<div class="flex-1 bg-secondary/40 h-[70%] rounded-t-sm"></div>
-<div class="flex-1 bg-secondary h-[85%] rounded-t-sm"></div>
-<div class="flex-1 bg-secondary/40 h-[75%] rounded-t-sm"></div>
-<div class="flex-1 bg-secondary/40 h-[60%] rounded-t-sm"></div>
-<div class="flex-1 bg-secondary/40 h-[55%] rounded-t-sm"></div>
-<div class="flex-1 bg-secondary h-[80%] rounded-t-sm shadow-[0_0_8px_rgba(157,223,46,0.5)]"></div>
-</div>
-</div>
-<div class="flex flex-col gap-1">
-<div class="flex justify-between items-center text-label-md font-label-md">
-<span>RH</span>
-<span class="text-primary">55%</span>
-</div>
-<div class="h-12 bg-surface flex items-end gap-[2px] px-1 rounded border border-outline-variant/20 overflow-hidden">
-<div class="flex-1 bg-primary/40 h-[40%] rounded-t-sm"></div>
-<div class="flex-1 bg-primary/40 h-[42%] rounded-t-sm"></div>
-<div class="flex-1 bg-primary h-[55%] rounded-t-sm"></div>
-<div class="flex-1 bg-primary/40 h-[50%] rounded-t-sm"></div>
-<div class="flex-1 bg-primary/40 h-[48%] rounded-t-sm"></div>
-<div class="flex-1 bg-primary h-[55%] rounded-t-sm shadow-[0_0_8px_rgba(161,212,148,0.5)]"></div>
-<div class="flex-1 bg-primary/40 h-[52%] rounded-t-sm"></div>
-<div class="flex-1 bg-primary/40 h-[50%] rounded-t-sm"></div>
-</div>
-</div>
-</div>
-</div>
-</section>
-</div>
-<!-- Recent Logs -->
-<section class="mt-8">
-<div class="flex justify-between items-center mb-4">
-<h2 class="font-headline-sm text-headline-sm">Recent Diary Logs</h2>
-<div class="flex items-center gap-3">
-<a class="flex items-center gap-1 text-label-md text-secondary hover:underline" href="register.html">
-<span class="material-symbols-outlined text-sm">person_add</span>
-                    Join Us
-                </a>
-<a class="flex items-center gap-1 text-label-md text-secondary hover:underline" href="achievements.html">
-<span class="material-symbols-outlined text-sm">emoji_events</span>
-                    Achievements
-                </a>
-</div>
-</div>
-<div class="flex gap-4 overflow-x-auto pb-4 custom-scrollbar">
-<div class="min-w-[280px] bg-surface-container border border-outline-variant/30 p-4 rounded-xl flex flex-col gap-2 hover:border-primary/50 transition-colors cursor-pointer">
-<div class="flex justify-between items-center">
-<span class="text-label-md text-on-surface-variant">Nov 24, 2023</span>
-<span class="material-symbols-outlined text-secondary text-sm">sticky_note_2</span>
-</div>
-<p class="font-bold text-on-surface">Topped Alpha</p>
-<p class="text-body-sm text-on-surface-variant line-clamp-2">Successfully topped the main cola of Lemon Haze. Recovering well with minor stress...</p>
-</div>
-<div class="min-w-[280px] bg-surface-container border border-outline-variant/30 p-4 rounded-xl flex flex-col gap-2 hover:border-primary/50 transition-colors cursor-pointer">
-<div class="flex justify-between items-center">
-<span class="text-label-md text-on-surface-variant">Nov 22, 2023</span>
-<span class="material-symbols-outlined text-secondary text-sm">photo_camera</span>
-</div>
-<p class="font-bold text-on-surface">Weekly Snapshot</p>
-<p class="text-body-sm text-on-surface-variant line-clamp-2">Color looks exceptional. No signs of nitrogen deficiency. Trichomes starting to cloud...</p>
-</div>
-<div class="min-w-[280px] bg-surface-container border border-outline-variant/30 p-4 rounded-xl flex flex-col gap-2 hover:border-primary/50 transition-colors cursor-pointer">
-<div class="flex justify-between items-center">
-<span class="text-label-md text-on-surface-variant">Nov 20, 2023</span>
-<span class="material-symbols-outlined text-tertiary text-sm">warning</span>
-</div>
-<p class="font-bold text-on-surface">pH Alert</p>
-<p class="text-body-sm text-on-surface-variant line-clamp-2">Runoff pH was 5.8. Flushed with neutral water to stabilize root zone...</p>
-</div>
+<div id="empty-state" class="text-center py-12">
+<span class="material-symbols-outlined text-6xl text-on-surface-variant mb-4 block">no_plants</span>
+<p class="text-on-surface-variant">No plants yet. Click the + button to add your first plant!</p>
 </div>
 </section>
 </main>
+
 <!-- Mini Player Bar -->
 <div class="fixed bottom-20 left-0 w-full z-40 px-4 pointer-events-none">
 <div class="max-w-md mx-auto pointer-events-auto">
@@ -386,10 +297,12 @@
 </div>
 </div>
 </div>
+
 <!-- FAB -->
-<button class="fixed bottom-32 right-6 w-14 h-14 bg-secondary text-black rounded-full flex items-center justify-center shadow-[0_4px_16px_rgba(157,223,46,0.4)] hover:scale-110 active:scale-90 transition-transform z-50" onclick="promptAction()">
+<button class="fixed bottom-32 right-6 w-14 h-14 bg-secondary text-black rounded-full flex items-center justify-center shadow-[0_4px_16px_rgba(157,223,46,0.4)] hover:scale-110 active:scale-90 transition-transform z-50" onclick="openAddPlantModal()">
 <span class="material-symbols-outlined" style="font-variation-settings: 'wght' 600;">add</span>
 </button>
+
 <!-- Bottom Navigation -->
 <nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-2 py-3 bg-surface-container-highest border-t border-primary/20 rounded-t-xl z-50 shadow-[0_-4px_12px_rgba(157,223,46,0.1)]">
 <a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:opacity-100 hover:bg-surface-variant px-2 py-1 rounded-full transition-all min-w-[64px]" href="index.html">
@@ -413,81 +326,478 @@
 <span class="font-label-md text-label-md mt-1">Shop</span>
 </a>
 </nav>
-<script>
-    // State Simulation
-    let isLoggedIn = localStorage.getItem('isLoggedIn') === 'true'; // Checked from login state
 
-    window.addEventListener('DOMContentLoaded', () => {
+<script>
+    // Global state
+    let isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    let currentUserId = 'guest';
+    let currentPlantId = null;
+    let plants = [];
+    let diaryLogs = [];
+
+    // Phase colors
+    const phaseColors = {
+        'Keimung': { bg: 'bg-primary/20', text: 'text-primary', badge: 'bg-primary text-black' },
+        'Sämling': { bg: 'bg-primary-fixed/20', text: 'text-primary-fixed', badge: 'bg-primary-fixed text-black' },
+        'Vegetativ': { bg: 'bg-secondary/20', text: 'text-secondary', badge: 'bg-secondary text-black' },
+        'Blüte': { bg: 'bg-tertiary/20', text: 'text-tertiary', badge: 'bg-tertiary text-black' },
+        'Ernte': { bg: 'bg-secondary-container/20', text: 'text-secondary-container', badge: 'bg-secondary-container text-black' }
+    };
+
+    const phaseIcons = {
+        'Keimung': 'spa',
+        'Sämling': 'leaf',
+        'Vegetativ': 'eco',
+        'Blüte': 'flower',
+        'Ernte': 'local_florist'
+    };
+
+    const logTypeIcons = {
+        'watering': 'water_drop',
+        'nutrients': 'science',
+        'defoliation': 'cut',
+        'topping': 'cutting',
+        'training': 'sports_bar',
+        'pest control': 'bug_report',
+        'other': 'sticky_note_2'
+    };
+
+    // Initialize
+    window.addEventListener('DOMContentLoaded', async () => {
+        // Try to get user from EG.Auth if available
+        if (typeof EG !== 'undefined' && EG.Auth) {
+            try {
+                const user = EG.Auth.getUser();
+                if (user?.id) {
+                    currentUserId = user.id;
+                    isLoggedIn = true;
+                }
+            } catch (e) {
+                console.log('EG.Auth not available');
+            }
+        }
+
         if (!isLoggedIn) {
-            // Show prompt after a short delay for impact
             setTimeout(() => {
                 document.getElementById('login-prompt').classList.remove('hidden');
-            }, 1000);
+            }, 500);
         }
-        
-        // Sync preferences
+
+        await loadPlants();
+        renderPlants();
+
+        // Unit toggle
         const savedUnits = localStorage.getItem('units') || 'metric';
         updateUnits(savedUnits === 'metric');
     });
 
-    function promptAction() {
-        if (!isLoggedIn) {
-            document.getElementById('login-prompt').classList.remove('hidden');
-        } else {
-            alert('Opening Add Log / Plant wizard...');
+    // Database operations using EG.DB
+    async function loadPlants() {
+        try {
+            if (typeof EG !== 'undefined' && EG.DB) {
+                plants = await EG.DB.read('plants', { userId: currentUserId }) || [];
+            } else {
+                // Fallback to localStorage
+                plants = JSON.parse(localStorage.getItem(`plants_${currentUserId}`) || '[]');
+            }
+        } catch (e) {
+            console.error('Error loading plants:', e);
+            plants = [];
         }
     }
 
-    // Phase Selection Logic
-    function togglePhase(btn) {
-        // Remove active states from all
-        document.querySelectorAll('.phase-btn').forEach(b => {
-            b.classList.remove('bg-secondary', 'text-black', 'font-bold');
-            b.classList.add('bg-surface-container', 'border', 'border-outline-variant/30');
-        });
-        
-        // Add active state to clicked
-        btn.classList.remove('bg-surface-container', 'border', 'border-outline-variant/30');
-        btn.classList.add('bg-secondary', 'text-black', 'font-bold');
+    async function loadDiaryLogs() {
+        try {
+            if (typeof EG !== 'undefined' && EG.DB) {
+                diaryLogs = await EG.DB.read('diaryLogs', { plantId: currentPlantId, userId: currentUserId }) || [];
+            } else {
+                diaryLogs = JSON.parse(localStorage.getItem(`logs_${currentPlantId}`) || '[]');
+            }
+        } catch (e) {
+            console.error('Error loading diary logs:', e);
+            diaryLogs = [];
+        }
     }
 
-    // Plant Card Selection
-    function selectPlant(card) {
-        document.querySelectorAll('.plant-card').forEach(c => {
-            c.classList.remove('bloom-glow', 'border-secondary');
-            c.classList.add('border-outline-variant/50');
+    async function savePlant(plant) {
+        try {
+            plant.userId = currentUserId;
+            if (typeof EG !== 'undefined' && EG.DB) {
+                if (plant.id) {
+                    await EG.DB.update('plants', plant.id, plant);
+                } else {
+                    plant.id = Date.now().toString();
+                    await EG.DB.create('plants', plant);
+                }
+            } else {
+                if (!plant.id) plant.id = Date.now().toString();
+                plants = plants.filter(p => p.id !== plant.id);
+                plants.push(plant);
+                localStorage.setItem(`plants_${currentUserId}`, JSON.stringify(plants));
+            }
+            await loadPlants();
+            renderPlants();
+        } catch (e) {
+            console.error('Error saving plant:', e);
+        }
+    }
+
+    async function deletePlant(plantId) {
+        try {
+            if (typeof EG !== 'undefined' && EG.DB) {
+                await EG.DB.delete('plants', plantId);
+                await EG.DB.delete('diaryLogs', { plantId: plantId });
+            } else {
+                plants = plants.filter(p => p.id !== plantId);
+                localStorage.removeItem(`logs_${plantId}`);
+                localStorage.setItem(`plants_${currentUserId}`, JSON.stringify(plants));
+            }
+            await loadPlants();
+            renderPlants();
+        } catch (e) {
+            console.error('Error deleting plant:', e);
+        }
+    }
+
+    async function addDiaryLog(log) {
+        try {
+            log.plantId = currentPlantId;
+            log.userId = currentUserId;
+            if (typeof EG !== 'undefined' && EG.DB) {
+                log.id = Date.now().toString();
+                await EG.DB.create('diaryLogs', log);
+            } else {
+                if (!log.id) log.id = Date.now().toString();
+                diaryLogs.push(log);
+                localStorage.setItem(`logs_${currentPlantId}`, JSON.stringify(diaryLogs));
+            }
+            await loadDiaryLogs();
+            updatePlantDetailView();
+        } catch (e) {
+            console.error('Error adding diary log:', e);
+        }
+    }
+
+    // UI Functions
+    function openAddPlantModal() {
+        if (!isLoggedIn) {
+            document.getElementById('login-prompt').classList.remove('hidden');
+            return;
+        }
+        document.getElementById('add-plant-modal').classList.remove('hidden');
+        document.getElementById('add-plant-form').reset();
+        document.getElementById('start-date').valueAsDate = new Date();
+    }
+
+    function closeAddPlantModal() {
+        document.getElementById('add-plant-modal').classList.add('hidden');
+    }
+
+    function closePlantDetailModal() {
+        document.getElementById('plant-detail-modal').classList.add('hidden');
+        document.getElementById('delete-confirm-modal').classList.add('hidden');
+        currentPlantId = null;
+    }
+
+    function calculateDayCount(startDate) {
+        const start = new Date(startDate);
+        const now = new Date();
+        return Math.floor((now - start) / (1000 * 60 * 60 * 24));
+    }
+
+    function calculateProgress(phase, dayCount) {
+        const phaseDurations = {
+            'Keimung': 7,
+            'Sämling': 14,
+            'Vegetativ': 42,
+            'Blüte': 56,
+            'Ernte': 7
+        };
+        const duration = phaseDurations[phase] || 30;
+        return Math.min(100, Math.round((dayCount / duration) * 100));
+    }
+
+    function getPhaseColor(percent) {
+        if (percent < 50) return '#a1d494';
+        if (percent < 75) return '#9ddf2e';
+        return '#ffb690';
+    }
+
+    function renderPlants() {
+        const grid = document.getElementById('plants-grid');
+        const emptyState = document.getElementById('empty-state');
+        const countEl = document.getElementById('plant-count');
+
+        grid.innerHTML = '';
+
+        if (plants.length === 0) {
+            emptyState.classList.remove('hidden');
+            countEl.textContent = '0 PLANTS';
+            return;
+        }
+
+        emptyState.classList.add('hidden');
+        countEl.textContent = `${plants.length} PLANT${plants.length !== 1 ? 'S' : ''}`;
+
+        plants.forEach(plant => {
+            const dayCount = calculateDayCount(plant.startDate);
+            const progress = calculateProgress(plant.phase, dayCount);
+            const progressColor = getPhaseColor(progress);
+            const circumference = 175.9;
+            const strokeDashoffset = circumference - (progress / 100) * circumference;
+
+            const colors = phaseColors[plant.phase] || phaseColors['Vegetativ'];
+            const icon = phaseIcons[plant.phase] || 'eco';
+
+            const card = document.createElement('div');
+            card.className = `plant-card cursor-pointer bg-surface-container border border-outline-variant/50 rounded-xl overflow-hidden group hover:border-secondary transition-all duration-300 bloom-glow`;
+            card.onclick = () => openPlantDetail(plant.id);
+
+            card.innerHTML = `
+                <div class="h-40 ${colors.bg} relative flex items-center justify-center">
+                    <span class="material-symbols-outlined text-6xl ${colors.text}">${icon}</span>
+                </div>
+                <div class="p-4 border-t border-outline-variant/30">
+                    <div class="flex justify-between items-start mb-3">
+                        <div>
+                            <h3 class="font-headline-sm text-headline-sm text-secondary">${plant.strain}</h3>
+                            <p class="text-label-md text-on-surface-variant">${plant.phase}</p>
+                        </div>
+                        <div class="w-16 h-16 relative flex items-center justify-center">
+                            <svg class="w-full h-full transform -rotate-90">
+                                <circle class="text-surface-container-highest" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-width="4"></circle>
+                                <circle class="transition-all duration-1000" cx="32" cy="32" fill="transparent" r="28" stroke="${progressColor}" stroke-dasharray="175.9" stroke-dashoffset="${strokeDashoffset}" stroke-width="4"></circle>
+                            </svg>
+                            <span class="absolute text-label-md font-bold">${progress}%</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center pt-3 border-t border-outline-variant/20">
+                        <span class="text-label-md text-on-surface-variant">Day ${dayCount}</span>
+                        <button class="material-symbols-outlined text-on-surface-variant hover:text-secondary transition-colors" onclick="event.stopPropagation();">more_vert</button>
+                    </div>
+                </div>
+            `;
+
+            grid.appendChild(card);
         });
-        card.classList.add('bloom-glow', 'border-secondary');
-        card.classList.remove('border-outline-variant/50');
+    }
+
+    async function openPlantDetail(plantId) {
+        currentPlantId = plantId;
+        const plant = plants.find(p => p.id === plantId);
+        if (!plant) return;
+
+        const dayCount = calculateDayCount(plant.startDate);
+        const colors = phaseColors[plant.phase] || phaseColors['Vegetativ'];
+        const icon = phaseIcons[plant.phase] || 'eco';
+
+        document.getElementById('detail-plant-name').textContent = plant.strain;
+
+        await loadDiaryLogs();
+
+        const content = document.getElementById('plant-detail-content');
+        content.innerHTML = `
+            <div class="flex gap-6">
+                <div class="flex-1">
+                    <div class="p-4 ${colors.bg} rounded-lg border border-outline-variant/20 mb-4 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-6xl ${colors.text}">${icon}</span>
+                    </div>
+                </div>
+                <div class="flex-1 flex flex-col gap-4">
+                    <div>
+                        <p class="text-label-md text-on-surface-variant mb-1">Phase</p>
+                        <p class="font-headline-sm text-on-surface">${plant.phase}</p>
+                    </div>
+                    <div>
+                        <p class="text-label-md text-on-surface-variant mb-1">Days in Growth</p>
+                        <p class="font-headline-sm text-on-surface">Day ${dayCount}</p>
+                    </div>
+                    <div>
+                        <p class="text-label-md text-on-surface-variant mb-1">Start Date</p>
+                        <p class="text-body-md text-on-surface">${new Date(plant.startDate).toLocaleDateString()}</p>
+                    </div>
+                </div>
+            </div>
+
+            ${plant.notes ? `
+                <div class="bg-surface-container-low rounded-lg p-4 border border-outline-variant/20">
+                    <p class="text-label-md text-on-surface-variant mb-2">Notes</p>
+                    <p class="text-body-sm text-on-surface">${plant.notes}</p>
+                </div>
+            ` : ''}
+
+            <div class="border-t border-outline-variant/30 pt-6">
+                <h4 class="font-headline-sm text-headline-sm mb-4">Phase Management</h4>
+                <div class="flex gap-2 flex-wrap mb-4">
+                    ${Object.keys(phaseColors).map(p => `
+                        <button class="px-4 py-2 text-label-lg rounded-full transition-all ${plant.phase === p ? 'bg-secondary text-black font-bold' : 'bg-surface-container border border-outline-variant/30 hover:border-secondary'}" onclick="updatePhase('${p}')">
+                            ${p}
+                        </button>
+                    `).join('')}
+                </div>
+            </div>
+
+            <div class="border-t border-outline-variant/30 pt-6">
+                <h4 class="font-headline-sm text-headline-sm mb-4">Add Diary Log</h4>
+                <form class="flex flex-col gap-4" id="log-form" onsubmit="submitDiaryLog(event)">
+                    <div>
+                        <label class="text-label-md text-on-surface-variant block mb-2">Log Type</label>
+                        <select class="w-full bg-surface border border-outline-variant rounded-lg p-3 text-on-surface focus:border-secondary outline-none" id="log-type" required>
+                            <option value="">Select type</option>
+                            <option value="watering">Watering</option>
+                            <option value="nutrients">Nutrients</option>
+                            <option value="defoliation">Defoliation</option>
+                            <option value="topping">Topping</option>
+                            <option value="training">Training</option>
+                            <option value="pest control">Pest Control</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-label-md text-on-surface-variant block mb-2">Notes</label>
+                        <textarea class="w-full bg-surface border border-outline-variant rounded-lg p-3 text-on-surface focus:border-secondary outline-none" id="log-notes" placeholder="What happened?" rows="3"></textarea>
+                    </div>
+                    <div>
+                        <label class="text-label-md text-on-surface-variant block mb-2">Date</label>
+                        <input class="w-full bg-surface border border-outline-variant rounded-lg p-3 text-on-surface focus:border-secondary outline-none" id="log-date" type="date" required/>
+                    </div>
+                    <button class="bg-secondary text-black font-bold py-3 rounded-full hover:scale-105 transition-transform" type="submit">Add Log</button>
+                </form>
+            </div>
+
+            <div class="border-t border-outline-variant/30 pt-6">
+                <h4 class="font-headline-sm text-headline-sm mb-4">Diary Timeline</h4>
+                <div class="flex flex-col gap-3 max-h-64 overflow-y-auto custom-scrollbar">
+                    ${diaryLogs.length === 0 ? '<p class="text-on-surface-variant">No logs yet.</p>' : diaryLogs.map(log => `
+                        <div class="bg-surface-container-low rounded-lg p-3 border border-outline-variant/20">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="material-symbols-outlined text-primary text-sm">${logTypeIcons[log.type] || 'sticky_note_2'}</span>
+                                <span class="font-bold text-on-surface capitalize">${log.type}</span>
+                                <span class="text-label-md text-on-surface-variant ml-auto">${new Date(log.date).toLocaleDateString()}</span>
+                            </div>
+                            ${log.notes ? `<p class="text-body-sm text-on-surface-variant">${log.notes}</p>` : ''}
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+
+            <div class="border-t border-outline-variant/30 pt-6">
+                <h4 class="font-headline-sm text-headline-sm mb-4">Danger Zone</h4>
+                <button class="w-full border border-error text-error py-3 rounded-full hover:bg-error/10 transition-colors font-bold" onclick="openDeleteConfirm()">
+                    Delete Plant
+                </button>
+            </div>
+        `;
+
+        // Set today's date for log
+        document.getElementById('log-date').valueAsDate = new Date();
+
+        document.getElementById('plant-detail-modal').classList.remove('hidden');
+    }
+
+    function updatePlantDetailView() {
+        if (currentPlantId) {
+            openPlantDetail(currentPlantId);
+        }
+    }
+
+    async function updatePhase(newPhase) {
+        const plant = plants.find(p => p.id === currentPlantId);
+        if (plant) {
+            plant.phase = newPhase;
+            await savePlant(plant);
+            updatePlantDetailView();
+        }
+    }
+
+    function submitDiaryLog(event) {
+        event.preventDefault();
+        const type = document.getElementById('log-type').value;
+        const notes = document.getElementById('log-notes').value;
+        const date = document.getElementById('log-date').value;
+
+        if (!type) {
+            alert('Please select a log type');
+            return;
+        }
+
+        addDiaryLog({
+            type,
+            notes,
+            date,
+            timestamp: new Date().toISOString()
+        });
+
+        document.getElementById('log-form').reset();
+        document.getElementById('log-date').valueAsDate = new Date();
+    }
+
+    function openDeleteConfirm() {
+        document.getElementById('delete-confirm-modal').classList.remove('hidden');
+    }
+
+    async function confirmDeletePlant() {
+        if (currentPlantId) {
+            await deletePlant(currentPlantId);
+            closePlantDetailModal();
+        }
     }
 
     // Unit Toggle Logic
     const btnL = document.getElementById('unit-toggle-l');
     const btnGal = document.getElementById('unit-toggle-gal');
-    const volumeTexts = document.querySelectorAll('.unit-volume');
 
     function updateUnits(isMetric) {
         if (isMetric) {
             btnL.className = 'px-3 py-1 text-label-md rounded-full bg-secondary text-black transition-all';
             btnGal.className = 'px-3 py-1 text-label-md rounded-full text-on-surface-variant hover:text-secondary transition-all';
-            volumeTexts.forEach(el => el.textContent = '500ml');
+            localStorage.setItem('units', 'metric');
         } else {
             btnGal.className = 'px-3 py-1 text-label-md rounded-full bg-secondary text-black transition-all';
             btnL.className = 'px-3 py-1 text-label-md rounded-full text-on-surface-variant hover:text-secondary transition-all';
-            volumeTexts.forEach(el => el.textContent = '0.13 gal');
+            localStorage.setItem('units', 'imperial');
         }
     }
 
     btnL.addEventListener('click', () => updateUnits(true));
     btnGal.addEventListener('click', () => updateUnits(false));
 
-    // Parallax
-    window.addEventListener('scroll', () => {
-        const scroll = window.pageYOffset;
-        document.querySelectorAll('section div[style*="background-image"]').forEach(img => {
-            img.style.backgroundPositionY = (scroll * 0.05) + 'px';
+    // Form submission
+    document.getElementById('add-plant-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const strain = document.getElementById('strain-name').value;
+        const phase = document.getElementById('phase-select').value;
+        const startDate = document.getElementById('start-date').value;
+        const notes = document.getElementById('notes').value;
+
+        if (!strain || !phase || !startDate) {
+            alert('Please fill in all required fields');
+            return;
+        }
+
+        await savePlant({
+            strain,
+            phase,
+            startDate,
+            notes
         });
+
+        closeAddPlantModal();
+    });
+
+    // Close modals on backdrop click
+    document.getElementById('add-plant-modal').addEventListener('click', (e) => {
+        if (e.target.id === 'add-plant-modal') closeAddPlantModal();
+    });
+
+    document.getElementById('plant-detail-modal').addEventListener('click', (e) => {
+        if (e.target.id === 'plant-detail-modal') closePlantDetailModal();
+    });
+
+    document.getElementById('delete-confirm-modal').addEventListener('click', (e) => {
+        if (e.target.id === 'delete-confirm-modal') closePlantDetailModal();
     });
 </script>
-<script src="player.js"></script>
+<script src="eg-core.js"></script>
 </body></html>
