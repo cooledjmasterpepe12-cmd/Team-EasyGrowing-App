@@ -1,0 +1,16 @@
+{
+  "name": "Team EasyGrowing",
+  "short_name": "EasyGrowing",
+  "description": "Botanical Intelligence PWA - 16-bit Retro Grow Command Center",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#121212",
+  "theme_color": "#00ff00",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23121212' width='100' height='100'/><text x='50' y='55' font-size='50' text-anchor='middle' fill='%2300ff00' font-family='monospace'>🌿</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    }
+  ]
+}
