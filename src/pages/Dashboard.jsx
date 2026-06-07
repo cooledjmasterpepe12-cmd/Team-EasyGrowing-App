@@ -54,8 +54,8 @@ export default function Dashboard() {
           backgroundColor: '#1a1a1a',
           borderLeft: '4px solid #00ff00',
           borderTop: '4px solid #00ff00',
-          borderRight: '2px solid #cc00ff',
-          borderBottom: '2px solid #cc00ff',
+          borderRight: '2px solid #00e5ff',
+          borderBottom: '2px solid #00e5ff',
           padding: '15px',
           marginBottom: '20px',
         }}>
@@ -66,7 +66,7 @@ export default function Dashboard() {
       )}
 
       <div style={{ marginBottom: '30px' }}>
-        <h2 className="pixel-h2" style={{ color: '#cc00ff', fontSize: '14px', marginBottom: '15px' }}>
+        <h2 className="pixel-h2" style={{ color: '#00e5ff', fontSize: '14px', marginBottom: '15px' }}>
           {t('dash.bio')}
         </h2>
 
@@ -75,14 +75,14 @@ export default function Dashboard() {
             backgroundColor: '#1a1a1a',
             borderLeft: '3px solid #00ff00',
             borderTop: '3px solid #00ff00',
-            borderRight: '2px solid #cc00ff',
-            borderBottom: '2px solid #cc00ff',
+            borderRight: '2px solid #00e5ff',
+            borderBottom: '2px solid #00e5ff',
             padding: '12px',
           }}>
             <p style={{ color: '#00ff00', fontFamily: 'Press Start 2P, monospace', fontSize: '8px', margin: '0 0 8px 0' }}>
               {t('dash.temp')}
             </p>
-            <p style={{ color: '#cc00ff', fontFamily: 'Press Start 2P, monospace', fontSize: '12px', margin: '0 0 8px 0', fontWeight: 'bold' }}>
+            <p style={{ color: '#00e5ff', fontFamily: 'Press Start 2P, monospace', fontSize: '12px', margin: '0 0 8px 0', fontWeight: 'bold' }}>
               {formatTemp(temperature)}
             </p>
             <div className="progress-bar" style={{ height: '8px', backgroundColor: '#0a0a0a' }}>
@@ -98,14 +98,14 @@ export default function Dashboard() {
             backgroundColor: '#1a1a1a',
             borderLeft: '3px solid #00ff00',
             borderTop: '3px solid #00ff00',
-            borderRight: '2px solid #cc00ff',
-            borderBottom: '2px solid #cc00ff',
+            borderRight: '2px solid #00e5ff',
+            borderBottom: '2px solid #00e5ff',
             padding: '12px',
           }}>
             <p style={{ color: '#00ff00', fontFamily: 'Press Start 2P, monospace', fontSize: '8px', margin: '0 0 8px 0' }}>
               {t('dash.humidity')}
             </p>
-            <p style={{ color: '#cc00ff', fontFamily: 'Press Start 2P, monospace', fontSize: '12px', margin: '0 0 8px 0', fontWeight: 'bold' }}>
+            <p style={{ color: '#00e5ff', fontFamily: 'Press Start 2P, monospace', fontSize: '12px', margin: '0 0 8px 0', fontWeight: 'bold' }}>
               {humidity.toFixed(0)}%
             </p>
             <div className="progress-bar" style={{ height: '8px', backgroundColor: '#0a0a0a' }}>
@@ -121,14 +121,14 @@ export default function Dashboard() {
             backgroundColor: '#1a1a1a',
             borderLeft: '3px solid #00ff00',
             borderTop: '3px solid #00ff00',
-            borderRight: '2px solid #cc00ff',
-            borderBottom: '2px solid #cc00ff',
+            borderRight: '2px solid #00e5ff',
+            borderBottom: '2px solid #00e5ff',
             padding: '12px',
           }}>
             <p style={{ color: '#00ff00', fontFamily: 'Press Start 2P, monospace', fontSize: '8px', margin: '0 0 8px 0' }}>
               {t('dash.water')}
             </p>
-            <p style={{ color: '#cc00ff', fontFamily: 'Press Start 2P, monospace', fontSize: '12px', margin: '0 0 8px 0', fontWeight: 'bold' }}>
+            <p style={{ color: '#00e5ff', fontFamily: 'Press Start 2P, monospace', fontSize: '12px', margin: '0 0 8px 0', fontWeight: 'bold' }}>
               {waterLevel.toFixed(0)}%
             </p>
             <div className="progress-bar" style={{ height: '8px', backgroundColor: '#0a0a0a' }}>
@@ -143,7 +143,7 @@ export default function Dashboard() {
       </div>
 
       <div style={{ marginBottom: '30px' }}>
-        <h2 className="pixel-h2" style={{ color: '#cc00ff', fontSize: '14px', marginBottom: '15px' }}>
+        <h2 className="pixel-h2" style={{ color: '#00e5ff', fontSize: '14px', marginBottom: '15px' }}>
           {t('dash.level')}
         </h2>
 
@@ -151,20 +151,20 @@ export default function Dashboard() {
           backgroundColor: '#1a1a1a',
           borderLeft: '3px solid #00ff00',
           borderTop: '3px solid #00ff00',
-          borderRight: '2px solid #cc00ff',
-          borderBottom: '2px solid #cc00ff',
+          borderRight: '2px solid #00e5ff',
+          borderBottom: '2px solid #00e5ff',
           padding: '15px',
         }}>
           <p style={{ color: '#00ff00', fontFamily: 'Press Start 2P, monospace', fontSize: '10px', margin: '0 0 12px 0' }}>
             {t('dash.level')}
           </p>
-          <p style={{ color: '#cc00ff', fontFamily: 'Press Start 2P, monospace', fontSize: '8px', margin: '0 0 6px 0' }}>
+          <p style={{ color: '#00e5ff', fontFamily: 'Press Start 2P, monospace', fontSize: '8px', margin: '0 0 6px 0' }}>
             XP: {xp} / 10000
           </p>
           <div className="progress-bar" style={{ height: '12px', backgroundColor: '#0a0a0a' }}>
             <div className="progress-bar-fill glow-pulse" style={{
               width: `${(xp / 10000) * 100}%`,
-              backgroundColor: '#cc00ff',
+              backgroundColor: '#00e5ff',
               height: '100%',
             }} />
           </div>
@@ -172,7 +172,7 @@ export default function Dashboard() {
       </div>
 
       <div>
-        <h2 className="pixel-h2" style={{ color: '#cc00ff', fontSize: '14px', marginBottom: '15px' }}>
+        <h2 className="pixel-h2" style={{ color: '#00e5ff', fontSize: '14px', marginBottom: '15px' }}>
           {t('dash.status')}
         </h2>
 
@@ -190,8 +190,8 @@ export default function Dashboard() {
                 backgroundColor: '#1a1a1a',
                 borderLeft: '3px solid #00ff00',
                 borderTop: '3px solid #00ff00',
-                borderRight: '2px solid #cc00ff',
-                borderBottom: '2px solid #cc00ff',
+                borderRight: '2px solid #00e5ff',
+                borderBottom: '2px solid #00e5ff',
                 padding: '12px',
                 cursor: 'pointer',
                 display: 'flex',

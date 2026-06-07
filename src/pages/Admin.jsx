@@ -18,13 +18,13 @@ export default function Admin() {
 
   const vpd = ((temp - humidity / 100 * (temp - 20)) * 0.61).toFixed(2);
 
-  if (!isLoggedIn()) {
+  if (!isLoggedIn) {
     return (
       <div style={{ background: '#121212', color: '#00ff00', minHeight: '100vh', padding: '20px', fontFamily: 'monospace', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div className="pixel-card" style={{ border: '3px solid #cc00ff', padding: '40px', background: '#1a1a1a', textAlign: 'center', maxWidth: '400px' }}>
+        <div className="pixel-card-cyan" style={{ border: '3px solid #00e5ff', padding: '40px', background: '#1a1a1a', textAlign: 'center', maxWidth: '400px' }}>
           <h2 className="pixel-h2">ACCESS DENIED</h2>
           <p style={{ marginTop: '20px', marginBottom: '20px' }}>Admin area requires authentication</p>
-          <a href="/register" style={{ color: '#00ff00', textDecoration: 'underline', fontSize: '14px' }}>Register or Login</a>
+          <a href="#/register" style={{ color: '#00ff00', textDecoration: 'underline', fontSize: '14px' }}>Register or Login</a>
         </div>
       </div>
     );
@@ -42,8 +42,8 @@ export default function Admin() {
           { label: 'REPORTS', value: '0' },
           { label: 'UPTIME', value: '99.98%' }
         ].map((m, i) => (
-          <div key={i} className="pixel-card" style={{ border: '3px solid #cc00ff', padding: '20px', background: '#1a1a1a' }}>
-            <div style={{ fontSize: '12px', marginBottom: '10px', color: '#cc00ff' }}>{m.label}</div>
+          <div key={i} className="pixel-card-cyan" style={{ border: '3px solid #00e5ff', padding: '20px', background: '#1a1a1a' }}>
+            <div style={{ fontSize: '12px', marginBottom: '10px', color: '#00e5ff' }}>{m.label}</div>
             <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#00ff00' }}>{m.value}</div>
           </div>
         ))}
@@ -55,16 +55,16 @@ export default function Admin() {
 
         <div style={{ marginTop: '20px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
           <div>
-            <label style={{ display: 'block', marginBottom: '10px' }}>Temperature: <span style={{ color: '#cc00ff' }}>{temp}°C</span></label>
+            <label style={{ display: 'block', marginBottom: '10px' }}>Temperature: <span style={{ color: '#00e5ff' }}>{temp}°C</span></label>
             <input type="range" min="15" max="40" value={temp} onChange={(e) => setTemp(+e.target.value)} style={{ width: '100%' }} />
           </div>
           <div>
-            <label style={{ display: 'block', marginBottom: '10px' }}>Humidity: <span style={{ color: '#cc00ff' }}>{humidity}%</span></label>
+            <label style={{ display: 'block', marginBottom: '10px' }}>Humidity: <span style={{ color: '#00e5ff' }}>{humidity}%</span></label>
             <input type="range" min="20" max="95" value={humidity} onChange={(e) => setHumidity(+e.target.value)} style={{ width: '100%' }} />
           </div>
         </div>
 
-        <div style={{ marginTop: '20px', padding: '15px', background: '#0a0a0a', border: '2px solid #cc00ff' }}>
+        <div style={{ marginTop: '20px', padding: '15px', background: '#0a0a0a', border: '2px solid #00e5ff', borderRadius: '4px' }}>
           <div>VPD: <span style={{ color: '#00ff00' }}>{vpd} kPa</span></div>
         </div>
 
@@ -85,9 +85,9 @@ export default function Admin() {
       </div>
 
       {/* Studio Collab */}
-      <div className="pixel-card" style={{ border: '3px solid #cc00ff', padding: '20px', background: '#1a1a1a', marginBottom: '40px' }}>
+      <div className="pixel-card-cyan" style={{ border: '3px solid #00e5ff', padding: '20px', background: '#1a1a1a', marginBottom: '40px' }}>
         <h2 className="pixel-h2">Studio Collab - Lyrics</h2>
-        <textarea value={lyrics} onChange={(e) => setLyrics(e.target.value)} style={{ width: '100%', height: '200px', marginTop: '15px', padding: '10px', background: '#0a0a0a', color: '#00ff00', border: '2px solid #cc00ff', fontFamily: 'monospace', resize: 'none' }} placeholder="Write your lyrics here..." />
+        <textarea value={lyrics} onChange={(e) => setLyrics(e.target.value)} style={{ width: '100%', height: '200px', marginTop: '15px', padding: '10px', background: '#0a0a0a', color: '#00ff00', border: '2px solid #00e5ff', fontFamily: 'monospace', resize: 'none' }} placeholder="Write your lyrics here..." />
         <div style={{ marginTop: '10px', fontSize: '12px', color: '#666' }}>Auto-saved to localStorage</div>
       </div>
 
@@ -101,7 +101,7 @@ export default function Admin() {
           ].map((item) => (
             <div key={item.id} style={{ padding: '15px', background: '#0a0a0a', border: '2px solid #666', marginBottom: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
-                <div style={{ color: '#cc00ff', fontWeight: 'bold' }}>{item.user}</div>
+                <div style={{ color: '#00e5ff', fontWeight: 'bold' }}>{item.user}</div>
                 <div style={{ color: '#00ff00', fontSize: '14px', marginTop: '5px' }}>{item.content}</div>
               </div>
               <div style={{ display: 'flex', gap: '10px' }}>

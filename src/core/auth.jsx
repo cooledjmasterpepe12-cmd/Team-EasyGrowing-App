@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
+import { supabase } from './supabase';
 
 const AuthContext = createContext(null);
 
@@ -7,43 +8,57 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    try {
-      const session = JSON.parse(localStorage.getItem('eg_session'));
-      const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
-      if (loggedIn && session) setUser(session);
-    } catch {}
-    setLoading(false);
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session?.user) {
+        setUser({
+          id: session.user.id,
+          email: session.user.email,
+          username: session.user.user_metadata?.username || session.user.email?.split('@')[0],
+        });
+      }
+      setLoading(false);
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session?.user) {
+        setUser({
+          id: session.user.id,
+          email: session.user.email,
+          username: session.user.user_metadata?.username || session.user.email?.split('@')[0],
+        });
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
-  const signup = (username, email, password) => {
-    const users = JSON.parse(localStorage.getItem('eg_users') || '[]');
-    if (users.find(u => u.email === email)) return { ok: false, err: 'email_exists' };
-    if (users.find(u => u.username === username)) return { ok: false, err: 'username_exists' };
-    if (password.length < 6) return { ok: false, err: 'weak_password' };
-    const u = { id: Date.now().toString(36), username, email, password, created: Date.now() };
-    users.push(u);
-    localStorage.setItem('eg_users', JSON.stringify(users));
-    const session = { id: u.id, username: u.username, email: u.email };
-    localStorage.setItem('eg_session', JSON.stringify(session));
-    localStorage.setItem('isLoggedIn', 'true');
-    setUser(session);
-    return { ok: true, user: session };
+  const signup = async (email, password, username) => {
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: { data: { username } },
+    });
+    if (error) {
+      if (error.message.includes('already registered')) return { ok: false, err: 'email_exists' };
+      if (error.message.includes('password')) return { ok: false, err: 'weak_password' };
+      return { ok: false, err: error.message };
+    }
+    return { ok: true, user: data.user };
   };
 
-  const login = (email, password) => {
-    const users = JSON.parse(localStorage.getItem('eg_users') || '[]');
-    const u = users.find(u => u.email === email && u.password === password);
-    if (!u) return { ok: false, err: 'invalid_credentials' };
-    const session = { id: u.id, username: u.username, email: u.email };
-    localStorage.setItem('eg_session', JSON.stringify(session));
-    localStorage.setItem('isLoggedIn', 'true');
-    setUser(session);
-    return { ok: true, user: session };
+  const login = async (email, password) => {
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) {
+      if (error.message.includes('Invalid login')) return { ok: false, err: 'invalid_credentials' };
+      return { ok: false, err: error.message };
+    }
+    return { ok: true, user: data.user };
   };
 
-  const logout = () => {
-    localStorage.removeItem('eg_session');
-    localStorage.removeItem('isLoggedIn');
+  const logout = async () => {
+    await supabase.auth.signOut();
     setUser(null);
   };
 

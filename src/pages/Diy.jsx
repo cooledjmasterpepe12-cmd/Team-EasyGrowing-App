@@ -173,7 +173,7 @@ const styles = {
   h2: {
     fontSize: '20px',
     marginBottom: '10px',
-    color: '#cc00ff',
+    color: '#00e5ff',
   },
   section: {
     marginBottom: '30px',
@@ -201,13 +201,13 @@ const styles = {
   },
   cutCard: {
     backgroundColor: '#1a1a1a',
-    border: '3px solid #cc00ff',
+    border: '3px solid #00e5ff',
     padding: '10px',
   },
   partName: {
     fontSize: '12px',
     marginBottom: '5px',
-    color: '#cc00ff',
+    color: '#00e5ff',
   },
   partDims: {
     fontSize: '14px',
@@ -215,9 +215,9 @@ const styles = {
     fontWeight: 'bold',
   },
   smallBtn: {
-    backgroundColor: '#cc00ff',
+    backgroundColor: '#00e5ff',
     color: '#121212',
-    border: '2px solid #cc00ff',
+    border: '2px solid #00e5ff',
     padding: '6px 10px',
     cursor: 'pointer',
     fontFamily: 'font-pixel',

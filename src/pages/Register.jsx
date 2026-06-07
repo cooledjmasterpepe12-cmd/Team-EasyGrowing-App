@@ -18,10 +18,14 @@ export default function Register() {
     setError(null);
     setLoading(true);
     try {
-      await login(email, password);
-      window.location.hash = '/';
+      const result = await login(email, password);
+      if (!result.ok) {
+        setError(t(`err.${result.err}`) || result.err);
+      } else {
+        window.location.hash = '/';
+      }
     } catch (err) {
-      setError(err.message || t('auth.error.login') || 'Login failed');
+      setError(err.message || 'Login failed');
     } finally {
       setLoading(false);
     }
@@ -32,24 +36,23 @@ export default function Register() {
     setError(null);
     setLoading(true);
     try {
-      await signup(email, password, username);
-      window.location.hash = '/';
-    } catch (err) {
-      if (err.email_exists) {
-        setError(t('auth.error.email_exists') || 'Email already exists');
-      } else if (err.username_exists) {
-        setError(t('auth.error.username_exists') || 'Username already taken');
+      const result = await signup(email, password, username);
+      if (!result.ok) {
+        setError(t(`err.${result.err}`) || result.err);
       } else {
-        setError(err.message || t('auth.error.register') || 'Registration failed');
+        window.location.hash = '/';
       }
+    } catch (err) {
+      setError(err.message || 'Registration failed');
     } finally {
       setLoading(false);
     }
   };
 
-  const handleGuest = () => {
+  if (isLoggedIn) {
     window.location.hash = '/';
-  };
+    return null;
+  }
 
   return (
     <div style={{
@@ -64,49 +67,41 @@ export default function Register() {
         backgroundColor: '#1a1a1a',
         borderLeft: '4px solid #00ff00',
         borderTop: '4px solid #00ff00',
-        borderRight: '2px solid #cc00ff',
-        borderBottom: '2px solid #cc00ff',
+        borderRight: '2px solid #00e5ff',
+        borderBottom: '2px solid #00e5ff',
         padding: '30px',
         maxWidth: '400px',
         width: '100%',
       }}>
         <h2 className="pixel-h2" style={{
           color: '#00ff00',
-          marginTop: '0',
+          marginTop: 0,
           marginBottom: '8px',
           fontSize: '16px',
           textAlign: 'center',
         }}>
-          {isLogin ? t('auth.login') || 'LOGIN' : t('auth.register') || 'REGISTER'}
+          {isLogin ? t('auth.login') : t('auth.register')}
         </h2>
 
         <p style={{
-          color: '#cc00ff',
+          color: '#00e5ff',
           fontFamily: 'Press Start 2P, monospace',
           fontSize: '8px',
           textAlign: 'center',
           marginBottom: '25px',
         }}>
-          {t('auth.welcome') || 'WELCOME TO TEAM EASYGROWING'}
+          {t('auth.welcome')}
         </p>
 
         {error && (
           <div style={{
             backgroundColor: '#2a0000',
-            borderLeft: '2px solid #ff0000',
-            borderTop: '2px solid #ff0000',
-            borderRight: '1px solid #cc00ff',
-            borderBottom: '1px solid #cc00ff',
+            borderLeft: '2px solid #ff3333',
             padding: '10px',
             marginBottom: '15px',
           }}>
-            <p style={{
-              color: '#ff6b6b',
-              fontFamily: 'Press Start 2P, monospace',
-              fontSize: '7px',
-              margin: '0',
-            }}>
-              ERROR: {error}
+            <p style={{ color: '#ff6b6b', fontFamily: 'Press Start 2P, monospace', fontSize: '7px', margin: 0 }}>
+              {error}
             </p>
           </div>
         )}
@@ -114,182 +109,45 @@ export default function Register() {
         <form onSubmit={isLogin ? handleLogin : handleRegister}>
           {!isLogin && (
             <div style={{ marginBottom: '15px' }}>
-              <label style={{
-                color: '#00ff00',
-                fontFamily: 'Press Start 2P, monospace',
-                fontSize: '8px',
-                display: 'block',
-                marginBottom: '6px',
-              }}>
-                {t('auth.username') || 'USERNAME'}
+              <label style={{ color: '#00ff00', fontFamily: 'Press Start 2P, monospace', fontSize: '8px', display: 'block', marginBottom: '6px' }}>
+                {t('auth.username')}
               </label>
-              <input
-                type="text"
-                className="pixel-input"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                placeholder="Enter username"
-                style={{
-                  width: '100%',
-                  padding: '10px',
-                  backgroundColor: '#0a0a0a',
-                  borderLeft: '2px solid #00ff00',
-                  borderTop: '2px solid #00ff00',
-                  borderRight: '1px solid #cc00ff',
-                  borderBottom: '1px solid #cc00ff',
-                  color: '#00ff00',
-                  fontFamily: 'Press Start 2P, monospace',
-                  fontSize: '8px',
-                  boxSizing: 'border-box',
-                }}
-                required
-              />
+              <input type="text" className="pixel-input" value={username}
+                onChange={(e) => setUsername(e.target.value)} required />
             </div>
           )}
 
           <div style={{ marginBottom: '15px' }}>
-            <label style={{
-              color: '#00ff00',
-              fontFamily: 'Press Start 2P, monospace',
-              fontSize: '8px',
-              display: 'block',
-              marginBottom: '6px',
-            }}>
-              {t('auth.email') || 'EMAIL'}
+            <label style={{ color: '#00ff00', fontFamily: 'Press Start 2P, monospace', fontSize: '8px', display: 'block', marginBottom: '6px' }}>
+              {t('auth.email')}
             </label>
-            <input
-              type="email"
-              className="pixel-input"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter email"
-              style={{
-                width: '100%',
-                padding: '10px',
-                backgroundColor: '#0a0a0a',
-                borderLeft: '2px solid #00ff00',
-                borderTop: '2px solid #00ff00',
-                borderRight: '1px solid #cc00ff',
-                borderBottom: '1px solid #cc00ff',
-                color: '#00ff00',
-                fontFamily: 'Press Start 2P, monospace',
-                fontSize: '8px',
-                boxSizing: 'border-box',
-              }}
-              required
-            />
+            <input type="email" className="pixel-input" value={email}
+              onChange={(e) => setEmail(e.target.value)} required />
           </div>
 
           <div style={{ marginBottom: '20px' }}>
-            <label style={{
-              color: '#00ff00',
-              fontFamily: 'Press Start 2P, monospace',
-              fontSize: '8px',
-              display: 'block',
-              marginBottom: '6px',
-            }}>
-              {t('auth.password') || 'PASSWORD'}
+            <label style={{ color: '#00ff00', fontFamily: 'Press Start 2P, monospace', fontSize: '8px', display: 'block', marginBottom: '6px' }}>
+              {t('auth.password')}
             </label>
-            <input
-              type="password"
-              className="pixel-input"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter password"
-              style={{
-                width: '100%',
-                padding: '10px',
-                backgroundColor: '#0a0a0a',
-                borderLeft: '2px solid #00ff00',
-                borderTop: '2px solid #00ff00',
-                borderRight: '1px solid #cc00ff',
-                borderBottom: '1px solid #cc00ff',
-                color: '#00ff00',
-                fontFamily: 'Press Start 2P, monospace',
-                fontSize: '8px',
-                boxSizing: 'border-box',
-              }}
-              required
-            />
+            <input type="password" className="pixel-input" value={password}
+              onChange={(e) => setPassword(e.target.value)} required minLength={6} />
           </div>
 
-          <button
-            type="submit"
-            className={isLogin ? 'pixel-btn' : 'pixel-btn-purple'}
+          <button type="submit" className={isLogin ? 'pixel-btn' : 'pixel-btn-cyan'}
             disabled={loading}
-            style={{
-              width: '100%',
-              padding: '12px',
-              marginBottom: '10px',
-              backgroundColor: isLogin ? '#00ff00' : '#cc00ff',
-              color: '#121212',
-              fontFamily: 'Press Start 2P, monospace',
-              fontSize: '8px',
-              fontWeight: 'bold',
-              borderLeft: '2px solid #ffffff',
-              borderTop: '2px solid #ffffff',
-              borderRight: '1px solid #000000',
-              borderBottom: '1px solid #000000',
-              cursor: loading ? 'not-allowed' : 'pointer',
-              opacity: loading ? 0.6 : 1,
-            }}
-          >
-            {loading ? t('auth.loading') || 'LOADING...' : (isLogin ? t('auth.login') || 'LOGIN' : t('auth.register') || 'REGISTER')}
+            style={{ width: '100%', padding: '12px', marginBottom: '10px', opacity: loading ? 0.6 : 1 }}>
+            {loading ? t('auth.loading') : (isLogin ? t('auth.login') : t('auth.register'))}
           </button>
         </form>
 
-        <button
-          className="pixel-btn-amber"
-          onClick={handleGuest}
-          style={{
-            width: '100%',
-            padding: '10px',
-            marginBottom: '15px',
-            backgroundColor: '#ffaa00',
-            color: '#121212',
-            fontFamily: 'Press Start 2P, monospace',
-            fontSize: '7px',
-            fontWeight: 'bold',
-            borderLeft: '2px solid #ffff00',
-            borderTop: '2px solid #ffff00',
-            borderRight: '1px solid #000000',
-            borderBottom: '1px solid #000000',
-            cursor: 'pointer',
-          }}
-        >
-          {t('auth.guest') || 'CONTINUE AS GUEST'}
-        </button>
-
-        <div style={{ textAlign: 'center' }}>
-          <p style={{
-            color: '#cc00ff',
-            fontFamily: 'Press Start 2P, monospace',
-            fontSize: '7px',
-            margin: '0',
-          }}>
-            {isLogin ? t('auth.no_account') || "DON'T HAVE AN ACCOUNT?" : t('auth.have_account') || 'ALREADY HAVE AN ACCOUNT?'}
+        <div style={{ textAlign: 'center', marginTop: '15px' }}>
+          <p style={{ color: '#00e5ff', fontFamily: 'Press Start 2P, monospace', fontSize: '7px', margin: '0 0 8px 0' }}>
+            {isLogin ? t('auth.no_account') : t('auth.have_account')}
           </p>
-          <button
-            type="button"
-            onClick={() => {
-              setIsLogin(!isLogin);
-              setError(null);
-              setEmail('');
-              setPassword('');
-              setUsername('');
-            }}
-            style={{
-              backgroundColor: 'transparent',
-              color: '#00ff00',
-              fontFamily: 'Press Start 2P, monospace',
-              fontSize: '7px',
-              border: 'none',
-              cursor: 'pointer',
-              textDecoration: 'underline',
-              marginTop: '6px',
-            }}
-          >
-            {isLogin ? t('auth.create_account') || 'CREATE ONE' : t('auth.login_instead') || 'LOGIN INSTEAD'}
+          <button type="button"
+            onClick={() => { setIsLogin(!isLogin); setError(null); setEmail(''); setPassword(''); setUsername(''); }}
+            style={{ backgroundColor: 'transparent', color: '#00ff00', fontFamily: 'Press Start 2P, monospace', fontSize: '7px', border: 'none', cursor: 'pointer', textDecoration: 'underline' }}>
+            {isLogin ? t('auth.create_account') : t('auth.login_instead')}
           </button>
         </div>
       </div>
