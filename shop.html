@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Team EasyGrowing - Shop</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#e7bdb1",
+                    "on-tertiary-fixed-variant": "#5d4037",
+                    "surface-bright": "#383a37",
+                    "inverse-surface": "#e2e3df",
+                    "secondary-fixed": "#ffdcbb",
+                    "surface-container-high": "#292a28",
+                    "on-primary-fixed": "#002201",
+                    "background": "#121412",
+                    "surface-container": "#1e201e",
+                    "outline": "#8c9387",
+                    "surface-dim": "#121412",
+                    "on-primary-container": "#9dd090",
+                    "secondary-container": "#fe9d00",
+                    "surface-container-low": "#1a1c1a",
+                    "primary": "#a1d494",
+                    "on-error": "#690005",
+                    "on-background": "#e2e3df",
+                    "tertiary-fixed-dim": "#e7bdb1",
+                    "primary-fixed-dim": "#a1d494",
+                    "on-primary-fixed-variant": "#23501e",
+                    "on-tertiary-container": "#e3baae",
+                    "on-secondary-fixed-variant": "#673d00",
+                    "error": "#ffb4ab",
+                    "primary-fixed": "#bcf0ae",
+                    "on-primary": "#0a3909",
+                    "on-tertiary": "#442a22",
+                    "secondary-fixed-dim": "#ffb869",
+                    "tertiary-fixed": "#ffdbd0",
+                    "error-container": "#93000a",
+                    "surface-container-lowest": "#0d0f0d",
+                    "outline-variant": "#42493e",
+                    "surface-tint": "#a1d494",
+                    "inverse-primary": "#3b6934",
+                    "on-secondary-fixed": "#2c1700",
+                    "surface-variant": "#333533",
+                    "inverse-on-surface": "#2f312e",
+                    "on-secondary": "#482900",
+                    "on-tertiary-fixed": "#2c160e",
+                    "secondary": "#ffc384",
+                    "on-error-container": "#ffdad6",
+                    "primary-container": "#2d5a27",
+                    "on-surface": "#e2e3df",
+                    "surface": "#121412",
+                    "tertiary-container": "#674940",
+                    "on-secondary-container": "#663c00",
+                    "surface-container-highest": "#333533",
+                    "on-surface-variant": "#c2c9bb"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "inline-padding": "12px",
+                    "container-margin": "20px",
+                    "section-gap": "32px",
+                    "stack-gap": "16px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "headline-sm": ["Montserrat"],
+                    "label-lg": ["Inter"],
+                    "headline-md": ["Montserrat"],
+                    "display-lg": ["Montserrat"],
+                    "label-sm": ["Inter"],
+                    "headline-lg": ["Montserrat"],
+                    "body-sm": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(30, 32, 30, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .phoenix-glow {
+            box-shadow: 0 0 20px rgba(161, 212, 148, 0.2);
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .pb-safe {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen pb-48">
+<!-- Integrated Global Header -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-white/10">
+<div class="flex items-center justify-between px-container-margin h-16 w-full max-w-md mx-auto">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center overflow-hidden border border-primary/20 cursor-pointer" onclick="window.location.href='index.html'">
+<img alt="Easygrowing Logo" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhGz31P1TSfQCsRXSaCgKxa5gVt5FazjrGM9Z7U_JD6eBv8aQQ-vW5WQxsmdVOsOMYUUBTkhlrB-JIP77tbN8jhO0FVeljQC13RcLzWr8fh5i2hrrd4AZZauRuHC4Jfdx79IRepFaQDZtWbLfQvp1hrMxRHcfkmjN4xAkakfasrL6TtehPXPMiiCXlE0HveX9BLfVcz1LTwmcpeV-5gsNNC1lmUjtcpczZFGkkmmG5I5IJXcB5XPdjYePMC544PVokDNCadwPRiS0"/>
+</div>
+<h1 class="font-headline-sm text-primary tracking-tight cursor-pointer hidden xs:block" onclick="window.location.href='index.html'">TEAM EASYGROWING</h1>
+</div>
+<div class="flex items-center gap-1">
+<!-- Language Switcher -->
+<div class="flex bg-surface-container-low rounded-lg p-0.5 border border-white/5 mr-2">
+<button class="px-1.5 py-1 text-[10px] font-bold text-primary bg-primary/10 rounded-md">DE</button>
+<button class="px-1.5 py-1 text-[10px] font-bold text-on-surface-variant">EN</button>
+<button class="px-1.5 py-1 text-[10px] font-bold text-on-surface-variant">ES</button>
+</div>
+<!-- User Profile -->
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors" onclick="window.location.href='profile.html'">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+<!-- Cart Icon -->
+<button class="relative p-2 text-primary" onclick="window.location.href='shop.html'">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span class="absolute top-1 right-1 w-4 h-4 bg-secondary text-on-secondary-container text-[10px] font-bold flex items-center justify-center rounded-full">0</span>
+</button>
+</div>
+</div>
+</header>
+<main class="pt-20 px-container-margin max-w-md mx-auto space-y-section-gap">
+<!-- Search & Integrated Unit Toggles -->
+<section class="space-y-4">
+<div class="flex justify-between items-center">
+<div class="flex bg-surface-container-low p-1 rounded-lg border border-white/5">
+<button class="px-3 py-1 rounded-md text-[10px] font-label-lg bg-primary/20 text-primary">METRIC</button>
+<button class="px-3 py-1 rounded-md text-[10px] font-label-lg text-on-surface-variant">IMP</button>
+</div>
+<span class="text-[10px] text-on-surface-variant/60 font-label-sm uppercase tracking-wider">Free Shipping over 79€</span>
+</div>
+<div class="relative">
+<input class="w-full bg-surface-container-high border-white/10 rounded-xl px-4 py-3 pl-11 text-on-surface focus:border-primary focus:ring-1 focus:ring-primary placeholder:text-outline/50" placeholder="Suche nach Keim-Eiern..." type="text"/>
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline/70">search</span>
+</div>
+</section>
+<!-- Category Chips -->
+<section class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+<button class="flex-shrink-0 px-6 py-2 rounded-full glass-card border-primary text-primary font-label-lg" onclick="window.location.href='shop.html'">Alle</button>
+<button class="flex-shrink-0 px-6 py-2 rounded-full glass-card border-white/5 text-on-surface-variant font-label-lg" onclick="window.location.href='shop.html?category=germination'">Keimung</button>
+<button class="flex-shrink-0 px-6 py-2 rounded-full glass-card border-white/5 text-on-surface-variant font-label-lg" onclick="window.location.href='shop.html?category=3dprint'">3D Druck</button>
+<button class="flex-shrink-0 px-6 py-2 rounded-full glass-card border-white/5 text-on-surface-variant font-label-lg" onclick="window.location.href='shop.html?category=accessories'">Zubehör</button>
+</section>
+<!-- Hero: Keim-Ei Personalisiert -->
+<section class="space-y-stack-gap">
+<div class="flex justify-between items-end">
+<h2 class="font-headline-sm text-on-surface">Top Pick</h2>
+<span class="font-label-sm text-secondary uppercase tracking-widest">Unikat</span>
+</div>
+<div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden glass-card group cursor-pointer" onclick="window.location.href='shop.html?product=keim-ei-perso'">
+<img alt="Personalisiertes Keim-Ei" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida/AP1WRLs67y3WJkc5SZw8ExIPrXJNZEZX3KfwT7LyTXwCy8ZjYp8G07DewYlygE5KSO3JXkTpBzBoWZc5tEj_wxgfwETOwAIonNOZX-3dX8QN4tNxUwnYAo8amyxt-zYt_Wa8n-VOkqbtRbY-Xd088Yjj072mfwZ4kRLt4TNGezzmm3Pfst8cvKOKLtVtt355rgqJpGDIwJ8LlBgKbmpXKfrG-wSNDLsfAk8RQD81lVglKfJTwxxUU2QHwnofqS0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+<div class="absolute bottom-4 left-4 right-4">
+<h3 class="font-headline-md text-white mb-1">Keim-Ei Personalisiert</h3>
+<p class="font-body-sm text-on-surface-variant line-clamp-1">Farbe und Wunschaufdruck inkl.</p>
+<div class="flex items-center justify-between mt-3">
+<span class="text-primary font-headline-sm">29,99 €</span>
+<button class="bg-primary text-on-primary px-5 py-2.5 rounded-lg font-label-lg phoenix-glow">Details</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Product Grid -->
+<section class="grid grid-cols-2 gap-4">
+<!-- Product: Keim-Ei -->
+<div class="glass-card rounded-2xl overflow-hidden flex flex-col group active:scale-95 transition-all cursor-pointer" onclick="window.location.href='shop.html?product=keim-ei'">
+<div class="relative aspect-square bg-surface-container-high overflow-hidden">
+<img alt="Easygrowing Keim-Ei" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AP1WRLuqsUBbh6XAGVuiSzjb7llm4zpRSh5mV6LHoeEugoq-t6TNdgWpcvHtrMQARcrbSkg3dp45jdow0Hlrh1798qjeJVAh3fGaqAu2IwC1uSQpg37jczm5RrDJwsqEcyqDjeXXI1quqpfuCcz0TivT2vGEah9c_7G7Won3c4fgdBaLEIfEBpj879iu3ER9d3tZfnXEvkEgyddtDFjS4NBKuRq15pCH31rZzPyGR6aY8LP63ybScqZAkWM21eU"/>
+<div class="absolute top-2 left-2 px-2 py-0.5 bg-secondary/90 backdrop-blur-md rounded text-[10px] font-bold text-on-secondary-container uppercase">NEU</div>
+</div>
+<div class="p-4 flex-1 flex flex-col justify-between space-y-2">
+<div>
+<span class="font-label-sm text-primary uppercase text-[10px] tracking-wider">3D DRUCK</span>
+<h4 class="font-headline-sm text-[16px] text-on-surface leading-tight mt-1">Keim-Ei</h4>
+<p class="text-[12px] text-on-surface-variant line-clamp-2 mt-1">Game-Changer für die Keimung.</p>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-headline-sm text-primary">19,95 €</span>
+<button class="w-9 h-9 rounded-xl bg-surface-container-highest text-primary border border-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]" data-icon="shopping_basket">shopping_basket</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product: Netztöpfe -->
+<div class="glass-card rounded-2xl overflow-hidden flex flex-col group active:scale-95 transition-all cursor-pointer" onclick="window.location.href='shop.html?product=netztoepfe'">
+<div class="relative aspect-square bg-surface-container-high overflow-hidden">
+<img alt="Keim-Ei Netztöpfe" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AP1WRLtb_vfvSeRl9j528OJINjfQPB8o1Sf4hKfLWcH9WMI7NXoMfWwsTw0N2zA04KWv1Vv5_p7XD9oTnfXE6cb632_KeMIDJShTiIdxYoIBRA2z-c1m2jl-6hyDV4P-tK5Vb49zLQU7rSw23SQxzuT1YPl1XyoxmshWZfRfN8lgWF_mwXcmngPo5K3DLFNkKeot18JjcXTWh1AysnvdX3I6U24ktfd4NIuzwH13Hw2B3XarONL5tFiPUvquDqs"/>
+</div>
+<div class="p-4 flex-1 flex flex-col justify-between space-y-2">
+<div>
+<span class="font-label-sm text-primary uppercase text-[10px] tracking-wider">ZUBEHÖR</span>
+<h4 class="font-headline-sm text-[16px] text-on-surface leading-tight mt-1">Netztöpfe</h4>
+<p class="text-[12px] text-on-surface-variant line-clamp-2 mt-1">3er Pack, robust &amp; wiederverwendbar.</p>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-headline-sm text-primary">9,99 €</span>
+<button class="w-9 h-9 rounded-xl bg-surface-container-highest text-primary border border-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]" data-icon="shopping_basket">shopping_basket</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Newsletter Section -->
+<section class="glass-card rounded-2xl p-6 space-y-4 border-primary/20 relative overflow-hidden">
+<div class="absolute -right-10 -top-10 w-32 h-32 bg-primary/10 blur-3xl rounded-full"></div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Werde Teil der Elite</h3>
+<p class="font-body-sm text-on-surface-variant">Exklusive Shop-Drops und limitierte 3D Files direkt in dein Postfach.</p>
+<div class="flex gap-2">
+<input class="flex-1 bg-surface-container-low border border-white/5 rounded-lg px-4 py-2 text-on-surface focus:border-primary focus:ring-0 transition-colors placeholder:text-outline/40" placeholder="E-Mail Adresse" type="email"/>
+<button class="bg-secondary text-on-secondary-container px-4 py-2 rounded-lg font-label-lg active:scale-95 transition-all">Join</button>
+</div>
+</section>
+<!-- About Content -->
+<section class="space-y-4 opacity-80 pb-8 border-t border-white/5 pt-8">
+<h2 class="font-headline-sm text-primary">Das einzigartige Keim-Ei</h2>
+<p class="font-body-sm text-on-surface-variant leading-relaxed">
+                Mit dem Easygrowing Keim-Ei haben Sie immer die volle Kontrolle über den Keimprozess. Ein perfekt ausbalanciertes, konstantes Klima sorgt für den optimalen Start Ihrer Saatgut. Unsere 3D-Drucktechnologie ermöglicht präzise Designs, die auf maximale Effizienz ausgelegt sind.
+            </p>
+<div class="flex flex-wrap gap-x-6 gap-y-2 mt-4">
+<button class="text-primary font-label-lg flex items-center gap-1" onclick="window.location.href='index.html'">
+                    Mehr über uns erfahren
+                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+<button class="text-on-surface-variant font-label-lg flex items-center gap-1" onclick="window.location.href='register.html'">
+                    Registrieren
+                </button>
+<button class="text-on-surface-variant font-label-lg flex items-center gap-1" onclick="window.location.href='achievements.html'">
+                    Erfolge
+                </button>
+<button class="text-on-surface-variant font-label-lg flex items-center gap-1" onclick="window.location.href='admin.html'">
+                    Admin
+                </button>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/80 backdrop-blur-xl border-t border-white/10 shadow-[0_-4px_20px_rgba(161,212,148,0.1)]">
+<!-- Persistent Mini-Player Bar -->
+<div class="bg-primary/10 border-b border-primary/20 px-container-margin py-2 flex items-center justify-between">
+<div class="flex items-center gap-3 overflow-hidden">
+<div class="w-8 h-8 rounded-md bg-primary/20 flex items-center justify-center flex-shrink-0 overflow-hidden">
+<img alt="Current Track" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhGz31P1TSfQCsRXSaCgKxa5gVt5FazjrGM9Z7U_JD6eBv8aQQ-vW5WQxsmdVOsOMYUUBTkhlrB-JIP77tbN8jhO0FVeljQC13RcLzWr8fh5i2hrrd4AZZauRuHC4Jfdx79IRepFaQDZtWbLfQvp1hrMxRHcfkmjN4xAkakfasrL6TtehPXPMiiCXlE0HveX9BLfVcz1LTwmcpeV-5gsNNC1lmUjtcpczZFGkkmmG5I5IJXcB5XPdjYePMC544PVokDNCadwPRiS0"/>
+</div>
+<div class="flex flex-col overflow-hidden">
+<span class="text-[10px] font-bold text-primary truncate leading-none">GROWER'S CHOICE</span>
+<span class="text-[9px] text-on-surface-variant truncate">EasyGrowing Radio - LIVE</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="text-primary"><span class="material-symbols-outlined text-[20px]">play_arrow</span></button>
+<button class="text-on-surface-variant"><span class="material-symbols-outlined text-[20px]">close</span></button>
+</div>
+</div>
+<div class="flex justify-around items-center h-16 w-full max-w-md mx-auto">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90" href="index.html">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-[10px]">Home</span>
+</a>
+<!-- Diary -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90" href="diary.html">
+<span class="material-symbols-outlined" data-icon="potted_plant">potted_plant</span>
+<span class="font-label-sm text-[10px]">Diary</span>
+</a>
+<!-- Bible -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90" href="bible.html">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-label-sm text-[10px]">Bible</span>
+</a>
+<!-- Music -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90" href="music.html">
+<span class="material-symbols-outlined" data-icon="library_music">library_music</span>
+<span class="font-label-sm text-[10px]">Music</span>
+</a>
+<!-- Shop (ACTIVE) -->
+<a class="flex flex-col items-center justify-center text-primary relative after:content-[''] after:w-1 after:h-1 after:bg-primary after:rounded-full after:mt-1 active:scale-90" href="shop.html">
+<span class="material-symbols-outlined" data-icon="shopping_bag" style="font-variation-settings: 'FILL' 1;">shopping_bag</span>
+<span class="font-label-sm text-[10px]">Shop</span>
+</a>
+</div>
+</nav>
+<script>
+        // Interactive UI feedback
+        document.querySelectorAll('button, a').forEach(el => {
+            el.addEventListener('click', function() {
+                this.classList.add('scale-95');
+                setTimeout(() => this.classList.remove('scale-95'), 100);
+            });
+        });
+    </script>
+</body></html>

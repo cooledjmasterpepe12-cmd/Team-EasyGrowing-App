@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TEAM EASYGROWING - Grow Diary</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .pixel-card {
+            image-rendering: pixelated;
+            border-image-source: linear-gradient(to bottom, #2d5a27, #131313);
+            border-image-slice: 1;
+        }
+        .bloom-glow {
+            box-shadow: 0 0 15px rgba(157, 223, 46, 0.2);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #131313;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #2d5a27;
+        }
+        /* Mini Player styles */
+        .player-blur {
+            backdrop-filter: blur(12px);
+            background-color: rgba(32, 31, 31, 0.85);
+        }
+        .auth-overlay {
+            backdrop-filter: blur(4px);
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "error-container": "#93000a",
+                "tertiary-fixed": "#ffdbca",
+                "secondary-fixed-dim": "#98da27",
+                "on-tertiary": "#552100",
+                "on-secondary-fixed": "#121f00",
+                "surface-tint": "#a1d494",
+                "surface-container-lowest": "#0e0e0e",
+                "outline-variant": "#42493e",
+                "on-tertiary-container": "#ffb188",
+                "primary-fixed-dim": "#a1d494",
+                "on-primary-fixed-variant": "#23501e",
+                "tertiary-fixed-dim": "#ffb690",
+                "primary-fixed": "#bcf0ae",
+                "on-primary": "#0a3909",
+                "error": "#ffb4ab",
+                "on-secondary-fixed-variant": "#334f00",
+                "tertiary-container": "#873900",
+                "on-secondary-container": "#304b00",
+                "surface": "#131313",
+                "primary-container": "#2d5a27",
+                "on-surface": "#e5e2e1",
+                "on-surface-variant": "#c2c9bb",
+                "surface-container-highest": "#353534",
+                "on-secondary": "#213600",
+                "inverse-on-surface": "#313030",
+                "surface-variant": "#353534",
+                "on-error-container": "#ffdad6",
+                "secondary": "#9ddf2e",
+                "on-tertiary-fixed": "#341100",
+                "secondary-fixed": "#b2f746",
+                "surface-bright": "#3a3939",
+                "inverse-surface": "#e5e2e1",
+                "surface-container": "#201f1f",
+                "background": "#131313",
+                "on-primary-fixed": "#002201",
+                "surface-container-high": "#2a2a2a",
+                "tertiary": "#ffb690",
+                "on-tertiary-fixed-variant": "#783200",
+                "primary": "#a1d494",
+                "on-error": "#690005",
+                "on-background": "#e5e2e1",
+                "surface-dim": "#131313",
+                "outline": "#8c9387",
+                "surface-container-low": "#1c1b1b",
+                "secondary-container": "#83c300",
+                "on-primary-container": "#9dd090"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+            },
+            "spacing": {
+                "gutter": "16px",
+                "unit": "4px",
+                "margin-mobile": "16px",
+                "container-max-width": "1280px",
+                "margin-desktop": "32px"
+            },
+            "fontFamily": {
+                "body-lg": ["Montserrat"],
+                "headline-sm": ["Montserrat"],
+                "label-lg": ["Montserrat"],
+                "headline-md": ["Montserrat"],
+                "display-lg": ["Montserrat"],
+                "label-md": ["Montserrat"],
+                "headline-lg": ["Montserrat"],
+                "body-sm": ["Montserrat"],
+                "body-md": ["Montserrat"],
+                "headline-lg-mobile": ["Montserrat"]
+            },
+            "fontSize": {
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md custom-scrollbar selection:bg-secondary selection:text-black pb-48">
+<!-- Auth Guard Check (Simulated) -->
+<div class="hidden fixed inset-0 z-[100] flex items-center justify-center p-6 auth-overlay bg-black/60" id="login-prompt">
+<div class="bg-surface-container border border-secondary/30 p-8 rounded-2xl max-w-sm w-full text-center shadow-2xl">
+<span class="material-symbols-outlined text-secondary text-5xl mb-4">lock_person</span>
+<h3 class="font-headline-md mb-2">Member Access Only</h3>
+<p class="text-on-surface-variant mb-6">Log in or create an account to start tracking your grow and access the personalized diary features.</p>
+<div class="flex flex-col gap-3">
+<a class="bg-secondary text-black font-bold py-3 rounded-full hover:scale-105 transition-transform" href="register.html">Log In</a>
+<a class="border border-outline-variant py-3 rounded-full hover:bg-surface-variant transition-colors" href="register.html">Create Account</a>
+</div>
+<button class="mt-4 text-label-md text-on-surface-variant underline" onclick="document.getElementById('login-prompt').classList.add('hidden')">Continue as Guest (Read Only)</button>
+</div>
+</div>
+<!-- Top Navigation -->
+<header class="bg-surface fixed top-0 w-full z-50 border-b border-outline-variant/30 flex justify-between items-center px-margin-mobile h-16">
+<div class="flex items-center gap-3">
+<a class="flex items-center gap-3 group" href="index.html">
+<img alt="Team Easygrowing Logo" class="h-8 w-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5iVdresCT0ua0xhYYM0aRawlY9uZoV9AmzgdwjBlasoBpfgoe11Sf9veNvuhjanLEIsqWPBHRwDUo0cv4V2DG5JPOMEqXL5Zg0tQvsug51zQomCY18w4ohFc5DHSR3AExzD2eUjspgiGkCl70ihuvfRAEe0DSiaBtKfzJce5i9dM6pSjRcUVxciBTOT9IyTKCBrpzGBQ-d9j26eTviBzuW_ibptnV63VJT3agaaistzoO9rsYZstcQNYwyTukaY0vY6cVErFMGBo"/>
+<h1 class="font-display-lg text-headline-sm tracking-tighter text-secondary group-hover:text-primary transition-colors">TEAM EASYGROWING</h1>
+</a>
+</div>
+<div class="flex items-center gap-4">
+<!-- Language Switcher -->
+<div class="hidden sm:flex bg-surface-container rounded-full p-1 border border-outline-variant/30">
+<button class="px-2 py-1 text-label-md rounded-full bg-secondary text-black font-bold">EN</button>
+<button class="px-2 py-1 text-label-md rounded-full text-on-surface-variant hover:text-secondary transition-all">DE</button>
+<button class="px-2 py-1 text-label-md rounded-full text-on-surface-variant hover:text-secondary transition-all">ES</button>
+</div>
+<!-- Unit Toggle -->
+<div class="hidden xs:flex bg-surface-container rounded-full p-1 border border-outline-variant/30">
+<button class="px-3 py-1 text-label-md rounded-full bg-secondary text-black transition-all" id="unit-toggle-l">L</button>
+<button class="px-3 py-1 text-label-md rounded-full text-on-surface-variant hover:text-secondary transition-all" id="unit-toggle-gal">GAL</button>
+</div>
+<div class="flex items-center gap-1">
+<a class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors active:scale-95 duration-100 p-2" href="admin.html">admin_panel_settings</a>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors active:scale-95 duration-100 p-2">sensors</button>
+<a class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors active:scale-95 duration-100 p-2" href="profile.html">account_circle</a>
+</div>
+</div>
+</header>
+<main class="pt-20 px-4 md:px-margin-desktop max-w-container-max-width mx-auto">
+<!-- Phasen-Steuerung Quick Access -->
+<section class="mb-8">
+<div class="flex items-center justify-between mb-4">
+<h2 class="font-headline-md text-headline-md flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">settings_input_component</span>
+                Phasen-Steuerung
+            </h2>
+</div>
+<div class="flex gap-2 overflow-x-auto pb-2 custom-scrollbar" id="phase-controls">
+<button class="phase-btn flex-shrink-0 px-4 py-2 bg-surface-container border border-outline-variant/30 rounded-full text-label-lg hover:border-secondary transition-all" onclick="togglePhase(this)">Keimung</button>
+<button class="phase-btn flex-shrink-0 px-4 py-2 bg-surface-container border border-outline-variant/30 rounded-full text-label-lg hover:border-secondary transition-all" onclick="togglePhase(this)">Sämling</button>
+<button class="phase-btn active flex-shrink-0 px-4 py-2 bg-secondary text-black rounded-full text-label-lg font-bold" onclick="togglePhase(this)">Vegetativ</button>
+<button class="phase-btn flex-shrink-0 px-4 py-2 bg-surface-container border border-outline-variant/30 rounded-full text-label-lg hover:border-secondary transition-all" onclick="togglePhase(this)">Blüte</button>
+<button class="phase-btn flex-shrink-0 px-4 py-2 bg-surface-container border border-outline-variant/30 rounded-full text-label-lg hover:border-secondary transition-all" onclick="togglePhase(this)">Ernte</button>
+</div>
+</section>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Active Plants Section -->
+<section class="md:col-span-8 flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<h2 class="font-headline-md text-headline-md flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">potted_plant</span>
+                        Active Plants
+                    </h2>
+<span class="text-[10px] uppercase font-bold tracking-widest text-primary border border-primary/30 px-2 py-0.5 rounded">Member Area</span>
+</div>
+<span class="text-label-md font-label-md bg-primary-container text-secondary px-3 py-1 rounded-full">2 RUNNING</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<!-- Lemon Haze Alpha Card -->
+<div class="plant-card cursor-pointer bg-surface-container border border-outline-variant/50 rounded-xl overflow-hidden group hover:border-secondary transition-all duration-300 bloom-glow" onclick="selectPlant(this)">
+<div class="h-40 bg-cover bg-center relative" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB5eHj1UuV4xgSau_Z8DcwAtDvzZ253slGahpqCZp1Zn0IGfU9uwgS616x_hIlIg7lFAv_aS1UGsXRGwYlUZjJIewURwkG6IIdZD5nTKNw5LtGKwpEBA7EaEw-gQe2H0lUyKkPUYCR9QmgFbrxQPNVkYO1zyt8fms1RkI0smd1hujSCJzDq8I4v9UxmR_EZfBiHNGqP4ey6pADDUZkq3z_jdjBc9IU0-U32DDbBjSphUInA1E_obIx0rMucUuHcf3hA0A3tySkeg-g')">
+<div class="absolute top-2 right-2 bg-secondary text-black px-2 py-1 text-label-md font-label-md rounded">VEGGIE</div>
+</div>
+<div class="p-4 border-t border-outline-variant/30">
+<h3 class="font-headline-sm text-headline-sm text-secondary">Lemon Haze Alpha</h3>
+<div class="mt-4 p-3 bg-surface-container-low rounded-lg border border-outline-variant/20">
+<label class="text-label-md text-on-surface-variant block mb-1">Erntemenge (g)</label>
+<input class="w-full bg-surface border border-outline-variant rounded p-2 text-on-surface focus:border-secondary outline-none transition-colors" onclick="event.stopPropagation()" placeholder="z.B. 45.5" type="number"/>
+</div>
+<div class="flex justify-between items-end mt-4">
+<div class="flex flex-col">
+<span class="text-label-md text-on-surface-variant">Day 42</span>
+<span class="text-body-md font-bold text-on-surface">Phase: Bloom</span>
+</div>
+<div class="w-16 h-16 relative flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-surface-container-highest" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-secondary transition-all duration-1000" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-dasharray="175.9" stroke-dashoffset="44" stroke-width="4"></circle>
+</svg>
+<span class="absolute text-label-md font-bold">75%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Purple Punch Beta Card -->
+<div class="plant-card cursor-pointer bg-surface-container border border-outline-variant/50 rounded-xl overflow-hidden group hover:border-secondary/50 transition-all duration-300" onclick="selectPlant(this)">
+<div class="h-40 bg-cover bg-center relative opacity-80" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA7RIVndTov8usbCgqWyMF0vswXy30M8_uV0UX6EBqx2T3ynvvZwSQ6ysOppFNiQFOqhdDRMvl_GjVixFdWMig7RVT786jaaUJsAxkhBXtPnwKQBsh_ObnPutFOBPniCI-lXPGcKl3u5R6r73MrgB99p1t2ew92t3IYbAYa69NF9lGWL7xQu-KyHSIY_UbwD1u_Q-JPXKE6iIYiqcG9OxVq-5BxxkrGtVysqXcevRHRafhypg6rTtodLu7cGR70M1gCfS6cLCj15AE')">
+<div class="absolute top-2 right-2 bg-tertiary-container text-tertiary px-2 py-1 text-label-md font-label-md rounded">BLOOM</div>
+</div>
+<div class="p-4 border-t border-outline-variant/30">
+<h3 class="font-headline-sm text-headline-sm text-secondary">Purple Punch Beta</h3>
+<div class="mt-4 p-3 bg-surface-container-low rounded-lg border border-outline-variant/20">
+<label class="text-label-md text-on-surface-variant block mb-1">Erntemenge (g)</label>
+<input class="w-full bg-surface border border-outline-variant rounded p-2 text-on-surface focus:border-secondary outline-none transition-colors" onclick="event.stopPropagation()" placeholder="z.B. 62.0" type="number"/>
+</div>
+<div class="flex justify-between items-end mt-4">
+<div class="flex flex-col">
+<span class="text-label-md text-on-surface-variant">Day 68</span>
+<span class="text-body-md font-bold text-on-surface">Phase: Harvest Ready</span>
+</div>
+<div class="w-16 h-16 relative flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-surface-container-highest" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-tertiary transition-all duration-1000" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-dasharray="175.9" stroke-dashoffset="17.5" stroke-width="4"></circle>
+</svg>
+<span class="absolute text-label-md font-bold">90%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Schedule Side Panel -->
+<section class="md:col-span-4 flex flex-col gap-4">
+<div class="bg-surface-container-high border border-outline-variant/50 rounded-xl p-5 flex flex-col gap-4 h-full">
+<h2 class="font-headline-sm text-headline-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">event_note</span>
+                    Schedule
+                </h2>
+<div class="flex items-center gap-4 bg-surface-container p-3 rounded-lg border-l-4 border-primary">
+<div class="p-2 bg-primary-container rounded-lg">
+<span class="material-symbols-outlined text-primary">water_drop</span>
+</div>
+<div class="flex-1">
+<p class="font-bold text-on-surface">Watering: Alpha</p>
+<p class="text-label-md text-on-surface-variant">Today, 4:00 PM - <span class="unit-volume">500ml</span></p>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-secondary">radio_button_unchecked</button>
+</div>
+<div class="flex items-center gap-4 bg-surface-container p-3 rounded-lg border-l-4 border-secondary">
+<div class="p-2 bg-secondary/20 rounded-lg">
+<span class="material-symbols-outlined text-secondary">science</span>
+</div>
+<div class="flex-1">
+<p class="font-bold text-on-surface">Nutrients: Beta</p>
+<p class="text-label-md text-on-surface-variant">Tomorrow - Bloom Mix A</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-50">pending</span>
+</div>
+<div class="mt-4 border-t border-outline-variant/30 pt-4">
+<h3 class="text-label-lg font-label-lg uppercase tracking-widest text-on-surface-variant mb-4">Environment (24h)</h3>
+<div class="flex flex-col gap-1 mb-6">
+<div class="flex justify-between items-center text-label-md font-label-md">
+<span>Temp</span>
+<span class="text-secondary">24.5°C</span>
+</div>
+<div class="h-12 bg-surface flex items-end gap-[2px] px-1 rounded border border-outline-variant/20 overflow-hidden">
+<div class="flex-1 bg-secondary/40 h-[60%] rounded-t-sm"></div>
+<div class="flex-1 bg-secondary/40 h-[65%] rounded-t-sm"></div>
+<div class="flex-1 bg-secondary/40 h-[70%] rounded-t-sm"></div>
+<div class="flex-1 bg-secondary h-[85%] rounded-t-sm"></div>
+<div class="flex-1 bg-secondary/40 h-[75%] rounded-t-sm"></div>
+<div class="flex-1 bg-secondary/40 h-[60%] rounded-t-sm"></div>
+<div class="flex-1 bg-secondary/40 h-[55%] rounded-t-sm"></div>
+<div class="flex-1 bg-secondary h-[80%] rounded-t-sm shadow-[0_0_8px_rgba(157,223,46,0.5)]"></div>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-center text-label-md font-label-md">
+<span>RH</span>
+<span class="text-primary">55%</span>
+</div>
+<div class="h-12 bg-surface flex items-end gap-[2px] px-1 rounded border border-outline-variant/20 overflow-hidden">
+<div class="flex-1 bg-primary/40 h-[40%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary/40 h-[42%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary h-[55%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary/40 h-[50%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary/40 h-[48%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary h-[55%] rounded-t-sm shadow-[0_0_8px_rgba(161,212,148,0.5)]"></div>
+<div class="flex-1 bg-primary/40 h-[52%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary/40 h-[50%] rounded-t-sm"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Recent Logs -->
+<section class="mt-8">
+<div class="flex justify-between items-center mb-4">
+<h2 class="font-headline-sm text-headline-sm">Recent Diary Logs</h2>
+<div class="flex items-center gap-3">
+<a class="flex items-center gap-1 text-label-md text-secondary hover:underline" href="register.html">
+<span class="material-symbols-outlined text-sm">person_add</span>
+                    Join Us
+                </a>
+<a class="flex items-center gap-1 text-label-md text-secondary hover:underline" href="achievements.html">
+<span class="material-symbols-outlined text-sm">emoji_events</span>
+                    Achievements
+                </a>
+</div>
+</div>
+<div class="flex gap-4 overflow-x-auto pb-4 custom-scrollbar">
+<div class="min-w-[280px] bg-surface-container border border-outline-variant/30 p-4 rounded-xl flex flex-col gap-2 hover:border-primary/50 transition-colors cursor-pointer">
+<div class="flex justify-between items-center">
+<span class="text-label-md text-on-surface-variant">Nov 24, 2023</span>
+<span class="material-symbols-outlined text-secondary text-sm">sticky_note_2</span>
+</div>
+<p class="font-bold text-on-surface">Topped Alpha</p>
+<p class="text-body-sm text-on-surface-variant line-clamp-2">Successfully topped the main cola of Lemon Haze. Recovering well with minor stress...</p>
+</div>
+<div class="min-w-[280px] bg-surface-container border border-outline-variant/30 p-4 rounded-xl flex flex-col gap-2 hover:border-primary/50 transition-colors cursor-pointer">
+<div class="flex justify-between items-center">
+<span class="text-label-md text-on-surface-variant">Nov 22, 2023</span>
+<span class="material-symbols-outlined text-secondary text-sm">photo_camera</span>
+</div>
+<p class="font-bold text-on-surface">Weekly Snapshot</p>
+<p class="text-body-sm text-on-surface-variant line-clamp-2">Color looks exceptional. No signs of nitrogen deficiency. Trichomes starting to cloud...</p>
+</div>
+<div class="min-w-[280px] bg-surface-container border border-outline-variant/30 p-4 rounded-xl flex flex-col gap-2 hover:border-primary/50 transition-colors cursor-pointer">
+<div class="flex justify-between items-center">
+<span class="text-label-md text-on-surface-variant">Nov 20, 2023</span>
+<span class="material-symbols-outlined text-tertiary text-sm">warning</span>
+</div>
+<p class="font-bold text-on-surface">pH Alert</p>
+<p class="text-body-sm text-on-surface-variant line-clamp-2">Runoff pH was 5.8. Flushed with neutral water to stabilize root zone...</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Mini Player Bar -->
+<div class="fixed bottom-20 left-0 w-full z-40 px-4 pointer-events-none">
+<div class="max-w-md mx-auto pointer-events-auto">
+<div class="player-blur border border-outline-variant/40 rounded-xl p-3 flex items-center gap-3 shadow-2xl">
+<div class="h-10 w-10 bg-surface-container-highest rounded-lg overflow-hidden flex-shrink-0 animate-pulse">
+<span class="material-symbols-outlined w-full h-full flex items-center justify-center text-primary">equalizer</span>
+</div>
+<div class="flex-1 overflow-hidden">
+<div class="text-label-lg font-bold text-on-surface truncate">Verdant Vibes Radio</div>
+<div class="text-label-md text-on-surface-variant truncate">Organic Growth - Chillhop Lo-Fi</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="material-symbols-outlined text-on-surface hover:text-secondary transition-colors">skip_previous</button>
+<button class="material-symbols-outlined text-on-surface bg-secondary text-black rounded-full p-1 hover:scale-110 transition-transform">play_arrow</button>
+<button class="material-symbols-outlined text-on-surface hover:text-secondary transition-colors">skip_next</button>
+</div>
+</div>
+</div>
+</div>
+<!-- FAB -->
+<button class="fixed bottom-32 right-6 w-14 h-14 bg-secondary text-black rounded-full flex items-center justify-center shadow-[0_4px_16px_rgba(157,223,46,0.4)] hover:scale-110 active:scale-90 transition-transform z-50" onclick="promptAction()">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 600;">add</span>
+</button>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-2 py-3 bg-surface-container-highest border-t border-primary/20 rounded-t-xl z-50 shadow-[0_-4px_12px_rgba(157,223,46,0.1)]">
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:opacity-100 hover:bg-surface-variant px-2 py-1 rounded-full transition-all min-w-[64px]" href="index.html">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-label-md text-label-md mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-secondary rounded-full px-4 py-1 shadow-[0_0_8px_rgba(161,212,148,0.4)] min-w-[64px]" href="diary.html">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label-md text-label-md mt-1">Diary</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:opacity-100 hover:bg-surface-variant px-2 py-1 rounded-full transition-all min-w-[64px]" href="bible.html">
+<span class="material-symbols-outlined">library_books</span>
+<span class="font-label-md text-label-md mt-1">Bible</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:opacity-100 hover:bg-surface-variant px-2 py-1 rounded-full transition-all min-w-[64px]" href="music.html">
+<span class="material-symbols-outlined">library_music</span>
+<span class="font-label-md text-label-md mt-1">Music</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:opacity-100 hover:bg-surface-variant px-2 py-1 rounded-full transition-all min-w-[64px]" href="shop.html">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-label-md text-label-md mt-1">Shop</span>
+</a>
+</nav>
+<script>
+    // State Simulation
+    let isLoggedIn = localStorage.getItem('isLoggedIn') === 'true'; // Checked from login state
+
+    window.addEventListener('DOMContentLoaded', () => {
+        if (!isLoggedIn) {
+            // Show prompt after a short delay for impact
+            setTimeout(() => {
+                document.getElementById('login-prompt').classList.remove('hidden');
+            }, 1000);
+        }
+        
+        // Sync preferences
+        const savedUnits = localStorage.getItem('units') || 'metric';
+        updateUnits(savedUnits === 'metric');
+    });
+
+    function promptAction() {
+        if (!isLoggedIn) {
+            document.getElementById('login-prompt').classList.remove('hidden');
+        } else {
+            alert('Opening Add Log / Plant wizard...');
+        }
+    }
+
+    // Phase Selection Logic
+    function togglePhase(btn) {
+        // Remove active states from all
+        document.querySelectorAll('.phase-btn').forEach(b => {
+            b.classList.remove('bg-secondary', 'text-black', 'font-bold');
+            b.classList.add('bg-surface-container', 'border', 'border-outline-variant/30');
+        });
+        
+        // Add active state to clicked
+        btn.classList.remove('bg-surface-container', 'border', 'border-outline-variant/30');
+        btn.classList.add('bg-secondary', 'text-black', 'font-bold');
+    }
+
+    // Plant Card Selection
+    function selectPlant(card) {
+        document.querySelectorAll('.plant-card').forEach(c => {
+            c.classList.remove('bloom-glow', 'border-secondary');
+            c.classList.add('border-outline-variant/50');
+        });
+        card.classList.add('bloom-glow', 'border-secondary');
+        card.classList.remove('border-outline-variant/50');
+    }
+
+    // Unit Toggle Logic
+    const btnL = document.getElementById('unit-toggle-l');
+    const btnGal = document.getElementById('unit-toggle-gal');
+    const volumeTexts = document.querySelectorAll('.unit-volume');
+
+    function updateUnits(isMetric) {
+        if (isMetric) {
+            btnL.className = 'px-3 py-1 text-label-md rounded-full bg-secondary text-black transition-all';
+            btnGal.className = 'px-3 py-1 text-label-md rounded-full text-on-surface-variant hover:text-secondary transition-all';
+            volumeTexts.forEach(el => el.textContent = '500ml');
+        } else {
+            btnGal.className = 'px-3 py-1 text-label-md rounded-full bg-secondary text-black transition-all';
+            btnL.className = 'px-3 py-1 text-label-md rounded-full text-on-surface-variant hover:text-secondary transition-all';
+            volumeTexts.forEach(el => el.textContent = '0.13 gal');
+        }
+    }
+
+    btnL.addEventListener('click', () => updateUnits(true));
+    btnGal.addEventListener('click', () => updateUnits(false));
+
+    // Parallax
+    window.addEventListener('scroll', () => {
+        const scroll = window.pageYOffset;
+        document.querySelectorAll('section div[style*="background-image"]').forEach(img => {
+            img.style.backgroundPositionY = (scroll * 0.05) + 'px';
+        });
+    });
+</script>
+</body></html>

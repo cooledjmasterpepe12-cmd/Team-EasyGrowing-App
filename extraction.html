@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html class="dark" lang="de">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Team EasyGrowing | Extraktions-Simulator</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(30, 32, 30, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .orange-glow {
+            box-shadow: 0 0 20px rgba(254, 157, 0, 0.15);
+        }
+        .green-glow {
+            box-shadow: 0 0 20px rgba(161, 212, 148, 0.15);
+        }
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ffc384;
+            border-radius: 10px;
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary": "#482900",
+                        "surface-container-low": "#1a1c1a",
+                        "primary-fixed": "#bcf0ae",
+                        "on-tertiary-container": "#e3baae",
+                        "secondary": "#ffc384",
+                        "on-surface": "#e2e3df",
+                        "primary": "#a1d494",
+                        "on-primary-fixed": "#002201",
+                        "inverse-surface": "#e2e3df",
+                        "surface-tint": "#a1d494",
+                        "on-tertiary-fixed": "#2c160e",
+                        "on-surface-variant": "#c2c9bb",
+                        "secondary-container": "#fe9d00",
+                        "tertiary-container": "#674940",
+                        "tertiary-fixed-dim": "#e7bdb1",
+                        "on-error-container": "#ffdad6",
+                        "on-error": "#690005",
+                        "on-primary-container": "#9dd090",
+                        "primary-container": "#2d5a27",
+                        "error": "#ffb4ab",
+                        "surface-container-high": "#292a28",
+                        "secondary-fixed-dim": "#ffb869",
+                        "inverse-primary": "#3b6934",
+                        "tertiary-fixed": "#ffdbd0",
+                        "surface-variant": "#333533",
+                        "surface-container-lowest": "#0d0f0d",
+                        "surface-container-highest": "#333533",
+                        "secondary-fixed": "#ffdcbb",
+                        "on-secondary-fixed-variant": "#673d00",
+                        "inverse-on-surface": "#2f312e",
+                        "on-tertiary-fixed-variant": "#5d4037",
+                        "surface-bright": "#383a37",
+                        "tertiary": "#e7bdb1",
+                        "primary-fixed-dim": "#a1d494",
+                        "surface": "#121412",
+                        "outline-variant": "#42493e",
+                        "on-primary": "#0a3909",
+                        "on-secondary-container": "#663c00",
+                        "on-background": "#e2e3df",
+                        "on-tertiary": "#442a22",
+                        "error-container": "#93000a",
+                        "background": "#121412",
+                        "outline": "#8c9387",
+                        "on-secondary-fixed": "#2c1700",
+                        "on-primary-fixed-variant": "#23501e",
+                        "surface-container": "#1e201e",
+                        "surface-dim": "#121412"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "section-gap": "32px",
+                        "stack-gap": "16px",
+                        "inline-padding": "12px",
+                        "base": "8px",
+                        "container-margin": "20px"
+                    },
+                    fontFamily: {
+                        "display-lg": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-sm": ["Montserrat"],
+                        "headline-md": ["Montserrat"],
+                        "body-lg": ["Inter"],
+                        "label-lg": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen pb-32">
+    <!-- Top App Bar -->
+    <header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md border-b border-white/10 shadow-sm">
+        <div class="flex justify-between items-center px-container-margin py-base w-full max-w-screen-xl mx-auto h-16">
+            <div class="flex items-center gap-2">
+                <a class="flex items-center gap-2 hover:opacity-90 transition-opacity" href="index.html">
+                    <span class="material-symbols-outlined text-primary font-headline-md" style="font-variation-settings: 'FILL' 1;">eco</span>
+                    <h1 class="font-headline-md text-headline-md font-bold text-primary">EasyGrowing</h1>
+                </a>
+                <span class="hidden md:inline-block bg-secondary/10 text-secondary border border-secondary/20 px-2 py-0.5 rounded text-[10px] uppercase font-bold tracking-widest ml-2">Extraktion & Rosin</span>
+            </div>
+            <div class="flex items-center gap-4 text-primary">
+                <!-- Global Toggles -->
+                <div class="flex items-center gap-2 border-r border-white/10 pr-4">
+                    <button class="text-[10px] font-bold active-toggle transition-all" id="btn-metric" onclick="toggleUnits('metric')">METRIC</button>
+                    <button class="text-[10px] font-bold opacity-50 hover:opacity-100 transition-all" id="btn-imperial" onclick="toggleUnits('imperial')">IMP</button>
+                </div>
+                <div class="flex items-center gap-2 border-r border-white/10 pr-4">
+                    <button class="text-xs font-bold lang-btn opacity-70 hover:text-primary transition-colors" id="lang-de" onclick="setLang('de')">DE</button>
+                    <button class="text-xs font-bold lang-btn active-toggle transition-colors" id="lang-en" onclick="setLang('en')">EN</button>
+                    <button class="text-xs font-bold lang-btn opacity-70 hover:text-primary transition-colors" id="lang-es" onclick="setLang('es')">ES</button>
+                </div>
+                <!-- Profile Avatar Link -->
+                <a class="w-8 h-8 rounded-full overflow-hidden border border-primary/30 flex items-center justify-center hover:opacity-85" href="profile.html">
+                    <img alt="User Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJghrO9GtUZPMeugUddSnBuWAyXkNFSjASIk921Xr_pDnUjlKJsWc4sr6RMxW5v_MNXu-Gcg94t_5nK8-Crkx99Od13XiyDBLZ6Q9UpVuaT8pL38uuGVS7TPA1PFjgsSDhOagQ7Xat50Xaff5CMRfkQyPnerkF-BW0q51b1LPJNPl7Y4_ZILt_sZUKMZ5DEXTwBedoGEyzZGOODTDBW8M7Sls5gSeUnIhkUQBA6CMCFyB8CoISIuJDMOSqfGRI-4XWG_Fn9RpLSQI"/>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar and Main Panel Container -->
+    <div class="flex max-w-screen-xl mx-auto pt-16">
+        <!-- Desktop Navigation Sidebar -->
+        <nav class="hidden md:flex w-20 flex-col items-center py-8 bg-surface-container-low border-r border-outline-variant/30 min-h-[calc(100vh-64px)] fixed left-0">
+            <div class="flex flex-col gap-6 text-on-surface-variant">
+                <a class="material-symbols-outlined hover:text-primary transition-all p-2 rounded-xl" href="index.html" title="Home">grid_view</a>
+                <a class="material-symbols-outlined hover:text-primary transition-all p-2 rounded-xl" href="diary.html" title="Diary">menu_book</a>
+                <a class="material-symbols-outlined hover:text-amber-accent transition-all p-2 rounded-xl" href="bible.html" title="Bible">library_books</a>
+                <a class="material-symbols-outlined hover:text-tertiary transition-all p-2 rounded-xl" href="music.html" title="Music">library_music</a>
+                <a class="material-symbols-outlined hover:text-amber-accent transition-all p-2 rounded-xl" href="shop.html" title="Shop">shopping_cart</a>
+                <a class="material-symbols-outlined hover:text-primary transition-all p-2 rounded-xl" href="achievements.html" title="Achievements">emoji_events</a>
+                <a class="material-symbols-outlined hover:text-primary transition-all p-2 rounded-xl" href="admin.html" title="Admin Hub">shield_person</a>
+                <a class="material-symbols-outlined hover:text-primary transition-all p-2 rounded-xl mt-auto" href="profile.html" title="Profile">person</a>
+            </div>
+        </nav>
+
+        <!-- Main Content Panel -->
+        <main class="w-full md:pl-24 px-container-margin py-8 space-y-section-gap">
+            <!-- Header Section -->
+            <section class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-white/5 pb-6">
+                <div>
+                    <h2 class="font-headline-lg text-headline-lg text-on-surface" id="title-ext">Extraktions-Simulator</h2>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant" id="sub-ext">Rechner für Rosin-Press-Kurven und präzises Static Sift Ausbeute-Tracking.</p>
+                </div>
+            </section>
+
+            <!-- Rosin Press Curve Calculator -->
+            <section class="grid grid-cols-1 lg:grid-cols-3 gap-stack-gap">
+                <!-- Inputs -->
+                <div class="lg:col-span-2 glass-card rounded-xl p-6 space-y-6 relative overflow-hidden orange-glow">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-secondary/5 rounded-full blur-2xl"></div>
+                    <h3 class="font-headline-sm text-headline-sm text-secondary flex items-center gap-2">
+                        <span class="material-symbols-outlined">compress</span>
+                        Rosin Press-Kurve
+                    </h3>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant">Bestimme die optimale Presskurve für Flower Rosin auf deiner 5-Tonnen-Presse.</p>
+                    
+                    <div class="space-y-6">
+                        <!-- Temp slider -->
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <label class="font-label-lg text-label-lg">Presstemperatur (°C)</label>
+                                <span class="text-secondary font-bold text-headline-sm" id="press-temp-val">85°C</span>
+                            </div>
+                            <input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-secondary" id="press-temp" max="115" min="70" step="1" type="range" value="85"/>
+                            <div class="flex justify-between text-[10px] text-on-surface-variant mt-1">
+                                <span>Kaltpressung (Terpene)</span>
+                                <span>Heißpressung (Ausbeute)</span>
+                            </div>
+                        </div>
+
+                        <!-- Pressure slider -->
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <label class="font-label-lg text-label-lg">Druckkraft (Tonnen)</label>
+                                <span class="text-primary font-bold text-headline-sm" id="press-force-val">3.5 Tonnen</span>
+                            </div>
+                            <input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary" id="press-force" max="5.0" min="0.5" step="0.1" type="range" value="3.5"/>
+                        </div>
+
+                        <!-- Press duration slider -->
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <label class="font-label-lg text-label-lg">Presszeit (Sekunden)</label>
+                                <span class="text-secondary font-bold text-headline-sm" id="press-time-val">120s</span>
+                            </div>
+                            <input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-secondary" id="press-time" max="300" min="45" step="5" type="range" value="120"/>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Outputs / Prognoses -->
+                <div class="glass-card rounded-xl p-6 flex flex-col justify-between border-l-4 border-secondary">
+                    <div>
+                        <h4 class="font-headline-sm text-headline-sm text-on-surface mb-4">Ertrags-Prognose</h4>
+                        <div class="space-y-4">
+                            <div class="p-3 bg-surface-container-low rounded-lg border border-white/5">
+                                <p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-wider">Erwartete Ausbeute</p>
+                                <p class="text-2xl font-bold text-primary mt-1" id="expected-yield">18.5%</p>
+                            </div>
+                            <div class="p-3 bg-surface-container-low rounded-lg border border-white/5">
+                                <p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-wider">Qualitätsstufe</p>
+                                <p class="text-lg font-bold text-secondary mt-1" id="quality-grade">Terpene Gold (Sehr hoch)</p>
+                            </div>
+                            <div class="p-3 bg-surface-container-low rounded-lg border border-white/5">
+                                <p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-wider">Fließgeschwindigkeit</p>
+                                <p class="text-body-md text-on-surface mt-1" id="flow-speed">Optimaler zähflüssiger Fluss</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-white/5">
+                        <div class="flex items-center gap-2 text-primary text-xs">
+                            <span class="material-symbols-outlined text-[16px]">info</span>
+                            <span>Basierend auf selektierter Elite-Genetik (RS11/Zqueeze).</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Static Sift Tracker & Filter Bag Calculator -->
+            <section class="grid grid-cols-1 lg:grid-cols-2 gap-stack-gap">
+                <!-- Static Sift Yield Tracker -->
+                <div class="glass-card rounded-xl p-6 space-y-4">
+                    <h3 class="font-headline-sm text-headline-sm text-primary flex items-center gap-2">
+                        <span class="material-symbols-outlined">filter_list</span>
+                        Static Sift Ertrags-Tracker
+                    </h3>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant">Dokumentiere den Sieb-Ertrag für reine Trichomköpfe bei verschiedenen Siebstufen.</p>
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-on-surface-variant mb-2">Ausgangsgewicht (g)</label>
+                                <input class="w-full bg-surface-container-low border border-white/10 rounded-lg p-3 text-white focus:ring-primary focus:border-primary" id="sift-input" oninput="calculateSift()" placeholder="z. B. 120" type="number" value="120"/>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-on-surface-variant mb-2">Siebstärke (Mikron)</label>
+                                <select class="w-full bg-surface-container-low border border-white/10 rounded-lg p-3 text-white focus:ring-primary focus:border-primary" id="sift-micron" onchange="calculateSift()">
+                                    <option value="120">120µm (Vorsiebung)</option>
+                                    <option selected="" value="90">90µm (Premium heads)</option>
+                                    <option value="73">73µm (Elite heads)</option>
+                                    <option value="45">45µm (Feinsiebung)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-on-surface-variant mb-2">Ausbeute-Gewicht (g)</label>
+                            <input class="w-full bg-surface-container-low border border-white/10 rounded-lg p-3 text-white focus:ring-primary focus:border-primary" id="sift-output" oninput="calculateSift()" placeholder="z. B. 18.4" type="number" value="18.4"/>
+                        </div>
+                        <div class="p-4 bg-primary-container/20 rounded-xl border border-primary/20 flex items-center justify-between">
+                            <div>
+                                <p class="text-[10px] text-primary uppercase font-bold tracking-wider">Ertragsquote (Return Rate)</p>
+                                <p class="text-3xl font-bold text-primary mt-1" id="sift-rate">15.33%</p>
+                            </div>
+                            <span class="material-symbols-outlined text-primary text-4xl">analytics</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Extraction Guidelines & Faustformeln -->
+                <div class="glass-card rounded-xl p-6 space-y-4">
+                    <h3 class="font-headline-sm text-headline-sm text-secondary flex items-center gap-2">
+                        <span class="material-symbols-outlined">menu_book</span>
+                        Extraktions-Faustformeln
+                    </h3>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant">Schnellreferenz für hervorragendes Rosin-Pressen direkt an der Maschine.</p>
+                    
+                    <div class="space-y-3 pt-2">
+                        <div class="flex gap-3 items-start">
+                            <span class="material-symbols-outlined text-secondary mt-0.5">thermostat</span>
+                            <div>
+                                <h4 class="font-label-lg text-label-lg text-on-surface">Temperatur-Daumenregel</h4>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Für maximales Terpenprofil pressen wir bei 80-85°C. Für maximalen Ertrag gehen wir auf 90-95°C hoch. Über 100°C droht Qualitätsverlust.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-3 items-start">
+                            <span class="material-symbols-outlined text-secondary mt-0.5">hourglass_empty</span>
+                            <div>
+                                <h4 class="font-label-lg text-label-lg text-on-surface">Druck-Zeit-Intervall</h4>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Langsamer Druckaufbau über 30-45 Sekunden (Pre-Heat), danach das Material über 2-3 Minuten unter vollem Druck halten.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-3 items-start">
+                            <span class="material-symbols-outlined text-secondary mt-0.5">blur_on</span>
+                            <div>
+                                <h4 class="font-label-lg text-label-lg text-on-surface">Mikron-Sieb Größentabelle</h4>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Das beste Harz sammeln wir in den Netzen zwischen 73µm und 120µm. Feines Material unter 45µm enthält meist zu viel Stängelreste.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Mini Player -->
+    <div class="fixed bottom-24 left-1/2 -translate-x-1/2 w-[90%] max-w-lg z-40" id="audio-player">
+        <div class="bg-surface-container-highest/90 backdrop-blur-md border border-primary/30 rounded-full px-6 py-3 flex items-center justify-between shadow-2xl bloom-border">
+            <div class="flex items-center gap-3 overflow-hidden">
+                <div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center animate-spin-slow">
+                    <span class="material-symbols-outlined text-primary text-lg">music_note</span>
+                </div>
+                <div class="truncate">
+                    <div class="font-bold text-xs text-primary truncate" id="player-title">Roots &amp; Resilience</div>
+                    <div class="text-[10px] text-on-surface-variant uppercase tracking-widest font-semibold">TEAM EASYGROWING</div>
+                </div>
+            </div>
+            <div class="flex items-center gap-4 text-on-surface">
+                <button class="material-symbols-outlined text-xl hover:text-primary">skip_previous</button>
+                <button class="material-symbols-outlined text-3xl text-primary hover:scale-110 transition-transform" style="font-variation-settings: 'FILL' 1;">pause_circle</button>
+                <button class="material-symbols-outlined text-xl hover:text-primary">skip_next</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-2 py-3 bg-surface-container-highest z-50 rounded-t-xl border-t border-primary/20 shadow-[0_-4px_12px_rgba(161,212,148,0.1)]">
+        <a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 p-2 hover:opacity-100" href="index.html">
+            <span class="material-symbols-outlined">grid_view</span>
+            <span class="text-[10px] font-bold">Home</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 p-2 hover:opacity-100" href="diary.html">
+            <span class="material-symbols-outlined">menu_book</span>
+            <span class="text-[10px] font-bold">Diary</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 p-2 hover:opacity-100" href="bible.html">
+            <span class="material-symbols-outlined">library_books</span>
+            <span class="text-[10px] font-bold">Bible</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 p-2 hover:opacity-100" href="music.html">
+            <span class="material-symbols-outlined">library_music</span>
+            <span class="text-[10px] font-bold">Music</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 p-2 hover:opacity-100" href="admin.html">
+            <span class="material-symbols-outlined">shield_person</span>
+            <span class="text-[10px] font-bold">Admin</span>
+        </a>
+    </nav>
+
+    <script>
+        // Onload synchronization
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedUnits = localStorage.getItem('units') || 'metric';
+            const savedLang = localStorage.getItem('lang') || 'en';
+            toggleUnits(savedUnits);
+            setLang(savedLang);
+
+            // Trigger initial calculators
+            calculateRosin();
+            calculateSift();
+        });
+
+        // Units setting
+        function toggleUnits(mode) {
+            localStorage.setItem('units', mode);
+            const btnMetric = document.getElementById('btn-metric');
+            const btnImperial = document.getElementById('btn-imperial');
+            if (mode === 'imperial') {
+                btnMetric.classList.add('opacity-50');
+                btnImperial.classList.remove('opacity-50');
+            } else {
+                btnMetric.classList.remove('opacity-50');
+                btnImperial.classList.add('opacity-50');
+            }
+        }
+
+        // Language settings
+        function setLang(lang) {
+            localStorage.setItem('lang', lang);
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active-toggle');
+                btn.classList.add('opacity-70');
+            });
+            const activeBtn = document.getElementById(`lang-${lang}`);
+            if (activeBtn) {
+                activeBtn.classList.add('active-toggle');
+                activeBtn.classList.remove('opacity-70');
+            }
+
+            // Simple localization
+            const title = document.getElementById('title-ext');
+            const sub = document.getElementById('sub-ext');
+            if (lang === 'de') {
+                title.innerText = "Extraktions-Simulator";
+                sub.innerText = "Rechner für Rosin-Press-Kurven und präzises Static Sift Ausbeute-Tracking.";
+            } else if (lang === 'es') {
+                title.innerText = "Simulador de Extracción";
+                sub.innerText = "Calculadora de curvas de prensa de colofonia (Rosin) y seguimiento preciso de Static Sift.";
+            } else {
+                title.innerText = "Extraction Simulator";
+                sub.innerText = "Rosin press curve calculator and precise Static Sift yield tracking.";
+            }
+        }
+
+        // Rosin press calculations
+        const tempInput = document.getElementById('press-temp');
+        const forceInput = document.getElementById('press-force');
+        const timeInput = document.getElementById('press-time');
+
+        function calculateRosin() {
+            const temp = parseFloat(tempInput.value);
+            const force = parseFloat(forceInput.value);
+            const time = parseFloat(timeInput.value);
+
+            document.getElementById('press-temp-val').innerText = `${temp}°C`;
+            document.getElementById('press-force-val').innerText = `${force} Tonnen`;
+            document.getElementById('press-time-val').innerText = `${time}s`;
+
+            // Calculate expected yield percentage based on temperature and pressure
+            // Optimum yield generally increases with temp, but terpene grade goes down
+            let yieldPct = (10 + (temp - 70) * 0.25 + (force * 1.5) + (time * 0.01)).toFixed(1);
+            if (yieldPct > 28.5) yieldPct = 28.5; // cap at 28.5%
+            
+            document.getElementById('expected-yield').innerText = `${yieldPct}%`;
+
+            // Determine Quality Grade
+            const qEl = document.getElementById('quality-grade');
+            const flowEl = document.getElementById('flow-speed');
+            if (temp < 82) {
+                qEl.innerText = "Terpene Platinum (Kaltpressung)";
+                qEl.className = "text-lg font-bold text-primary mt-1";
+                flowEl.innerText = "Sehr langsamer, wachsartiger Harzfluss";
+            } else if (temp >= 82 && temp <= 95) {
+                qEl.innerText = "Terpene Gold (Optimal)";
+                qEl.className = "text-lg font-bold text-secondary mt-1";
+                flowEl.innerText = "Optimaler, zähflüssiger Fluss";
+            } else {
+                qEl.innerText = "Standard Rosin (Dunkles Amber)";
+                qEl.className = "text-lg font-bold text-error mt-1";
+                flowEl.innerText = "Sehr schneller, flüssiger Fluss (hoher Wachsanteil)";
+            }
+        }
+
+        tempInput.addEventListener('input', calculateRosin);
+        forceInput.addEventListener('input', calculateRosin);
+        timeInput.addEventListener('input', calculateRosin);
+
+        // Static Sift Calculation
+        function calculateSift() {
+            const inputVal = parseFloat(document.getElementById('sift-input').value) || 0;
+            const outputVal = parseFloat(document.getElementById('sift-output').value) || 0;
+            
+            if (inputVal === 0) {
+                document.getElementById('sift-rate').innerText = "0.00%";
+                return;
+            }
+
+            const returnRate = ((outputVal / inputVal) * 100).toFixed(2);
+            document.getElementById('sift-rate').innerText = `${returnRate}%`;
+        }
+    </script>
+</body>
+</html>

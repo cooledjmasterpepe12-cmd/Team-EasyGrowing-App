@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Grow Profile | Team EasyGrowing</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Load Tailwind Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#e2e3df",
+                    "on-surface-variant": "#c2c9bb",
+                    "surface-container": "#1e201e",
+                    "surface": "#121412",
+                    "primary-container": "#2d5a27",
+                    "on-primary-fixed-variant": "#23501e",
+                    "on-primary": "#0a3909",
+                    "primary": "#a1d494",
+                    "secondary-fixed": "#ffdcbb",
+                    "primary-fixed": "#bcf0ae",
+                    "background": "#121412",
+                    "surface-container-lowest": "#0d0f0d",
+                    "surface-variant": "#333533",
+                    "outline-variant": "#42493e",
+                    "on-tertiary-fixed-variant": "#5d4037",
+                    "on-secondary-fixed": "#2c1700",
+                    "on-tertiary": "#442a22",
+                    "tertiary": "#e7bdb1",
+                    "on-secondary": "#482900",
+                    "error-container": "#93000a",
+                    "surface-container-low": "#1a1c1a",
+                    "secondary": "#ffc384",
+                    "on-error": "#690005",
+                    "error": "#ffb4ab",
+                    "tertiary-fixed-dim": "#e7bdb1",
+                    "outline": "#8c9387",
+                    "inverse-on-surface": "#2f312e",
+                    "secondary-container": "#fe9d00",
+                    "on-error-container": "#ffdad6",
+                    "tertiary-container": "#674940",
+                    "surface-tint": "#a1d494",
+                    "primary-fixed-dim": "#a1d494",
+                    "surface-bright": "#383a37",
+                    "secondary-fixed-dim": "#ffb869",
+                    "on-primary-fixed": "#002201",
+                    "tertiary-fixed": "#ffdbd0",
+                    "on-surface": "#e2e3df",
+                    "on-secondary-fixed-variant": "#673d00",
+                    "surface-container-highest": "#333533",
+                    "on-secondary-container": "#663c00",
+                    "surface-dim": "#121412",
+                    "on-tertiary-container": "#e3baae",
+                    "inverse-surface": "#e2e3df",
+                    "inverse-primary": "#3b6934",
+                    "on-primary-container": "#9dd090",
+                    "surface-container-high": "#292a28",
+                    "on-tertiary-fixed": "#2c160e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "section-gap": "32px",
+                    "base": "8px",
+                    "stack-gap": "16px",
+                    "inline-padding": "12px",
+                    "container-margin": "20px"
+            },
+            "fontFamily": {
+                    "body-sm": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Montserrat"],
+                    "label-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-sm": ["Montserrat"],
+                    "display-lg": ["Montserrat"],
+                    "headline-lg": ["Montserrat"]
+            },
+            "fontSize": {
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(30, 32, 30, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .phoenix-glow {
+            box-shadow: 0 0 20px rgba(255, 157, 0, 0.15);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-secondary/30 min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-container-margin h-16 bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-outline-variant/10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-headline-sm" data-icon="settings">settings</span>
+<h1 class="font-headline-sm text-headline-sm text-on-surface">Grow Profile</h1>
+</div>
+<div class="font-display-lg text-headline-sm text-secondary font-bold tracking-tight">
+            Team EasyGrowing
+        </div>
+</header>
+<main class="pt-24 px-container-margin max-w-lg mx-auto space-y-section-gap">
+<!-- User Section: Profile Hero -->
+<section class="glass-card rounded-xl p-6 flex flex-col items-center text-center phoenix-glow">
+<div class="relative mb-4">
+<div class="w-24 h-24 rounded-full border-2 border-secondary p-1 overflow-hidden bg-surface-container-highest">
+<img alt="A sophisticated digital avatar representing a Grow Master" class="w-full h-full object-contain p-2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVzXY0dPPXSrs6Xlg1ULGD8Vjb3-mWOra83Z5KBi3MZcUG7TipLN3OKgPdWtkvEmY9-a6R2zhAmhIZx-finmhyvLMtWOHu-kG37dNK0rwv68-p5Hf1E-NRAQGwW5QNCQCFekoYhfQPPAdA1TocYir-CNRSR_MbvPDLcatUeyIPFUmVIYCc-LkjBGK0m1ot1Kjf7ehm5to0ADWWf4oHXBjtitKkjD3Srm4QNv_GB-Cb3O52scaiwQ0lajrLMKbkinj-td6tDbGHfrs"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-secondary text-on-secondary px-2 py-0.5 rounded-full font-label-sm text-label-sm font-bold">
+                    LVL 42
+                </div>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-1">Grow Master Phoenix</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Expert Cultivator &amp; Phoenix Level Explorer</p>
+<!-- XP Tracker -->
+<div class="w-full space-y-2">
+<div class="flex justify-between items-end">
+<span class="font-label-sm text-label-sm text-on-surface-variant">XP Progress</span>
+<span class="font-label-sm text-label-sm text-secondary">8,450 / 10,000 XP</span>
+</div>
+<div class="h-3 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full phoenix-glow" style="width: 84.5%"></div>
+</div>
+<p class="text-right font-label-sm text-label-sm text-primary opacity-80 italic">1,550 XP to Level 43</p>
+</div>
+</section>
+<!-- Settings Section -->
+<section class="space-y-stack-gap">
+<h3 class="font-headline-sm text-headline-sm text-on-surface px-1">Settings</h3>
+<div class="glass-card rounded-xl divide-y divide-outline-variant/10">
+<!-- Language Selector -->
+<div class="p-4 space-y-3">
+<div class="flex items-center gap-3 text-on-surface">
+<span class="material-symbols-outlined text-primary" data-icon="language">language</span>
+<span class="font-body-md text-body-md">Language</span>
+</div>
+<div class="flex gap-2">
+<button id="btn-lang-de" class="flex-1 py-2 rounded-lg font-label-sm text-label-sm bg-surface-variant text-on-surface-variant hover:bg-surface-container-highest transition-all duration-300">DE</button>
+<button id="btn-lang-en" class="flex-1 py-2 rounded-lg font-label-sm text-label-sm bg-surface-variant text-on-surface-variant hover:bg-surface-container-highest transition-all duration-300">EN</button>
+<button id="btn-lang-es" class="flex-1 py-2 rounded-lg font-label-sm text-label-sm bg-surface-variant text-on-surface-variant hover:bg-surface-container-highest transition-all duration-300">ES</button>
+</div>
+</div>
+<!-- Units: Temp Toggle -->
+<div class="p-4 flex items-center justify-between">
+<div class="flex items-center gap-3 text-on-surface">
+<span class="material-symbols-outlined text-primary" data-icon="thermostat">thermostat</span>
+<span class="font-body-md text-body-md">Temperature</span>
+</div>
+<div class="bg-surface-container-high p-1 rounded-full flex">
+<button id="btn-temp-c" class="px-4 py-1 rounded-full font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors">°C</button>
+<button id="btn-temp-f" class="px-4 py-1 rounded-full font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors">°F</button>
+</div>
+</div>
+<!-- Units: Volume Toggle -->
+<div class="p-4 flex items-center justify-between">
+<div class="flex items-center gap-3 text-on-surface">
+<span class="material-symbols-outlined text-primary" data-icon="opacity">opacity</span>
+<span class="font-body-md text-body-md">Liquid Units</span>
+</div>
+<div class="bg-surface-container-high p-1 rounded-full flex">
+<button id="btn-vol-l" class="px-4 py-1 rounded-full font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors">L</button>
+<button id="btn-vol-gal" class="px-4 py-1 rounded-full font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors">Gal</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Achievement Section -->
+<section class="space-y-stack-gap">
+<div class="flex justify-between items-center px-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Achievements</h3>
+<button class="text-primary font-label-sm text-label-sm flex items-center gap-1">
+                    View All <span class="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+<div class="flex overflow-x-auto gap-4 no-scrollbar py-2 -mx-container-margin px-container-margin">
+<!-- Badge 1 -->
+<div class="flex-none w-28 glass-card rounded-xl p-4 flex flex-col items-center gap-2 group cursor-pointer hover:border-secondary transition-all">
+<div class="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined fill-icon text-3xl" data-icon="local_florist">local_florist</span>
+</div>
+<span class="font-label-sm text-label-sm text-center text-on-surface leading-tight">First Bloom</span>
+</div>
+<!-- Badge 2 -->
+<div class="flex-none w-28 glass-card rounded-xl p-4 flex flex-col items-center gap-2 group cursor-pointer hover:border-secondary transition-all">
+<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined fill-icon text-3xl" data-icon="library_books">library_books</span>
+</div>
+<span class="font-label-sm text-label-sm text-center text-on-surface leading-tight">Collector</span>
+</div>
+<!-- Badge 3 -->
+<div class="flex-none w-28 glass-card rounded-xl p-4 flex flex-col items-center gap-2 group cursor-pointer hover:border-secondary transition-all">
+<div class="w-12 h-12 bg-tertiary/10 rounded-full flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined fill-icon text-3xl" data-icon="verified">verified</span>
+</div>
+<span class="font-label-sm text-label-sm text-center text-on-surface leading-tight">Expert</span>
+</div>
+<!-- Badge 4 -->
+<div class="flex-none w-28 glass-card rounded-xl p-4 flex flex-col items-center gap-2 group cursor-pointer hover:border-secondary transition-all">
+<div class="w-12 h-12 bg-on-surface-variant/10 rounded-full flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-3xl" data-icon="lock">lock</span>
+</div>
+<span class="font-label-sm text-label-sm text-center text-on-surface-variant leading-tight">Master</span>
+</div>
+</div>
+</section>
+<!-- Logout -->
+<button class="w-full py-4 glass-card rounded-xl flex items-center justify-center gap-3 text-error border-error/20 hover:bg-error/10 active:scale-[0.98] transition-all" onclick="logout()">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-lg text-label-lg">Logout</span>
+</button>
+<!-- Footer -->
+<footer class="text-center py-8">
+<p class="text-on-surface-variant/40 font-label-sm text-label-sm tracking-widest">BOTANICAL INTEL © 2026</p>
+</footer>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-8 pt-3 bg-surface/80 dark:bg-surface/80 backdrop-blur-xl rounded-t-xl border-t border-outline-variant/10 shadow-[0_-4px_20px_rgba(255,157,0,0.1)]">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all duration-300" href="index.html">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all duration-300" href="diary.html">
+<span class="material-symbols-outlined" data-icon="book_5">book_5</span>
+<span class="font-label-sm text-label-sm">Diary</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all duration-300" href="bible.html">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-label-sm text-label-sm">Bible</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all duration-300" href="music.html">
+<span class="material-symbols-outlined" data-icon="music_note">music_note</span>
+<span class="font-label-sm text-label-sm">Music</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all duration-300" href="shop.html">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span class="font-label-sm text-label-sm">Shop</span>
+</a>
+</nav>
+<script>
+        // Load initial settings
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedUnits = localStorage.getItem('units') || 'metric';
+            const savedLang = localStorage.getItem('lang') || 'en';
+            const savedVol = localStorage.getItem('volUnit') || 'l';
+
+            updateLanguageUI(savedLang);
+            updateTempUI(savedUnits);
+            updateVolUI(savedVol);
+        });
+
+        // Language togglers
+        document.getElementById('btn-lang-de').addEventListener('click', () => updateLanguageUI('de'));
+        document.getElementById('btn-lang-en').addEventListener('click', () => updateLanguageUI('en'));
+        document.getElementById('btn-lang-es').addEventListener('click', () => updateLanguageUI('es'));
+
+        // Temp togglers
+        document.getElementById('btn-temp-c').addEventListener('click', () => updateTempUI('metric'));
+        document.getElementById('btn-temp-f').addEventListener('click', () => updateTempUI('imperial'));
+
+        // Vol togglers
+        document.getElementById('btn-vol-l').addEventListener('click', () => updateVolUI('l'));
+        document.getElementById('btn-vol-gal').addEventListener('click', () => updateVolUI('gal'));
+
+        function updateLanguageUI(lang) {
+            localStorage.setItem('lang', lang);
+            ['de', 'en', 'es'].forEach(l => {
+                const btn = document.getElementById(`btn-lang-${l}`);
+                btn.className = "flex-1 py-2 rounded-lg font-label-sm text-label-sm bg-surface-variant text-on-surface-variant hover:bg-surface-container-highest transition-all duration-300";
+            });
+            const activeBtn = document.getElementById(`btn-lang-${lang}`);
+            activeBtn.className = "flex-1 py-2 rounded-lg font-label-sm text-label-sm bg-primary-container text-on-primary-container font-bold transition-all duration-300";
+        }
+
+        function updateTempUI(mode) {
+            localStorage.setItem('units', mode);
+            const btnC = document.getElementById('btn-temp-c');
+            const btnF = document.getElementById('btn-temp-f');
+            
+            btnC.className = "px-4 py-1 rounded-full font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors";
+            btnF.className = "px-4 py-1 rounded-full font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors";
+            
+            if (mode === 'imperial') {
+                btnF.className = "px-4 py-1 rounded-full font-label-sm text-label-sm bg-secondary text-on-secondary shadow-sm";
+            } else {
+                btnC.className = "px-4 py-1 rounded-full font-label-sm text-label-sm bg-secondary text-on-secondary shadow-sm";
+            }
+        }
+
+        function updateVolUI(vol) {
+            localStorage.setItem('volUnit', vol);
+            const btnL = document.getElementById('btn-vol-l');
+            const btnGal = document.getElementById('btn-vol-gal');
+            
+            btnL.className = "px-4 py-1 rounded-full font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors";
+            btnGal.className = "px-4 py-1 rounded-full font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors";
+            
+            if (vol === 'gal') {
+                btnGal.className = "px-4 py-1 rounded-full font-label-sm text-label-sm bg-secondary text-on-secondary shadow-sm";
+            } else {
+                btnL.className = "px-4 py-1 rounded-full font-label-sm text-label-sm bg-secondary text-on-secondary shadow-sm";
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            window.location.href = 'register.html';
+        }
+    </script>
+</body></html>

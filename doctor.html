@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(30, 32, 30, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .scan-line {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ffc384, transparent);
+            box-shadow: 0 0 15px #fe9d00;
+            animation: scan 3s linear infinite;
+        }
+        @keyframes scan {
+            0% { top: 0%; }
+            100% { top: 100%; }
+        }
+        body {
+            background-color: #121412;
+            color: #e2e3df;
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary": "#482900",
+                        "surface-container-low": "#1a1c1a",
+                        "primary-fixed": "#bcf0ae",
+                        "on-tertiary-container": "#e3baae",
+                        "secondary": "#ffc384",
+                        "on-surface": "#e2e3df",
+                        "primary": "#a1d494",
+                        "on-primary-fixed": "#002201",
+                        "inverse-surface": "#e2e3df",
+                        "surface-tint": "#a1d494",
+                        "on-tertiary-fixed": "#2c160e",
+                        "on-surface-variant": "#c2c9bb",
+                        "secondary-container": "#fe9d00",
+                        "tertiary-container": "#674940",
+                        "tertiary-fixed-dim": "#e7bdb1",
+                        "on-error-container": "#ffdad6",
+                        "on-error": "#690005",
+                        "on-primary-container": "#9dd090",
+                        "primary-container": "#2d5a27",
+                        "error": "#ffb4ab",
+                        "surface-container-high": "#292a28",
+                        "secondary-fixed-dim": "#ffb869",
+                        "inverse-primary": "#3b6934",
+                        "tertiary-fixed": "#ffdbd0",
+                        "surface-variant": "#333533",
+                        "surface-container-lowest": "#0d0f0d",
+                        "surface-container-highest": "#333533",
+                        "secondary-fixed": "#ffdcbb",
+                        "on-secondary-fixed-variant": "#673d00",
+                        "inverse-on-surface": "#2f312e",
+                        "on-tertiary-fixed-variant": "#5d4037",
+                        "surface-bright": "#383a37",
+                        "tertiary": "#e7bdb1",
+                        "primary-fixed-dim": "#a1d494",
+                        "surface": "#121412",
+                        "outline-variant": "#42493e",
+                        "on-primary": "#0a3909",
+                        "on-secondary-container": "#663c00",
+                        "on-background": "#e2e3df",
+                        "on-tertiary": "#442a22",
+                        "error-container": "#93000a",
+                        "background": "#121412",
+                        "outline": "#8c9387",
+                        "on-secondary-fixed": "#2c1700",
+                        "on-primary-fixed-variant": "#23501e",
+                        "surface-container": "#1e201e",
+                        "surface-dim": "#121412"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-gap": "32px",
+                        "stack-gap": "16px",
+                        "inline-padding": "12px",
+                        "base": "8px",
+                        "container-margin": "20px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-sm": ["Montserrat"],
+                        "headline-md": ["Montserrat"],
+                        "body-lg": ["Inter"],
+                        "label-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen pb-24">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md dark:bg-surface/80 border-b border-white/10 shadow-sm">
+<div class="flex justify-between items-center px-container-margin py-base w-full max-w-screen-xl mx-auto">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="eco">eco</span>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">KI-Pflanzendoktor</h1>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/20 hover:opacity-80 transition-opacity cursor-pointer active:scale-95 duration-200">
+<img alt="User Profile" data-alt="A professional headshot of a botanical specialist with a friendly expression. The lighting is soft and natural, emphasizing a clean and expert persona. The background is a blurred high-end greenhouse with lush green foliage, maintaining the modern nature aesthetic of the brand with subtle amber highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfrkxBOYgeDXtL6tFw-FWYZtipQV6VBtACUt5IZCMTWbapbtAkcL7jXDvCfAS1R90lxxgPxS68nX-QgZUSN5RBxf0gbcUEvjCp-j8SaNnd0ZlZGUNjoKU0aCrUP7HOhIxzEi7jpIUPiWvCYi7or-HJKtu66OarPgWJDDKu7HqsE473-jmHgdM2L1GcI96Gpu6H9q0hW3cX1r0kHTvn3r7-Y3dXB1FcYMFySo9HDTUtRM9t9R_sZq-Hqc1i5ZMbSW50ToEq25wRZhY"/>
+</div>
+</div>
+</header>
+<main class="pt-24 px-container-margin max-w-screen-md mx-auto">
+<!-- Diagnostic Analysis Area -->
+<section class="space-y-stack-gap">
+<div class="flex flex-col gap-base">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Blatt-Analyse</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Lade ein Foto hoch, um Mangelerscheinungen oder Krankheiten zu identifizieren.</p>
+</div>
+<!-- Upload Card -->
+<div class="glass-card rounded-xl p-8 border-dashed border-2 border-primary/30 flex flex-col items-center justify-center gap-4 cursor-pointer active:scale-95 transition-all" id="upload-zone">
+<div class="w-16 h-16 rounded-full bg-primary-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-4xl" data-icon="add_a_photo">add_a_photo</span>
+</div>
+<div class="text-center">
+<p class="font-label-lg text-label-lg text-on-surface">Foto aufnehmen oder hochladen</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant/60">Unterstützt JPG, PNG bis 10MB</p>
+</div>
+</div>
+<!-- Active Scan Preview (Hidden by default, shown via JS logic simulation) -->
+<div class="hidden glass-card rounded-xl overflow-hidden relative border border-secondary/30" id="scan-preview">
+<img alt="Leaf Diagnostic" class="w-full h-64 object-cover" data-alt="A close-up macro photograph of a plant leaf showing distinct yellowing between the veins, characteristic of magnesium deficiency. The lighting is crisp and clinical, highlighting the texture and pathology of the leaf. The background is dark and moody, focusing all attention on the botanical diagnostic subject with a professional medical aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjknmWzNEwd0IMnuomQDAGSN91VFo_U4UkLzP4OwK4j3AbYqyS6YpkTRk6Zg9yqRg9MfEjp9_Tot2d-78RaK0JsjdCBUU0s_k7C1WOFgyhqDLa3Ir8P1MoYw7r8ePloD54qwrdbN3KjQl3TNe6AlGZ3NIt9FQZr1fprRuqJq_lQ6DLhFAc2NwcPNRym5Tkugp4g1OjLaNlEK9yygxI6eZ3xd7DlWD7gLJGqroscY6bbAk21W_efLZkmKn8xMlO29F91uGX6WAZ_nk"/>
+<div class="scan-line absolute top-0 left-0 w-full z-10"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4">
+<span class="bg-secondary-container text-on-secondary px-3 py-1 rounded-full text-label-sm font-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="clinical_notes">clinical_notes</span>
+                        Analysiere...
+                    </span>
+</div>
+</div>
+</section>
+<!-- Detection Results (Simulated State) -->
+<section class="mt-section-gap space-y-stack-gap">
+<h3 class="font-headline-sm text-headline-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" data-icon="biomedical_extraction">chip_extraction</span>
+                Diagnose-Bericht
+            </h3>
+<!-- Result Cards Bento -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Calcium Deficiency -->
+<div class="glass-card p-container-margin rounded-xl border-l-4 border-secondary">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">Nährstoffmangel</span>
+<span class="font-label-sm text-label-sm bg-secondary/10 text-secondary px-2 py-0.5 rounded">94% Sicherheit</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-2">Calcium-Mangel</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Symptome: Verkrüppelte junge Blätter, braune Spitzen und Nekrosen an den Rändern.</p>
+</div>
+<!-- Over-fertilization Warning -->
+<div class="glass-card p-container-margin rounded-xl border-l-4 border-error">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-sm text-label-sm text-error uppercase tracking-widest">Stressfaktor</span>
+<span class="font-label-sm text-label-sm bg-error/10 text-error px-2 py-0.5 rounded">Aktion Erforderlich</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-2">Überdüngung</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Symptome: "Adlerkralle" (nach unten gebogene Blattspitzen), extrem dunkles Grün.</p>
+</div>
+</div>
+<!-- Professional Countermeasures -->
+<div class="glass-card p-container-margin rounded-xl space-y-4">
+<h4 class="font-headline-sm text-headline-sm text-primary flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="healing">healing</span>
+                    Sofort-Maßnahmen
+                </h4>
+<ul class="space-y-3">
+<li class="flex gap-3">
+<div class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-xs">1</div>
+<p class="font-body-md text-body-md">Substrat spülen: Das Medium mit dem 3-fachen Topfvolumen an PH-reguliertem Wasser durchspülen, um Salze zu lösen.</p>
+</li>
+<li class="flex gap-3">
+<div class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-xs">2</div>
+<p class="font-body-md text-body-md">CalMag Supplementierung: Nach dem Spülen eine leichte Lösung mit Calcium-Magnesium-Zusatz (0.5ml/L) verabreichen.</p>
+</li>
+<li class="flex gap-3">
+<div class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-xs">3</div>
+<p class="font-body-md text-body-md">Lichtintensität reduzieren: Den Stress für 48 Stunden minimieren, indem die Lampen um 10-15cm höher gehängt werden.</p>
+</li>
+</ul>
+<button class="w-full mt-4 bg-secondary text-on-secondary py-3 rounded-xl font-label-lg text-label-lg shadow-[0_0_20px_rgba(255,157,0,0.2)] hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+                    Passende Heilmittel im Shop
+                </button>
+</div>
+</section>
+<!-- Grow Diary Integration -->
+<section class="mt-section-gap">
+<div class="glass-card p-container-margin rounded-xl bg-gradient-to-br from-surface-container to-surface flex items-center justify-between">
+<div>
+<h4 class="font-headline-sm text-headline-sm">Ereignis protokollieren?</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Speichere diese Diagnose in deinem Grow Diary.</p>
+</div>
+<button class="border-2 border-primary text-primary px-4 py-2 rounded-xl font-label-lg hover:bg-primary/10 transition-colors">
+                    Hinzufügen
+                </button>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container-low/80 backdrop-blur-xl border-t border-white/5 shadow-[0_-4px_20px_rgba(254,157,0,0.1)]">
+<div class="flex justify-around items-center w-full px-inline-padding pb-8 pt-base">
+<a class="flex flex-col items-center justify-center text-on-surface-variant/60 hover:text-secondary/80 transition-colors active:scale-90 duration-150" href="index.html">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant/60 hover:text-secondary/80 transition-colors active:scale-90 duration-150" href="diary.html">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-label-sm text-label-sm">Diary</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary relative after:content-[''] after:absolute after:-bottom-1 after:w-1 after:h-1 after:bg-secondary after:rounded-full after:shadow-[0_0_8px_rgba(254,157,0,0.8)]" href="bible.html">
+<span class="material-symbols-outlined" data-icon="local_library">local_library</span>
+<span class="font-label-sm text-label-sm">Bible</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant/60 hover:text-secondary/80 transition-colors active:scale-90 duration-150" href="community.html">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-label-sm text-label-sm">Community</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant/60 hover:text-secondary/80 transition-colors active:scale-90 duration-150" href="shop.html">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span class="font-label-sm text-label-sm">Shop</span>
+</a>
+</div>
+</nav>
+<script>
+        // Micro-interaction simulation for the diagnostic scan
+        const uploadZone = document.getElementById('upload-zone');
+        const scanPreview = document.getElementById('scan-preview');
+
+        uploadZone.addEventListener('click', () => {
+            uploadZone.classList.add('hidden');
+            scanPreview.classList.remove('hidden');
+            
+            // Simulate scanning completion after 4 seconds
+            setTimeout(() => {
+                const scanLine = scanPreview.querySelector('.scan-line');
+                if(scanLine) scanLine.style.animation = 'none';
+                scanPreview.querySelector('.bg-secondary-container').innerHTML = 
+                    `<span class="material-symbols-outlined text-sm">check_circle</span> Analyse Abgeschlossen`;
+                scanPreview.classList.add('border-primary/50');
+                scanPreview.classList.remove('border-secondary/30');
+            }, 4000);
+        });
+
+        // Add glow effect on button interaction
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach(btn => {
+            btn.addEventListener('touchstart', () => {
+                btn.style.boxShadow = '0 0 25px rgba(254, 157, 0, 0.4)';
+            });
+            btn.addEventListener('touchend', () => {
+                btn.style.boxShadow = '';
+            });
+        });
+    </script>
+</body></html>

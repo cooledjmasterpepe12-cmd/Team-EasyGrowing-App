@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Husky Rudel - Community Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(30, 32, 30, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .phoenix-glow:active {
+            box-shadow: 0 0 20px rgba(255, 157, 0, 0.3);
+            transform: scale(0.98);
+        }
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #121412;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d5a27;
+            border-radius: 10px;
+        }
+        .active-tab-indicator::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            width: 4px;
+            height: 4px;
+            background-color: #ffc384;
+            border-radius: 50%;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#e2e3df",
+                        "surface-dim": "#121412",
+                        "primary-fixed-dim": "#a1d494",
+                        "surface-container-lowest": "#0d0f0d",
+                        "surface-container-highest": "#333533",
+                        "on-error": "#690005",
+                        "on-tertiary-fixed": "#2c160e",
+                        "tertiary": "#e7bdb1",
+                        "on-secondary-fixed": "#2c1700",
+                        "on-secondary-container": "#663c00",
+                        "error": "#ffb4ab",
+                        "primary-container": "#2d5a27",
+                        "secondary-fixed": "#ffdcbb",
+                        "surface-variant": "#333533",
+                        "tertiary-container": "#674940",
+                        "secondary-container": "#fe9d00",
+                        "primary": "#a1d494",
+                        "tertiary-fixed": "#ffdbd0",
+                        "on-surface": "#e2e3df",
+                        "on-tertiary": "#442a22",
+                        "surface-container-high": "#292a28",
+                        "surface-tint": "#a1d494",
+                        "on-secondary": "#482900",
+                        "surface": "#121412",
+                        "on-surface-variant": "#c2c9bb",
+                        "tertiary-fixed-dim": "#e7bdb1",
+                        "surface-container-low": "#1a1c1a",
+                        "on-primary-container": "#9dd090",
+                        "outline-variant": "#42493e",
+                        "surface-bright": "#383a37",
+                        "on-secondary-fixed-variant": "#673d00",
+                        "surface-container": "#1e201e",
+                        "background": "#121412",
+                        "on-tertiary-fixed-variant": "#5d4037",
+                        "secondary": "#ffc384",
+                        "inverse-on-surface": "#2f312e",
+                        "primary-fixed": "#bcf0ae",
+                        "outline": "#8c9387",
+                        "on-background": "#e2e3df",
+                        "on-primary-fixed": "#002201",
+                        "on-error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#ffb869",
+                        "on-primary": "#0a3909",
+                        "on-primary-fixed-variant": "#23501e",
+                        "error-container": "#93000a",
+                        "on-tertiary-container": "#e3baae",
+                        "inverse-primary": "#3b6934"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "section-gap": "32px",
+                        "container-margin": "20px",
+                        "stack-gap": "16px",
+                        "inline-padding": "12px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "headline-md": ["Montserrat"],
+                        "display-lg": ["Montserrat"],
+                        "label-lg": ["Inter"],
+                        "headline-sm": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-container-margin h-16 bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-outline-variant/10">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary" data-icon="settings">settings</span>
+<h1 class="font-headline-sm text-headline-sm-mobile text-on-surface">Community Hub</h1>
+</div>
+<div class="font-display-lg text-headline-sm text-secondary">Husky Rudel</div>
+</header>
+<main class="pt-24 pb-32 px-container-margin max-w-4xl mx-auto space-y-section-gap">
+<!-- Social Feed Section -->
+<section class="space-y-stack-gap">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-sm text-on-surface">Rudel Feed</h2>
+<button class="flex items-center gap-2 text-primary font-label-lg px-4 py-2 rounded-full hover:bg-primary/10 transition-all">
+<span class="material-symbols-outlined" data-icon="add_a_photo">add_a_photo</span>
+                    Post Grow
+                </button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-gap">
+<!-- Post 1 -->
+<div class="glass-card rounded-xl overflow-hidden transition-all hover:border-primary/30">
+<div class="aspect-square relative group">
+<img class="w-full h-full object-cover" data-alt="A macro close-up of a vibrant cannabis flower covered in crystalline trichomes, with deep purple and forest green hues. The lighting is dramatic, highlighting the organic texture and intricate details of the plant. The scene is professional and technical, suggesting high-end botanical photography within a modern greenhouse setting with soft obsidian and amber light reflections." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJs47M6vJ_xXfRo88RTMYQLcuUIfEq5MhC55XY-uJnDeCa3bQ_5VOOJxL2qw1JDX9ECwnuBoyC3plZWhklJCqCUk89qLOtxf49W-4Lv6nNxmPX3z--leC6RDUWGZMoqIKC3MV0mpp7P7C9LnfK1OPPuES9JGMc9Znxw8mCCeSsgNAtHaft1NlvIPrudea2gu-_AKyP02Co3WwPU5a9TyepoPmF7b1Uhpc9F9x0LoumAB6GsV-QgiJH8CwDodxGgAG7dEiz4LrPQgE"/>
+<div class="absolute top-3 right-3 bg-primary-container text-on-primary-container px-3 py-1 rounded-full font-label-sm">
+                            Day 42
+                        </div>
+</div>
+<div class="p-4 space-y-2">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center font-bold text-on-secondary-container">P</div>
+<div>
+<p class="font-label-lg">Phoenix_Grower</p>
+<p class="text-on-surface-variant font-label-sm">Lemon Pastries #4</p>
+</div>
+</div>
+<div class="flex gap-4 pt-2">
+<button class="flex items-center gap-1 text-on-surface-variant hover:text-secondary transition-colors">
+<span class="material-symbols-outlined" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<span class="text-label-sm">124</span>
+</button>
+<button class="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+<span class="text-label-sm">18</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Post 2 -->
+<div class="glass-card rounded-xl overflow-hidden transition-all hover:border-primary/30">
+<div class="aspect-square relative">
+<img class="w-full h-full object-cover" data-alt="A wide shot of a modern, clean hydroponic grow setup with glowing LED lights emitting a spectrum of pink and blue hues. Healthy, lush green plants are arranged in precise geometric patterns against a dark obsidian background. The atmosphere is professional and scientific, embodying the modern nature aesthetic where technical precision meets organic vitality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVcF33rYDWVXR49VjL2XBvkWP68q4IKGbfe8E9Bi_rjFi584uan7yP91U-7heS_raxMnEbBme8x62h3ejLowAFciFJ6gLcxk4TRO6dGPBkPNGdR5CMub2FBgdRE419k_sfN0Lx2eEbOvuEfp4ip47cQK5ALORqooiPz4LLeJaOYl0Tjwj_rMUYkgcwgfBVspviVEP0m0ekrAtWhdtAhELbL6Z7mBvbdYLjtB2Drncss2JVKSMAc-N5q7XfC07Nmkz4GR4JYeScehw"/>
+<div class="absolute top-3 right-3 bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full font-label-sm">
+                            Tech Check
+                        </div>
+</div>
+<div class="p-4 space-y-2">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center font-bold text-on-primary-container">M</div>
+<div>
+<p class="font-label-lg">MasterBotanist</p>
+<p class="text-on-surface-variant font-label-sm">System Optimization</p>
+</div>
+</div>
+<div class="flex gap-4 pt-2">
+<button class="flex items-center gap-1 text-on-surface-variant hover:text-secondary transition-colors">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+<span class="text-label-sm">89</span>
+</button>
+<button class="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+<span class="text-label-sm">42</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Strain Review Bento Grid -->
+<section class="space-y-stack-gap">
+<h2 class="font-headline-sm text-on-surface">Strain Reviews</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-stack-gap">
+<!-- Review Card 1 (Large) -->
+<div class="md:col-span-2 glass-card rounded-xl p-6 flex flex-col md:flex-row gap-6 hover:shadow-2xl hover:shadow-secondary/5 transition-all">
+<div class="w-full md:w-1/2 aspect-video md:aspect-square rounded-lg overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A highly detailed close-up of the RS11 cannabis strain, showcasing its deep crimson and lime green leaves covered in a thick layer of frosty trichomes. The image is shot with a professional macro lens, focusing on the crystalline structures. The lighting is warm and amber, contrasting against a dark forest floor aesthetic, capturing the essence of organic vitality and botanical precision." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtnmlWO2qFcEN04KeYfwoQAtIRQyn7RAJc2Q6NrE0ZWUVW3kBSFtnpsrdqnLXm-KiFDdIYih3lPGIBeUcGIgvkMWtqbqVchTyVhxxfLgFz3mWoQMYiTU77AopBqMpihEUHJJ66NuJpF-4s6-64C5IYYRSSqXfuz9B8w7Ef1pMyIPDHnMKQ6l-7Tj1X6Ysbh23Ode2ytMiLwMOxC2vpgTQapMoybI3eJhkFncix8oD0CFlpmBgIaLfi26_y5m_QdXHS7qBh0QdILkA"/>
+</div>
+<div class="w-full md:w-1/2 space-y-3">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-sm text-secondary">RS11</h3>
+<p class="font-label-sm text-on-surface-variant uppercase tracking-widest">Genetics: Pink Guava x OZK</p>
+</div>
+<div class="flex text-secondary">
+<span class="material-symbols-outlined" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" data-icon="star" style="font-variation-settings: 'FILL' 0;">star</span>
+</div>
+</div>
+<p class="text-body-sm text-on-surface-variant line-clamp-3">
+                            "Incredible candy-gas profile with heavy trichome production. The smoke is smooth and the effect is perfectly balanced for a late-afternoon session. A must-try for terpene chasers."
+                        </p>
+<button class="w-full bg-secondary text-on-secondary font-label-lg py-3 rounded-xl phoenix-glow transition-all">Read Full Review</button>
+</div>
+</div>
+<!-- Review Card 2 (Vertical Small) -->
+<div class="glass-card rounded-xl p-5 space-y-4 hover:border-primary/50 transition-all">
+<h3 class="font-headline-sm text-primary">Lemon Pastries</h3>
+<div class="flex text-secondary scale-75 origin-left">
+<span class="material-symbols-outlined" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="text-body-sm text-on-surface-variant">Zesty lemon crust notes with a creamy finish. Exceptional vigor during the stretch phase.</p>
+<div class="pt-2 border-t border-outline-variant/10 flex justify-between items-center">
+<span class="text-label-sm text-on-surface-variant">14 Reviews</span>
+<span class="material-symbols-outlined text-primary" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Q&A Forum / Community Radar -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-section-gap">
+<!-- Q&A Forum -->
+<section class="space-y-stack-gap">
+<h2 class="font-headline-sm text-on-surface">Forum Hot Topics</h2>
+<div class="space-y-3">
+<div class="glass-card p-4 rounded-xl border-l-4 border-primary hover:bg-surface-variant transition-colors cursor-pointer">
+<h4 class="font-label-lg mb-1">Nutrient lockout or light stress?</h4>
+<p class="text-body-sm text-on-surface-variant">Posted by GreenThumb88 • 2h ago</p>
+<div class="mt-3 flex gap-3">
+<span class="bg-surface-container-highest px-2 py-0.5 rounded text-[10px] uppercase font-bold">Help</span>
+<span class="text-label-sm text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="forum">forum</span> 12
+                            </span>
+</div>
+</div>
+<div class="glass-card p-4 rounded-xl border-l-4 border-secondary hover:bg-surface-variant transition-colors cursor-pointer">
+<h4 class="font-label-lg mb-1">Best LED settings for RS11?</h4>
+<p class="text-body-sm text-on-surface-variant">Posted by TerpLord • 5h ago</p>
+<div class="mt-3 flex gap-3">
+<span class="bg-surface-container-highest px-2 py-0.5 rounded text-[10px] uppercase font-bold">Genetics</span>
+<span class="text-label-sm text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="forum">forum</span> 34
+                            </span>
+</div>
+</div>
+</div>
+</section>
+<!-- Event Radar -->
+<section class="space-y-stack-gap">
+<h2 class="font-headline-sm text-on-surface">Event Radar</h2>
+<div class="glass-card rounded-xl p-5 bg-gradient-to-br from-surface-container to-primary/5">
+<div class="flex items-center gap-4 mb-4">
+<div class="bg-secondary-container text-on-secondary-container rounded-lg p-2 text-center min-w-[50px]">
+<span class="block font-bold text-lg">14</span>
+<span class="block text-[10px] uppercase font-bold">JUN</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-on-surface">Mary Jane Berlin</h4>
+<p class="text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="location_on">location_on</span> Arena Berlin, DE
+                            </p>
+</div>
+</div>
+<p class="text-body-sm text-on-surface-variant mb-4">Join the Husky Rudel meetup at Hall 2. Networking, live music, and professional grow workshops.</p>
+<div class="flex -space-x-2 mb-4">
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-primary flex items-center justify-center text-[10px] font-bold">JD</div>
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-secondary flex items-center justify-center text-[10px] font-bold">AL</div>
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-tertiary flex items-center justify-center text-[10px] font-bold">RK</div>
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-surface-container-highest flex items-center justify-center text-[10px] text-on-surface-variant">+42</div>
+</div>
+<button class="w-full border-2 border-primary text-primary font-label-lg py-2 rounded-xl hover:bg-primary/10 transition-all">Count Me In</button>
+</div>
+</section>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-8 pt-3 bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-t border-outline-variant/10 rounded-t-xl shadow-[0_-4px_20px_rgba(255,157,0,0.1)]">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-transform" href="index.html">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-transform" href="diary.html">
+<span class="material-symbols-outlined" data-icon="book_5">book_5</span>
+<span class="font-label-sm text-label-sm">Diary</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary relative after:content-[''] after:absolute after:-bottom-1 after:w-1 after:h-1 after:bg-secondary after:rounded-full" href="community.html">
+<span class="material-symbols-outlined" data-icon="groups" style="font-variation-settings: 'FILL' 1;">groups</span>
+<span class="font-label-sm text-label-sm">Community</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-transform" href="music.html">
+<span class="material-symbols-outlined" data-icon="music_note">music_note</span>
+<span class="font-label-sm text-label-sm">Music</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-transform" href="shop.html">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span class="font-label-sm text-label-sm">Shop</span>
+</a>
+</nav>
+<!-- Floating Action Button (FAB) - Suppression logic: Hubs usually have focused post actions -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-secondary text-on-secondary rounded-full shadow-lg flex items-center justify-center phoenix-glow z-40 transition-transform active:scale-90">
+<span class="material-symbols-outlined text-3xl" data-icon="add" style="font-variation-settings: 'wght' 600;">add</span>
+</button>
+<script>
+        // Simple micro-interaction for voting and likes
+        document.querySelectorAll('[data-icon="favorite"]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const icon = this.querySelector('.material-symbols-outlined');
+                const count = this.querySelector('span:not(.material-symbols-outlined)');
+                const isFilled = icon.style.fontVariationSettings.includes("'FILL' 1");
+                
+                if (isFilled) {
+                    icon.style.fontVariationSettings = "'FILL' 0";
+                    count.textContent = parseInt(count.textContent) - 1;
+                    this.classList.remove('text-secondary');
+                    this.classList.add('text-on-surface-variant');
+                } else {
+                    icon.style.fontVariationSettings = "'FILL' 1";
+                    count.textContent = parseInt(count.textContent) + 1;
+                    this.classList.remove('text-on-surface-variant');
+                    this.classList.add('text-secondary');
+                }
+            });
+        });
+
+        // Smooth reveal on scroll logic (simplified)
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-4');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section, .glass-card').forEach(el => {
+            el.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-4');
+            observer.observe(el);
+        });
+    </script>
+</body></html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Team EasyGrowing - Tutorials &amp; Masterclasses</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-primary": "#3b6934",
+                        "surface": "#121412",
+                        "secondary-fixed-dim": "#ffb869",
+                        "secondary-fixed": "#ffdcbb",
+                        "primary": "#a1d494",
+                        "background": "#121412",
+                        "on-tertiary-fixed": "#2c160e",
+                        "on-tertiary-container": "#e3baae",
+                        "surface-container-low": "#1a1c1a",
+                        "secondary-container": "#fe9d00",
+                        "tertiary-container": "#674940",
+                        "surface-variant": "#333533",
+                        "outline-variant": "#42493e",
+                        "on-surface": "#e2e3df",
+                        "outline": "#8c9387",
+                        "inverse-on-surface": "#2f312e",
+                        "surface-tint": "#a1d494",
+                        "on-secondary": "#482900",
+                        "inverse-surface": "#e2e3df",
+                        "on-secondary-fixed": "#2c1700",
+                        "on-primary-fixed-variant": "#23501e",
+                        "surface-dim": "#121412",
+                        "on-tertiary": "#442a22",
+                        "surface-container-highest": "#333533",
+                        "on-surface-variant": "#c2c9bb",
+                        "on-background": "#e2e3df",
+                        "error": "#ffb4ab",
+                        "surface-container-lowest": "#0d0f0d",
+                        "primary-container": "#2d5a27",
+                        "primary-fixed": "#bcf0ae",
+                        "on-primary-container": "#9dd090",
+                        "tertiary-fixed": "#ffdbd0",
+                        "surface-container": "#1e201e",
+                        "on-error": "#690005",
+                        "primary-fixed-dim": "#a1d494",
+                        "on-primary": "#0a3909",
+                        "on-tertiary-fixed-variant": "#5d4037",
+                        "on-secondary-container": "#663c00",
+                        "tertiary-fixed-dim": "#e7bdb1",
+                        "tertiary": "#e7bdb1",
+                        "surface-container-high": "#292a28",
+                        "secondary": "#ffc384",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#673d00",
+                        "surface-bright": "#383a37",
+                        "on-primary-fixed": "#002201",
+                        "error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-gap": "16px",
+                        "section-gap": "32px",
+                        "container-margin": "20px",
+                        "inline-padding": "12px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Montserrat"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "headline-md": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "display-lg": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #121412;
+            color: #e2e3df;
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-card {
+            background: rgba(30, 32, 30, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glow-secondary {
+            box-shadow: 0 0 20px rgba(255, 157, 0, 0.2);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .active-nav-dot::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            width: 4px;
+            height: 4px;
+            background-color: #ffc384;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-24">
+<!-- Top AppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-white/10 shadow-sm">
+<div class="flex items-center justify-between px-container-margin h-16 w-full max-w-md mx-auto">
+<div class="flex items-center gap-3">
+<img alt="Team EasyGrowing Logo" class="h-10 w-10 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBb2dXfkESV4U7RghdFDNlcmJ-PGq5dGdOGtWOnV9eb5hUQTdbx_R21xjNd92OzAyK98qGZYMf_t-nTKrtZOp7Pgj1vqLJXBikJSDQTRVZqRE6qiB29Pg-MJKr8_0pquSO_LTT3nAYiY6s6P7UZialWcTSlwcqnThD19SVxNCG4MeVohSPTngfKjViQaCQHXHEr3Me5iDtkPRFpoSGUQBmKKTfducXCwM_hiBN0tMgfiwiTIi8TdAbTvN1TYP2O8ydMX5caLBAE0bI"/>
+<span class="font-headline-sm text-headline-sm text-primary tracking-tight">EasyGrowing</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="flex items-center gap-1 bg-surface-variant px-2 py-1 rounded-full">
+<span class="font-label-sm text-label-sm text-secondary">DE</span>
+<span class="material-symbols-outlined text-sm text-on-surface-variant">expand_more</span>
+</div>
+<button class="material-symbols-outlined text-primary active:scale-95 transition-transform" data-icon="notifications">notifications</button>
+</div>
+</div>
+</header>
+<main class="pt-20 px-container-margin max-w-md mx-auto space-y-section-gap">
+<!-- Featured Video Masterclass -->
+<section class="space-y-stack-gap">
+<div class="flex justify-between items-end">
+<h2 class="font-headline-md text-headline-md text-on-surface">Neueste Lektion</h2>
+<span class="font-label-sm text-label-sm text-secondary">GrowBibel Teil 9</span>
+</div>
+<div class="relative group cursor-pointer overflow-hidden rounded-xl glass-card glow-secondary">
+<div class="aspect-video w-full bg-surface-container relative overflow-hidden">
+<img class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700" data-alt="A cinematic, high-resolution video thumbnail showing a lush cannabis plant illuminated by a warm, golden sunset light. The background is a sophisticated dark green bokeh effect, emphasizing professional horticulture. Overlaid text in a modern sans-serif font reads 'PAR &amp; DLI Masterclass' with an inviting orange play button in the center. The overall mood is educational, premium, and visually captivating, matching a high-end botanical aesthetic." src="https://lh3.googleusercontent.com/aida/AP1WRLvoNZf6Fhn-KNmLqsQp1aisOzVyIzv-PKKiFu7QhpH3LrGczs8fQfvLV5l8mkn4vYiGr2d66U2_OstF736WJwRLeG0Tlh-TpWNG6jV5m0vvOu1WAv7a6aZKCEW4uDcd7tleR0Uz2kK7uZ9VvdLrnGeGvCFbF7xKAreGdCbk28S_3-FznxzXelqB_wUsnwiWhqEQbfRa2MBV8jVvMb6FcfE-ISqQQkPc4tNSDM83t7Vk4Ti-G_sUPWGSdQ0"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center shadow-2xl active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-surface text-4xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+<p class="font-label-lg text-label-lg text-white">Licht ist Gewicht: PAR, PPFD &amp; DLI Basics</p>
+</div>
+</div>
+</div>
+</section>
+<!-- YouTube Subscription CTA -->
+<section class="glass-card rounded-xl p-6 flex items-center justify-between border-primary/20 bg-primary/5">
+<div class="space-y-1">
+<h3 class="font-headline-sm text-headline-sm text-primary">Folge dem Wachstum</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Wöchentlich neue Masterclasses auf YouTube.</p>
+</div>
+<button class="bg-secondary text-on-secondary px-4 py-2 rounded-lg font-label-lg flex items-center gap-2 active:scale-95 transition-all shadow-lg shadow-secondary/20">
+<span class="material-symbols-outlined text-lg">subscriptions</span>
+                Abonnieren
+            </button>
+</section>
+<!-- Categorized Video Grid -->
+<section class="space-y-section-gap pb-8">
+<!-- Category 1 -->
+<div class="space-y-stack-gap">
+<div class="flex items-center gap-2 border-l-4 border-secondary pl-3">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Anbau-Grundlagen</h3>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<!-- Tutorial Card -->
+<div class="space-y-2 group">
+<div class="aspect-square rounded-xl overflow-hidden glass-card relative">
+<img class="w-full h-full object-cover opacity-70" data-alt="A close-up, high-fidelity shot of a germinating seed with a tiny white root emerging from dark, rich soil. Soft, macro-lighting highlights the texture of the soil and the moisture on the seed. The aesthetic is clean and professional, focusing on the miracle of new life in a controlled laboratory environment. The color palette consists of deep browns and vibrant greens." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAD9TesMMul2doi8UvdSipSTO8G2k6AUqswYFqNanH5Kd0wVErQsjF-T6GEFGopJQtUA2jd_0gGc0IYiLRtWrHxnsd_XCKR7VY4KZ9FMHoeUMmSHxwLAj9wG8MPUl_VAlrD_qns4iLIEcF3gYgv31VFimNqdEqSYmCbm43CsK7ML8CnuuXwqICA-yXQ8826IpqU3_2xsFhXcrwLPq-9irVpN5kGAMU6T7lABt6pw8WL7sznZeQLyZaAK4D8ja5tRCQnexsoN1PFX_k"/>
+<div class="absolute top-2 right-2 px-2 py-0.5 bg-surface/60 backdrop-blur-md rounded text-[10px] font-bold text-secondary uppercase">Premium</div>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface line-clamp-2 group-hover:text-primary transition-colors">Keimung Masterclass: Der perfekte Start</p>
+</div>
+<!-- Tutorial Card -->
+<div class="space-y-2 group">
+<div class="aspect-square rounded-xl overflow-hidden glass-card relative">
+<img class="w-full h-full object-cover opacity-70" data-alt="An array of professional botanical nutrient bottles arranged neatly on a dark, slate surface. Each bottle features a minimalist green and amber label. The lighting is moody and dramatic, with a spotlight hitting the center bottle, emphasizing the science behind plant nutrition. The aesthetic is pharmaceutical-grade and high-end SaaS style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDV9HAUSt-LtHqc2bhd1Q-Ps7YyQxCIBBcLLZO4_WbLn0qEN3537rM5c-AXHLrxI_j6grjiEyrmQzkYkREblCUYenGBxbUaSN_gExebhFgoC47B3zjmpSmeeJXt3wzam5fGylpT_USKFX5EItGB51lLK4OFNF9OsUypGBYpKr_aq92NyGtRv--efZJsmusx15ROqYWwf1ZXN7XWp98i0cNxNe_3iK2yuR3XvGX69PcQf2DSt1mpPv2wEr4LL9LhpUb6zO-C4oxXjsA"/>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface line-clamp-2 group-hover:text-primary transition-colors">Nährstoff-Guide: N-P-K verstehen</p>
+</div>
+</div>
+</div>
+<!-- Category 2 -->
+<div class="space-y-stack-gap">
+<div class="flex items-center gap-2 border-l-4 border-primary pl-3">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Ernte &amp; Technik</h3>
+</div>
+<div class="space-y-4">
+<!-- Horizontal List Item -->
+<div class="glass-card p-3 rounded-xl flex gap-4 items-center active:bg-white/5 transition-colors cursor-pointer">
+<div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A professional close-up of a harvesting scissor trimming a frosty, crystalline plant bud. The background is a blurred dark greenhouse interior. The focus is sharp on the resin-coated leaves and the stainless steel tool. The lighting is cool-toned and clear, conveying precision and expert harvesting techniques. The overall mood is artisanal and meticulous." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEtELBIHF1O2Ir2UXqe2zOWmpRoE_Sn0tir8ABhX2cwJ2mLEDgdvO0WzqqzjQ4oIEK53CfFRhe_diVH_nXHzcJwJQ8y3mC1vuByagBYCf8luwHYVWEbzk1uP6BtTowgaxf4687pXcz0bNo4okMZuYCFsjwQQ0hs_ybBzVYc8zVK0nxQGUCJZUN7WSOoCH864-r6WbqsQzN7PHnq1kPRpaQY_r6WsXDPkk92_UBqcaDl7uUlsl4yOe5GBlyR5KN4sCrKTrEr7mNMu8"/>
+</div>
+<div class="flex-1 space-y-1">
+<h4 class="font-label-lg text-label-lg text-on-surface">Erntetechniken: Wann ist der Tag?</h4>
+<div class="flex items-center gap-3 text-on-surface-variant font-label-sm text-[10px]">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> 15 Min</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">visibility</span> 12.4k</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</div>
+<div class="glass-card p-3 rounded-xl flex gap-4 items-center active:bg-white/5 transition-colors cursor-pointer">
+<div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A macro shot of plant roots growing through a hydroponic mesh pot. The roots are pearly white and vibrant, showing extreme health. The water droplets are frozen in time by a high-speed camera, reflecting the soft green light of the grow room. The aesthetic is clean, technical, and full of vitality, showcasing the hidden side of cultivation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXUkcoJGREofadYycj0BSUGHrljPAox94CuHlMSKza_3XJqYZFppoDqjHm3c_uYrpCQGL_VASZG4rqdrosOmq1ME-IUdDeYieqxqFguCIkxsH2l1gKUfxj16iXcvGCb3Goke0EVZ8hAxaYxEQCjQ2uwuC1O0TwifR_0upUZR6JftGxvM1ysRNgjQCjYuxf4nEla-Bx8hEJUglXnwoR3Jo1yQAFnIRWTRJX33xsIYMqG2dbhVqmIWJkOXy2UBzVKNoHjrQbOoJIpKA"/>
+</div>
+<div class="flex-1 space-y-1">
+<h4 class="font-label-lg text-label-lg text-on-surface">Hydroponik 101: Wurzelgesundheit</h4>
+<div class="flex items-center gap-3 text-on-surface-variant font-label-sm text-[10px]">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> 22 Min</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">visibility</span> 8.9k</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/80 backdrop-blur-xl border-t border-white/10 shadow-[0_-4px_20px_rgba(255,157,0,0.1)]">
+<div class="flex justify-around items-center h-20 w-full max-w-md mx-auto">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="index.html"><span class="material-symbols-outlined" data-icon="home">home</span><span class="font-label-sm text-label-sm mt-1">Home</span></a>
+<!-- Diary -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="diary.html"><span class="material-symbols-outlined" data-icon="potted_plant">potted_plant</span><span class="font-label-sm text-label-sm mt-1">Diary</span></a>
+<!-- Bible (Active) -->
+<a class="flex flex-col items-center justify-center text-secondary relative active:scale-90 duration-200" href="tutorials.html"><span class="material-symbols-outlined" data-icon="menu_book" style="font-variation-settings: 'FILL' 1;">menu_book</span><span class="font-label-sm text-label-sm mt-1">Bible</span><div class="absolute -bottom-1 w-1 h-1 bg-secondary rounded-full"></div></a>
+<!-- Music -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="music.html"><span class="material-symbols-outlined" data-icon="library_music">library_music</span><span class="font-label-sm text-label-sm mt-1">Music</span></a>
+<!-- Shop -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="shop.html"><span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span><span class="font-label-sm text-label-sm mt-1">Shop</span></a>
+</div>
+</nav>
+<script>
+        // Micro-interactions
+        document.querySelectorAll('.active\\:scale-95').forEach(button => {
+            button.addEventListener('touchstart', () => {
+                button.classList.add('scale-95');
+            });
+            button.addEventListener('touchend', () => {
+                button.classList.remove('scale-95');
+            });
+        });
+
+        // Simple Fade-in animation for sections on load
+        window.addEventListener('DOMContentLoaded', () => {
+            // Settings sync
+            const savedUnits = localStorage.getItem('units') || 'metric';
+            const savedLang = localStorage.getItem('lang') || 'en';
+            // Simple language switcher display update
+            const langEl = document.querySelector('.bg-surface-variant span.font-label-sm');
+            if (langEl) langEl.textContent = savedLang.toUpperCase();
+
+            const sections = document.querySelectorAll('section');
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(10px)';
+                section.style.transition = `all 0.5s ease ${index * 0.1}s`;
+                
+                setTimeout(() => {
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, 100);
+            });
+        });
+    </script>
+</body></html>

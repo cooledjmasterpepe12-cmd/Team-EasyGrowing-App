@@ -1,0 +1,405 @@
+<html class="dark" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TEAM EASYGROWING - Musik &amp; Releases</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#442a22",
+                        "error": "#ffb4ab",
+                        "on-secondary-container": "#663c00",
+                        "primary-container": "#2d5a27",
+                        "tertiary-fixed-dim": "#e7bdb1",
+                        "on-tertiary-fixed-variant": "#5d4037",
+                        "on-surface-variant": "#c2c9bb",
+                        "surface-container-low": "#1a1c1a",
+                        "on-secondary-fixed": "#2c1700",
+                        "inverse-surface": "#e2e3df",
+                        "tertiary": "#e7bdb1",
+                        "surface-bright": "#383a37",
+                        "secondary-container": "#fe9d00",
+                        "primary": "#a1d494",
+                        "outline": "#8c9387",
+                        "surface-container-lowest": "#0d0f0d",
+                        "on-tertiary-fixed": "#2c160e",
+                        "surface": "#121412",
+                        "inverse-on-surface": "#2f312e",
+                        "surface-container-high": "#292a28",
+                        "secondary-fixed-dim": "#ffb869",
+                        "primary-fixed-dim": "#a1d494",
+                        "on-error": "#690005",
+                        "secondary": "#ffc384",
+                        "primary-fixed": "#bcf0ae",
+                        "tertiary-container": "#674940",
+                        "surface-tint": "#a1d494",
+                        "background": "#121412",
+                        "on-surface": "#e2e3df",
+                        "tertiary-fixed": "#ffdbd0",
+                        "error-container": "#93000a",
+                        "on-background": "#e2e3df",
+                        "on-primary-container": "#9dd090",
+                        "outline-variant": "#42493e",
+                        "on-tertiary-container": "#e3baae",
+                        "on-primary-fixed-variant": "#23501e",
+                        "on-primary-fixed": "#002201",
+                        "on-primary": "#0a3909",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-highest": "#333533",
+                        "surface-variant": "#333533",
+                        "inverse-primary": "#3b6934",
+                        "surface-dim": "#121412",
+                        "on-secondary-fixed-variant": "#673d00",
+                        "secondary-fixed": "#ffdcbb",
+                        "surface-container": "#1e201e",
+                        "on-secondary": "#482900"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-gap": "16px",
+                        "inline-padding": "12px",
+                        "base": "8px",
+                        "container-margin": "20px",
+                        "section-gap": "32px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Montserrat"],
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Montserrat"],
+                        "headline-md": ["Montserrat"],
+                        "label-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "display-lg": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(30, 32, 30, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .phoenix-glow {
+            box-shadow: 0 0 20px rgba(255, 157, 0, 0.15);
+        }
+        .text-glow {
+            text-shadow: 0 0 10px rgba(161, 212, 148, 0.5);
+        }
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+        .spotify-green {
+            color: #1DB954;
+        }
+        .track-active {
+            background: rgba(161, 212, 148, 0.1);
+            border-color: rgba(161, 212, 148, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary selection:text-on-primary min-h-screen pb-48">
+<!-- TopAppBar -->
+<nav class="fixed top-0 z-50 w-full h-16 bg-background/80 backdrop-blur-xl border-b border-white/10 flex justify-between items-center px-container-margin">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center border border-primary/20 overflow-hidden">
+<span class="material-symbols-outlined text-primary">eco</span>
+</div>
+<span class="font-headline-md text-headline-md font-bold text-primary">Musik</span>
+</div>
+<div class="flex items-center gap-4">
+<!-- Global Selectors -->
+<div class="flex items-center gap-2">
+<div class="flex bg-surface-container-high rounded-full p-1 border border-white/5">
+<button id="lang-de" class="px-2 py-0.5 rounded-full text-[10px] font-bold text-on-surface-variant hover:text-primary transition-colors" onclick="setLang('de')">DE</button>
+<button id="lang-en" class="px-2 py-0.5 rounded-full text-[10px] font-bold text-on-surface-variant hover:text-primary transition-colors" onclick="setLang('en')">EN</button>
+<button id="lang-es" class="px-2 py-0.5 rounded-full text-[10px] font-bold text-on-surface-variant hover:text-primary transition-colors" onclick="setLang('es')">ES</button>
+</div>
+<div class="hidden sm:flex bg-surface-container-high rounded-full p-1 border border-white/5">
+<button id="btn-metric" class="px-2 py-0.5 rounded-full text-[10px] font-bold text-on-surface-variant hover:text-primary transition-colors" onclick="toggleUnits('metric')">°C</button>
+<button id="btn-imperial" class="px-2 py-0.5 rounded-full text-[10px] font-bold text-on-surface-variant hover:text-primary transition-colors" onclick="toggleUnits('imperial')">°F</button>
+</div>
+</div>
+<a class="p-2 text-on-surface-variant hover:text-primary transition-colors active:scale-95 duration-200" href="profile.html">
+<span class="material-symbols-outlined">person</span>
+</a>
+</div>
+</nav>
+<main class="pt-20 px-container-margin space-y-section-gap">
+<!-- Hero Section: Featured Release -->
+<section class="relative rounded-3xl overflow-hidden phoenix-glow group">
+<div class="aspect-[16/10] w-full relative">
+<img alt="Featured Release" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida/AP1WRLv5Jd2ZqlkHyxR7KN4189O2WqeiFi5_ykcEuKzlHBkI17C03KdNFo4IfJs62DsQxnwxVYK_iK48HuK9o6zQ_ETwBbNkLd-AwoKF2AVIplR-qZtWs7Ec6c8iaA9hZqFdTgx70fH1JlZH07kbmtcGQM5Us4wYhyRB7fGfHe4x5A5jMBmKygb-hHZdCn-fiG9tLwPT6GoiIsNeiGgQwN2HTWqAgIjmx5UH3c99_Ka5mopDhXP1Ho9qm7Y_UaE"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-6 space-y-4 w-full">
+<div class="space-y-1">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">TEAM EASYGROWING Featured Album</span>
+<h1 class="font-headline-lg text-headline-lg text-white leading-tight">4 SONGS.<br/>1 VISION.</h1>
+</div>
+<div class="flex flex-wrap gap-3">
+<button class="bg-secondary-container text-on-secondary-container px-6 py-2.5 rounded-full font-label-lg text-label-lg flex items-center gap-2 hover:scale-105 transition-transform active:scale-95" onclick="playTrack('Das sind wir!', 'TEAM EASYGROWING', 'https://lh3.googleusercontent.com/aida/AP1WRLv5Jd2ZqlkHyxR7KN4189O2WqeiFi5_ykcEuKzlHBkI17C03KdNFo4IfJs62DsQxnwxVYK_iK48HuK9o6zQ_ETwBbNkLd-AwoKF2AVIplR-qZtWs7Ec6c8iaA9hZqFdTgx70fH1JlZH07kbmtcGQM5Us4wYhyRB7fGfHe4x5A5jMBmKygb-hHZdCn-fiG9tLwPT6GoiIsNeiGgQwN2HTWqAgIjmx5UH3c99_Ka5mopDhXP1Ho9qm7Y_UaE')">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+                            JETZT ABSPIELEN
+                        </button>
+<a class="bg-[#1DB954]/20 text-[#1DB954] backdrop-blur-md px-6 py-2.5 rounded-full font-label-lg text-label-lg flex items-center gap-2 hover:bg-[#1DB954]/30 transition-all border border-[#1DB954]/30" href="https://open.spotify.com/artist/06HLovvJm7QjU-pD3lO0jM" target="_blank">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.496 17.303c-.218.358-.683.473-1.041.255-2.883-1.762-6.513-2.161-10.789-1.186-.41.094-.82-.163-.914-.573-.094-.41.163-.82.573-.914 4.693-1.072 8.705-.615 11.916 1.346.358.218.473.683.255 1.041zm1.464-3.262c-.274.446-.856.589-1.302.315-3.3-2.028-8.33-2.617-12.23-1.431-.502.152-1.031-.131-1.183-.633-.152-.502.131-1.031.633-1.183 4.453-1.353 10.003-.699 13.767 1.614.446.274.589.856.315 1.302zm.126-3.411c-3.957-2.35-10.482-2.567-14.269-1.417-.606.184-1.248-.161-1.432-.767-.184-.606.161-1.248.767-1.432 4.347-1.319 11.538-1.066 16.1 1.64.545.324.724 1.026.4 1.571-.324.545-1.026.724-1.566.405z"></path></svg>
+                            SPOTIFY
+                        </a>
+<a class="bg-surface-container-high/60 text-on-surface backdrop-blur-md px-6 py-2.5 rounded-full font-label-lg text-label-lg flex items-center gap-2 hover:bg-surface-container-highest transition-all border border-white/10" href="https://music.amazon.de/artists/B0H1RMG3CD/team-easygrowing" target="_blank">
+<span class="material-symbols-outlined">music_video</span>
+                            AMAZON
+                        </a>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Neueste Tracks -->
+<section class="space-y-stack-gap">
+<div class="flex justify-between items-end">
+<h2 class="font-headline-sm text-headline-sm text-primary">Neueste Tracks</h2>
+<button class="text-label-sm text-on-surface-variant hover:text-primary">Alle ansehen</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="track-list">
+<!-- Track 1 -->
+<div class="glass-card p-4 rounded-2xl flex items-center gap-4 hover:bg-surface-variant/30 transition-colors group cursor-pointer" onclick="playTrack('Das sind wir!', 'TEAM EASYGROWING', 'https://lh3.googleusercontent.com/aida/AP1WRLv5Jd2ZqlkHyxR7KN4189O2WqeiFi5_ykcEuKzlHBkI17C03KdNFo4IfJs62DsQxnwxVYK_iK48HuK9o6zQ_ETwBbNkLd-AwoKF2AVIplR-qZtWs7Ec6c8iaA9hZqFdTgx70fH1JlZH07kbmtcGQM5Us4wYhyRB7fGfHe4x5A5jMBmKygb-hHZdCn-fiG9tLwPT6GoiIsNeiGgQwN2HTWqAgIjmx5UH3c99_Ka5mopDhXP1Ho9qm7Y_UaE')">
+<div class="w-16 h-16 rounded-xl overflow-hidden bg-primary/10 flex items-center justify-center relative">
+<span class="material-symbols-outlined text-primary group-hover:hidden">music_note</span>
+<span class="material-symbols-outlined text-primary hidden group-hover:block" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+</div>
+<div class="flex-1">
+<h3 class="font-body-lg text-body-lg font-semibold text-on-background">Das sind wir!</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">TEAM EASYGROWING</p>
+</div>
+<div class="flex items-center gap-3" onclick="event.stopPropagation()">
+<a class="spotify-green hover:scale-110 transition-transform" href="https://open.spotify.com/track/4Xp4i8Z6QZ5K4Yn0WbN1X" target="_blank">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.496 17.303c-.218.358-.683.473-1.041.255-2.883-1.762-6.513-2.161-10.789-1.186-.41.094-.82-.163-.914-.573-.094-.41.163-.82.573-.914 4.693-1.072 8.705-.615 11.916 1.346.358.218.473.683.255 1.041zm1.464-3.262c-.274.446-.856.589-1.302.315-3.3-2.028-8.33-2.617-12.23-1.431-.502.152-1.031-.131-1.183-.633-.152-.502.131-1.031.633-1.183 4.453-1.353 10.003-.699 13.767 1.614.446.274.589.856.315 1.302zm.126-3.411c-3.957-2.35-10.482-2.567-14.269-1.417-.606.184-1.248-.161-1.432-.767-.184-.606.161-1.248.767-1.432 4.347-1.319 11.538-1.066 16.1 1.64.545.324.724 1.026.4 1.571-.324.545-1.026.724-1.566.405z"></path></svg>
+</a>
+<span class="font-label-sm text-label-sm text-on-surface-variant">03:45</span>
+</div>
+</div>
+<!-- Track 2 -->
+<div class="glass-card p-4 rounded-2xl flex items-center gap-4 hover:bg-surface-variant/30 transition-colors group cursor-pointer" onclick="playTrack('Wir sind keine Redner', 'TEAM EASYGROWING', 'https://lh3.googleusercontent.com/aida/AP1WRLuPg4q2Wob3enSIKsMmYipEQ1xVjpOqRCsaNJbN0UonHRn_pGYK4qMbpND_ElpUXcSoFks_OCn0tssME3zarrZIDiXy7lAlTNVD2Jb8_2N5shpDMBCOWY5VhqI0rnpLiQn7Ol3kOOpcIG07ysZr7tn8tJe_nN2ehpD9SoQjFbl5kQ47EtXeHoQJWCN4IhYxAPKhN4z8sCpdge-35XyLT2fLEcaFvdawgIAToF0VMZTp8aqzFPhQGDrt1A')">
+<div class="w-16 h-16 rounded-xl overflow-hidden bg-secondary/10 flex items-center justify-center relative">
+<span class="material-symbols-outlined text-secondary group-hover:hidden">volume_up</span>
+<span class="material-symbols-outlined text-secondary hidden group-hover:block" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+</div>
+<div class="flex-1">
+<h3 class="font-body-lg text-body-lg font-semibold text-on-background">Wir sind keine Redner</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">TEAM EASYGROWING</p>
+</div>
+<div class="flex items-center gap-3" onclick="event.stopPropagation()">
+<a class="spotify-green hover:scale-110 transition-transform" href="https://open.spotify.com/artist/06HLovvJm7QjU-pD3lO0jM" target="_blank">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.496 17.303c-.218.358-.683.473-1.041.255-2.883-1.762-6.513-2.161-10.789-1.186-.41.094-.82-.163-.914-.573-.094-.41.163-.82.573-.914 4.693-1.072 8.705-.615 11.916 1.346.358.218.473.683.255 1.041zm1.464-3.262c-.274.446-.856.589-1.302.315-3.3-2.028-8.33-2.617-12.23-1.431-.502.152-1.031-.131-1.183-.633-.152-.502.131-1.031.633-1.183 4.453-1.353 10.003-.699 13.767 1.614.446.274.589.856.315 1.302zm.126-3.411c-3.957-2.35-10.482-2.567-14.269-1.417-.606.184-1.248-.161-1.432-.767-.184-.606.161-1.248.767-1.432 4.347-1.319 11.538-1.066 16.1 1.64.545.324.724 1.026.4 1.571-.324.545-1.026.724-1.566.405z"></path></svg>
+</a>
+<span class="font-label-sm text-label-sm text-on-surface-variant">04:12</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Mary Jane Countdown (Bento Grid) -->
+<section class="space-y-stack-gap">
+<div class="flex items-center gap-2">
+<h2 class="font-headline-sm text-headline-sm text-secondary">Mary Jane Countdown</h2>
+<div class="h-px flex-1 bg-gradient-to-r from-secondary/40 to-transparent"></div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+<div class="aspect-square rounded-2xl overflow-hidden relative group cursor-pointer">
+<img alt="MJ 1" class="w-full h-full object-cover transition-transform group-hover:scale-110" src="https://lh3.googleusercontent.com/aida/AP1WRLsHY0SHp71e3F4OXGi2NJMAJ_G5DpBZA9TsPZRMQs7f7XJlxWuXB1QmuaDRjN5NKqEQQov9fdhmUBvcoImdB9h6LPloQnpbefNd9ysx3jLDVIN-GhbGqA45vDSQcOgCJ_RMl0X1vnN2b9c7s4KGEt0JSNTwMM53ddpUxG_hcBzXqwzx51dwi-86aI9fexy3wCIEoke19z-fpjFcRHEUDBYjbjWidNHZ7pppt7w1SDQFP346Fl4Gxzge0mo"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-4xl">headphones</span>
+</div>
+</div>
+<div class="aspect-square rounded-2xl overflow-hidden relative group cursor-pointer">
+<img alt="MJ 2" class="w-full h-full object-cover transition-transform group-hover:scale-110" src="https://lh3.googleusercontent.com/aida/AP1WRLuPg4q2Wob3enSIKsMmYipEQ1xVjpOqRCsaNJbN0UonHRn_pGYK4qMbpND_ElpUXcSoFks_OCn0tssME3zarrZIDiXy7lAlTNVD2Jb8_2N5shpDMBCOWY5VhqI0rnpLiQn7Ol3kOOpcIG07ysZr7tn8tJe_nN2ehpD9SoQjFbl5kQ47EtXeHoQJWCN4IhYxAPKhN4z8sCpdge-35XyLT2fLEcaFvdawgIAToF0VMZTp8aqzFPhQGDrt1A"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-4xl">headphones</span>
+</div>
+</div>
+<div class="aspect-square rounded-2xl overflow-hidden relative group cursor-pointer">
+<img alt="MJ 3" class="w-full h-full object-cover transition-transform group-hover:scale-110" src="https://lh3.googleusercontent.com/aida/AP1WRLtdssOYmqhzcs6Nk6z83qvFKHu5A77rJ5T13-EPVafoSDuRR0yMsZn9iAwniTKWNu-1uOyRtkqxpSdqQakePrdXCRCKq1xIGAdTv2bdIgF4DKwNV_b1ppBy5LNFqFLeYQbOtFTqxdfOa1Jde1xY8o2_1x3SESGpHPGSzfXRndJC7hVxD1EJD5KooNt0VUFn3g_tcVFWnydY4EOVRbvclWjNHy-J_iH0JZD46RE8-4AEvncnFFVviAOBRDw"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-4xl">headphones</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Grow Sessions -->
+<section class="space-y-stack-gap">
+<h2 class="font-headline-sm text-headline-sm text-primary">Grow Sessions</h2>
+<div class="relative rounded-3xl overflow-hidden glass-card p-2 flex flex-col md:flex-row gap-6 border-primary/30">
+<div class="w-full md:w-48 h-48 rounded-2xl overflow-hidden">
+<img alt="Organic Vibe Mix" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLunvBaVzDhtmTG3wd7B9JawK2VLceU9FZ6UADtW4LiMu7KbfgTrRAS9hz5bKXEE_GhZJMWR3rgTaN8-5nf0gal4FL270vMq7qYsjIYQRfShZpFqL-IPffsqrCYbVxFt67T0LX-EMhjJsq9ITTs7XQzfPpcItV6Rw_milibt4bc3DP9D53XBcuAVV-vUTiUyeK06BNxSaAl5yr-MpfIUP_J6U6gS712XDgxFrk0xJpVmpuWZLhl3-BhakvI"/>
+</div>
+<div class="flex-1 p-4 flex flex-col justify-center">
+<h3 class="font-headline-md text-headline-md text-white mb-2">Organic Vibe Mix</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Die perfekte Begleitung für deine Grow-Sessions von TEAM EASYGROWING. Entspannter Lofi &amp; Acoustic Sound.</p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-label-lg text-label-lg hover:brightness-110" onclick="playTrack('Organic Vibe Mix', 'TEAM EASYGROWING', 'https://lh3.googleusercontent.com/aida/AP1WRLunvBaVzDhtmTG3wd7B9JawK2VLceU9FZ6UADtW4LiMu7KbfgTrRAS9hz5bKXEE_GhZJMWR3rgTaN8-5nf0gal4FL270vMq7qYsjIYQRfShZpFqL-IPffsqrCYbVxFt67T0LX-EMhjJsq9ITTs7XQzfPpcItV6Rw_milibt4bc3DP9D53XBcuAVV-vUTiUyeK06BNxSaAl5yr-MpfIUP_J6U6gS712XDgxFrk0xJpVmpuWZLhl3-BhakvI')">Abspielen</button>
+<button class="border border-outline px-6 py-2 rounded-full font-label-lg text-label-lg hover:bg-white/5 transition-colors">Speichern</button>
+<a class="bg-[#1DB954]/10 text-[#1DB954] border border-[#1DB954]/30 px-6 py-2 rounded-full font-label-lg text-label-lg hover:bg-[#1DB954]/20 transition-all flex items-center gap-2" href="https://open.spotify.com/playlist/37i9dQZF1DX8Ueb99MhI70" target="_blank">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.496 17.303c-.218.358-.683.473-1.041.255-2.883-1.762-6.513-2.161-10.789-1.186-.41.094-.82-.163-.914-.573-.094-.41.163-.82.573-.914 4.693-1.072 8.705-.615 11.916 1.346.358.218.473.683.255 1.041zm1.464-3.262c-.274.446-.856.589-1.302.315-3.3-2.028-8.33-2.617-12.23-1.431-.502.152-1.031-.131-1.183-.633-.152-.502.131-1.031.633-1.183 4.453-1.353 10.003-.699 13.767 1.614.446.274.589.856.315 1.302zm.126-3.411c-3.957-2.35-10.482-2.567-14.269-1.417-.606.184-1.248-.161-1.432-.767-.184-.606.161-1.248.767-1.432 4.347-1.319 11.538-1.066 16.1 1.64.545.324.724 1.026.4 1.571-.324.545-1.026.724-1.566.405z"></path></svg>
+                            Spotify
+                        </a>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Global Audio Player (Enhanced Mini Player) -->
+<div class="fixed bottom-24 left-4 right-4 z-40 transition-all duration-500 transform translate-y-0 opacity-100" id="audio-player">
+<div class="glass-card p-3 rounded-2xl shadow-2xl flex items-center justify-between border-primary/20 phoenix-glow relative overflow-hidden">
+<div class="flex items-center gap-3 overflow-hidden z-10">
+<div class="w-12 h-12 rounded-lg bg-surface-container overflow-hidden flex-shrink-0">
+<img alt="Playing" class="w-full h-full object-cover" id="player-img" src="https://lh3.googleusercontent.com/aida/AP1WRLv5Jd2ZqlkHyxR7KN4189O2WqeiFi5_ykcEuKzlHBkI17C03KdNFo4IfJs62DsQxnwxVYK_iK48HuK9o6zQ_ETwBbNkLd-AwoKF2AVIplR-qZtWs7Ec6c8iaA9hZqFdTgx70fH1JlZH07kbmtcGQM5Us4wYhyRB7fGfHe4x5A5jMBmKygb-hHZdCn-fiG9tLwPT6GoiIsNeiGgQwN2HTWqAgIjmx5UH3c99_Ka5mopDhXP1Ho9qm7Y_UaE"/>
+</div>
+<div class="overflow-hidden">
+<h4 class="font-label-lg text-label-lg text-white truncate" id="player-title">Das sind wir!</h4>
+<p class="font-label-sm text-label-sm text-primary truncate" id="player-artist">TEAM EASYGROWING</p>
+</div>
+</div>
+<div class="flex items-center gap-2 z-10">
+<button class="p-2 text-on-surface hover:text-primary active:scale-90 transition-transform">
+<span class="material-symbols-outlined">skip_previous</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center hover:scale-105 active:scale-95 transition-transform" id="master-play-btn">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">pause</span>
+</button>
+<button class="p-2 text-on-surface hover:text-primary active:scale-90 transition-transform">
+<span class="material-symbols-outlined">skip_next</span>
+</button>
+</div>
+<!-- Progress Bar -->
+<div class="absolute bottom-0 left-0 right-0 h-1 bg-surface-variant/30">
+<div class="h-full bg-primary w-[45%] shadow-[0_0_8px_rgba(161,212,148,0.8)] transition-all duration-300" id="player-progress"></div>
+</div>
+</div>
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center pt-2 pb-8 px-4 bg-surface-container/80 backdrop-blur-xl border-t border-white/5 z-50 rounded-t-xl shadow-[0_-4px_20px_rgba(255,157,0,0.1)]">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/20 rounded-lg transition-all p-2" href="index.html">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/20 rounded-lg transition-all p-2" href="diary.html">
+<span class="material-symbols-outlined">book_2</span>
+<span class="font-label-sm text-label-sm mt-1">Diary</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/20 rounded-lg transition-all p-2" href="bible.html">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label-sm text-label-sm mt-1">Bible</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary-fixed-dim font-bold after:content-[''] after:w-1 after:h-1 after:bg-secondary-fixed-dim after:rounded-full after:mt-1 p-2 scale-110" href="music.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">library_music</span>
+<span class="font-label-sm text-label-sm mt-1">Music</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/20 rounded-lg transition-all p-2" href="shop.html">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-label-sm text-label-sm mt-1">Shop</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/20 rounded-lg transition-all p-2" href="profile.html">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm mt-1">Profile</span>
+</a>
+</nav>
+<script>
+        let isPlaying = true;
+        const masterPlayBtn = document.getElementById('master-play-btn');
+        const playBtnIcon = masterPlayBtn.querySelector('.material-symbols-outlined');
+        const playerTitle = document.getElementById('player-title');
+        const playerArtist = document.getElementById('player-artist');
+        const playerImg = document.getElementById('player-img');
+        const playerProgress = document.getElementById('player-progress');
+
+        // State management
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedUnits = localStorage.getItem('units') || 'metric';
+            const savedLang = localStorage.getItem('lang') || 'en';
+            toggleUnits(savedUnits);
+            setLang(savedLang);
+        });
+
+        function toggleUnits(mode) {
+            localStorage.setItem('units', mode);
+            const btnMetric = document.getElementById('btn-metric');
+            const btnImperial = document.getElementById('btn-imperial');
+            if (btnMetric && btnImperial) {
+                if (mode === 'imperial') {
+                    btnMetric.className = "px-2 py-0.5 rounded-full text-[10px] font-bold text-on-surface-variant hover:text-primary transition-colors";
+                    btnImperial.className = "px-2 py-0.5 rounded-full text-[10px] font-bold bg-secondary-container text-on-secondary-container";
+                } else {
+                    btnMetric.className = "px-2 py-0.5 rounded-full text-[10px] font-bold bg-secondary-container text-on-secondary-container";
+                    btnImperial.className = "px-2 py-0.5 rounded-full text-[10px] font-bold text-on-surface-variant hover:text-primary transition-colors";
+                }
+            }
+        }
+
+        function setLang(lang) {
+            localStorage.setItem('lang', lang);
+            ['de', 'en', 'es'].forEach(l => {
+                const btn = document.getElementById(`lang-${l}`);
+                if (btn) btn.className = "px-2 py-0.5 rounded-full text-[10px] font-bold text-on-surface-variant hover:text-primary transition-colors";
+            });
+            const activeBtn = document.getElementById(`lang-${lang}`);
+            if (activeBtn) activeBtn.className = "px-2 py-0.5 rounded-full text-[10px] font-bold bg-primary text-on-primary";
+        }
+
+        function playTrack(title, artist, img) {
+            playerTitle.textContent = title;
+            playerArtist.textContent = artist;
+            playerImg.src = img;
+            
+            // Highlight active track UI
+            document.querySelectorAll('#track-list > div').forEach(card => {
+                const cardTitle = card.querySelector('h3').textContent;
+                if (cardTitle === title) {
+                    card.classList.add('track-active');
+                } else {
+                    card.classList.remove('track-active');
+                }
+            });
+
+            // Set play state
+            isPlaying = true;
+            playBtnIcon.textContent = 'pause';
+            
+            // Randomize progress for demo effect
+            playerProgress.style.width = '0%';
+            setTimeout(() => {
+                playerProgress.style.width = Math.floor(Math.random() * 40 + 10) + '%';
+            }, 50);
+        }
+
+        masterPlayBtn.addEventListener('click', () => {
+            isPlaying = !isPlaying;
+            playBtnIcon.textContent = isPlaying ? 'pause' : 'play_arrow';
+        });
+
+        // Initialize first track state
+        playTrack('Das sind wir!', 'TEAM EASYGROWING', 'https://lh3.googleusercontent.com/aida/AP1WRLv5Jd2ZqlkHyxR7KN4189O2WqeiFi5_ykcEuKzlHBkI17C03KdNFo4IfJs62DsQxnwxVYK_iK48HuK9o6zQ_ETwBbNkLd-AwoKF2AVIplR-qZtWs7Ec6c8iaA9hZqFdTgx70fH1JlZH07kbmtcGQM5Us4wYhyRB7fGfHe4x5A5jMBmKygb-hHZdCn-fiG9tLwPT6GoiIsNeiGgQwN2HTWqAgIjmx5UH3c99_Ka5mopDhXP1Ho9qm7Y_UaE');
+    </script>
+</body></html>
