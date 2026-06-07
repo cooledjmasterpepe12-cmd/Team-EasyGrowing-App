@@ -241,50 +241,173 @@
             © 2026 Team EasyGrowing. Alle Rechte vorbehalten.
         </p>
 </main>
-<script>
-        const tabLogin = document.getElementById('tab-login');
-        const tabRegister = document.getElementById('tab-register');
-        const loginForm = document.getElementById('login-form');
-        const registerForm = document.getElementById('register-form');
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 
-        function showLogin() {
-            tabLogin.classList.add('text-primary', 'border-primary');
-            tabLogin.classList.remove('text-on-surface-variant');
-            tabRegister.classList.remove('text-primary', 'border-primary');
-            tabRegister.classList.add('text-on-surface-variant');
-            
-            loginForm.classList.remove('hidden');
-            registerForm.classList.add('hidden');
+    const firebaseConfig = {
+        apiKey: "AIzaSyCwIlWksdGaKr-eJCgJ4Q0u73nwYqG9MNs",
+        authDomain: "team-easygrowing.firebaseapp.com",
+        projectId: "team-easygrowing",
+        storageBucket: "team-easygrowing.firebasestorage.app",
+        messagingSenderId: "152035870457",
+        appId: "1:152035870457:web:265e638fbf0e4e679c4428",
+        measurementId: "G-1C8H0C11T8"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Redirect if already logged in
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            window.location.href = 'index.html';
         }
+    });
 
-        function showRegister() {
-            tabRegister.classList.add('text-primary', 'border-primary');
-            tabRegister.classList.remove('text-on-surface-variant');
-            tabLogin.classList.remove('text-primary', 'border-primary');
-            tabLogin.classList.add('text-on-surface-variant');
-            
-            registerForm.classList.remove('hidden');
-            loginForm.classList.add('hidden');
+    // ── Tab switching ──────────────────────────────────────────
+    const tabLogin    = document.getElementById('tab-login');
+    const tabRegister = document.getElementById('tab-register');
+    const loginForm   = document.getElementById('login-form');
+    const registerForm= document.getElementById('register-form');
+
+    function showLogin() {
+        tabLogin.classList.add('text-primary','border-b-2','border-primary');
+        tabLogin.classList.remove('text-on-surface-variant','border-b-0');
+        tabRegister.classList.remove('text-primary','border-b-2','border-primary');
+        tabRegister.classList.add('text-on-surface-variant');
+        loginForm.classList.remove('hidden');
+        registerForm.classList.add('hidden');
+        clearError();
+    }
+
+    function showRegister() {
+        tabRegister.classList.add('text-primary','border-b-2','border-primary');
+        tabRegister.classList.remove('text-on-surface-variant','border-b-0');
+        tabLogin.classList.remove('text-primary','border-b-2','border-primary');
+        tabLogin.classList.add('text-on-surface-variant');
+        registerForm.classList.remove('hidden');
+        loginForm.classList.add('hidden');
+        clearError();
+    }
+
+    tabLogin.addEventListener('click', showLogin);
+    tabRegister.addEventListener('click', showRegister);
+
+    // ── Error / Success helper ─────────────────────────────────
+    function showError(msg) {
+        let el = document.getElementById('auth-error');
+        if (!el) {
+            el = document.createElement('div');
+            el.id = 'auth-error';
+            el.className = 'bg-error/20 border border-error/40 text-error rounded-lg px-4 py-3 text-sm font-medium text-center mt-2';
+            document.getElementById('auth-container').prepend(el);
         }
+        el.textContent = msg;
+        el.classList.remove('hidden');
+    }
 
-        tabLogin.addEventListener('click', showLogin);
-        tabRegister.addEventListener('click', showRegister);
+    function showSuccess(msg) {
+        let el = document.getElementById('auth-error');
+        if (!el) {
+            el = document.createElement('div');
+            el.id = 'auth-error';
+            document.getElementById('auth-container').prepend(el);
+        }
+        el.className = 'bg-primary/20 border border-primary/40 text-primary rounded-lg px-4 py-3 text-sm font-medium text-center mt-2';
+        el.textContent = msg;
+        el.classList.remove('hidden');
+    }
 
-        // Form submission handling for redirect
-        document.querySelectorAll('form').forEach(form => {
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const btn = form.querySelector('button[type="submit"]');
-                btn.classList.add('scale-95');
-                
-                // Save login status to localStorage
-                localStorage.setItem('isLoggedIn', 'true');
-                
-                // Show a brief loading state/delay before redirecting to simulate success
-                setTimeout(() => {
-                    window.location.href = form.getAttribute('action');
-                }, 300);
-            });
+    function clearError() {
+        const el = document.getElementById('auth-error');
+        if (el) el.classList.add('hidden');
+    }
+
+    function setLoading(btn, loading) {
+        if (loading) {
+            btn.disabled = true;
+            btn.dataset.original = btn.textContent;
+            btn.innerHTML = '<span class="inline-block w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin mr-2"></span>Bitte warten...';
+        } else {
+            btn.disabled = false;
+            btn.textContent = btn.dataset.original || btn.textContent;
+        }
+    }
+
+    function translateError(code) {
+        const map = {
+            'auth/user-not-found':      'Kein Konto mit dieser E-Mail gefunden.',
+            'auth/wrong-password':      'Falsches Passwort. Bitte erneut versuchen.',
+            'auth/invalid-credential':  'E-Mail oder Passwort ist falsch.',
+            'auth/email-already-in-use':'Diese E-Mail ist bereits registriert.',
+            'auth/weak-password':       'Passwort muss mindestens 6 Zeichen haben.',
+            'auth/invalid-email':       'Ungültige E-Mail-Adresse.',
+            'auth/too-many-requests':   'Zu viele Versuche. Bitte kurz warten.',
+            'auth/network-request-failed': 'Keine Internetverbindung.',
+        };
+        return map[code] || 'Ein Fehler ist aufgetreten. Bitte erneut versuchen.';
+    }
+
+    // ── Password visibility toggle ─────────────────────────────
+    document.querySelectorAll('button[data-toggle-pw]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const input = btn.previousElementSibling || btn.parentElement.querySelector('input[type="password"], input[type="text"]');
+            const icon  = btn.querySelector('.material-symbols-outlined');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.textContent = 'visibility_off';
+            } else {
+                input.type = 'password';
+                icon.textContent = 'visibility';
+            }
         });
-    </script>
+    });
+
+    // ── LOGIN ──────────────────────────────────────────────────
+    loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        clearError();
+        const email    = loginForm.querySelector('input[type="email"]').value.trim();
+        const password = loginForm.querySelector('input[type="password"]').value;
+        const btn      = loginForm.querySelector('button[type="submit"]');
+
+        setLoading(btn, true);
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+            showSuccess('✅ Erfolgreich eingeloggt! Weiterleitung...');
+            setTimeout(() => { window.location.href = 'index.html'; }, 800);
+        } catch (err) {
+            showError(translateError(err.code));
+            setLoading(btn, false);
+        }
+    });
+
+    // ── REGISTER ───────────────────────────────────────────────
+    registerForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        clearError();
+        const username = registerForm.querySelector('input[type="text"]').value.trim();
+        const email    = registerForm.querySelector('input[type="email"]').value.trim();
+        const password = registerForm.querySelector('input[type="password"]').value;
+        const btn      = registerForm.querySelector('button[type="submit"]');
+
+        if (!username || username.length < 3) {
+            showError('Benutzername muss mindestens 3 Zeichen lang sein.');
+            return;
+        }
+
+        setLoading(btn, true);
+        try {
+            const cred = await createUserWithEmailAndPassword(auth, email, password);
+            await updateProfile(cred.user, { displayName: username });
+            localStorage.setItem('username', username);
+            showSuccess('✅ Konto erstellt! Willkommen bei EasyGrowing!');
+            setTimeout(() => { window.location.href = 'index.html'; }, 800);
+        } catch (err) {
+            showError(translateError(err.code));
+            setLoading(btn, false);
+        }
+    });
+</script>
 </body></html>
