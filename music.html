@@ -186,7 +186,7 @@
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="track-list">
 <!-- Track 1 -->
-<div class="glass-card p-4 rounded-2xl flex items-center gap-4 hover:bg-surface-variant/30 transition-colors group cursor-pointer" onclick="playTrack('Das sind wir!', 'TEAM EASYGROWING', 'https://lh3.googleusercontent.com/aida/AP1WRLv5Jd2ZqlkHyxR7KN4189O2WqeiFi5_ykcEuKzlHBkI17C03KdNFo4IfJs62DsQxnwxVYK_iK48HuK9o6zQ_ETwBbNkLd-AwoKF2AVIplR-qZtWs7Ec6c8iaA9hZqFdTgx70fH1JlZH07kbmtcGQM5Us4wYhyRB7fGfHe4x5A5jMBmKygb-hHZdCn-fiG9tLwPT6GoiIsNeiGgQwN2HTWqAgIjmx5UH3c99_Ka5mopDhXP1Ho9qm7Y_UaE')">
+<div class="glass-card p-4 rounded-2xl flex items-center gap-4 hover:bg-surface-variant/30 transition-colors group cursor-pointer" onclick="playTrack(0)">
 <div class="w-16 h-16 rounded-xl overflow-hidden bg-primary/10 flex items-center justify-center relative">
 <span class="material-symbols-outlined text-primary group-hover:hidden">music_note</span>
 <span class="material-symbols-outlined text-primary hidden group-hover:block" style="font-variation-settings: 'FILL' 1;">play_circle</span>
@@ -203,7 +203,7 @@
 </div>
 </div>
 <!-- Track 2 -->
-<div class="glass-card p-4 rounded-2xl flex items-center gap-4 hover:bg-surface-variant/30 transition-colors group cursor-pointer" onclick="playTrack('Wir sind keine Redner', 'TEAM EASYGROWING', 'https://lh3.googleusercontent.com/aida/AP1WRLuPg4q2Wob3enSIKsMmYipEQ1xVjpOqRCsaNJbN0UonHRn_pGYK4qMbpND_ElpUXcSoFks_OCn0tssME3zarrZIDiXy7lAlTNVD2Jb8_2N5shpDMBCOWY5VhqI0rnpLiQn7Ol3kOOpcIG07ysZr7tn8tJe_nN2ehpD9SoQjFbl5kQ47EtXeHoQJWCN4IhYxAPKhN4z8sCpdge-35XyLT2fLEcaFvdawgIAToF0VMZTp8aqzFPhQGDrt1A')">
+<div class="glass-card p-4 rounded-2xl flex items-center gap-4 hover:bg-surface-variant/30 transition-colors group cursor-pointer" onclick="playTrack(1)">
 <div class="w-16 h-16 rounded-xl overflow-hidden bg-secondary/10 flex items-center justify-center relative">
 <span class="material-symbols-outlined text-secondary group-hover:hidden">volume_up</span>
 <span class="material-symbols-outlined text-secondary hidden group-hover:block" style="font-variation-settings: 'FILL' 1;">play_circle</span>
@@ -259,7 +259,7 @@
 <h3 class="font-headline-md text-headline-md text-white mb-2">Organic Vibe Mix</h3>
 <p class="font-body-md text-body-md text-on-surface-variant mb-6">Die perfekte Begleitung für deine Grow-Sessions von TEAM EASYGROWING. Entspannter Lofi &amp; Acoustic Sound.</p>
 <div class="flex flex-wrap gap-4">
-<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-label-lg text-label-lg hover:brightness-110" onclick="playTrack('Organic Vibe Mix', 'TEAM EASYGROWING', 'https://lh3.googleusercontent.com/aida/AP1WRLunvBaVzDhtmTG3wd7B9JawK2VLceU9FZ6UADtW4LiMu7KbfgTrRAS9hz5bKXEE_GhZJMWR3rgTaN8-5nf0gal4FL270vMq7qYsjIYQRfShZpFqL-IPffsqrCYbVxFt67T0LX-EMhjJsq9ITTs7XQzfPpcItV6Rw_milibt4bc3DP9D53XBcuAVV-vUTiUyeK06BNxSaAl5yr-MpfIUP_J6U6gS712XDgxFrk0xJpVmpuWZLhl3-BhakvI')">Abspielen</button>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-label-lg text-label-lg hover:brightness-110" onclick="playTrack(2)">Abspielen</button>
 <button class="border border-outline px-6 py-2 rounded-full font-label-lg text-label-lg hover:bg-white/5 transition-colors">Speichern</button>
 <a class="bg-[#1DB954]/10 text-[#1DB954] border border-[#1DB954]/30 px-6 py-2 rounded-full font-label-lg text-label-lg hover:bg-[#1DB954]/20 transition-all flex items-center gap-2" href="https://open.spotify.com/playlist/37i9dQZF1DX8Ueb99MhI70" target="_blank">
 <svg class="w-4 h-4 fill-current" viewbox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.496 17.303c-.218.358-.683.473-1.041.255-2.883-1.762-6.513-2.161-10.789-1.186-.41.094-.82-.163-.914-.573-.094-.41.163-.82.573-.914 4.693-1.072 8.705-.615 11.916 1.346.358.218.473.683.255 1.041zm1.464-3.262c-.274.446-.856.589-1.302.315-3.3-2.028-8.33-2.617-12.23-1.431-.502.152-1.031-.131-1.183-.633-.152-.502.131-1.031.633-1.183 4.453-1.353 10.003-.699 13.767 1.614.446.274.589.856.315 1.302zm.126-3.411c-3.957-2.35-10.482-2.567-14.269-1.417-.606.184-1.248-.161-1.432-.767-.184-.606.161-1.248.767-1.432 4.347-1.319 11.538-1.066 16.1 1.64.545.324.724 1.026.4 1.571-.324.545-1.026.724-1.566.405z"></path></svg>
@@ -271,32 +271,43 @@
 </section>
 </main>
 <!-- Global Audio Player (Enhanced Mini Player) -->
-<div class="fixed bottom-24 left-4 right-4 z-40 transition-all duration-500 transform translate-y-0 opacity-100" id="audio-player">
-<div class="glass-card p-3 rounded-2xl shadow-2xl flex items-center justify-between border-primary/20 phoenix-glow relative overflow-hidden">
-<div class="flex items-center gap-3 overflow-hidden z-10">
-<div class="w-12 h-12 rounded-lg bg-surface-container overflow-hidden flex-shrink-0">
-<img alt="Playing" class="w-full h-full object-cover" id="player-img" src="https://lh3.googleusercontent.com/aida/AP1WRLv5Jd2ZqlkHyxR7KN4189O2WqeiFi5_ykcEuKzlHBkI17C03KdNFo4IfJs62DsQxnwxVYK_iK48HuK9o6zQ_ETwBbNkLd-AwoKF2AVIplR-qZtWs7Ec6c8iaA9hZqFdTgx70fH1JlZH07kbmtcGQM5Us4wYhyRB7fGfHe4x5A5jMBmKygb-hHZdCn-fiG9tLwPT6GoiIsNeiGgQwN2HTWqAgIjmx5UH3c99_Ka5mopDhXP1Ho9qm7Y_UaE"/>
-</div>
-<div class="overflow-hidden">
-<h4 class="font-label-lg text-label-lg text-white truncate" id="player-title">Das sind wir!</h4>
-<p class="font-label-sm text-label-sm text-primary truncate" id="player-artist">TEAM EASYGROWING</p>
-</div>
-</div>
-<div class="flex items-center gap-2 z-10">
-<button class="p-2 text-on-surface hover:text-primary active:scale-90 transition-transform">
-<span class="material-symbols-outlined">skip_previous</span>
-</button>
-<button class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center hover:scale-105 active:scale-95 transition-transform" id="master-play-btn">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">pause</span>
-</button>
-<button class="p-2 text-on-surface hover:text-primary active:scale-90 transition-transform">
-<span class="material-symbols-outlined">skip_next</span>
-</button>
-</div>
-<!-- Progress Bar -->
-<div class="absolute bottom-0 left-0 right-0 h-1 bg-surface-variant/30">
-<div class="h-full bg-primary w-[45%] shadow-[0_0_8px_rgba(161,212,148,0.8)] transition-all duration-300" id="player-progress"></div>
-</div>
+<div class="fixed bottom-24 left-4 right-4 z-40 transition-all duration-500" id="audio-player">
+<div class="glass-card px-4 pt-3 pb-4 rounded-2xl shadow-2xl border-primary/20 phoenix-glow relative overflow-hidden">
+  <!-- Top row: cover + info + controls -->
+  <div class="flex items-center gap-3">
+    <div class="w-12 h-12 rounded-lg bg-surface-container overflow-hidden flex-shrink-0">
+      <img alt="Playing" class="w-full h-full object-cover" id="player-img" src=""/>
+    </div>
+    <div class="overflow-hidden flex-1">
+      <h4 class="font-label-lg text-label-lg text-white truncate" id="player-title">Das sind wir!</h4>
+      <p class="font-label-sm text-label-sm text-primary truncate" id="player-artist">TEAM EASYGROWING</p>
+    </div>
+    <div class="flex items-center gap-1">
+      <button id="btn-shuffle" class="p-1.5 text-on-surface-variant hover:text-primary active:scale-90 transition-all" title="Shuffle">
+        <span class="material-symbols-outlined text-xl">shuffle</span>
+      </button>
+      <button id="btn-prev" class="p-1.5 text-on-surface hover:text-primary active:scale-90 transition-transform">
+        <span class="material-symbols-outlined">skip_previous</span>
+      </button>
+      <button class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center hover:scale-105 active:scale-95 transition-transform" id="master-play-btn">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+      </button>
+      <button id="btn-next" class="p-1.5 text-on-surface hover:text-primary active:scale-90 transition-transform">
+        <span class="material-symbols-outlined">skip_next</span>
+      </button>
+      <button id="btn-repeat" class="p-1.5 text-on-surface-variant hover:text-primary active:scale-90 transition-all" title="Repeat">
+        <span class="material-symbols-outlined text-xl">repeat</span>
+      </button>
+    </div>
+  </div>
+  <!-- Progress row -->
+  <div class="mt-2 flex items-center gap-2">
+    <span class="font-label-sm text-label-sm text-on-surface-variant text-[10px] w-20" id="player-time">0:00 / 0:00</span>
+    <div class="flex-1 h-1.5 bg-surface-variant/40 rounded-full cursor-pointer" id="progress-bar">
+      <div class="h-full bg-primary rounded-full shadow-[0_0_6px_rgba(161,212,148,0.7)] transition-all duration-150" id="player-progress" style="width:0%"></div>
+    </div>
+    <input class="w-16 accent-primary" id="volume-slider" max="100" min="0" type="range" value="80"/>
+  </div>
 </div>
 </div>
 <!-- BottomNavBar -->
@@ -327,79 +338,217 @@
 </a>
 </nav>
 <script>
-        let isPlaying = true;
-        const masterPlayBtn = document.getElementById('master-play-btn');
-        const playBtnIcon = masterPlayBtn.querySelector('.material-symbols-outlined');
-        const playerTitle = document.getElementById('player-title');
-        const playerArtist = document.getElementById('player-artist');
-        const playerImg = document.getElementById('player-img');
-        const playerProgress = document.getElementById('player-progress');
+    // ── Track Library ────────────────────────────────────────────
+    const TRACKS = [
+        {
+            title:  'Das sind wir!',
+            artist: 'TEAM EASYGROWING',
+            src:    'music/das-sind-wir.mp3',
+            cover:  'https://lh3.googleusercontent.com/aida/AP1WRLv5Jd2ZqlkHyxR7KN4189O2WqeiFi5_ykcEuKzlHBkI17C03KdNFo4IfJs62DsQxnwxVYK_iK48HuK9o6zQ_ETwBbNkLd-AwoKF2AVIplR-qZtWs7Ec6c8iaA9hZqFdTgx70fH1JlZH07kbmtcGQM5Us4wYhyRB7fGfHe4x5A5jMBmKygb-hHZdCn-fiG9tLwPT6GoiIsNeiGgQwN2HTWqAgIjmx5UH3c99_Ka5mopDhXP1Ho9qm7Y_UaE',
+            spotify: 'https://open.spotify.com/artist/06HLovvJm7QjU-pD3lO0jM',
+            duration: '03:45'
+        },
+        {
+            title:  'Wir sind keine Redner',
+            artist: 'TEAM EASYGROWING',
+            src:    'music/wir-sind-keine-redner.mp3',
+            cover:  'https://lh3.googleusercontent.com/aida/AP1WRLuPg4q2Wob3enSIKsMmYipEQ1xVjpOqRCsaNJbN0UonHRn_pGYK4qMbpND_ElpUXcSoFks_OCn0tssME3zarrZIDiXy7lAlTNVD2Jb8_2N5shpDMBCOWY5VhqI0rnpLiQn7Ol3kOOpcIG07ysZr7tn8tJe_nN2ehpD9SoQjFbl5kQ47EtXeHoQJWCN4IhYxAPKhN4z8sCpdge-35XyLT2fLEcaFvdawgIAToF0VMZTp8aqzFPhQGDrt1A',
+            spotify: 'https://open.spotify.com/artist/06HLovvJm7QjU-pD3lO0jM',
+            duration: '04:12'
+        },
+        {
+            title:  'Organic Vibe Mix',
+            artist: 'TEAM EASYGROWING',
+            src:    'music/organic-vibe-mix.mp3',
+            cover:  'https://lh3.googleusercontent.com/aida/AP1WRLunvBaVzDhtmTG3wd7B9JawK2VLceU9FZ6UADtW4LiMu7KbfgTrRAS9hz5bKXEE_GhZJMWR3rgTaN8-5nf0gal4FL270vMq7qYsjIYQRfShZpFqL-IPffsqrCYbVxFt67T0LX-EMhjJsq9ITTs7XQzfPpcItV6Rw_milibt4bc3DP9D53XBcuAVV-vUTiUyeK06BNxSaAl5yr-MpfIUP_J6U6gS712XDgxFrk0xJpVmpuWZLhl3-BhakvI',
+            spotify: 'https://open.spotify.com/playlist/37i9dQZF1DX8Ueb99MhI70',
+            duration: '05:30'
+        }
+    ];
 
-        // State management
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedUnits = localStorage.getItem('units') || 'metric';
-            const savedLang = localStorage.getItem('lang') || 'en';
-            toggleUnits(savedUnits);
-            setLang(savedLang);
+    // ── State ────────────────────────────────────────────────────
+    let currentIndex = 0;
+    let isPlaying    = false;
+    let isShuffle    = false;
+    let isRepeat     = false;
+
+    // ── DOM ──────────────────────────────────────────────────────
+    const audio         = new Audio();
+    const masterPlayBtn = document.getElementById('master-play-btn');
+    const playBtnIcon   = masterPlayBtn.querySelector('.material-symbols-outlined');
+    const playerTitle   = document.getElementById('player-title');
+    const playerArtist  = document.getElementById('player-artist');
+    const playerImg     = document.getElementById('player-img');
+    const playerProgress= document.getElementById('player-progress');
+    const playerTime    = document.getElementById('player-time');
+    const progressBar   = document.getElementById('progress-bar');
+    const volumeSlider  = document.getElementById('volume-slider');
+    const btnShuffle    = document.getElementById('btn-shuffle');
+    const btnRepeat     = document.getElementById('btn-repeat');
+    const btnPrev       = document.getElementById('btn-prev');
+    const btnNext       = document.getElementById('btn-next');
+
+    // ── Load Track ───────────────────────────────────────────────
+    function loadTrack(index, autoPlay = true) {
+        const track = TRACKS[index];
+        currentIndex = index;
+
+        // Update player UI
+        playerTitle.textContent  = track.title;
+        playerArtist.textContent = track.artist;
+        playerImg.src            = track.cover;
+
+        // Load audio
+        audio.src = track.src;
+        audio.load();
+
+        // Highlight active card
+        document.querySelectorAll('#track-list > div').forEach((card, i) => {
+            card.classList.toggle('track-active', i === index);
         });
 
-        function toggleUnits(mode) {
-            localStorage.setItem('units', mode);
-            const btnMetric = document.getElementById('btn-metric');
-            const btnImperial = document.getElementById('btn-imperial');
-            if (btnMetric && btnImperial) {
-                if (mode === 'imperial') {
-                    btnMetric.className = "px-2 py-0.5 rounded-full text-[10px] font-bold text-on-surface-variant hover:text-primary transition-colors";
-                    btnImperial.className = "px-2 py-0.5 rounded-full text-[10px] font-bold bg-secondary-container text-on-secondary-container";
-                } else {
-                    btnMetric.className = "px-2 py-0.5 rounded-full text-[10px] font-bold bg-secondary-container text-on-secondary-container";
-                    btnImperial.className = "px-2 py-0.5 rounded-full text-[10px] font-bold text-on-surface-variant hover:text-primary transition-colors";
-                }
-            }
-        }
-
-        function setLang(lang) {
-            localStorage.setItem('lang', lang);
-            ['de', 'en', 'es'].forEach(l => {
-                const btn = document.getElementById(`lang-${l}`);
-                if (btn) btn.className = "px-2 py-0.5 rounded-full text-[10px] font-bold text-on-surface-variant hover:text-primary transition-colors";
+        if (autoPlay) {
+            audio.play().then(() => {
+                isPlaying = true;
+                playBtnIcon.textContent = 'pause';
+            }).catch(() => {
+                // File not yet available – show friendly message
+                isPlaying = false;
+                playBtnIcon.textContent = 'play_arrow';
+                showNoFile(track.title);
             });
-            const activeBtn = document.getElementById(`lang-${lang}`);
-            if (activeBtn) activeBtn.className = "px-2 py-0.5 rounded-full text-[10px] font-bold bg-primary text-on-primary";
         }
+    }
 
-        function playTrack(title, artist, img) {
-            playerTitle.textContent = title;
-            playerArtist.textContent = artist;
-            playerImg.src = img;
-            
-            // Highlight active track UI
-            document.querySelectorAll('#track-list > div').forEach(card => {
-                const cardTitle = card.querySelector('h3').textContent;
-                if (cardTitle === title) {
-                    card.classList.add('track-active');
-                } else {
-                    card.classList.remove('track-active');
-                }
-            });
-
-            // Set play state
-            isPlaying = true;
-            playBtnIcon.textContent = 'pause';
-            
-            // Randomize progress for demo effect
-            playerProgress.style.width = '0%';
-            setTimeout(() => {
-                playerProgress.style.width = Math.floor(Math.random() * 40 + 10) + '%';
-            }, 50);
+    function showNoFile(title) {
+        let toast = document.getElementById('no-file-toast');
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.id = 'no-file-toast';
+            toast.className = 'fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-surface-container-high border border-outline text-on-surface px-5 py-3 rounded-2xl text-sm font-medium shadow-xl transition-all';
+            document.body.appendChild(toast);
         }
+        toast.textContent = `⚠️ MP3 fehlt: music/${title.toLowerCase().replace(/ /g,'-').replace(/!/g,'')}.mp3`;
+        toast.style.opacity = '1';
+        setTimeout(() => { toast.style.opacity = '0'; }, 3500);
+    }
 
-        masterPlayBtn.addEventListener('click', () => {
-            isPlaying = !isPlaying;
-            playBtnIcon.textContent = isPlaying ? 'pause' : 'play_arrow';
+    // ── Controls ─────────────────────────────────────────────────
+    masterPlayBtn.addEventListener('click', () => {
+        if (isPlaying) {
+            audio.pause();
+            isPlaying = false;
+            playBtnIcon.textContent = 'play_arrow';
+        } else {
+            audio.play().then(() => {
+                isPlaying = true;
+                playBtnIcon.textContent = 'pause';
+            }).catch(() => showNoFile(TRACKS[currentIndex].title));
+        }
+    });
+
+    btnPrev.addEventListener('click', () => {
+        if (audio.currentTime > 3) {
+            audio.currentTime = 0;
+        } else {
+            loadTrack((currentIndex - 1 + TRACKS.length) % TRACKS.length);
+        }
+    });
+
+    btnNext.addEventListener('click', () => {
+        const next = isShuffle
+            ? Math.floor(Math.random() * TRACKS.length)
+            : (currentIndex + 1) % TRACKS.length;
+        loadTrack(next);
+    });
+
+    btnShuffle.addEventListener('click', () => {
+        isShuffle = !isShuffle;
+        btnShuffle.classList.toggle('text-primary', isShuffle);
+        btnShuffle.classList.toggle('text-on-surface-variant', !isShuffle);
+    });
+
+    btnRepeat.addEventListener('click', () => {
+        isRepeat = !isRepeat;
+        audio.loop = isRepeat;
+        btnRepeat.classList.toggle('text-primary', isRepeat);
+        btnRepeat.classList.toggle('text-on-surface-variant', !isRepeat);
+    });
+
+    // ── Progress bar click ────────────────────────────────────────
+    progressBar.addEventListener('click', (e) => {
+        if (!audio.duration) return;
+        const rect = progressBar.getBoundingClientRect();
+        const pct  = (e.clientX - rect.left) / rect.width;
+        audio.currentTime = pct * audio.duration;
+    });
+
+    // ── Volume ────────────────────────────────────────────────────
+    if (volumeSlider) {
+        volumeSlider.addEventListener('input', () => {
+            audio.volume = volumeSlider.value / 100;
         });
+    }
 
-        // Initialize first track state
-        playTrack('Das sind wir!', 'TEAM EASYGROWING', 'https://lh3.googleusercontent.com/aida/AP1WRLv5Jd2ZqlkHyxR7KN4189O2WqeiFi5_ykcEuKzlHBkI17C03KdNFo4IfJs62DsQxnwxVYK_iK48HuK9o6zQ_ETwBbNkLd-AwoKF2AVIplR-qZtWs7Ec6c8iaA9hZqFdTgx70fH1JlZH07kbmtcGQM5Us4wYhyRB7fGfHe4x5A5jMBmKygb-hHZdCn-fiG9tLwPT6GoiIsNeiGgQwN2HTWqAgIjmx5UH3c99_Ka5mopDhXP1Ho9qm7Y_UaE');
-    </script>
+    // ── Audio events ─────────────────────────────────────────────
+    audio.addEventListener('timeupdate', () => {
+        if (!audio.duration) return;
+        const pct = (audio.currentTime / audio.duration) * 100;
+        playerProgress.style.width = pct + '%';
+        if (playerTime) {
+            playerTime.textContent = formatTime(audio.currentTime) + ' / ' + formatTime(audio.duration);
+        }
+    });
+
+    audio.addEventListener('ended', () => {
+        if (!isRepeat) {
+            const next = isShuffle
+                ? Math.floor(Math.random() * TRACKS.length)
+                : (currentIndex + 1) % TRACKS.length;
+            loadTrack(next);
+        }
+    });
+
+    function formatTime(s) {
+        const m = Math.floor(s / 60);
+        const sec = Math.floor(s % 60).toString().padStart(2, '0');
+        return `${m}:${sec}`;
+    }
+
+    // ── Track card clicks ─────────────────────────────────────────
+    function playTrack(index) {
+        loadTrack(index, true);
+    }
+
+    // ── Settings persistence ──────────────────────────────────────
+    window.addEventListener('DOMContentLoaded', () => {
+        toggleUnits(localStorage.getItem('units') || 'metric');
+        setLang(localStorage.getItem('lang') || 'de');
+        loadTrack(0, false);
+    });
+
+    function toggleUnits(mode) {
+        localStorage.setItem('units', mode);
+        const btnMetric   = document.getElementById('btn-metric');
+        const btnImperial = document.getElementById('btn-imperial');
+        if (!btnMetric || !btnImperial) return;
+        if (mode === 'imperial') {
+            btnMetric.className   = "px-2 py-0.5 rounded-full text-[10px] font-bold text-on-surface-variant hover:text-primary transition-colors";
+            btnImperial.className = "px-2 py-0.5 rounded-full text-[10px] font-bold bg-secondary-container text-on-secondary-container";
+        } else {
+            btnMetric.className   = "px-2 py-0.5 rounded-full text-[10px] font-bold bg-secondary-container text-on-secondary-container";
+            btnImperial.className = "px-2 py-0.5 rounded-full text-[10px] font-bold text-on-surface-variant hover:text-primary transition-colors";
+        }
+    }
+
+    function setLang(lang) {
+        localStorage.setItem('lang', lang);
+        ['de','en','es'].forEach(l => {
+            const btn = document.getElementById(`lang-${l}`);
+            if (btn) btn.className = "px-2 py-0.5 rounded-full text-[10px] font-bold text-on-surface-variant hover:text-primary transition-colors";
+        });
+        const activeBtn = document.getElementById(`lang-${lang}`);
+        if (activeBtn) activeBtn.className = "px-2 py-0.5 rounded-full text-[10px] font-bold bg-primary text-on-primary";
+    }
+</script>
 </body></html>
