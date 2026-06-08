@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useI18n } from '../core/i18n';
 import { useUnits } from '../core/units';
 import { useAuth } from '../core/auth';
@@ -25,8 +25,26 @@ const NAV_ITEMS = [
 export default function Layout({ children, currentPath }) {
   const { lang, setLang, t } = useI18n();
   const { mode, setMode } = useUnits();
-  const { user } = useAuth();
+  const { user, isLoggedIn, logout } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const userMenuRef = useRef(null);
+
+  useEffect(() => {
+    const handleClick = (e) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(e.target)) {
+        setUserMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, []);
+
+  const handleLogout = async () => {
+    setUserMenuOpen(false);
+    await logout();
+    window.location.hash = '/';
+  };
 
   return (
     <div className="min-h-screen bg-[#121212] flex flex-col">
@@ -36,7 +54,6 @@ export default function Layout({ children, currentPath }) {
           <span className="font-pixel text-[14px] text-[#00ff00] glow-pulse">EASYGROWING</span>
         </div>
         <div className="flex items-center gap-2">
-          {/* Lang toggle */}
           {['de', 'en', 'es'].map(l => (
             <button key={l} onClick={() => setLang(l)}
               className={`font-pixel text-[8px] px-2 py-1 border transition-all
@@ -44,14 +61,41 @@ export default function Layout({ children, currentPath }) {
               {l.toUpperCase()}
             </button>
           ))}
-          {/* Unit toggle */}
           <button onClick={() => setMode(mode === 'metric' ? 'imperial' : 'metric')}
-            className="font-pixel text-[8px] px-2 py-1 border border-[#cc00ff] text-[#cc00ff] hover:bg-[#cc00ff] hover:text-black transition-all ml-2">
+            className="font-pixel text-[8px] px-2 py-1 border border-[#00e5ff] text-[#00e5ff] hover:bg-[#00e5ff] hover:text-black transition-all ml-2">
             {mode === 'metric' ? '°C/L' : '°F/GAL'}
           </button>
-          {/* Menu */}
+
+          {/* User Menu */}
+          {isLoggedIn ? (
+            <div ref={userMenuRef} className="relative ml-2">
+              <button onClick={() => setUserMenuOpen(!userMenuOpen)}
+                className="font-pixel text-[8px] px-2 py-1 border border-[#00e5ff] text-[#00e5ff] hover:bg-[#00e5ff]/10 transition-all flex items-center gap-1">
+                <span>{user?.username?.toUpperCase() || 'USER'}</span>
+                <span style={{ fontSize: '6px' }}>▼</span>
+              </button>
+              {userMenuOpen && (
+                <div className="absolute right-0 top-full mt-1 bg-[#1a1a1a] border-2 border-[#00ff00] min-w-[140px] z-50">
+                  <button onClick={() => { setUserMenuOpen(false); window.location.hash = '/profile'; }}
+                    className="w-full text-left font-pixel text-[8px] text-[#00ff00] px-3 py-2 hover:bg-[#001a00] transition-all">
+                    {t('nav.profile')}
+                  </button>
+                  <button onClick={handleLogout}
+                    className="w-full text-left font-pixel text-[8px] text-[#ff3333] px-3 py-2 hover:bg-[#1a0000] transition-all border-t border-[#333]">
+                    {t('auth.logout')}
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <button onClick={() => window.location.hash = '/register'}
+              className="font-pixel text-[8px] px-2 py-1 border border-[#00e5ff] text-[#00e5ff] hover:bg-[#00e5ff]/10 transition-all ml-2">
+              {t('auth.login')}
+            </button>
+          )}
+
           <button onClick={() => setMenuOpen(!menuOpen)}
-            className="font-pixel text-[12px] text-[#00ff00] ml-2 hover:text-[#cc00ff]">
+            className="font-pixel text-[12px] text-[#00ff00] ml-2 hover:text-[#00e5ff]">
             {menuOpen ? '✕' : '☰'}
           </button>
         </div>
@@ -74,7 +118,6 @@ export default function Layout({ children, currentPath }) {
         </nav>
       )}
 
-      {/* Main Content */}
       <main className="flex-1 pt-14 pb-16 overflow-y-auto">
         {children}
       </main>

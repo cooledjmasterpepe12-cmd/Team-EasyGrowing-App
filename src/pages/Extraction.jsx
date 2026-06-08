@@ -188,7 +188,7 @@ const styles = {
   h2: {
     fontSize: '20px',
     marginBottom: '10px',
-    color: '#cc00ff',
+    color: '#00e5ff',
   },
   section: {
     marginBottom: '30px',
@@ -221,7 +221,7 @@ const styles = {
     marginTop: '15px',
     padding: '10px',
     backgroundColor: '#121212',
-    border: '2px solid #cc00ff',
+    border: '2px solid #00e5ff',
   },
   resultText: {
     fontSize: '14px',
@@ -243,7 +243,7 @@ const styles = {
   },
   timestamp: {
     fontSize: '10px',
-    color: '#cc00ff',
+    color: '#00e5ff',
   },
   empty: {
     color: '#888',
@@ -265,6 +265,6 @@ function getGradeStyle(grade) {
   } else if (grade === 'QUALITY') {
     return { ...base, backgroundColor: '#ff9500', color: '#121212', borderColor: '#ff9500' };
   } else {
-    return { ...base, backgroundColor: '#cc00ff', color: '#121212', borderColor: '#cc00ff' };
+    return { ...base, backgroundColor: '#00e5ff', color: '#121212', borderColor: '#00e5ff' };
   }
 }

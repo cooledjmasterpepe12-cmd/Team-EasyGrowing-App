@@ -21,7 +21,7 @@ const Community = () => {
 
       {/* Social Feed */}
       <section style={{ marginTop: '40px', marginBottom: '40px' }}>
-        <h2 className="pixel-h2" style={{ color: '#cc00ff', marginBottom: '20px' }}>
+        <h2 className="pixel-h2" style={{ color: '#00e5ff', marginBottom: '20px' }}>
           SOCIAL FEED
         </h2>
 
@@ -29,7 +29,7 @@ const Community = () => {
           <div key={num} className="pixel-card" style={{ marginBottom: '20px', border: '2px solid #00ff00', padding: '15px', backgroundColor: '#000' }}>
             <div style={{ position: 'relative', marginBottom: '10px', borderBottom: '2px solid #00ff00', paddingBottom: '10px' }}>
               <div style={{ fontSize: '48px', marginBottom: '10px' }}>📷</div>
-              <span className="pixel-tag" style={{ backgroundColor: '#cc00ff', color: '#000', padding: '4px 8px', borderRadius: '0' }}>
+              <span className="pixel-tag" style={{ backgroundColor: '#00e5ff', color: '#000', padding: '4px 8px', borderRadius: '0' }}>
                 DAY {42 + num * 5}
               </span>
             </div>
@@ -44,7 +44,7 @@ const Community = () => {
                 onClick={() => toggleLike(`post${num}`)}
                 className="pixel-tag"
                 style={{
-                  backgroundColor: likes[`post${num}`] ? '#cc00ff' : 'transparent',
+                  backgroundColor: likes[`post${num}`] ? '#00e5ff' : 'transparent',
                   color: '#00ff00',
                   border: '1px solid #00ff00',
                   padding: '4px 8px',
@@ -64,7 +64,7 @@ const Community = () => {
 
       {/* Strain Reviews */}
       <section style={{ marginBottom: '40px' }}>
-        <h2 className="pixel-h2" style={{ color: '#cc00ff', marginBottom: '20px' }}>
+        <h2 className="pixel-h2" style={{ color: '#00e5ff', marginBottom: '20px' }}>
           STRAIN REVIEWS
         </h2>
 
@@ -90,7 +90,7 @@ const Community = () => {
 
       {/* Forum Hot Topics */}
       <section style={{ marginBottom: '40px' }}>
-        <h2 className="pixel-h2" style={{ color: '#cc00ff', marginBottom: '20px' }}>
+        <h2 className="pixel-h2" style={{ color: '#00e5ff', marginBottom: '20px' }}>
           FORUM HOT TOPICS
         </h2>
 
@@ -98,8 +98,8 @@ const Community = () => {
           'How to optimize pH levels for seedlings',
           'Best nutrients for flowering stage',
         ].map((topic, idx) => (
-          <div key={idx} className="pixel-card" style={{ marginBottom: '15px', border: '2px solid #cc00ff', padding: '15px', backgroundColor: '#000' }}>
-            <h3 className="pixel-h3" style={{ color: '#cc00ff', marginBottom: '10px' }}>
+          <div key={idx} className="pixel-card" style={{ marginBottom: '15px', border: '2px solid #00e5ff', padding: '15px', backgroundColor: '#000' }}>
+            <h3 className="pixel-h3" style={{ color: '#00e5ff', marginBottom: '10px' }}>
               {topic}
             </h3>
             <span className="pixel-tag" style={{ backgroundColor: '#00ff00', color: '#000', padding: '4px 8px' }}>
@@ -111,15 +111,15 @@ const Community = () => {
 
       {/* Event Radar */}
       <section style={{ marginBottom: '40px' }}>
-        <h2 className="pixel-h2" style={{ color: '#cc00ff', marginBottom: '20px' }}>
+        <h2 className="pixel-h2" style={{ color: '#00e5ff', marginBottom: '20px' }}>
           EVENT RADAR
         </h2>
 
-        <div className="pixel-card" style={{ border: '2px solid #cc00ff', padding: '15px', backgroundColor: '#000' }}>
-          <h3 className="pixel-h3" style={{ color: '#cc00ff', marginBottom: '10px' }}>
+        <div className="pixel-card" style={{ border: '2px solid #00e5ff', padding: '15px', backgroundColor: '#000' }}>
+          <h3 className="pixel-h3" style={{ color: '#00e5ff', marginBottom: '10px' }}>
             MARY JANE BERLIN
           </h3>
-          <span className="pixel-tag" style={{ backgroundColor: '#cc00ff', color: '#000', padding: '4px 8px' }}>
+          <span className="pixel-tag" style={{ backgroundColor: '#00e5ff', color: '#000', padding: '4px 8px' }}>
             14 JUN
           </span>
         </div>

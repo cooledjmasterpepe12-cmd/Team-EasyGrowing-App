@@ -81,8 +81,8 @@ const Shop = () => {
       </section>
 
       {/* Footer */}
-      <footer style={{ marginTop: '60px', textAlign: 'center', paddingTop: '20px', borderTop: '2px solid #cc00ff' }}>
-        <span className="pixel-tag font-pixel" style={{ backgroundColor: '#cc00ff', color: '#000', padding: '8px 12px', display: 'inline-block' }}>
+      <footer style={{ marginTop: '60px', textAlign: 'center', paddingTop: '20px', borderTop: '2px solid #00e5ff' }}>
+        <span className="pixel-tag font-pixel" style={{ backgroundColor: '#00e5ff', color: '#000', padding: '8px 12px', display: 'inline-block' }}>
           BOTANICAL INTEL 2026
         </span>
       </footer>

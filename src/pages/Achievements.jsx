@@ -33,14 +33,14 @@ export default function Achievements() {
       <h1 className="pixel-h1">{t('ach.title')}</h1>
 
       {/* User Progress Header */}
-      <div className="pixel-card" style={{ border: '3px solid #cc00ff', padding: '20px', background: '#1a1a1a', marginBottom: '40px' }}>
+      <div className="pixel-card" style={{ border: '3px solid #00e5ff', padding: '20px', background: '#1a1a1a', marginBottom: '40px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
           <div style={{ fontSize: '24px', fontWeight: 'bold' }}>LVL {currentLevel} PHOENIX</div>
-          <div style={{ fontSize: '14px', color: '#cc00ff' }}>{currentXP} XP</div>
+          <div style={{ fontSize: '14px', color: '#00e5ff' }}>{currentXP} XP</div>
         </div>
         <div style={{ marginBottom: '10px', fontSize: '12px' }}>Next Level Progress</div>
-        <div style={{ width: '100%', height: '24px', background: '#0a0a0a', border: '2px solid #cc00ff', overflow: 'hidden' }}>
-          <div className="progress-bar-fill" style={{ width: `${xpPercent}%`, height: '100%', background: '#cc00ff', transition: 'width 0.3s' }} />
+        <div style={{ width: '100%', height: '24px', background: '#0a0a0a', border: '2px solid #00e5ff', overflow: 'hidden' }}>
+          <div className="progress-bar-fill" style={{ width: `${xpPercent}%`, height: '100%', background: '#00e5ff', transition: 'width 0.3s' }} />
         </div>
         <div style={{ marginTop: '8px', fontSize: '12px', textAlign: 'right', color: '#666' }}>{xpToNextLevel} / {nextLevelXP} XP</div>
       </div>
@@ -51,7 +51,7 @@ export default function Achievements() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '15px' }}>
           {earned.map((ach) => (
             <div key={ach.id} onClick={() => setSelectedBadge(ach.name)} className="pixel-card" style={{
-              border: selectedBadge === ach.name ? '3px solid #00ff00' : '3px solid #cc00ff',
+              border: selectedBadge === ach.name ? '3px solid #00ff00' : '3px solid #00e5ff',
               padding: '20px',
               background: '#1a1a1a',
               textAlign: 'center',
@@ -85,7 +85,7 @@ export default function Achievements() {
       </div>
 
       {/* Badge Detail */}
-      <div className="pixel-card" style={{ border: '3px solid #cc00ff', padding: '20px', background: '#1a1a1a', marginBottom: '40px' }}>
+      <div className="pixel-card" style={{ border: '3px solid #00e5ff', padding: '20px', background: '#1a1a1a', marginBottom: '40px' }}>
         <div style={{ fontSize: '48px', marginBottom: '15px' }}>☀️</div>
         <h2 className="pixel-h2">{selectedBadge}</h2>
         <p style={{ marginTop: '15px', fontSize: '14px', lineHeight: '1.6' }}>Master optimization techniques across 100 different grow chambers. Fine-tune PPFD levels to achieve maximum yields and plant health metrics in record time.</p>
@@ -105,8 +105,8 @@ export default function Achievements() {
               <div style={{
                 width: '20px',
                 height: '20px',
-                border: '2px solid ' + (m.status === 'completed' ? '#00ff00' : '#cc00ff'),
-                background: m.status === 'completed' ? '#00ff00' : (m.status === 'current' ? '#cc00ff' : '#0a0a0a')
+                border: '2px solid ' + (m.status === 'completed' ? '#00ff00' : '#00e5ff'),
+                background: m.status === 'completed' ? '#00ff00' : (m.status === 'current' ? '#00e5ff' : '#0a0a0a')
               }} />
               <div>
                 <div style={{ fontWeight: 'bold' }}>Level {m.level}</div>
