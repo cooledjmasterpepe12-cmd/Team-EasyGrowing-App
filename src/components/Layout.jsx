@@ -51,6 +51,7 @@ export default function Layout({ children, currentPath }) {
       {/* Top Bar */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0a] border-b-2 border-[#00ff00] px-4 py-2 flex items-center justify-between">
         <div className="flex items-center gap-3">
+          <img src="/logoteam.png" alt="Team EasyGrowing" style={{ height: '40px', width: 'auto' }} />
           <span className="font-pixel text-[14px] text-[#00ff00] glow-pulse">EASYGROWING</span>
         </div>
         <div className="flex items-center gap-2">

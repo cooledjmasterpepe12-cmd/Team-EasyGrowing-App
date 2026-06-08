@@ -1,17 +1,61 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useI18n } from '../core/i18n';
-import { useUnits } from '../core/units';
+import { useAuth } from '../core/auth';
+import { useDB } from '../core/db';
 
 const Music = () => {
   const { t } = useI18n();
-  const { formatTemp } = useUnits();
-  const [playing, setPlaying] = useState(null);
+  const { isAdmin } = useAuth();
+  const { getTracks, addTrack, deleteTrack } = useDB();
 
-  const tracks = [
-    { id: 1, name: 'Akapella', duration: '3:45' },
-    { id: 2, name: 'Hit From The Bong Remix', duration: '4:12' },
-    { id: 3, name: 'Keimei Rap', duration: '3:28' },
-  ];
+  const [playing, setPlaying] = useState(null);
+  const [tracks, setTracks] = useState([]);
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [formData, setFormData] = useState({ name: '', artist: '', duration: '', url: '' });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loadTracks();
+  }, []);
+
+  const loadTracks = async () => {
+    try {
+      const data = await getTracks();
+      setTracks(data.map(t => ({
+        id: t.id,
+        name: t.title,
+        artist: t.artist,
+        duration: `${Math.floor(t.duration_seconds / 60)}:${(t.duration_seconds % 60).toString().padStart(2, '0')}`,
+        url: t.file_url,
+      })));
+    } catch (err) {
+      console.error('Failed to load tracks:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleAddTrack = async () => {
+    if (!formData.name || !formData.url) return;
+    try {
+      const durationSecs = parseInt(formData.duration.split(':')[0]) * 60 + parseInt(formData.duration.split(':')[1]);
+      await addTrack(formData.name, formData.artist, durationSecs, formData.url);
+      setFormData({ name: '', artist: '', duration: '', url: '' });
+      setShowAddForm(false);
+      loadTracks();
+    } catch (err) {
+      console.error('Failed to add track:', err);
+    }
+  };
+
+  const handleDeleteTrack = async (id) => {
+    try {
+      await deleteTrack(id);
+      loadTracks();
+    } catch (err) {
+      console.error('Failed to delete track:', err);
+    }
+  };
 
   return (
     <div style={{ backgroundColor: '#121212', color: '#00ff00', minHeight: '100vh', padding: '20px' }}>
@@ -32,44 +76,122 @@ const Music = () => {
         </div>
       </section>
 
+      {/* Admin Controls */}
+      {isAdmin && (
+        <section style={{ marginBottom: '40px', padding: '15px', border: '2px solid #ff9500', backgroundColor: '#1a1200' }}>
+          <h2 className="pixel-h2" style={{ color: '#ff9500', marginBottom: '10px' }}>
+            ADMIN: MANAGE TRACKS
+          </h2>
+          <button
+            className="pixel-btn-amber"
+            onClick={() => setShowAddForm(!showAddForm)}
+            style={{ marginBottom: showAddForm ? '15px' : 0 }}
+          >
+            {showAddForm ? 'CANCEL' : '+ ADD TRACK'}
+          </button>
+
+          {showAddForm && (
+            <div style={{ marginTop: '15px' }}>
+              <input
+                type="text"
+                className="pixel-input"
+                placeholder="Track name"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                style={{ marginBottom: '10px' }}
+              />
+              <input
+                type="text"
+                className="pixel-input"
+                placeholder="Artist"
+                value={formData.artist}
+                onChange={(e) => setFormData({ ...formData, artist: e.target.value })}
+                style={{ marginBottom: '10px' }}
+              />
+              <input
+                type="text"
+                className="pixel-input"
+                placeholder="Duration (mm:ss)"
+                value={formData.duration}
+                onChange={(e) => setFormData({ ...formData, duration: e.target.value })}
+                style={{ marginBottom: '10px' }}
+              />
+              <input
+                type="text"
+                className="pixel-input"
+                placeholder="File URL"
+                value={formData.url}
+                onChange={(e) => setFormData({ ...formData, url: e.target.value })}
+                style={{ marginBottom: '10px' }}
+              />
+              <button className="pixel-btn-amber" onClick={handleAddTrack}>
+                SAVE TRACK
+              </button>
+            </div>
+          )}
+        </section>
+      )}
+
       {/* Track List */}
       <section style={{ marginBottom: '40px' }}>
         <h2 className="pixel-h2" style={{ color: '#00e5ff', marginBottom: '20px' }}>
           TRACKS
         </h2>
 
-        {tracks.map((track) => (
-          <div key={track.id} className="pixel-card" style={{ marginBottom: '15px', border: '2px solid #00ff00', padding: '15px', backgroundColor: '#000', display: 'flex', alignItems: 'center', gap: '15px' }}>
-            <button
-              onClick={() => setPlaying(playing === track.id ? null : track.id)}
-              className="pixel-btn"
-              style={{
-                width: '40px',
-                height: '40px',
-                border: '2px solid #00ff00',
-                backgroundColor: playing === track.id ? '#00e5ff' : '#000',
-                color: '#00ff00',
-                cursor: 'pointer',
-                fontSize: '18px',
-                fontWeight: 'bold',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0,
-              }}
-            >
-              {playing === track.id ? '⏸' : '▶'}
-            </button>
-            <div style={{ flex: 1 }}>
-              <h3 className="pixel-h3 font-pixel" style={{ color: '#00ff00', marginBottom: '5px', fontSize: '14px' }}>
-                {track.name}
-              </h3>
-              <span className="pixel-tag" style={{ backgroundColor: '#00ff00', color: '#000', padding: '4px 8px', fontSize: '12px' }}>
-                {track.duration}
-              </span>
+        {loading ? (
+          <p style={{ color: '#00ff00' }}>Loading tracks...</p>
+        ) : tracks.length === 0 ? (
+          <p style={{ color: '#00ff00' }}>No tracks available</p>
+        ) : (
+          tracks.map((track) => (
+            <div key={track.id} className="pixel-card" style={{ marginBottom: '15px', border: '2px solid #00ff00', padding: '15px', backgroundColor: '#000', display: 'flex', alignItems: 'center', gap: '15px' }}>
+              <button
+                onClick={() => setPlaying(playing === track.id ? null : track.id)}
+                className="pixel-btn"
+                style={{
+                  width: '40px',
+                  height: '40px',
+                  border: '2px solid #00ff00',
+                  backgroundColor: playing === track.id ? '#00e5ff' : '#000',
+                  color: '#00ff00',
+                  cursor: 'pointer',
+                  fontSize: '18px',
+                  fontWeight: 'bold',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
+                }}
+              >
+                {playing === track.id ? '⏸' : '▶'}
+              </button>
+              <div style={{ flex: 1 }}>
+                <h3 className="pixel-h3 font-pixel" style={{ color: '#00ff00', marginBottom: '5px', fontSize: '14px' }}>
+                  {track.name}
+                </h3>
+                <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                  {track.artist && (
+                    <span className="pixel-tag" style={{ backgroundColor: '#00ff00', color: '#000', padding: '4px 8px', fontSize: '10px' }}>
+                      {track.artist}
+                    </span>
+                  )}
+                  <span className="pixel-tag" style={{ backgroundColor: '#00e5ff', color: '#000', padding: '4px 8px', fontSize: '10px' }}>
+                    {track.duration}
+                  </span>
+                </div>
+              </div>
+              {isAdmin && (
+                <button
+                  className="pixel-btn-red"
+                  onClick={() => handleDeleteTrack(track.id)}
+                  style={{ width: '40px', height: '40px', padding: 0, fontSize: '14px' }}
+                >
+                  ✕
+                </button>
+              )}
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </section>
 
       {/* Music Platform Links */}
@@ -149,13 +271,6 @@ const Music = () => {
             </div>
           ))}
         </div>
-      </section>
-
-      {/* Language/Unit Toggles Info */}
-      <section style={{ marginTop: '40px', marginBottom: '20px', padding: '15px', border: '2px dashed #00e5ff' }}>
-        <p className="font-pixel" style={{ color: '#00e5ff', fontSize: '12px' }}>
-          Language and unit settings available in main settings
-        </p>
       </section>
     </div>
   );

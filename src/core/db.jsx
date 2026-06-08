@@ -55,6 +55,28 @@ const db = {
       await supabase.storage.from('plant-photos').remove([path]);
     }
   },
+
+  getTracks: async () => {
+    const { data, error } = await supabase.from('music_tracks').select().order('created_at');
+    if (error) throw error;
+    return data || [];
+  },
+
+  addTrack: async (title, artist, duration_seconds, file_url) => {
+    const { data, error } = await supabase.from('music_tracks').insert({
+      title,
+      artist,
+      duration_seconds,
+      file_url,
+    }).select().single();
+    if (error) throw error;
+    return data;
+  },
+
+  deleteTrack: async (id) => {
+    const { error } = await supabase.from('music_tracks').delete().eq('id', id);
+    if (error) throw error;
+  },
 };
 
 export function DBProvider({ children }) {
