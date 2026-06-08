@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useAuth } from './core/auth';
 import Layout from './components/Layout';
 import Dashboard from './pages/Dashboard';
 import Register from './pages/Register';
@@ -38,7 +39,13 @@ const ROUTES = {
   '/achievements': Achievements,
 };
 
+const PROTECTED_ROUTES = new Set([
+  '/', '/diary', '/bible', '/tools', '/genetics', '/community', '/music',
+  '/shop', '/extraction', '/diy', '/iot', '/doctor', '/b2b', '/admin', '/profile', '/achievements'
+]);
+
 export default function App() {
+  const { isLoggedIn, loading } = useAuth();
   const [path, setPath] = useState(() => window.location.hash.slice(1) || '/');
 
   useEffect(() => {
@@ -46,6 +53,28 @@ export default function App() {
     window.addEventListener('hashchange', handler);
     return () => window.removeEventListener('hashchange', handler);
   }, []);
+
+  // Wait for auth to load before deciding which page to show
+  if (loading) {
+    return (
+      <Layout currentPath="/register">
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
+          <div style={{ color: '#00ff00', fontFamily: 'monospace', fontSize: '14px' }}>Loading...</div>
+        </div>
+      </Layout>
+    );
+  }
+
+  // If not logged in and trying to access protected route, redirect to register
+  const isProtected = PROTECTED_ROUTES.has(path);
+  if (!isLoggedIn && isProtected) {
+    window.location.hash = '#/register';
+    return (
+      <Layout currentPath="/register">
+        <Register key="/register" />
+      </Layout>
+    );
+  }
 
   const Page = ROUTES[path] || Dashboard;
 
