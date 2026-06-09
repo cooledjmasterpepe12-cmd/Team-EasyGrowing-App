@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useI18n } from '../core/i18n';
 import { useAuth } from '../core/auth';
 import { useDB } from '../core/db';
+import { useMusicPlayer } from '../core/music-player';
 
 const Music = () => {
   const { t } = useI18n();
   const { isAdmin } = useAuth();
   const { getTracks, addTrack, deleteTrack } = useDB();
-
-  const [playing, setPlaying] = useState(null);
+  const { currentTrack, isPlaying, playTrack } = useMusicPlayer();
   const [tracks, setTracks] = useState([]);
   const [showAddForm, setShowAddForm] = useState(false);
   const [formData, setFormData] = useState({ name: '', artist: '', duration: '', url: '' });
@@ -146,13 +146,13 @@ const Music = () => {
           tracks.map((track) => (
             <div key={track.id} className="pixel-card" style={{ marginBottom: '15px', border: '2px solid #00ff00', padding: '15px', backgroundColor: '#000', display: 'flex', alignItems: 'center', gap: '15px' }}>
               <button
-                onClick={() => setPlaying(playing === track.id ? null : track.id)}
+                onClick={() => playTrack(track)}
                 className="pixel-btn"
                 style={{
                   width: '40px',
                   height: '40px',
                   border: '2px solid #00ff00',
-                  backgroundColor: playing === track.id ? '#00e5ff' : '#000',
+                  backgroundColor: currentTrack?.id === track.id && isPlaying ? '#00e5ff' : '#000',
                   color: '#00ff00',
                   cursor: 'pointer',
                   fontSize: '18px',
@@ -163,7 +163,7 @@ const Music = () => {
                   flexShrink: 0,
                 }}
               >
-                {playing === track.id ? '⏸' : '▶'}
+                {currentTrack?.id === track.id && isPlaying ? '⏸' : '▶'}
               </button>
               <div style={{ flex: 1 }}>
                 <h3 className="pixel-h3 font-pixel" style={{ color: '#00ff00', marginBottom: '5px', fontSize: '14px' }}>

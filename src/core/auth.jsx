@@ -4,7 +4,7 @@ import { supabase } from './supabase';
 const AuthContext = createContext(null);
 
 // Hardcoded admin password for the admin@easygrowing.de user
-const ADMIN_PASSWORD = 'PHOENIX2024';
+const ADMIN_PASSWORD = 'TestEasyGrowing';
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
