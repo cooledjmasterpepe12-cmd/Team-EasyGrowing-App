@@ -13,31 +13,31 @@ export default function Profile() {
   const xpPercent = (currentXP / maxXP) * 100;
 
   return (
-    <div style={{ background: '#121212', color: '#00ff00', minHeight: '100vh', padding: '20px', fontFamily: 'monospace' }}>
+    <div style={{ background: '#0c1a0c', color: '#6ab86a', minHeight: '100vh', padding: '20px', fontFamily: 'monospace' }}>
       <h1 className="pixel-h1">{t('prof.title')}</h1>
 
       {/* Avatar & Level */}
-      <div className="pixel-card" style={{ border: '3px solid #00ff00', padding: '40px', background: '#1a1a1a', marginBottom: '40px', textAlign: 'center' }}>
+      <div className="pixel-card" style={{ border: '3px solid #6ab86a', padding: '40px', background: '#122212', marginBottom: '40px', textAlign: 'center' }}>
         <div style={{ fontSize: '80px', marginBottom: '20px' }}>🎮</div>
         <h2 className="pixel-h2">{user?.username || 'PLAYER'}</h2>
-        <div className="pixel-tag-amber" style={{ display: 'inline-block', padding: '8px 16px', border: '2px solid #ffaa00', background: '#1a1a1a', color: '#ffaa00', marginTop: '15px', fontSize: '14px' }}>
+        <div className="pixel-tag-amber" style={{ display: 'inline-block', padding: '8px 16px', border: '2px solid #ffaa00', background: '#122212', color: '#ffaa00', marginTop: '15px', fontSize: '14px' }}>
           LVL {currentLevel}
         </div>
       </div>
 
       {/* XP Progress */}
-      <div className="pixel-card" style={{ border: '3px solid #00e5ff', padding: '20px', background: '#1a1a1a', marginBottom: '40px' }}>
+      <div className="pixel-card" style={{ border: '3px solid #20c8d8', padding: '20px', background: '#122212', marginBottom: '40px' }}>
         <h3 className="pixel-h3">{t('prof.xp')}</h3>
         <div style={{ marginTop: '15px', marginBottom: '10px', fontSize: '14px' }}>
           {currentXP} / {maxXP} XP
         </div>
-        <div style={{ width: '100%', height: '20px', background: '#0a0a0a', border: '2px solid #00e5ff', overflow: 'hidden' }}>
-          <div className="progress-bar-fill" style={{ width: `${xpPercent}%`, height: '100%', background: '#00ff00', transition: 'width 0.3s' }} />
+        <div style={{ width: '100%', height: '20px', background: '#080f08', border: '2px solid #20c8d8', overflow: 'hidden' }}>
+          <div className="progress-bar-fill" style={{ width: `${xpPercent}%`, height: '100%', background: '#6ab86a', transition: 'width 0.3s' }} />
         </div>
       </div>
 
       {/* Settings */}
-      <div className="pixel-card" style={{ border: '3px solid #00ff00', padding: '20px', background: '#1a1a1a', marginBottom: '40px' }}>
+      <div className="pixel-card" style={{ border: '3px solid #6ab86a', padding: '20px', background: '#122212', marginBottom: '40px' }}>
         <h2 className="pixel-h2">{t('prof.settings')}</h2>
 
         {/* Language */}
@@ -47,9 +47,9 @@ export default function Profile() {
             {['de', 'en', 'es'].map((l) => (
               <button key={l} onClick={() => setLang(l)} style={{
                 padding: '10px 20px',
-                border: '3px solid ' + (lang === l ? '#00ff00' : '#666'),
-                background: '#1a1a1a',
-                color: lang === l ? '#00ff00' : '#666',
+                border: '3px solid ' + (lang === l ? '#6ab86a' : '#666'),
+                background: '#122212',
+                color: lang === l ? '#6ab86a' : '#666',
                 cursor: 'pointer',
                 fontFamily: 'monospace',
                 fontWeight: lang === l ? 'bold' : 'normal'
@@ -67,9 +67,9 @@ export default function Profile() {
             {['C', 'F'].map((m) => (
               <button key={m} onClick={() => setMode(m === 'C' ? 'metric' : 'imperial')} style={{
                 padding: '10px 20px',
-                border: '3px solid ' + (mode === (m === 'C' ? 'metric' : 'imperial') ? '#00e5ff' : '#666'),
-                background: '#1a1a1a',
-                color: mode === (m === 'C' ? 'metric' : 'imperial') ? '#00e5ff' : '#666',
+                border: '3px solid ' + (mode === (m === 'C' ? 'metric' : 'imperial') ? '#20c8d8' : '#666'),
+                background: '#122212',
+                color: mode === (m === 'C' ? 'metric' : 'imperial') ? '#20c8d8' : '#666',
                 cursor: 'pointer',
                 fontFamily: 'monospace',
                 fontWeight: mode === (m === 'C' ? 'metric' : 'imperial') ? 'bold' : 'normal'
@@ -87,9 +87,9 @@ export default function Profile() {
             {['L', 'Gal'].map((m) => (
               <button key={m} onClick={() => setMode(m === 'L' ? 'metric' : 'imperial')} style={{
                 padding: '10px 20px',
-                border: '3px solid ' + (mode === (m === 'L' ? 'metric' : 'imperial') ? '#00e5ff' : '#666'),
-                background: '#1a1a1a',
-                color: mode === (m === 'L' ? 'metric' : 'imperial') ? '#00e5ff' : '#666',
+                border: '3px solid ' + (mode === (m === 'L' ? 'metric' : 'imperial') ? '#20c8d8' : '#666'),
+                background: '#122212',
+                color: mode === (m === 'L' ? 'metric' : 'imperial') ? '#20c8d8' : '#666',
                 cursor: 'pointer',
                 fontFamily: 'monospace',
                 fontWeight: mode === (m === 'L' ? 'metric' : 'imperial') ? 'bold' : 'normal'

@@ -58,13 +58,13 @@ export default function Genetics() {
   const getTypeColor = (type) => {
     switch (type) {
       case 'Indica':
-        return '#00ff00';
+        return '#6ab86a';
       case 'Sativa':
-        return '#00e5ff';
+        return '#20c8d8';
       case 'Hybrid':
         return '#ffaa00';
       default:
-        return '#00ff00';
+        return '#6ab86a';
     }
   };
 
@@ -82,8 +82,8 @@ export default function Genetics() {
   };
 
   return (
-    <div style={{ backgroundColor: '#121212', color: '#00ff00', minHeight: '100vh', padding: '20px', fontFamily: 'Press Start 2P' }}>
-      <h1 className="pixel-h1" style={{ color: '#00ff00', marginBottom: '20px' }}>{t('gen.title')}</h1>
+    <div style={{ backgroundColor: '#0c1a0c', color: '#6ab86a', minHeight: '100vh', padding: '20px', fontFamily: 'Press Start 2P' }}>
+      <h1 className="pixel-h1" style={{ color: '#6ab86a', marginBottom: '20px' }}>{t('gen.title')}</h1>
 
       <div style={{ display: 'flex', gap: '10px', marginBottom: '40px', alignItems: 'center' }}>
         <button
@@ -94,9 +94,9 @@ export default function Genetics() {
           }}
           className="pixel-btn-cyan"
           style={{
-            backgroundColor: breederMode ? '#00e5ff' : '#1a1a1a',
-            color: breederMode ? '#121212' : '#00e5ff',
-            border: '2px solid #00e5ff',
+            backgroundColor: breederMode ? '#20c8d8' : '#122212',
+            color: breederMode ? '#0c1a0c' : '#20c8d8',
+            border: '2px solid #20c8d8',
             padding: '10px 15px',
           }}
         >
@@ -111,7 +111,7 @@ export default function Genetics() {
 
       {/* Landraces Section */}
       <div style={{ marginBottom: '40px' }}>
-        <h2 className="pixel-h2" style={{ color: '#00e5ff', marginBottom: '20px' }}>LANDRACES</h2>
+        <h2 className="pixel-h2" style={{ color: '#20c8d8', marginBottom: '20px' }}>LANDRACES</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '15px' }}>
           {STRAIN_DATA.landraces.map((strain) => (
             <div
@@ -119,19 +119,19 @@ export default function Genetics() {
               onClick={() => handleStrainClick(strain)}
               className="pixel-card"
               style={{
-                backgroundColor: selectedStrain?.id === strain.id || parentOne?.id === strain.id || parentTwo?.id === strain.id ? '#1a3a1a' : '#1a1a1a',
+                backgroundColor: selectedStrain?.id === strain.id || parentOne?.id === strain.id || parentTwo?.id === strain.id ? '#1a3a1a' : '#122212',
                 border: `3px solid ${selectedStrain?.id === strain.id || parentOne?.id === strain.id || parentTwo?.id === strain.id ? '#ffff00' : getTypeColor(strain.type)}`,
                 padding: '15px',
                 cursor: 'pointer',
                 transition: 'all 0.1s',
               }}
             >
-              <h3 className="pixel-h3" style={{ color: '#00ff00', marginBottom: '10px' }}>{strain.name}</h3>
+              <h3 className="pixel-h3" style={{ color: '#6ab86a', marginBottom: '10px' }}>{strain.name}</h3>
               <div
                 className="pixel-tag"
                 style={{
                   backgroundColor: getTypeColor(strain.type),
-                  color: '#121212',
+                  color: '#0c1a0c',
                   padding: '5px 8px',
                   display: 'inline-block',
                   marginBottom: '10px',
@@ -148,7 +148,7 @@ export default function Genetics() {
 
       {/* Hybrids Section */}
       <div style={{ marginBottom: '40px' }}>
-        <h2 className="pixel-h2" style={{ color: '#00e5ff', marginBottom: '20px' }}>HYBRIDS</h2>
+        <h2 className="pixel-h2" style={{ color: '#20c8d8', marginBottom: '20px' }}>HYBRIDS</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '15px' }}>
           {STRAIN_DATA.hybrids.map((strain) => (
             <div
@@ -156,19 +156,19 @@ export default function Genetics() {
               onClick={() => handleStrainClick(strain)}
               className="pixel-card"
               style={{
-                backgroundColor: selectedStrain?.id === strain.id || parentOne?.id === strain.id || parentTwo?.id === strain.id ? '#1a3a1a' : '#1a1a1a',
+                backgroundColor: selectedStrain?.id === strain.id || parentOne?.id === strain.id || parentTwo?.id === strain.id ? '#1a3a1a' : '#122212',
                 border: `3px solid ${selectedStrain?.id === strain.id || parentOne?.id === strain.id || parentTwo?.id === strain.id ? '#ffff00' : getTypeColor(strain.type)}`,
                 padding: '15px',
                 cursor: 'pointer',
                 transition: 'all 0.1s',
               }}
             >
-              <h3 className="pixel-h3" style={{ color: '#00ff00', marginBottom: '10px' }}>{strain.name}</h3>
+              <h3 className="pixel-h3" style={{ color: '#6ab86a', marginBottom: '10px' }}>{strain.name}</h3>
               <div
                 className="pixel-tag"
                 style={{
                   backgroundColor: getTypeColor(strain.type),
-                  color: '#121212',
+                  color: '#0c1a0c',
                   padding: '5px 8px',
                   display: 'inline-block',
                   marginBottom: '10px',
@@ -188,23 +188,23 @@ export default function Genetics() {
       {/* Detail Panel */}
       {selectedStrain && !breederMode && (
         <div style={{ marginBottom: '40px' }}>
-          <h2 className="pixel-h2" style={{ color: '#00ff00', marginBottom: '20px' }}>DETAILS</h2>
+          <h2 className="pixel-h2" style={{ color: '#6ab86a', marginBottom: '20px' }}>DETAILS</h2>
           <div
             className="pixel-card"
             style={{
-              backgroundColor: '#1a1a1a',
-              border: '4px solid #00ff00',
+              backgroundColor: '#122212',
+              border: '4px solid #6ab86a',
               padding: '20px',
             }}
           >
-            <h3 className="pixel-h3" style={{ color: '#00e5ff', marginBottom: '15px' }}>{selectedStrain.name}</h3>
+            <h3 className="pixel-h3" style={{ color: '#20c8d8', marginBottom: '15px' }}>{selectedStrain.name}</h3>
             <div style={{ marginBottom: '15px' }}>
               <span style={{ fontSize: '12px', color: '#888' }}>Type:</span>
               <div
                 className="pixel-tag"
                 style={{
                   backgroundColor: getTypeColor(selectedStrain.type),
-                  color: '#121212',
+                  color: '#0c1a0c',
                   padding: '8px 12px',
                   display: 'inline-block',
                   marginLeft: '10px',
@@ -216,13 +216,13 @@ export default function Genetics() {
             </div>
             {selectedStrain.origin && (
               <p style={{ fontSize: '12px', color: '#888', marginBottom: '15px' }}>
-                Origin: <span style={{ color: '#00ff00' }}>{selectedStrain.origin}</span>
+                Origin: <span style={{ color: '#6ab86a' }}>{selectedStrain.origin}</span>
               </p>
             )}
             {selectedStrain.parents.length > 0 && (
               <div>
                 <p style={{ fontSize: '12px', color: '#888', marginBottom: '10px' }}>Lineage:</p>
-                <p style={{ fontSize: '12px', color: '#00e5ff' }}>{selectedStrain.parents.join(' × ')}</p>
+                <p style={{ fontSize: '12px', color: '#20c8d8' }}>{selectedStrain.parents.join(' × ')}</p>
               </div>
             )}
           </div>
@@ -236,7 +236,7 @@ export default function Genetics() {
           <div
             className="pixel-card"
             style={{
-              backgroundColor: '#1a1a1a',
+              backgroundColor: '#122212',
               border: '4px solid #ffaa00',
               padding: '20px',
             }}
@@ -246,7 +246,7 @@ export default function Genetics() {
               className="pixel-tag"
               style={{
                 backgroundColor: '#ffaa00',
-                color: '#121212',
+                color: '#0c1a0c',
                 padding: '8px 12px',
                 display: 'inline-block',
                 marginBottom: '15px',
@@ -260,8 +260,8 @@ export default function Genetics() {
               onClick={resetBreeder}
               className="pixel-btn"
               style={{
-                backgroundColor: '#00e5ff',
-                color: '#121212',
+                backgroundColor: '#20c8d8',
+                color: '#0c1a0c',
                 marginTop: '15px',
                 padding: '8px 12px',
                 fontSize: '10px',

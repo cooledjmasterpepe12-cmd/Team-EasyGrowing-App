@@ -58,18 +58,18 @@ const Music = () => {
   };
 
   return (
-    <div style={{ backgroundColor: '#121212', color: '#00ff00', minHeight: '100vh', padding: '20px' }}>
-      <h1 className="pixel-h1 font-pixel" style={{ color: '#00ff00' }}>
+    <div style={{ backgroundColor: '#0c1a0c', color: '#6ab86a', minHeight: '100vh', padding: '20px' }}>
+      <h1 className="pixel-h1 font-pixel" style={{ color: '#6ab86a' }}>
         {t('music.title')}
       </h1>
 
       {/* Featured Release Hero */}
       <section style={{ marginTop: '40px', marginBottom: '40px' }}>
-        <div className="pixel-card" style={{ border: '2px solid #00ff00', padding: '30px', backgroundColor: '#000', textAlign: 'center' }}>
-          <h2 className="pixel-h2" style={{ color: '#00e5ff', marginBottom: '20px' }}>
+        <div className="pixel-card" style={{ border: '2px solid #6ab86a', padding: '30px', backgroundColor: '#0c1a0c', textAlign: 'center' }}>
+          <h2 className="pixel-h2" style={{ color: '#20c8d8', marginBottom: '20px' }}>
             4 SONGS. 1 VISION.
           </h2>
-          <p className="font-pixel" style={{ color: '#00ff00', fontSize: '14px', marginBottom: '20px' }}>
+          <p className="font-pixel" style={{ color: '#6ab86a', fontSize: '14px', marginBottom: '20px' }}>
             THE OFFICIAL TEAM EASYGROWING ALBUM
           </p>
           <div style={{ fontSize: '64px', marginBottom: '20px' }}>🎵</div>
@@ -134,26 +134,26 @@ const Music = () => {
 
       {/* Track List */}
       <section style={{ marginBottom: '40px' }}>
-        <h2 className="pixel-h2" style={{ color: '#00e5ff', marginBottom: '20px' }}>
+        <h2 className="pixel-h2" style={{ color: '#20c8d8', marginBottom: '20px' }}>
           TRACKS
         </h2>
 
         {loading ? (
-          <p style={{ color: '#00ff00' }}>Loading tracks...</p>
+          <p style={{ color: '#6ab86a' }}>Loading tracks...</p>
         ) : tracks.length === 0 ? (
-          <p style={{ color: '#00ff00' }}>No tracks available</p>
+          <p style={{ color: '#6ab86a' }}>No tracks available</p>
         ) : (
           tracks.map((track) => (
-            <div key={track.id} className="pixel-card" style={{ marginBottom: '15px', border: '2px solid #00ff00', padding: '15px', backgroundColor: '#000', display: 'flex', alignItems: 'center', gap: '15px' }}>
+            <div key={track.id} className="pixel-card" style={{ marginBottom: '15px', border: '2px solid #6ab86a', padding: '15px', backgroundColor: '#0c1a0c', display: 'flex', alignItems: 'center', gap: '15px' }}>
               <button
                 onClick={() => playTrack(track)}
                 className="pixel-btn"
                 style={{
                   width: '40px',
                   height: '40px',
-                  border: '2px solid #00ff00',
-                  backgroundColor: currentTrack?.id === track.id && isPlaying ? '#00e5ff' : '#000',
-                  color: '#00ff00',
+                  border: '2px solid #6ab86a',
+                  backgroundColor: currentTrack?.id === track.id && isPlaying ? '#20c8d8' : '#0c1a0c',
+                  color: '#6ab86a',
                   cursor: 'pointer',
                   fontSize: '18px',
                   fontWeight: 'bold',
@@ -166,16 +166,16 @@ const Music = () => {
                 {currentTrack?.id === track.id && isPlaying ? '⏸' : '▶'}
               </button>
               <div style={{ flex: 1 }}>
-                <h3 className="pixel-h3 font-pixel" style={{ color: '#00ff00', marginBottom: '5px', fontSize: '14px' }}>
+                <h3 className="pixel-h3 font-pixel" style={{ color: '#6ab86a', marginBottom: '5px', fontSize: '14px' }}>
                   {track.name}
                 </h3>
                 <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                   {track.artist && (
-                    <span className="pixel-tag" style={{ backgroundColor: '#00ff00', color: '#000', padding: '4px 8px', fontSize: '10px' }}>
+                    <span className="pixel-tag" style={{ backgroundColor: '#6ab86a', color: '#0c1a0c', padding: '4px 8px', fontSize: '10px' }}>
                       {track.artist}
                     </span>
                   )}
-                  <span className="pixel-tag" style={{ backgroundColor: '#00e5ff', color: '#000', padding: '4px 8px', fontSize: '10px' }}>
+                  <span className="pixel-tag" style={{ backgroundColor: '#20c8d8', color: '#0c1a0c', padding: '4px 8px', fontSize: '10px' }}>
                     {track.duration}
                   </span>
                 </div>
@@ -196,7 +196,7 @@ const Music = () => {
 
       {/* Music Platform Links */}
       <section style={{ marginBottom: '40px' }}>
-        <h2 className="pixel-h2" style={{ color: '#00e5ff', marginBottom: '20px' }}>
+        <h2 className="pixel-h2" style={{ color: '#20c8d8', marginBottom: '20px' }}>
           LISTEN ON
         </h2>
 
@@ -208,10 +208,10 @@ const Music = () => {
             className="pixel-btn-cyan font-pixel"
             style={{
               display: 'inline-block',
-              backgroundColor: '#00e5ff',
-              color: '#000',
+              backgroundColor: '#20c8d8',
+              color: '#0c1a0c',
               padding: '10px 20px',
-              border: '2px solid #00e5ff',
+              border: '2px solid #20c8d8',
               cursor: 'pointer',
               textDecoration: 'none',
               fontSize: '14px',
@@ -228,7 +228,7 @@ const Music = () => {
             style={{
               display: 'inline-block',
               backgroundColor: '#ffaa00',
-              color: '#000',
+              color: '#0c1a0c',
               padding: '10px 20px',
               border: '2px solid #ffaa00',
               cursor: 'pointer',
@@ -244,15 +244,15 @@ const Music = () => {
 
       {/* Grow Sessions */}
       <section style={{ marginBottom: '40px' }}>
-        <h2 className="pixel-h2" style={{ color: '#00e5ff', marginBottom: '20px' }}>
+        <h2 className="pixel-h2" style={{ color: '#20c8d8', marginBottom: '20px' }}>
           GROW SESSIONS
         </h2>
 
-        <div className="pixel-card" style={{ border: '2px solid #00ff00', padding: '15px', backgroundColor: '#000' }}>
-          <h3 className="pixel-h3" style={{ color: '#00ff00', marginBottom: '10px' }}>
+        <div className="pixel-card" style={{ border: '2px solid #6ab86a', padding: '15px', backgroundColor: '#0c1a0c' }}>
+          <h3 className="pixel-h3" style={{ color: '#6ab86a', marginBottom: '10px' }}>
             ORGANIC VIBE MIX
           </h3>
-          <p className="font-pixel" style={{ color: '#00ff00', fontSize: '12px' }}>
+          <p className="font-pixel" style={{ color: '#6ab86a', fontSize: '12px' }}>
             Curated playlist for optimal growing atmosphere
           </p>
         </div>
@@ -260,13 +260,13 @@ const Music = () => {
 
       {/* Mary Jane Countdown Gallery */}
       <section style={{ marginBottom: '40px' }}>
-        <h2 className="pixel-h2" style={{ color: '#00e5ff', marginBottom: '20px' }}>
+        <h2 className="pixel-h2" style={{ color: '#20c8d8', marginBottom: '20px' }}>
           MARY JANE COUNTDOWN
         </h2>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '15px' }}>
           {[1, 2, 3].map((num) => (
-            <div key={num} className="pixel-card" style={{ border: '2px solid #00e5ff', padding: '20px', backgroundColor: '#000', textAlign: 'center', minHeight: '150px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div key={num} className="pixel-card" style={{ border: '2px solid #20c8d8', padding: '20px', backgroundColor: '#0c1a0c', textAlign: 'center', minHeight: '150px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <div style={{ fontSize: '48px' }}>📸</div>
             </div>
           ))}

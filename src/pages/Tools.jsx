@@ -60,32 +60,32 @@ export default function Tools() {
   };
 
   const getPPFDColor = (ppfd) => {
-    if (ppfd >= 200 && ppfd <= 800) return '#00ff00';
+    if (ppfd >= 200 && ppfd <= 800) return '#6ab86a';
     if (ppfd < 200) return '#ffff00';
     return '#ff0000';
   };
 
   const getVPDColor = (vpd) => {
-    if (vpd >= 0.8 && vpd <= 1.2) return '#00ff00';
+    if (vpd >= 0.8 && vpd <= 1.2) return '#6ab86a';
     if (vpd < 0.8) return '#ffff00';
     return '#ff0000';
   };
 
   return (
-    <div style={{ backgroundColor: '#121212', color: '#00ff00', minHeight: '100vh', padding: '20px', fontFamily: 'Press Start 2P' }}>
-      <h1 className="pixel-h1" style={{ color: '#00ff00', marginBottom: '40px' }}>{t('tools.title')}</h1>
+    <div style={{ backgroundColor: '#0c1a0c', color: '#6ab86a', minHeight: '100vh', padding: '20px', fontFamily: 'Press Start 2P' }}>
+      <h1 className="pixel-h1" style={{ color: '#6ab86a', marginBottom: '40px' }}>{t('tools.title')}</h1>
 
       {/* Unit Toggle */}
       <div style={{ marginBottom: '40px', display: 'flex', gap: '10px', alignItems: 'center' }}>
         <span>{isMetric ? 'Metric' : 'Imperial'}</span>
-        <button className="pixel-btn" onClick={() => setMode(isMetric ? 'imperial' : 'metric')} style={{ backgroundColor: '#00e5ff', color: '#121212' }}>
+        <button className="pixel-btn" onClick={() => setMode(isMetric ? 'imperial' : 'metric')} style={{ backgroundColor: '#20c8d8', color: '#0c1a0c' }}>
           {isMetric ? 'Switch' : 'Switch'}
         </button>
       </div>
 
       {/* Light Calculator */}
-      <div className="pixel-card" style={{ backgroundColor: '#1a1a1a', border: '4px solid #00ff00', marginBottom: '40px', padding: '20px' }}>
-        <h2 className="pixel-h2" style={{ color: '#00e5ff' }}>Light Calculator</h2>
+      <div className="pixel-card" style={{ backgroundColor: '#122212', border: '4px solid #6ab86a', marginBottom: '40px', padding: '20px' }}>
+        <h2 className="pixel-h2" style={{ color: '#20c8d8' }}>Light Calculator</h2>
 
         <div style={{ marginBottom: '20px' }}>
           <label style={{ display: 'block', marginBottom: '5px' }}>Lux Value</label>
@@ -94,7 +94,7 @@ export default function Tools() {
             value={lightLux}
             onChange={(e) => setLightLux(parseFloat(e.target.value))}
             className="pixel-input"
-            style={{ width: '100%', marginBottom: '10px', backgroundColor: '#121212', color: '#00ff00', border: '2px solid #00ff00', padding: '8px' }}
+            style={{ width: '100%', marginBottom: '10px', backgroundColor: '#0c1a0c', color: '#6ab86a', border: '2px solid #6ab86a', padding: '8px' }}
           />
 
           <label style={{ display: 'block', marginBottom: '5px' }}>Light Source</label>
@@ -102,7 +102,7 @@ export default function Tools() {
             value={lightSource}
             onChange={(e) => setLightSource(e.target.value)}
             className="pixel-select"
-            style={{ width: '100%', marginBottom: '10px', backgroundColor: '#121212', color: '#00ff00', border: '2px solid #00e5ff', padding: '8px' }}
+            style={{ width: '100%', marginBottom: '10px', backgroundColor: '#0c1a0c', color: '#6ab86a', border: '2px solid #20c8d8', padding: '8px' }}
           >
             {Object.keys(LIGHT_SOURCES).map((source) => (
               <option key={source} value={source}>{source}</option>
@@ -115,30 +115,30 @@ export default function Tools() {
             value={lightHours}
             onChange={(e) => setLightHours(parseFloat(e.target.value))}
             className="pixel-input"
-            style={{ width: '100%', marginBottom: '10px', backgroundColor: '#121212', color: '#00ff00', border: '2px solid #00ff00', padding: '8px' }}
+            style={{ width: '100%', marginBottom: '10px', backgroundColor: '#0c1a0c', color: '#6ab86a', border: '2px solid #6ab86a', padding: '8px' }}
           />
         </div>
 
-        <button onClick={calculateLight} className="pixel-btn" style={{ backgroundColor: '#00ff00', color: '#121212', marginBottom: '20px', width: '100%' }}>
+        <button onClick={calculateLight} className="pixel-btn" style={{ backgroundColor: '#6ab86a', color: '#0c1a0c', marginBottom: '20px', width: '100%' }}>
           CALCULATE
         </button>
 
         {lightResult && (
-          <div style={{ backgroundColor: '#121212', border: '2px solid #00ff00', padding: '15px' }}>
+          <div style={{ backgroundColor: '#0c1a0c', border: '2px solid #6ab86a', padding: '15px' }}>
             <p style={{ marginBottom: '10px' }}>
               PPFD: <span style={{ color: getPPFDColor(lightResult.ppfd) }}>{lightResult.ppfd.toFixed(2)} µmol/m²/s</span>
             </p>
-            <div style={{ backgroundColor: '#000', height: '20px', border: '2px solid #00ff00', marginBottom: '10px', overflow: 'hidden' }}>
+            <div style={{ backgroundColor: '#0c1a0c', height: '20px', border: '2px solid #6ab86a', marginBottom: '10px', overflow: 'hidden' }}>
               <div className="progress-bar-fill" style={{ width: `${Math.min((lightResult.ppfd / 1000) * 100, 100)}%`, height: '100%', backgroundColor: getPPFDColor(lightResult.ppfd) }}></div>
             </div>
-            <p>DLI: <span style={{ color: '#00ff00' }}>{lightResult.dli.toFixed(2)} mol/m²/day</span></p>
+            <p>DLI: <span style={{ color: '#6ab86a' }}>{lightResult.dli.toFixed(2)} mol/m²/day</span></p>
           </div>
         )}
       </div>
 
       {/* Fertilizer Calculator */}
-      <div className="pixel-card" style={{ backgroundColor: '#1a1a1a', border: '4px solid #00e5ff', marginBottom: '40px', padding: '20px' }}>
-        <h2 className="pixel-h2" style={{ color: '#00ff00' }}>Fertilizer Calculator</h2>
+      <div className="pixel-card" style={{ backgroundColor: '#122212', border: '4px solid #20c8d8', marginBottom: '40px', padding: '20px' }}>
+        <h2 className="pixel-h2" style={{ color: '#6ab86a' }}>Fertilizer Calculator</h2>
 
         <div style={{ marginBottom: '20px' }}>
           <label style={{ display: 'block', marginBottom: '5px' }}>Volume ({isMetric ? 'ml' : 'fl oz'})</label>
@@ -147,7 +147,7 @@ export default function Tools() {
             value={isMetric ? fertVolume : mlToFlOz(fertVolume)}
             onChange={(e) => setFertVolume(isMetric ? parseFloat(e.target.value) : mlToFlOz(parseFloat(e.target.value)))}
             className="pixel-input"
-            style={{ width: '100%', marginBottom: '10px', backgroundColor: '#121212', color: '#00ff00', border: '2px solid #00e5ff', padding: '8px' }}
+            style={{ width: '100%', marginBottom: '10px', backgroundColor: '#0c1a0c', color: '#6ab86a', border: '2px solid #20c8d8', padding: '8px' }}
           />
 
           <label style={{ display: 'block', marginBottom: '5px' }}>Dose Rate (ml/L)</label>
@@ -156,7 +156,7 @@ export default function Tools() {
             value={fertDoseRate}
             onChange={(e) => setFertDoseRate(parseFloat(e.target.value))}
             className="pixel-input"
-            style={{ width: '100%', marginBottom: '10px', backgroundColor: '#121212', color: '#00ff00', border: '2px solid #00e5ff', padding: '8px' }}
+            style={{ width: '100%', marginBottom: '10px', backgroundColor: '#0c1a0c', color: '#6ab86a', border: '2px solid #20c8d8', padding: '8px' }}
           />
 
           <label style={{ display: 'block', marginBottom: '5px' }}>Presets</label>
@@ -166,7 +166,7 @@ export default function Tools() {
                 key={name}
                 onClick={() => setFertDoseRate(dose)}
                 className="pixel-btn-amber"
-                style={{ backgroundColor: '#ffaa00', color: '#121212', padding: '8px', fontSize: '10px' }}
+                style={{ backgroundColor: '#ffaa00', color: '#0c1a0c', padding: '8px', fontSize: '10px' }}
               >
                 {name}
               </button>
@@ -174,21 +174,21 @@ export default function Tools() {
           </div>
         </div>
 
-        <button onClick={calculateFertilizer} className="pixel-btn" style={{ backgroundColor: '#00ff00', color: '#121212', marginBottom: '20px', width: '100%' }}>
+        <button onClick={calculateFertilizer} className="pixel-btn" style={{ backgroundColor: '#6ab86a', color: '#0c1a0c', marginBottom: '20px', width: '100%' }}>
           CALCULATE
         </button>
 
         {fertResult && (
-          <div style={{ backgroundColor: '#121212', border: '2px solid #00e5ff', padding: '15px' }}>
-            <p style={{ marginBottom: '10px' }}>Total Dose: <span style={{ color: '#00e5ff' }}>{fertResult.totalDose.toFixed(2)} ml</span></p>
-            <p>Per 200ml: <span style={{ color: '#00e5ff' }}>{fertResult.dosePer200ml.toFixed(2)} ml</span></p>
+          <div style={{ backgroundColor: '#0c1a0c', border: '2px solid #20c8d8', padding: '15px' }}>
+            <p style={{ marginBottom: '10px' }}>Total Dose: <span style={{ color: '#20c8d8' }}>{fertResult.totalDose.toFixed(2)} ml</span></p>
+            <p>Per 200ml: <span style={{ color: '#20c8d8' }}>{fertResult.dosePer200ml.toFixed(2)} ml</span></p>
           </div>
         )}
       </div>
 
       {/* VPD Calculator */}
-      <div className="pixel-card" style={{ backgroundColor: '#1a1a1a', border: '4px solid #00ff00', marginBottom: '40px', padding: '20px' }}>
-        <h2 className="pixel-h2" style={{ color: '#00e5ff' }}>VPD Calculator</h2>
+      <div className="pixel-card" style={{ backgroundColor: '#122212', border: '4px solid #6ab86a', marginBottom: '40px', padding: '20px' }}>
+        <h2 className="pixel-h2" style={{ color: '#20c8d8' }}>VPD Calculator</h2>
 
         <div style={{ marginBottom: '20px' }}>
           <label style={{ display: 'block', marginBottom: '5px' }}>Temperature (°C)</label>
@@ -197,7 +197,7 @@ export default function Tools() {
             value={vpdTemp}
             onChange={(e) => setVpdTemp(parseFloat(e.target.value))}
             className="pixel-input"
-            style={{ width: '100%', marginBottom: '10px', backgroundColor: '#121212', color: '#00ff00', border: '2px solid #00ff00', padding: '8px' }}
+            style={{ width: '100%', marginBottom: '10px', backgroundColor: '#0c1a0c', color: '#6ab86a', border: '2px solid #6ab86a', padding: '8px' }}
           />
 
           <label style={{ display: 'block', marginBottom: '5px' }}>Humidity (%)</label>
@@ -206,20 +206,20 @@ export default function Tools() {
             value={vpdHumidity}
             onChange={(e) => setVpdHumidity(Math.min(100, Math.max(0, parseFloat(e.target.value))))}
             className="pixel-input"
-            style={{ width: '100%', marginBottom: '10px', backgroundColor: '#121212', color: '#00ff00', border: '2px solid #00ff00', padding: '8px' }}
+            style={{ width: '100%', marginBottom: '10px', backgroundColor: '#0c1a0c', color: '#6ab86a', border: '2px solid #6ab86a', padding: '8px' }}
             min="0"
             max="100"
           />
         </div>
 
-        <button onClick={calculateVpd} className="pixel-btn" style={{ backgroundColor: '#00ff00', color: '#121212', marginBottom: '20px', width: '100%' }}>
+        <button onClick={calculateVpd} className="pixel-btn" style={{ backgroundColor: '#6ab86a', color: '#0c1a0c', marginBottom: '20px', width: '100%' }}>
           CALCULATE
         </button>
 
         {vpdResult !== null && (
-          <div style={{ backgroundColor: '#121212', border: '2px solid #00ff00', padding: '15px' }}>
+          <div style={{ backgroundColor: '#0c1a0c', border: '2px solid #6ab86a', padding: '15px' }}>
             <p style={{ marginBottom: '10px' }}>
-              VPD: <span className="pixel-tag" style={{ backgroundColor: getVPDColor(vpdResult), color: '#121212', padding: '8px', display: 'inline-block' }}>
+              VPD: <span className="pixel-tag" style={{ backgroundColor: getVPDColor(vpdResult), color: '#0c1a0c', padding: '8px', display: 'inline-block' }}>
                 {vpdResult.toFixed(2)} kPa
               </span>
             </p>

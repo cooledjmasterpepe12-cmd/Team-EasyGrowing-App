@@ -132,7 +132,7 @@ export default function Diary() {
     return (
       <div className="pixel-container" style={{ textAlign: 'center', paddingTop: '60px' }}>
         <h1 className="pixel-h1">{t('diary.title')}</h1>
-        <p style={{ color: '#00e5ff', fontFamily: 'Press Start 2P, monospace', fontSize: '10px', marginTop: '20px' }}>
+        <p style={{ color: '#20c8d8', fontFamily: 'Press Start 2P, monospace', fontSize: '10px', marginTop: '20px' }}>
           {t('auth.welcome')}
         </p>
         <button className="pixel-btn" onClick={() => window.location.hash = '/register'} style={{ marginTop: '20px' }}>
@@ -170,7 +170,7 @@ export default function Diary() {
 
       <div style={{ marginTop: '20px' }}>
         {plants.length === 0 && (
-          <p style={{ color: '#00e5ff', fontFamily: 'Press Start 2P, monospace', fontSize: '10px' }}>
+          <p style={{ color: '#20c8d8', fontFamily: 'Press Start 2P, monospace', fontSize: '10px' }}>
             {t('diary.noPlants')}
           </p>
         )}
@@ -186,8 +186,8 @@ export default function Diary() {
             </div>
 
             {expandedPlantId === plant.id && (
-              <div style={{ marginTop: '12px', borderTop: '2px solid #00ff00', paddingTop: '12px' }}>
-                {plant.notes && <p style={{ color: '#00ff00', marginBottom: '12px' }}>{plant.notes}</p>}
+              <div style={{ marginTop: '12px', borderTop: '2px solid #6ab86a', paddingTop: '12px' }}>
+                {plant.notes && <p style={{ color: '#6ab86a', marginBottom: '12px' }}>{plant.notes}</p>}
 
                 <h3 className="pixel-h3">{t('diary.photos')}</h3>
                 <div style={{ display: 'flex', gap: '8px', marginBottom: '12px', flexWrap: 'wrap' }}>
@@ -197,7 +197,7 @@ export default function Diary() {
                 </div>
 
                 {showPhotoForm && (
-                  <div className="pixel-card" style={{ marginBottom: '12px', borderColor: '#00e5ff' }}>
+                  <div className="pixel-card" style={{ marginBottom: '12px', borderColor: '#20c8d8' }}>
                     <div style={{ display: 'flex', gap: '10px', marginBottom: '10px' }}>
                       <button className={photoData.cadence === 'daily' ? 'pixel-btn' : 'pixel-btn-cyan'}
                         onClick={() => setPhotoData({ ...photoData, cadence: 'daily' })} style={{ fontSize: '8px' }}>
@@ -217,7 +217,7 @@ export default function Diary() {
                     <div style={{ marginTop: '8px' }}>
                       <input type="file" accept="image/*" ref={fileInputRef}
                         onChange={(e) => setPhotoFile(e.target.files[0])}
-                        style={{ color: '#00ff00', fontFamily: 'Press Start 2P, monospace', fontSize: '8px' }} />
+                        style={{ color: '#6ab86a', fontFamily: 'Press Start 2P, monospace', fontSize: '8px' }} />
                     </div>
                     <button className="pixel-btn-cyan" onClick={handlePhotoUpload}
                       disabled={uploading || !photoFile}
@@ -232,11 +232,11 @@ export default function Diary() {
                     {photos.map((photo) => (
                       <div key={photo.id} style={{ position: 'relative' }}>
                         <img src={photo.photo_url} alt={photo.caption || `Day ${photo.day_number}`}
-                          style={{ width: '100%', aspectRatio: '1', objectFit: 'cover', border: '2px solid #00ff00' }} />
+                          style={{ width: '100%', aspectRatio: '1', objectFit: 'cover', border: '2px solid #6ab86a' }} />
                         <div style={{
                           position: 'absolute', bottom: 0, left: 0, right: 0,
                           backgroundColor: 'rgba(0,0,0,0.8)', padding: '2px 4px',
-                          fontFamily: 'Press Start 2P, monospace', fontSize: '6px', color: '#00e5ff',
+                          fontFamily: 'Press Start 2P, monospace', fontSize: '6px', color: '#20c8d8',
                         }}>
                           {t('diary.dayNum')} {photo.day_number} | {photo.cadence === 'daily' ? t('diary.daily') : t('diary.weekly')}
                         </div>
@@ -251,7 +251,7 @@ export default function Diary() {
                 </button>
 
                 {showLogForm && (
-                  <div style={{ marginTop: '12px', paddingTop: '12px', borderTop: '2px solid #00e5ff' }}>
+                  <div style={{ marginTop: '12px', paddingTop: '12px', borderTop: '2px solid #20c8d8' }}>
                     <select className="pixel-select" value={logData.type} style={{ width: '100%' }}
                       onChange={(e) => setLogData({ ...logData, type: e.target.value })}>
                       {LOG_TYPES.map(lt => <option key={lt} value={lt}>{t(`diary.log.${lt}`)}</option>)}
@@ -270,10 +270,10 @@ export default function Diary() {
 
                 <div style={{ marginTop: '12px' }}>
                   {logs.map((log) => (
-                    <div key={log.id} style={{ marginBottom: '8px', paddingLeft: '8px', borderLeft: '4px solid #00e5ff' }}>
+                    <div key={log.id} style={{ marginBottom: '8px', paddingLeft: '8px', borderLeft: '4px solid #20c8d8' }}>
                       <span className="pixel-tag">{t(`diary.log.${log.log_type}`)}</span>
-                      {log.amount && <span style={{ color: '#00ff00', marginLeft: '8px' }}>{log.amount}</span>}
-                      {log.notes && <p style={{ color: '#00e5ff', fontSize: '12px', marginTop: '4px' }}>{log.notes}</p>}
+                      {log.amount && <span style={{ color: '#6ab86a', marginLeft: '8px' }}>{log.amount}</span>}
+                      {log.notes && <p style={{ color: '#20c8d8', fontSize: '12px', marginTop: '4px' }}>{log.notes}</p>}
                     </div>
                   ))}
                 </div>

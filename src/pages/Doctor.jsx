@@ -120,8 +120,8 @@ export default function Doctor() {
 
 const styles = {
   container: {
-    backgroundColor: '#121212',
-    color: '#00ff00',
+    backgroundColor: '#0c1a0c',
+    color: '#6ab86a',
     padding: '20px',
     fontFamily: 'font-pixel',
     minHeight: '100vh',
@@ -129,19 +129,19 @@ const styles = {
   h1: {
     fontSize: '32px',
     marginBottom: '20px',
-    textShadow: '0 0 10px #00ff00',
+    textShadow: '0 0 10px #6ab86a',
   },
   h2: {
     fontSize: '20px',
     marginBottom: '10px',
-    color: '#00e5ff',
+    color: '#20c8d8',
   },
   section: {
     marginBottom: '30px',
   },
   uploadZone: {
-    backgroundColor: '#1a1a1a',
-    border: '3px dashed #00ff00',
+    backgroundColor: '#122212',
+    border: '3px dashed #6ab86a',
     padding: '40px 20px',
     textAlign: 'center',
   },
@@ -150,9 +150,9 @@ const styles = {
     marginBottom: '15px',
   },
   scanBtn: {
-    backgroundColor: '#00ff00',
-    color: '#121212',
-    border: '3px solid #00ff00',
+    backgroundColor: '#6ab86a',
+    color: '#0c1a0c',
+    border: '3px solid #6ab86a',
     padding: '12px 30px',
     cursor: 'pointer',
     fontFamily: 'font-pixel',
@@ -164,7 +164,7 @@ const styles = {
   loader: {
     width: '30px',
     height: '30px',
-    border: '3px solid #00ff00',
+    border: '3px solid #6ab86a',
     borderTop: '3px solid transparent',
     borderRadius: '50%',
     margin: '0 auto 10px',
@@ -172,11 +172,11 @@ const styles = {
   },
   loadingText: {
     fontSize: '12px',
-    color: '#00e5ff',
+    color: '#20c8d8',
   },
   card: {
-    backgroundColor: '#1a1a1a',
-    border: '4px solid #00ff00',
+    backgroundColor: '#122212',
+    border: '4px solid #6ab86a',
     padding: '15px',
   },
   diagnosisGrid: {
@@ -185,15 +185,15 @@ const styles = {
     gap: '15px',
   },
   issueCard: {
-    backgroundColor: '#1a1a1a',
-    border: '3px solid #00e5ff',
+    backgroundColor: '#122212',
+    border: '3px solid #20c8d8',
     padding: '12px',
   },
   issueName: {
     fontSize: '14px',
     fontWeight: 'bold',
     marginBottom: '10px',
-    color: '#00e5ff',
+    color: '#20c8d8',
   },
   certaintContainer: {
     marginBottom: '10px',
@@ -201,8 +201,8 @@ const styles = {
   certaintBar: {
     width: '100%',
     height: '8px',
-    backgroundColor: '#121212',
-    border: '1px solid #00ff00',
+    backgroundColor: '#0c1a0c',
+    border: '1px solid #6ab86a',
     marginBottom: '5px',
     overflow: 'hidden',
   },
@@ -222,7 +222,7 @@ const styles = {
   },
   listItem: {
     marginBottom: '10px',
-    color: '#00ff00',
+    color: '#6ab86a',
   },
   actionButtons: {
     display: 'grid',
@@ -230,9 +230,9 @@ const styles = {
     gap: '15px',
   },
   diaryBtn: {
-    backgroundColor: '#00ff00',
-    color: '#121212',
-    border: '3px solid #00ff00',
+    backgroundColor: '#6ab86a',
+    color: '#0c1a0c',
+    border: '3px solid #6ab86a',
     padding: '10px 20px',
     cursor: 'pointer',
     fontFamily: 'font-pixel',
@@ -243,7 +243,7 @@ const styles = {
   },
   shopBtn: {
     backgroundColor: '#ff9500',
-    color: '#121212',
+    color: '#0c1a0c',
     border: '3px solid #ff9500',
     padding: '10px 20px',
     cursor: 'pointer',
@@ -258,7 +258,7 @@ const styles = {
 function getIssueColor(severity) {
   if (severity === 'amber') return '#ff9500';
   if (severity === 'red') return '#ff3333';
-  return '#00ff00';
+  return '#6ab86a';
 }
 
 function getIssueTagStyle(severity) {
@@ -274,22 +274,22 @@ function getIssueTagStyle(severity) {
     return {
       ...baseStyle,
       backgroundColor: '#ff9500',
-      color: '#121212',
+      color: '#0c1a0c',
       borderColor: '#ff9500',
     };
   } else if (severity === 'red') {
     return {
       ...baseStyle,
       backgroundColor: '#ff3333',
-      color: '#121212',
+      color: '#0c1a0c',
       borderColor: '#ff3333',
     };
   } else {
     return {
       ...baseStyle,
-      backgroundColor: '#00ff00',
-      color: '#121212',
-      borderColor: '#00ff00',
+      backgroundColor: '#6ab86a',
+      color: '#0c1a0c',
+      borderColor: '#6ab86a',
     };
   }
 }

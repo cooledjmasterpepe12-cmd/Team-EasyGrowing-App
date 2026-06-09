@@ -55,57 +55,139 @@ export default function Layout({ children, currentPath }) {
     window.location.hash = '/';
   };
 
+  const hasMiniPlayer = !!currentTrack;
+
   return (
-    <div className="min-h-screen bg-[#121212] flex flex-col">
+    <div style={{ minHeight: '100vh', background: '#0c1a0c', display: 'flex', flexDirection: 'column' }}>
       {/* Top Bar */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0a] border-b-2 border-[#00ff00] px-4 py-2 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <img src="/logoteam.png" alt="Team EasyGrowing" style={{ height: '40px', width: 'auto' }} />
-          <span className="font-pixel text-[14px] text-[#00ff00] glow-pulse">EASYGROWING</span>
+      <header style={{
+        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
+        background: '#080f08',
+        borderBottom: '1px solid #2a4a2a',
+        padding: '0 16px',
+        height: '52px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        boxShadow: '0 2px 12px rgba(0,0,0,0.5)',
+      }}>
+        {/* Logo */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <img src="/logoteam.png" alt="Team EasyGrowing" style={{ height: '36px', width: 'auto', objectFit: 'contain' }}
+            onError={(e) => { e.target.style.display = 'none'; }} />
+          <div>
+            <div style={{ fontFamily: 'Press Start 2P, monospace', fontSize: '10px', color: '#6ab86a', lineHeight: 1, letterSpacing: '1px' }}>
+              EASYGROWING
+            </div>
+            <div style={{ fontFamily: 'Press Start 2P, monospace', fontSize: '6px', color: '#4a7a4a', marginTop: '3px', letterSpacing: '1px' }}>
+              BOTANICAL INTEL
+            </div>
+          </div>
         </div>
-        <div className="flex items-center gap-2">
+
+        {/* Right controls */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          {/* Language switcher */}
           {['de', 'en', 'es'].map(l => (
-            <button key={l} onClick={() => setLang(l)}
-              className={`font-pixel text-[8px] px-2 py-1 border transition-all
-                ${lang === l ? 'border-[#00ff00] bg-[#00ff00] text-black' : 'border-[#444] text-[#888] hover:border-[#00ff00]'}`}>
+            <button key={l} onClick={() => setLang(l)} style={{
+              fontFamily: 'Press Start 2P, monospace',
+              fontSize: '7px',
+              padding: '4px 6px',
+              border: '1px solid',
+              borderColor: lang === l ? '#6ab86a' : '#2a4a2a',
+              background: lang === l ? '#2a5a2a' : 'transparent',
+              color: lang === l ? '#c8ffc8' : '#5a8a5a',
+              cursor: 'pointer',
+              borderRadius: '3px',
+              transition: 'all 0.15s',
+            }}>
               {l.toUpperCase()}
             </button>
           ))}
-          <button onClick={() => setMode(mode === 'metric' ? 'imperial' : 'metric')}
-            className="font-pixel text-[8px] px-2 py-1 border border-[#00e5ff] text-[#00e5ff] hover:bg-[#00e5ff] hover:text-black transition-all ml-2">
-            {mode === 'metric' ? '°C/L' : '°F/GAL'}
+
+          {/* Units toggle */}
+          <button onClick={() => setMode(mode === 'metric' ? 'imperial' : 'metric')} style={{
+            fontFamily: 'Press Start 2P, monospace',
+            fontSize: '7px',
+            padding: '4px 6px',
+            border: '1px solid #2a6070',
+            background: 'transparent',
+            color: '#20c8d8',
+            cursor: 'pointer',
+            borderRadius: '3px',
+            marginLeft: '2px',
+          }}>
+            {mode === 'metric' ? '°C' : '°F'}
           </button>
 
-          {/* User Menu */}
+          {/* User menu */}
           {isLoggedIn ? (
-            <div ref={userMenuRef} className="relative ml-2">
-              <button onClick={() => setUserMenuOpen(!userMenuOpen)}
-                className="font-pixel text-[8px] px-2 py-1 border border-[#00e5ff] text-[#00e5ff] hover:bg-[#00e5ff]/10 transition-all flex items-center gap-1">
-                <span>{user?.username?.toUpperCase() || 'USER'}</span>
-                <span style={{ fontSize: '6px' }}>▼</span>
+            <div ref={userMenuRef} style={{ position: 'relative', marginLeft: '4px' }}>
+              <button onClick={() => setUserMenuOpen(!userMenuOpen)} style={{
+                fontFamily: 'Press Start 2P, monospace',
+                fontSize: '7px',
+                padding: '4px 8px',
+                border: '1px solid #2a6070',
+                background: 'rgba(21, 128, 144, 0.15)',
+                color: '#20c8d8',
+                cursor: 'pointer',
+                borderRadius: '3px',
+                display: 'flex', alignItems: 'center', gap: '4px',
+              }}>
+                {user?.username?.toUpperCase()?.slice(0, 8) || 'USER'}
+                <span style={{ fontSize: '5px' }}>▼</span>
               </button>
               {userMenuOpen && (
-                <div className="absolute right-0 top-full mt-1 bg-[#1a1a1a] border-2 border-[#00ff00] min-w-[140px] z-50">
-                  <button onClick={() => { setUserMenuOpen(false); window.location.hash = '/profile'; }}
-                    className="w-full text-left font-pixel text-[8px] text-[#00ff00] px-3 py-2 hover:bg-[#001a00] transition-all">
+                <div style={{
+                  position: 'absolute', right: 0, top: '100%', marginTop: '4px',
+                  background: '#0e1e0e', border: '1px solid #2a4a2a',
+                  borderRadius: '4px', minWidth: '130px', zIndex: 100,
+                  boxShadow: '0 4px 16px rgba(0,0,0,0.6)',
+                }}>
+                  <button onClick={() => { setUserMenuOpen(false); window.location.hash = '/profile'; }} style={{
+                    width: '100%', textAlign: 'left',
+                    fontFamily: 'Press Start 2P, monospace', fontSize: '8px',
+                    color: '#6ab86a', padding: '10px 14px',
+                    background: 'transparent', border: 'none', cursor: 'pointer',
+                    borderBottom: '1px solid #1a3a1a',
+                    transition: 'background 0.1s',
+                  }}
+                  onMouseEnter={e => e.target.style.background = '#162816'}
+                  onMouseLeave={e => e.target.style.background = 'transparent'}>
                     {t('nav.profile')}
                   </button>
-                  <button onClick={handleLogout}
-                    className="w-full text-left font-pixel text-[8px] text-[#ff3333] px-3 py-2 hover:bg-[#1a0000] transition-all border-t border-[#333]">
+                  <button onClick={handleLogout} style={{
+                    width: '100%', textAlign: 'left',
+                    fontFamily: 'Press Start 2P, monospace', fontSize: '8px',
+                    color: '#e06060', padding: '10px 14px',
+                    background: 'transparent', border: 'none', cursor: 'pointer',
+                    transition: 'background 0.1s',
+                  }}
+                  onMouseEnter={e => e.target.style.background = '#1a0e0e'}
+                  onMouseLeave={e => e.target.style.background = 'transparent'}>
                     {t('auth.logout')}
                   </button>
                 </div>
               )}
             </div>
           ) : (
-            <button onClick={() => window.location.hash = '/register'}
-              className="font-pixel text-[8px] px-2 py-1 border border-[#00e5ff] text-[#00e5ff] hover:bg-[#00e5ff]/10 transition-all ml-2">
+            <button onClick={() => window.location.hash = '/register'} style={{
+              fontFamily: 'Press Start 2P, monospace', fontSize: '7px',
+              padding: '4px 8px',
+              border: '1px solid #2a6070', background: 'rgba(21, 128, 144, 0.15)',
+              color: '#20c8d8', cursor: 'pointer', borderRadius: '3px', marginLeft: '4px',
+            }}>
               {t('auth.login')}
             </button>
           )}
 
-          <button onClick={() => setMenuOpen(!menuOpen)}
-            className="font-pixel text-[12px] text-[#00ff00] ml-2 hover:text-[#00e5ff]">
+          {/* Hamburger */}
+          <button onClick={() => setMenuOpen(!menuOpen)} style={{
+            fontFamily: 'Press Start 2P, monospace', fontSize: '14px',
+            color: '#6ab86a', background: 'transparent', border: 'none',
+            cursor: 'pointer', marginLeft: '6px', padding: '2px',
+            lineHeight: 1,
+          }}>
             {menuOpen ? '✕' : '☰'}
           </button>
         </div>
@@ -113,67 +195,127 @@ export default function Layout({ children, currentPath }) {
 
       {/* Nav Overlay */}
       {menuOpen && (
-        <nav className="fixed inset-0 z-40 bg-[#0a0a0a]/95 pt-14 scanline" onClick={() => setMenuOpen(false)}>
-          <div className="grid grid-cols-4 gap-2 p-4 max-w-lg mx-auto">
+        <nav
+          style={{
+            position: 'fixed', inset: 0, zIndex: 40,
+            background: 'rgba(8, 15, 8, 0.97)',
+            paddingTop: '60px',
+          }}
+          onClick={() => setMenuOpen(false)}
+        >
+          <div style={{
+            display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)',
+            gap: '10px', padding: '16px', maxWidth: '500px', margin: '0 auto',
+          }} onClick={e => e.stopPropagation()}>
             {NAV_ITEMS.map(n => (
-              <a key={n.path} href={`#${n.path}`}
-                onClick={(e) => { e.preventDefault(); window.location.hash = n.path; setMenuOpen(false); }}
-                className={`pixel-card text-center py-3 hover:bg-[#00ff00]/10 transition-all cursor-pointer
-                  ${currentPath === n.path ? 'border-[#00ff00] bg-[#001a00]' : ''}`}>
-                <div className="text-lg">{n.icon}</div>
-                <div className="font-pixel text-[7px] text-[#00ff00] mt-1">{t(n.key)}</div>
-              </a>
+              <button key={n.path}
+                onClick={() => { window.location.hash = n.path; setMenuOpen(false); }}
+                style={{
+                  background: currentPath === n.path
+                    ? 'linear-gradient(145deg, #1e3a1e, #162616)'
+                    : 'linear-gradient(145deg, #122212, #0e1a0e)',
+                  border: currentPath === n.path ? '1px solid #4a8a4a' : '1px solid #1e3a1e',
+                  borderRadius: '8px',
+                  padding: '14px 6px',
+                  cursor: 'pointer',
+                  display: 'flex', flexDirection: 'column',
+                  alignItems: 'center', gap: '6px',
+                  transition: 'all 0.15s',
+                }}
+              >
+                <span style={{ fontSize: '20px' }}>{n.icon}</span>
+                <span style={{ fontFamily: 'Press Start 2P, monospace', fontSize: '7px', color: '#b8d8b8', textAlign: 'center' }}>
+                  {t(n.key)}
+                </span>
+              </button>
             ))}
           </div>
         </nav>
       )}
 
-      <main className="flex-1 pt-14 pb-24 overflow-y-auto">
+      {/* Main content */}
+      <main style={{
+        flex: 1,
+        paddingTop: '52px',
+        paddingBottom: hasMiniPlayer ? '90px' : '56px',
+        overflowY: 'auto',
+      }}>
         {children}
       </main>
 
       {/* Mini Player Bar */}
       {currentTrack && (
-        <div className="fixed bottom-12 left-0 right-0 z-40 bg-[#0a0a0a] border-t-2 border-b-2 border-[#00e5ff] px-4 py-2">
-          <div className="flex items-center gap-3">
-            <button onClick={togglePlay}
-              className="font-pixel text-[16px] text-[#00ff00] hover:text-[#00e5ff] transition-all"
-              style={{ minWidth: '24px' }}>
+        <div style={{
+          position: 'fixed', bottom: '48px', left: 0, right: 0, zIndex: 40,
+          background: '#0a150a',
+          borderTop: '1px solid #2a5a2a',
+          padding: '8px 16px',
+          boxShadow: '0 -2px 10px rgba(0,0,0,0.5)',
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <button onClick={togglePlay} style={{
+              fontSize: '16px', color: '#6ab86a', background: 'none', border: 'none',
+              cursor: 'pointer', flexShrink: 0, padding: 0,
+            }}>
               {isPlaying ? '⏸' : '▶'}
             </button>
-            <div className="flex-1 min-w-0">
-              <div className="font-pixel text-[10px] text-[#00ff00] truncate">{currentTrack.name}</div>
+            <div style={{ minWidth: 0, flex: '0 0 auto', maxWidth: '120px' }}>
+              <div style={{ fontFamily: 'Press Start 2P, monospace', fontSize: '9px', color: '#6ab86a', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                {currentTrack.name}
+              </div>
               {currentTrack.artist && (
-                <div className="font-pixel text-[8px] text-[#00e5ff] truncate">{currentTrack.artist}</div>
+                <div style={{ fontFamily: 'Press Start 2P, monospace', fontSize: '7px', color: '#4a7a4a', marginTop: '2px' }}>
+                  {currentTrack.artist}
+                </div>
               )}
             </div>
-            <div className="flex items-center gap-2 flex-1">
-              <span className="font-pixel text-[8px] text-[#666]">{formatTime(currentTime)}</span>
-              <div className="flex-1 h-2 bg-[#1a1a1a] border border-[#444] cursor-pointer relative"
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flex: 1 }}>
+              <span style={{ fontFamily: 'monospace', fontSize: '10px', color: '#4a7a4a', flexShrink: 0 }}>{formatTime(currentTime)}</span>
+              <div
+                style={{ flex: 1, height: '4px', background: '#1a2a1a', borderRadius: '2px', cursor: 'pointer', position: 'relative' }}
                 onClick={(e) => {
                   const rect = e.currentTarget.getBoundingClientRect();
-                  const percent = (e.clientX - rect.left) / rect.width;
-                  seekTo(percent * duration);
-                }}>
-                <div className="absolute left-0 top-0 h-full bg-[#00e5ff] transition-all"
-                  style={{ width: `${duration ? (currentTime / duration) * 100 : 0}%` }} />
+                  seekTo(((e.clientX - rect.left) / rect.width) * duration);
+                }}
+              >
+                <div style={{
+                  position: 'absolute', left: 0, top: 0, height: '100%',
+                  background: '#4a8a4a', borderRadius: '2px',
+                  width: `${duration ? (currentTime / duration) * 100 : 0}%`,
+                  transition: 'width 0.3s',
+                }} />
               </div>
-              <span className="font-pixel text-[8px] text-[#666]">{formatTime(duration)}</span>
+              <span style={{ fontFamily: 'monospace', fontSize: '10px', color: '#4a7a4a', flexShrink: 0 }}>{formatTime(duration)}</span>
             </div>
           </div>
         </div>
       )}
 
       {/* Bottom Quick Nav */}
-      <nav className="fixed bottom-0 left-0 right-0 z-50 bg-[#0a0a0a] border-t-2 border-[#00ff00] flex justify-around py-2">
+      <nav style={{
+        position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 50,
+        background: '#080f08',
+        borderTop: '1px solid #2a4a2a',
+        display: 'flex', justifyContent: 'space-around',
+        paddingTop: '6px', paddingBottom: '6px',
+        boxShadow: '0 -2px 12px rgba(0,0,0,0.5)',
+      }}>
         {NAV_ITEMS.slice(0, 5).map(n => (
-          <a key={n.path} href={`#${n.path}`}
-            onClick={(e) => { e.preventDefault(); window.location.hash = n.path; }}
-            className={`flex flex-col items-center font-pixel text-[7px] py-1 px-1 transition-all
-              ${currentPath === n.path ? 'text-[#00ff00]' : 'text-[#666] hover:text-[#00ff00]'}`}>
-            <span className="text-sm">{n.icon}</span>
-            {t(n.key)}
-          </a>
+          <button key={n.path}
+            onClick={() => window.location.hash = n.path}
+            style={{
+              display: 'flex', flexDirection: 'column', alignItems: 'center',
+              background: 'none', border: 'none', cursor: 'pointer',
+              fontFamily: 'Press Start 2P, monospace', fontSize: '7px',
+              color: currentPath === n.path ? '#6ab86a' : '#4a6a4a',
+              padding: '4px 8px',
+              transition: 'color 0.15s',
+              gap: '3px',
+            }}
+          >
+            <span style={{ fontSize: '16px' }}>{n.icon}</span>
+            <span>{t(n.key)}</span>
+          </button>
         ))}
       </nav>
     </div>

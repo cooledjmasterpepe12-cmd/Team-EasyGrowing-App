@@ -159,8 +159,8 @@ export default function Diy() {
 
 const styles = {
   container: {
-    backgroundColor: '#121212',
-    color: '#00ff00',
+    backgroundColor: '#0c1a0c',
+    color: '#6ab86a',
     padding: '20px',
     fontFamily: 'font-pixel',
     minHeight: '100vh',
@@ -168,19 +168,19 @@ const styles = {
   h1: {
     fontSize: '32px',
     marginBottom: '20px',
-    textShadow: '0 0 10px #00ff00',
+    textShadow: '0 0 10px #6ab86a',
   },
   h2: {
     fontSize: '20px',
     marginBottom: '10px',
-    color: '#00e5ff',
+    color: '#20c8d8',
   },
   section: {
     marginBottom: '30px',
   },
   card: {
-    backgroundColor: '#1a1a1a',
-    border: '4px solid #00ff00',
+    backgroundColor: '#122212',
+    border: '4px solid #6ab86a',
     padding: '15px',
     marginBottom: '15px',
   },
@@ -188,9 +188,9 @@ const styles = {
     width: '100%',
     marginBottom: '10px',
     padding: '8px',
-    backgroundColor: '#121212',
-    border: '2px solid #00ff00',
-    color: '#00ff00',
+    backgroundColor: '#0c1a0c',
+    border: '2px solid #6ab86a',
+    color: '#6ab86a',
     fontFamily: 'font-pixel',
     boxSizing: 'border-box',
   },
@@ -200,14 +200,14 @@ const styles = {
     gap: '15px',
   },
   cutCard: {
-    backgroundColor: '#1a1a1a',
-    border: '3px solid #00e5ff',
+    backgroundColor: '#122212',
+    border: '3px solid #20c8d8',
     padding: '10px',
   },
   partName: {
     fontSize: '12px',
     marginBottom: '5px',
-    color: '#00e5ff',
+    color: '#20c8d8',
   },
   partDims: {
     fontSize: '14px',
@@ -215,9 +215,9 @@ const styles = {
     fontWeight: 'bold',
   },
   smallBtn: {
-    backgroundColor: '#00e5ff',
-    color: '#121212',
-    border: '2px solid #00e5ff',
+    backgroundColor: '#20c8d8',
+    color: '#0c1a0c',
+    border: '2px solid #20c8d8',
     padding: '6px 10px',
     cursor: 'pointer',
     fontFamily: 'font-pixel',
@@ -226,7 +226,7 @@ const styles = {
   },
   volumeText: {
     fontSize: '18px',
-    color: '#00ff00',
+    color: '#6ab86a',
   },
   resultText: {
     fontSize: '14px',

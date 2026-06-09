@@ -174,8 +174,8 @@ export default function Extraction() {
 
 const styles = {
   container: {
-    backgroundColor: '#121212',
-    color: '#00ff00',
+    backgroundColor: '#0c1a0c',
+    color: '#6ab86a',
     padding: '20px',
     fontFamily: 'font-pixel',
     minHeight: '100vh',
@@ -183,19 +183,19 @@ const styles = {
   h1: {
     fontSize: '32px',
     marginBottom: '20px',
-    textShadow: '0 0 10px #00ff00',
+    textShadow: '0 0 10px #6ab86a',
   },
   h2: {
     fontSize: '20px',
     marginBottom: '10px',
-    color: '#00e5ff',
+    color: '#20c8d8',
   },
   section: {
     marginBottom: '30px',
   },
   card: {
-    backgroundColor: '#1a1a1a',
-    border: '4px solid #00ff00',
+    backgroundColor: '#122212',
+    border: '4px solid #6ab86a',
     padding: '15px',
     marginBottom: '15px',
   },
@@ -203,15 +203,15 @@ const styles = {
     width: '100%',
     marginBottom: '10px',
     padding: '8px',
-    backgroundColor: '#121212',
-    border: '2px solid #00ff00',
-    color: '#00ff00',
+    backgroundColor: '#0c1a0c',
+    border: '2px solid #6ab86a',
+    color: '#6ab86a',
     fontFamily: 'font-pixel',
   },
   btn: {
-    backgroundColor: '#00ff00',
-    color: '#121212',
-    border: '3px solid #00ff00',
+    backgroundColor: '#6ab86a',
+    color: '#0c1a0c',
+    border: '3px solid #6ab86a',
     padding: '10px 20px',
     cursor: 'pointer',
     fontFamily: 'font-pixel',
@@ -220,8 +220,8 @@ const styles = {
   result: {
     marginTop: '15px',
     padding: '10px',
-    backgroundColor: '#121212',
-    border: '2px solid #00e5ff',
+    backgroundColor: '#0c1a0c',
+    border: '2px solid #20c8d8',
   },
   resultText: {
     fontSize: '14px',
@@ -233,8 +233,8 @@ const styles = {
     gap: '10px',
   },
   historyItem: {
-    backgroundColor: '#1a1a1a',
-    border: '2px solid #00ff00',
+    backgroundColor: '#122212',
+    border: '2px solid #6ab86a',
     padding: '10px',
   },
   historyText: {
@@ -243,7 +243,7 @@ const styles = {
   },
   timestamp: {
     fontSize: '10px',
-    color: '#00e5ff',
+    color: '#20c8d8',
   },
   empty: {
     color: '#888',
@@ -261,10 +261,10 @@ function getGradeStyle(grade) {
   };
 
   if (grade === 'FULL MELT') {
-    return { ...base, backgroundColor: '#00ff00', color: '#121212', borderColor: '#00ff00' };
+    return { ...base, backgroundColor: '#6ab86a', color: '#0c1a0c', borderColor: '#6ab86a' };
   } else if (grade === 'QUALITY') {
-    return { ...base, backgroundColor: '#ff9500', color: '#121212', borderColor: '#ff9500' };
+    return { ...base, backgroundColor: '#ff9500', color: '#0c1a0c', borderColor: '#ff9500' };
   } else {
-    return { ...base, backgroundColor: '#00e5ff', color: '#121212', borderColor: '#00e5ff' };
+    return { ...base, backgroundColor: '#20c8d8', color: '#0c1a0c', borderColor: '#20c8d8' };
   }
 }

@@ -29,8 +29,8 @@ const Shop = () => {
   ];
 
   return (
-    <div style={{ backgroundColor: '#121212', color: '#00ff00', minHeight: '100vh', padding: '20px' }}>
-      <h1 className="pixel-h1 font-pixel" style={{ color: '#00ff00' }}>
+    <div style={{ backgroundColor: '#0c1a0c', color: '#6ab86a', minHeight: '100vh', padding: '20px' }}>
+      <h1 className="pixel-h1 font-pixel" style={{ color: '#6ab86a' }}>
         {t('shop.title')}
       </h1>
 
@@ -38,17 +38,17 @@ const Shop = () => {
       <section style={{ marginTop: '40px', marginBottom: '40px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
           {products.map((product) => (
-            <div key={product.id} className="pixel-card" style={{ border: '2px solid #00ff00', padding: '20px', backgroundColor: '#000' }}>
+            <div key={product.id} className="pixel-card" style={{ border: '2px solid #6ab86a', padding: '20px', backgroundColor: '#0c1a0c' }}>
               <div style={{ fontSize: '64px', textAlign: 'center', marginBottom: '15px' }}>
                 {product.emoji}
               </div>
-              <h3 className="pixel-h3 font-pixel" style={{ color: '#00ff00', marginBottom: '10px', fontSize: '16px' }}>
+              <h3 className="pixel-h3 font-pixel" style={{ color: '#6ab86a', marginBottom: '10px', fontSize: '16px' }}>
                 {product.name}
               </h3>
-              <p className="font-pixel" style={{ color: '#00ff00', fontSize: '12px', marginBottom: '15px', lineHeight: '1.4' }}>
+              <p className="font-pixel" style={{ color: '#6ab86a', fontSize: '12px', marginBottom: '15px', lineHeight: '1.4' }}>
                 {product.description}
               </p>
-              <span className="pixel-tag-amber" style={{ display: 'inline-block', backgroundColor: '#ffaa00', color: '#000', padding: '6px 10px', fontSize: '14px', fontWeight: 'bold' }}>
+              <span className="pixel-tag-amber" style={{ display: 'inline-block', backgroundColor: '#ffaa00', color: '#0c1a0c', padding: '6px 10px', fontSize: '14px', fontWeight: 'bold' }}>
                 {product.price}
               </span>
             </div>
@@ -66,7 +66,7 @@ const Shop = () => {
           style={{
             display: 'inline-block',
             backgroundColor: '#ffaa00',
-            color: '#000',
+            color: '#0c1a0c',
             padding: '15px 40px',
             border: '2px solid #ffaa00',
             cursor: 'pointer',
@@ -81,8 +81,8 @@ const Shop = () => {
       </section>
 
       {/* Footer */}
-      <footer style={{ marginTop: '60px', textAlign: 'center', paddingTop: '20px', borderTop: '2px solid #00e5ff' }}>
-        <span className="pixel-tag font-pixel" style={{ backgroundColor: '#00e5ff', color: '#000', padding: '8px 12px', display: 'inline-block' }}>
+      <footer style={{ marginTop: '60px', textAlign: 'center', paddingTop: '20px', borderTop: '2px solid #20c8d8' }}>
+        <span className="pixel-tag font-pixel" style={{ backgroundColor: '#20c8d8', color: '#0c1a0c', padding: '8px 12px', display: 'inline-block' }}>
           BOTANICAL INTEL 2026
         </span>
       </footer>

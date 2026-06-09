@@ -110,10 +110,10 @@ export default function Bible() {
       <h2 className="pixel-h2">{t('bible.mythbuster')}</h2>
       <div style={{ marginBottom: '24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '12px' }}>
         {MYTHS.map((myth, idx) => (
-          <div key={idx} className="pixel-card" style={{ borderColor: '#00e5ff', borderWidth: '4px' }}>
+          <div key={idx} className="pixel-card" style={{ borderColor: '#20c8d8', borderWidth: '4px' }}>
             <h3 className="pixel-h3">{t(`bible.${myth.title}`)}</h3>
-            <p style={{ color: '#00ff00', marginBottom: '8px' }}>{t(`bible.${myth.desc}`)}</p>
-            <p style={{ color: '#00e5ff', fontSize: '12px' }}>
+            <p style={{ color: '#6ab86a', marginBottom: '8px' }}>{t(`bible.${myth.desc}`)}</p>
+            <p style={{ color: '#20c8d8', fontSize: '12px' }}>
               <strong>{t('bible.truth')}:</strong> {t(`bible.${myth.truth}`)}
             </p>
           </div>
@@ -131,7 +131,7 @@ export default function Bible() {
           >
             <h3 className="pixel-h3">{article.title}</h3>
             <span className="pixel-tag-amber">{article.category}</span>
-            <p style={{ color: '#00ff00', marginTop: '8px', fontSize: '12px' }}>{article.preview}</p>
+            <p style={{ color: '#6ab86a', marginTop: '8px', fontSize: '12px' }}>{article.preview}</p>
           </div>
         ))}
       </div>
@@ -141,7 +141,7 @@ export default function Bible() {
           <div className="pixel-card" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '600px', maxHeight: '80vh', overflow: 'auto' }}>
             <h2 className="pixel-h2">{selectedArticle.title}</h2>
             <span className="pixel-tag-amber">{selectedArticle.category}</span>
-            <p style={{ color: '#00ff00', marginTop: '12px', lineHeight: '1.6' }}>{selectedArticle.content}</p>
+            <p style={{ color: '#6ab86a', marginTop: '12px', lineHeight: '1.6' }}>{selectedArticle.content}</p>
             <button className="pixel-btn" onClick={() => setSelectedArticle(null)} style={{ marginTop: '16px' }}>
               {t('bible.close')}
             </button>

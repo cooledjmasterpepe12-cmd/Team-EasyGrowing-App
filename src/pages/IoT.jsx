@@ -50,7 +50,7 @@ export default function IoT() {
               points="0,120 50,110 100,95 150,85 200,80 250,90 300,100 350,115 400,125"
               style={{
                 fill: 'none',
-                stroke: '#00ff00',
+                stroke: '#6ab86a',
                 strokeWidth: '2',
               }}
             />
@@ -58,7 +58,7 @@ export default function IoT() {
               points="0,100 50,90 100,75 150,65 200,70 250,80 300,95 350,110 400,120"
               style={{
                 fill: 'none',
-                stroke: '#00e5ff',
+                stroke: '#20c8d8',
                 strokeWidth: '2',
               }}
             />
@@ -121,8 +121,8 @@ export default function IoT() {
 
 const styles = {
   container: {
-    backgroundColor: '#121212',
-    color: '#00ff00',
+    backgroundColor: '#0c1a0c',
+    color: '#6ab86a',
     padding: '20px',
     fontFamily: 'font-pixel',
     minHeight: '100vh',
@@ -130,19 +130,19 @@ const styles = {
   h1: {
     fontSize: '32px',
     marginBottom: '20px',
-    textShadow: '0 0 10px #00ff00',
+    textShadow: '0 0 10px #6ab86a',
   },
   h2: {
     fontSize: '20px',
     marginBottom: '10px',
-    color: '#00e5ff',
+    color: '#20c8d8',
   },
   section: {
     marginBottom: '30px',
   },
   card: {
-    backgroundColor: '#1a1a1a',
-    border: '4px solid #00ff00',
+    backgroundColor: '#122212',
+    border: '4px solid #6ab86a',
     padding: '15px',
     marginBottom: '15px',
   },
@@ -152,8 +152,8 @@ const styles = {
     gap: '15px',
   },
   deviceCard: {
-    backgroundColor: '#1a1a1a',
-    border: '3px solid #00ff00',
+    backgroundColor: '#122212',
+    border: '3px solid #6ab86a',
     padding: '10px',
   },
   deviceId: {
@@ -164,25 +164,25 @@ const styles = {
   deviceStatus: (status) => ({
     fontSize: '12px',
     marginBottom: '8px',
-    color: status === 'Online' ? '#00ff00' : '#ff3333',
+    color: status === 'Online' ? '#6ab86a' : '#ff3333',
   }),
   deviceData: {
     fontSize: '12px',
     marginBottom: '4px',
   },
   svg: {
-    backgroundColor: '#121212',
-    border: '2px solid #00ff00',
+    backgroundColor: '#0c1a0c',
+    border: '2px solid #6ab86a',
   },
   svgText: {
     fontSize: '10px',
-    fill: '#00ff00',
+    fill: '#6ab86a',
   },
   label: {
     display: 'block',
     fontSize: '14px',
     marginBottom: '8px',
-    color: '#00ff00',
+    color: '#6ab86a',
   },
   slider: {
     width: '100%',
@@ -193,15 +193,15 @@ const styles = {
     fontSize: '14px',
     marginTop: '10px',
     padding: '10px',
-    backgroundColor: '#121212',
-    border: '2px solid #00e5ff',
-    color: '#00e5ff',
+    backgroundColor: '#0c1a0c',
+    border: '2px solid #20c8d8',
+    color: '#20c8d8',
   },
   cameraPlaceholder: {
     textAlign: 'center',
     padding: '40px 20px',
-    backgroundColor: '#121212',
-    border: '2px dashed #00ff00',
+    backgroundColor: '#0c1a0c',
+    border: '2px dashed #6ab86a',
   },
   cameraText: {
     fontSize: '48px',
@@ -213,10 +213,10 @@ const styles = {
   },
   cameraTag: {
     display: 'inline-block',
-    backgroundColor: '#00ff00',
-    color: '#121212',
+    backgroundColor: '#6ab86a',
+    color: '#0c1a0c',
     padding: '4px 8px',
-    border: '2px solid #00ff00',
+    border: '2px solid #6ab86a',
     fontSize: '12px',
   },
 };
